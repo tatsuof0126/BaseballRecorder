@@ -43,4 +43,15 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
++ (void)adjustForiPhone5:(UIView*)view {
+    // iPhone5対応
+    if([UIScreen mainScreen].bounds.size.height == 568){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
+                                    oldRect.size.width, oldRect.size.height+88);
+        view.frame = newRect;
+    }
+}
+
+
 @end

@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  ResultPickerViewController.h
 //  BaseballRecorder
 //
 //  Created by 藤原 達郎 on 2012/10/20.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface ResultPickerViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @end

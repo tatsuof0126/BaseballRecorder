@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1AA348163D59F800535116 /* BaseballRecorderUIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1AA347163D59F800535116 /* BaseballRecorderUIApplication.m */; };
+		0B1AA351163D772B00535116 /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA349163D772B00535116 /* book.png */; };
+		0B1AA352163D772B00535116 /* book@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34A163D772B00535116 /* book@2x.png */; };
+		0B1AA355163D772B00535116 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34D163D772B00535116 /* settings.png */; };
+		0B1AA356163D772B00535116 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34E163D772B00535116 /* settings@2x.png */; };
+		0B1AA357163D772B00535116 /* statistics.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34F163D772B00535116 /* statistics.png */; };
+		0B1AA358163D772B00535116 /* statistics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA350163D772B00535116 /* statistics@2x.png */; };
+		0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D1FC616402BAF00330699 /* ShowGameResultController.m */; };
+		0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C77C2164952ED00A214EC /* ConfigManager.m */; };
+		0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63016500FCE00C544D9 /* Icon@2x.png */; };
+		0B5DD63316500FDE00C544D9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63216500FDE00C544D9 /* Icon.png */; };
+		0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EEE81163AE4C20038980D /* GameResultManager.m */; };
+		0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6836FF164277220086E198 /* BattingStatisticsViewController.m */; };
+		0B683703164279C50086E198 /* TeamStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683702164279C50086E198 /* TeamStatistics.m */; };
+		0B683706164279E00086E198 /* BattingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683705164279E00086E198 /* BattingStatistics.m */; };
+		0B74A7BF164401D40080372D /* SelectInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B74A7BE164401D40080372D /* SelectInputViewController.m */; };
+		0B7F8207164C0E2E00811465 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8205164C0E2E00811465 /* Icon-72.png */; };
+		0B7F8208164C0E2E00811465 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8206164C0E2E00811465 /* Icon-72@2x.png */; };
 		0B9499AE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
 		0B9499B016325697007F574D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AF16325697007F574D /* Foundation.framework */; };
 		0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499B116325697007F574D /* CoreGraphics.framework */; };
@@ -17,17 +35,17 @@
 		0B9499C216325697007F574D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C116325697007F574D /* Default@2x.png */; };
 		0B9499C416325697007F574D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C316325697007F574D /* Default-568h@2x.png */; };
 		0B9499C716325697007F574D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C516325697007F574D /* MainStoryboard.storyboard */; };
-		0B9499CA16325697007F574D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499C916325697007F574D /* FirstViewController.m */; };
-		0B9499CC16325697007F574D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499CB16325697007F574D /* first.png */; };
-		0B9499CE16325697007F574D /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499CD16325697007F574D /* first@2x.png */; };
-		0B9499D116325697007F574D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499D016325697007F574D /* SecondViewController.m */; };
-		0B9499D316325697007F574D /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499D216325697007F574D /* second.png */; };
-		0B9499D516325697007F574D /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499D416325697007F574D /* second@2x.png */; };
+		0B9499CA16325697007F574D /* GameResultListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499C916325697007F574D /* GameResultListController.m */; };
 		0B9499DD16325697007F574D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499DC16325697007F574D /* SenTestingKit.framework */; };
 		0B9499DE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
 		0B9499DF16325697007F574D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AF16325697007F574D /* Foundation.framework */; };
 		0B9499E716325697007F574D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499E516325697007F574D /* InfoPlist.strings */; };
 		0B9499EA16325697007F574D /* BaseballRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499E916325697007F574D /* BaseballRecorderTests.m */; };
+		0B9499F516325AAF007F574D /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499F416325AAF007F574D /* ConfigViewController.m */; };
+		0B9499FF16329738007F574D /* ResultPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499FE16329737007F574D /* ResultPickerViewController.m */; };
+		0B949A011632A1E3007F574D /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A001632A1E3007F574D /* InputViewController.m */; };
+		0B949A0416335C33007F574D /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0316335C33007F574D /* GameResult.m */; };
+		0B949A0716335C8B007F574D /* BattingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0616335C8B007F574D /* BattingResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +59,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B1AA346163D59F700535116 /* BaseballRecorderUIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseballRecorderUIApplication.h; sourceTree = "<group>"; };
+		0B1AA347163D59F800535116 /* BaseballRecorderUIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseballRecorderUIApplication.m; sourceTree = "<group>"; };
+		0B1AA349163D772B00535116 /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = book.png; path = BaseballRecorder/images/book.png; sourceTree = SOURCE_ROOT; };
+		0B1AA34A163D772B00535116 /* book@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "book@2x.png"; path = "BaseballRecorder/images/book@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B1AA34D163D772B00535116 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = BaseballRecorder/images/settings.png; sourceTree = SOURCE_ROOT; };
+		0B1AA34E163D772B00535116 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "BaseballRecorder/images/settings@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B1AA34F163D772B00535116 /* statistics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statistics.png; path = BaseballRecorder/images/statistics.png; sourceTree = SOURCE_ROOT; };
+		0B1AA350163D772B00535116 /* statistics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statistics@2x.png"; path = "BaseballRecorder/images/statistics@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B2D1FC516402BAF00330699 /* ShowGameResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowGameResultController.h; sourceTree = "<group>"; };
+		0B2D1FC616402BAF00330699 /* ShowGameResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowGameResultController.m; sourceTree = "<group>"; };
+		0B3C77C1164952ED00A214EC /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
+		0B3C77C2164952ED00A214EC /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
+		0B5DD63016500FCE00C544D9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		0B5DD63216500FDE00C544D9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0B5EEE80163AE4C20038980D /* GameResultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultManager.h; sourceTree = "<group>"; };
+		0B5EEE81163AE4C20038980D /* GameResultManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResultManager.m; sourceTree = "<group>"; };
+		0B6836FE164277220086E198 /* BattingStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingStatisticsViewController.h; sourceTree = "<group>"; };
+		0B6836FF164277220086E198 /* BattingStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatisticsViewController.m; sourceTree = "<group>"; };
+		0B683701164279C50086E198 /* TeamStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamStatistics.h; sourceTree = "<group>"; };
+		0B683702164279C50086E198 /* TeamStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamStatistics.m; sourceTree = "<group>"; };
+		0B683704164279E00086E198 /* BattingStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingStatistics.h; sourceTree = "<group>"; };
+		0B683705164279E00086E198 /* BattingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatistics.m; sourceTree = "<group>"; };
+		0B74A7BD164401D40080372D /* SelectInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInputViewController.h; sourceTree = "<group>"; };
+		0B74A7BE164401D40080372D /* SelectInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInputViewController.m; sourceTree = "<group>"; };
+		0B7F8205164C0E2E00811465 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "BaseballRecorder/images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
+		0B7F8206164C0E2E00811465 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "BaseballRecorder/images/Icon-72@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B7F820A164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0B7F820B164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		0B7F820C164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0B9499A916325697007F574D /* BaseballRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9499AD16325697007F574D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0B9499AF16325697007F574D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,20 +102,24 @@
 		0B9499C116325697007F574D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0B9499C316325697007F574D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B9499C616325697007F574D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		0B9499C816325697007F574D /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		0B9499C916325697007F574D /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		0B9499CB16325697007F574D /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		0B9499CD16325697007F574D /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		0B9499CF16325697007F574D /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		0B9499D016325697007F574D /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		0B9499D216325697007F574D /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		0B9499D416325697007F574D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		0B9499C816325697007F574D /* GameResultListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameResultListController.h; sourceTree = "<group>"; };
+		0B9499C916325697007F574D /* GameResultListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameResultListController.m; sourceTree = "<group>"; };
 		0B9499DB16325697007F574D /* BaseballRecorderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballRecorderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9499DC16325697007F574D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0B9499E416325697007F574D /* BaseballRecorderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BaseballRecorderTests-Info.plist"; sourceTree = "<group>"; };
 		0B9499E616325697007F574D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0B9499E816325697007F574D /* BaseballRecorderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseballRecorderTests.h; sourceTree = "<group>"; };
 		0B9499E916325697007F574D /* BaseballRecorderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseballRecorderTests.m; sourceTree = "<group>"; };
+		0B9499F316325AAF007F574D /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		0B9499F416325AAF007F574D /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		0B9499FA16326416007F574D /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		0B9499FD16329737007F574D /* ResultPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultPickerViewController.h; sourceTree = "<group>"; };
+		0B9499FE16329737007F574D /* ResultPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultPickerViewController.m; sourceTree = "<group>"; };
+		0B949A001632A1E3007F574D /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		0B949A0216335C32007F574D /* GameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResult.h; sourceTree = "<group>"; };
+		0B949A0316335C33007F574D /* GameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResult.m; sourceTree = "<group>"; };
+		0B949A0516335C8A007F574D /* BattingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingResult.h; sourceTree = "<group>"; };
+		0B949A0616335C8B007F574D /* BattingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +146,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B1AA339163D4F3300535116 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				0B7F8205164C0E2E00811465 /* Icon-72.png */,
+				0B7F8206164C0E2E00811465 /* Icon-72@2x.png */,
+				0B1AA349163D772B00535116 /* book.png */,
+				0B1AA34A163D772B00535116 /* book@2x.png */,
+				0B1AA34D163D772B00535116 /* settings.png */,
+				0B1AA34E163D772B00535116 /* settings@2x.png */,
+				0B1AA34F163D772B00535116 /* statistics.png */,
+				0B1AA350163D772B00535116 /* statistics@2x.png */,
+			);
+			name = images;
+			path = image;
+			sourceTree = "<group>";
+		};
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
+				0B5DD63216500FDE00C544D9 /* Icon.png */,
+				0B5DD63016500FCE00C544D9 /* Icon@2x.png */,
 				0B9499B316325697007F574D /* BaseballRecorder */,
 				0B9499E216325697007F574D /* BaseballRecorderTests */,
 				0B9499AC16325697007F574D /* Frameworks */,
@@ -128,18 +197,39 @@
 		0B9499B316325697007F574D /* BaseballRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				0B1AA339163D4F3300535116 /* images */,
+				0B9499B416325697007F574D /* Supporting Files */,
 				0B9499BC16325697007F574D /* AppDelegate.h */,
 				0B9499BD16325697007F574D /* AppDelegate.m */,
+				0B1AA346163D59F700535116 /* BaseballRecorderUIApplication.h */,
+				0B1AA347163D59F800535116 /* BaseballRecorderUIApplication.m */,
 				0B9499C516325697007F574D /* MainStoryboard.storyboard */,
-				0B9499C816325697007F574D /* FirstViewController.h */,
-				0B9499C916325697007F574D /* FirstViewController.m */,
-				0B9499CB16325697007F574D /* first.png */,
-				0B9499CD16325697007F574D /* first@2x.png */,
-				0B9499CF16325697007F574D /* SecondViewController.h */,
-				0B9499D016325697007F574D /* SecondViewController.m */,
-				0B9499D216325697007F574D /* second.png */,
-				0B9499D416325697007F574D /* second@2x.png */,
-				0B9499B416325697007F574D /* Supporting Files */,
+				0B9499C816325697007F574D /* GameResultListController.h */,
+				0B9499C916325697007F574D /* GameResultListController.m */,
+				0B6836FE164277220086E198 /* BattingStatisticsViewController.h */,
+				0B6836FF164277220086E198 /* BattingStatisticsViewController.m */,
+				0B9499F316325AAF007F574D /* ConfigViewController.h */,
+				0B9499F416325AAF007F574D /* ConfigViewController.m */,
+				0B9499FA16326416007F574D /* InputViewController.h */,
+				0B949A001632A1E3007F574D /* InputViewController.m */,
+				0B9499FD16329737007F574D /* ResultPickerViewController.h */,
+				0B9499FE16329737007F574D /* ResultPickerViewController.m */,
+				0B74A7BD164401D40080372D /* SelectInputViewController.h */,
+				0B74A7BE164401D40080372D /* SelectInputViewController.m */,
+				0B2D1FC516402BAF00330699 /* ShowGameResultController.h */,
+				0B2D1FC616402BAF00330699 /* ShowGameResultController.m */,
+				0B3C77C1164952ED00A214EC /* ConfigManager.h */,
+				0B3C77C2164952ED00A214EC /* ConfigManager.m */,
+				0B5EEE80163AE4C20038980D /* GameResultManager.h */,
+				0B5EEE81163AE4C20038980D /* GameResultManager.m */,
+				0B949A0216335C32007F574D /* GameResult.h */,
+				0B949A0316335C33007F574D /* GameResult.m */,
+				0B949A0516335C8A007F574D /* BattingResult.h */,
+				0B949A0616335C8B007F574D /* BattingResult.m */,
+				0B683701164279C50086E198 /* TeamStatistics.h */,
+				0B683702164279C50086E198 /* TeamStatistics.m */,
+				0B683704164279E00086E198 /* BattingStatistics.h */,
+				0B683705164279E00086E198 /* BattingStatistics.m */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -231,6 +321,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
+				Base,
 			);
 			mainGroup = 0B94999E16325696007F574D;
 			productRefGroup = 0B9499AA16325697007F574D /* Products */;
@@ -253,10 +345,16 @@
 				0B9499C216325697007F574D /* Default@2x.png in Resources */,
 				0B9499C416325697007F574D /* Default-568h@2x.png in Resources */,
 				0B9499C716325697007F574D /* MainStoryboard.storyboard in Resources */,
-				0B9499CC16325697007F574D /* first.png in Resources */,
-				0B9499CE16325697007F574D /* first@2x.png in Resources */,
-				0B9499D316325697007F574D /* second.png in Resources */,
-				0B9499D516325697007F574D /* second@2x.png in Resources */,
+				0B1AA351163D772B00535116 /* book.png in Resources */,
+				0B1AA352163D772B00535116 /* book@2x.png in Resources */,
+				0B1AA355163D772B00535116 /* settings.png in Resources */,
+				0B1AA356163D772B00535116 /* settings@2x.png in Resources */,
+				0B1AA357163D772B00535116 /* statistics.png in Resources */,
+				0B1AA358163D772B00535116 /* statistics@2x.png in Resources */,
+				0B7F8207164C0E2E00811465 /* Icon-72.png in Resources */,
+				0B7F8208164C0E2E00811465 /* Icon-72@2x.png in Resources */,
+				0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */,
+				0B5DD63316500FDE00C544D9 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +391,20 @@
 			files = (
 				0B9499BA16325697007F574D /* main.m in Sources */,
 				0B9499BE16325697007F574D /* AppDelegate.m in Sources */,
-				0B9499CA16325697007F574D /* FirstViewController.m in Sources */,
-				0B9499D116325697007F574D /* SecondViewController.m in Sources */,
+				0B9499CA16325697007F574D /* GameResultListController.m in Sources */,
+				0B9499F516325AAF007F574D /* ConfigViewController.m in Sources */,
+				0B9499FF16329738007F574D /* ResultPickerViewController.m in Sources */,
+				0B949A011632A1E3007F574D /* InputViewController.m in Sources */,
+				0B949A0416335C33007F574D /* GameResult.m in Sources */,
+				0B949A0716335C8B007F574D /* BattingResult.m in Sources */,
+				0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */,
+				0B1AA348163D59F800535116 /* BaseballRecorderUIApplication.m in Sources */,
+				0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */,
+				0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */,
+				0B683703164279C50086E198 /* TeamStatistics.m in Sources */,
+				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,
+				0B74A7BF164401D40080372D /* SelectInputViewController.m in Sources */,
+				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +431,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0B9499B716325697007F574D /* en */,
+				0B7F820A164C134700811465 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -329,6 +440,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0B9499C616325697007F574D /* en */,
+				0B7F820B164C134700811465 /* ja */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -337,6 +449,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0B9499E616325697007F574D /* en */,
+				0B7F820C164C134700811465 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -366,7 +479,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -387,7 +500,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -397,10 +510,16 @@
 		0B9499EE16325697007F574D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tatsuo Fujiwara (59Q7GGKNL2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tatsuo Fujiwara (59Q7GGKNL2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "DEC599EF-5E66-4026-9F07-7C36CC841C86";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DEC599EF-5E66-4026-9F07-7C36CC841C86";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,10 +527,16 @@
 		0B9499EF16325697007F574D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tatsuo Fujiwara";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tatsuo Fujiwara";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2111860D-9F42-4C75-8B70-8422A1026FBB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2111860D-9F42-4C75-8B70-8422A1026FBB";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -469,6 +594,7 @@
 				0B9499EF16325697007F574D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B9499F016325697007F574D /* Build configuration list for PBXNativeTarget "BaseballRecorderTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +603,7 @@
 				0B9499F216325697007F574D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

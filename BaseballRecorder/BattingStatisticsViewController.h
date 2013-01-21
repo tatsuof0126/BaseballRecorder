@@ -16,12 +16,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingstat;
-@property (weak, nonatomic) IBOutlet UILabel *battingresult2;
-@property (weak, nonatomic) IBOutlet UILabel *battingresult3;
-@property (weak, nonatomic) IBOutlet UILabel *battingresult4;
+
+@property (weak, nonatomic) IBOutlet UILabel *doubles;
+@property (weak, nonatomic) IBOutlet UILabel *triples;
+@property (weak, nonatomic) IBOutlet UILabel *homeruns;
+@property (weak, nonatomic) IBOutlet UILabel *strikeouts;
+@property (weak, nonatomic) IBOutlet UILabel *walks;
+@property (weak, nonatomic) IBOutlet UILabel *sacrifices;
+@property (weak, nonatomic) IBOutlet UILabel *daten;
+@property (weak, nonatomic) IBOutlet UILabel *steal;
+@property (weak, nonatomic) IBOutlet UILabel *errors;
 
 @property (weak, nonatomic) IBOutlet UILabel *team;
-
 @property (weak, nonatomic) IBOutlet UILabel *year;
 
 @property int targetyear;

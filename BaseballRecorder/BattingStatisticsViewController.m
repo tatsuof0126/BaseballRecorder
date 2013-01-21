@@ -141,14 +141,15 @@
     _battingresult.text = [NSString stringWithFormat:@"%d打席  %d打数  %d安打",
                            battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits];
     
-    _battingresult2.text = [NSString stringWithFormat:@"　二塁打:%d  三塁打:%d  本塁打:%d",
-                            battingStatistics.doubles, battingStatistics.triples, battingStatistics.homeruns];
-    
-    _battingresult3.text = [NSString stringWithFormat:@"　三振:%d  四死球:%d  犠打:%d ",
-                            battingStatistics.strikeouts, battingStatistics.walks, battingStatistics.sacrifices];
-
-    _battingresult4.text = [NSString stringWithFormat:@"　打点:%d  盗塁:%d  失策:%d",
-                            battingStatistics.daten, battingStatistics.steal, battingStatistics.errors];
+    _doubles.text = [NSString stringWithFormat:@"%d",battingStatistics.doubles];
+    _triples.text = [NSString stringWithFormat:@"%d",battingStatistics.triples];
+    _homeruns.text = [NSString stringWithFormat:@"%d",battingStatistics.homeruns];
+    _strikeouts.text = [NSString stringWithFormat:@"%d",battingStatistics.strikeouts];
+    _walks.text = [NSString stringWithFormat:@"%d",battingStatistics.walks];
+    _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices];
+    _daten.text = [NSString stringWithFormat:@"%d",battingStatistics.daten];
+    _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
+    _errors.text = [NSString stringWithFormat:@"%d",battingStatistics.errors];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
                          [BattingStatisticsViewController getFloatStr:battingStatistics.average],
@@ -162,12 +163,18 @@
 - (void)viewDidUnload {
     [self setTeamresult:nil];
     [self setBattingresult:nil];
-    [self setBattingresult2:nil];
-    [self setBattingresult3:nil];
-    [self setBattingresult4:nil];
     [self setBattingstat:nil];
     [self setTeam:nil];
     [self setYear:nil];
+    [self setDoubles:nil];
+    [self setTriples:nil];
+    [self setHomeruns:nil];
+    [self setStrikeouts:nil];
+    [self setWalks:nil];
+    [self setSacrifices:nil];
+    [self setDaten:nil];
+    [self setSteal:nil];
+    [self setErrors:nil];
     [super viewDidUnload];
 }
 

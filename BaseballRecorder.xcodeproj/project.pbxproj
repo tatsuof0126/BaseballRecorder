@@ -22,7 +22,7 @@
 		0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6836FF164277220086E198 /* BattingStatisticsViewController.m */; };
 		0B683703164279C50086E198 /* TeamStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683702164279C50086E198 /* TeamStatistics.m */; };
 		0B683706164279E00086E198 /* BattingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683705164279E00086E198 /* BattingStatistics.m */; };
-		0B74A7BF164401D40080372D /* SelectInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B74A7BE164401D40080372D /* SelectInputViewController.m */; };
+		0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */; };
 		0B7F8207164C0E2E00811465 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8205164C0E2E00811465 /* Icon-72.png */; };
 		0B7F8208164C0E2E00811465 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8206164C0E2E00811465 /* Icon-72@2x.png */; };
 		0B9499AE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
@@ -81,8 +81,8 @@
 		0B683702164279C50086E198 /* TeamStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamStatistics.m; sourceTree = "<group>"; };
 		0B683704164279E00086E198 /* BattingStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingStatistics.h; sourceTree = "<group>"; };
 		0B683705164279E00086E198 /* BattingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatistics.m; sourceTree = "<group>"; };
-		0B74A7BD164401D40080372D /* SelectInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInputViewController.h; sourceTree = "<group>"; };
-		0B74A7BE164401D40080372D /* SelectInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInputViewController.m; sourceTree = "<group>"; };
+		0B6BB1B216AD9E1C00B66509 /* SelectInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInputViewController.h; sourceTree = "<group>"; };
+		0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInputViewController.m; sourceTree = "<group>"; };
 		0B7F8205164C0E2E00811465 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "BaseballRecorder/images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		0B7F8206164C0E2E00811465 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "BaseballRecorder/images/Icon-72@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B7F820A164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 				0B949A001632A1E3007F574D /* InputViewController.m */,
 				0B9499FD16329737007F574D /* ResultPickerViewController.h */,
 				0B9499FE16329737007F574D /* ResultPickerViewController.m */,
-				0B74A7BD164401D40080372D /* SelectInputViewController.h */,
-				0B74A7BE164401D40080372D /* SelectInputViewController.m */,
+				0B6BB1B216AD9E1C00B66509 /* SelectInputViewController.h */,
+				0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */,
 				0B2D1FC516402BAF00330699 /* ShowGameResultController.h */,
 				0B2D1FC616402BAF00330699 /* ShowGameResultController.m */,
 				0B3C77C1164952ED00A214EC /* ConfigManager.h */,
@@ -403,8 +403,8 @@
 				0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */,
 				0B683703164279C50086E198 /* TeamStatistics.m in Sources */,
 				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,
-				0B74A7BF164401D40080372D /* SelectInputViewController.m in Sources */,
 				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
+				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

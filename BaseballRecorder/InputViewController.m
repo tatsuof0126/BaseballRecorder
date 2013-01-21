@@ -81,6 +81,10 @@
     _myscore.text = [NSString stringWithFormat:@"%d",gameResult.myscore];
     _otherscore.text = [NSString stringWithFormat:@"%d",gameResult.otherscore];
     
+    _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
+    _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+    _errors.text = [NSString stringWithFormat:@"%d",gameResult.errors];
+    
     battingResultViewArray = [NSMutableArray array];
     
     [self makeBattingResult];
@@ -95,12 +99,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+//    NSLog(@"y : %f", scroolview.contentOffset.y);
+    
+    if ((textField == _daten || textField == _steal || textField == _errors) &&
+        scroolview.contentOffset.y < 155.0f+gameResult.battingResultArray.count*40){
+        [scroolview setContentOffset:CGPointMake(0.0f, 155.0f+gameResult.battingResultArray.count*40) animated:YES];
+    }
+    
+    if ((textField == _myscore || textField == _otherscore) &&
+        scroolview.contentOffset.y < 20.0f){
+        [scroolview setContentOffset:CGPointMake(0.0f, 20.0f) animated:YES];
+    }
+    
     [self showDoneButton];
+    
     // ResultPickerを閉じる
     [self closeResultPicker];
 }
+
+//-(BOOL)textFieldShouldBeginEditing:(UITextField*)textField {
+//    return YES;
+//}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     [self hiddenDoneButton];
@@ -126,6 +146,9 @@
     [_otherteam endEditing:YES];
     [_myscore endEditing:YES];
     [_otherscore endEditing:YES];
+    [_daten endEditing:YES];
+    [_steal endEditing:YES];
+    [_errors endEditing:YES];
 }
 
 - (void)makeBattingResult {
@@ -187,16 +210,28 @@
     [scroolview addSubview:nlabel];
     [scroolview addSubview:nbutton];
     
-    int saveY = 320+battingResultArray.count*40;
-    if(saveY < 340){saveY = 340;}
+    int bottomY = 310+battingResultArray.count*40;
     
-    saveButton.frame = CGRectMake(90,saveY,140,43);
+    _datenLabel.frame = CGRectMake(_datenLabel.frame.origin.x, bottomY+4,
+                              _datenLabel.frame.size.width, _datenLabel.frame.size.height);
+    _daten.frame = CGRectMake(_daten.frame.origin.x, bottomY,
+                              _daten.frame.size.width, _daten.frame.size.height);
+    _stealLabel.frame = CGRectMake(_stealLabel.frame.origin.x, bottomY+4,
+                              _stealLabel.frame.size.width, _stealLabel.frame.size.height);
+    _steal.frame = CGRectMake(_steal.frame.origin.x, bottomY,
+                              _steal.frame.size.width, _steal.frame.size.height);
+    _errorsLabel.frame = CGRectMake(_errorsLabel.frame.origin.x, bottomY+4,
+                              _errorsLabel.frame.size.width, _errorsLabel.frame.size.height);
+    _errors.frame = CGRectMake(_errors.frame.origin.x, bottomY,
+                              _errors.frame.size.width, _errors.frame.size.height);
     
-    CGSize size = CGSizeMake(320, saveY+160);
+//    int saveY = 365+battingResultArray.count*40;
+//    if(saveY < 365){saveY = 365;}
+    
+    saveButton.frame = CGRectMake(90,bottomY+55,140,43);
+    
+    CGSize size = CGSizeMake(320, bottomY+350);
     scroolview.contentSize = size;
-    
-    
-//    NSLog(@"height : %f",scroolview.contentSize.height);
     
 }
 
@@ -427,14 +462,22 @@
         blankFlg = true;
     }
     
-    if(_myscore.text.length == 0 || _otherscore.text.length == 0){
+    if(_myscore.text.length == 0 || _otherscore.text.length == 0 ||
+       _daten.text.length == 0 || _steal.text.length == 0 || _errors.text.length == 0){
         blankFlg = true;
     } else {
+        // 数字以外が入っていたらエラーにする
         int myscore = [_myscore.text intValue];
         int otherscore = [_otherscore.text intValue];
+        int daten = [_daten.text intValue];
+        int steal = [_steal.text intValue];
+        int errors = [_errors.text intValue];
         
         if((myscore == 0 && [_myscore.text isEqualToString:@"0"] == false) ||
-           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == false)){
+           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == false) ||
+           (daten == 0 && [_daten.text isEqualToString:@"0"] == false) ||
+           (steal == 0 && [_steal.text isEqualToString:@"0"] == false) ||
+           (errors == 0 && [_errors.text isEqualToString:@"0"] == false) ){
             [errorArray addObject:@"試合結果が正しくありません"];
         }
     }
@@ -471,6 +514,9 @@
     gameResult.myscore = [_myscore.text intValue];
     gameResult.otherscore = [_otherscore.text intValue];
     
+    gameResult.daten = [_daten.text intValue];
+    gameResult.steal = [_steal.text intValue];
+    gameResult.errors = [_errors.text intValue];
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {
@@ -507,6 +553,12 @@
 
     [self setMyscore:nil];
     [self setOtherscore:nil];
+    [self setDatenLabel:nil];
+    [self setDaten:nil];
+    [self setStealLabel:nil];
+    [self setSteal:nil];
+    [self setErrorsLabel:nil];
+    [self setErrors:nil];
     [super viewDidUnload];
 }
 

@@ -65,11 +65,11 @@
     }
     
     for(int i=0;i<gameResult.battingResultArray.count;i++){
-        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,255+i*35,90,30)];
+        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,225+i*30,90,30)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         titlelabel.tag = 1;
         
-        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,255+i*35,200,30)];
+        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+i*30,200,30)];
         resultlabel.text = [[gameResult.battingResultArray objectAtIndex:i] getResultString];
         resultlabel.tag = 1;
         
@@ -77,7 +77,25 @@
         [_scrollview addSubview:resultlabel];
     }
     
-    CGSize size = CGSizeMake(320, 380+gameResult.battingResultArray.count*35);
+    _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
+    _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+    _errors.text = [NSString stringWithFormat:@"%d",gameResult.errors];
+    
+    int bottomY = 240+gameResult.battingResultArray.count*30;
+    _datenLabel.frame = CGRectMake(_datenLabel.frame.origin.x, bottomY,
+                                   _datenLabel.frame.size.width, _datenLabel.frame.size.height);
+    _daten.frame = CGRectMake(_daten.frame.origin.x, bottomY,
+                              _daten.frame.size.width, _daten.frame.size.height);
+    _stealLabel.frame = CGRectMake(_stealLabel.frame.origin.x, bottomY,
+                                   _stealLabel.frame.size.width, _stealLabel.frame.size.height);
+    _steal.frame = CGRectMake(_steal.frame.origin.x, bottomY,
+                              _steal.frame.size.width, _steal.frame.size.height);
+    _errorsLabel.frame = CGRectMake(_errorsLabel.frame.origin.x, bottomY,
+                                    _errorsLabel.frame.size.width, _errorsLabel.frame.size.height);
+    _errors.frame = CGRectMake(_errors.frame.origin.x, bottomY,
+                               _errors.frame.size.width, _errors.frame.size.height);
+    
+    CGSize size = CGSizeMake(320, 380+gameResult.battingResultArray.count*30);
     _scrollview.contentSize = size;
 }
      
@@ -96,6 +114,12 @@
     [self setOtherteam:nil];
     [self setResult:nil];
     [self setScrollview:nil];
+    [self setDatenLabel:nil];
+    [self setStealLabel:nil];
+    [self setErrorsLabel:nil];
+    [self setDaten:nil];
+    [self setSteal:nil];
+    [self setErrors:nil];
     [super viewDidUnload];
 }
 

@@ -16,6 +16,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherteam;
 @property (weak, nonatomic) IBOutlet UILabel *result;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+@property (weak, nonatomic) IBOutlet UILabel *datenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stealLabel;
+@property (weak, nonatomic) IBOutlet UILabel *errorsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *daten;
+@property (weak, nonatomic) IBOutlet UILabel *steal;
+@property (weak, nonatomic) IBOutlet UILabel *errors;
 
 - (IBAction)backButton:(id)sender;
 

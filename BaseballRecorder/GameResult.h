@@ -11,6 +11,7 @@
 
 @interface GameResult : NSObject
 
+@property (strong, nonatomic, readwrite) NSString *UUID;
 @property int resultid;
 @property int year;
 @property int month;
@@ -22,6 +23,10 @@
 
 @property int myscore;
 @property int otherscore;
+
+@property int daten;
+@property int steal;
+@property int errors;
 
 @property (strong, nonatomic, readwrite) NSMutableArray *battingResultArray;
 

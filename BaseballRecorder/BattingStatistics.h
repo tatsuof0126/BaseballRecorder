@@ -20,6 +20,9 @@
 @property int strikeouts;
 @property int walks;
 @property int sacrifices;
+@property int daten;
+@property int steal;
+@property int errors;
 
 @property float average;
 @property float obp;

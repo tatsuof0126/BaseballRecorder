@@ -772,6 +772,7 @@
                 <relationship kind="outlet" name="battingresult" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="battingresult2" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="battingresult3" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="battingresult4" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="battingstat" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="team" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="teamresult" candidateClass="UILabel"/>
@@ -800,7 +801,11 @@
             <relationships>
                 <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="saveButton:"/>
+                <relationship kind="outlet" name="daten" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="datenLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="day" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="errors" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="errorsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="inputNavi" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="month" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="myscore" candidateClass="UITextField"/>
@@ -810,6 +815,8 @@
                 <relationship kind="outlet" name="place" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="saveButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scroolview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="steal" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="stealLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="year" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -827,11 +834,17 @@
                 <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="editButton:"/>
                 <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="daten" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="datenLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="errors" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="errorsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="myteam" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="otherteam" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="place" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="result" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="steal" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stealLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

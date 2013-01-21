@@ -146,6 +146,9 @@
     
     _battingresult3.text = [NSString stringWithFormat:@"　三振:%d  四死球:%d  犠打:%d ",
                             battingStatistics.strikeouts, battingStatistics.walks, battingStatistics.sacrifices];
+
+    _battingresult4.text = [NSString stringWithFormat:@"　打点:%d  盗塁:%d  失策:%d",
+                            battingStatistics.daten, battingStatistics.steal, battingStatistics.errors];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
                          [BattingStatisticsViewController getFloatStr:battingStatistics.average],
@@ -161,6 +164,7 @@
     [self setBattingresult:nil];
     [self setBattingresult2:nil];
     [self setBattingresult3:nil];
+    [self setBattingresult4:nil];
     [self setBattingstat:nil];
     [self setTeam:nil];
     [self setYear:nil];

@@ -35,7 +35,6 @@
         GameResult* gameResult = [gameResultList objectAtIndex:i];
         
         NSArray* battingResultArray = gameResult.battingResultArray;
-        
         for(int j=0;j<battingResultArray.count;j++){
             BattingResult* battingResult = [battingResultArray objectAtIndex:j];
             
@@ -50,6 +49,11 @@
             battingStatistics.walks    += [battingResult getStatisticsCounts:S_WALKS];
             battingStatistics.sacrifices += [battingResult getStatisticsCounts:S_SACRIFICES];
         }
+        
+        battingStatistics.daten  += gameResult.daten;
+        battingStatistics.steal  += gameResult.steal;
+        battingStatistics.errors += gameResult.errors;
+        
     }
     
     [battingStatistics calculateStatistics];

@@ -23,6 +23,10 @@
         } else {
             teamStatistics.lose++;
         }
+        
+        
+        
+        
     }
     
     return teamStatistics;

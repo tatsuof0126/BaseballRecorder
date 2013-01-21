@@ -47,6 +47,12 @@
         
     GameResult* gameResult = [GameResult makeGameResult:readdata];
     
+    // nilが返ってきたらとりあえずresultidだけセットした空オブジェクトを返す
+    if(gameResult == nil){
+        gameResult = [[GameResult alloc] init];
+        gameResult.resultid = resultid;
+    }
+    
     return gameResult;
 }
 
@@ -67,7 +73,10 @@
         
         GameResult* gameResult = [GameResult makeGameResult:readdata];
         
-        [resultList addObject:gameResult];        
+        // nilが返ってきたらリストに追加しない
+        if(gameResult != nil){
+            [resultList addObject:gameResult];
+        }
     }
 
     NSArray* returnArray = [resultList sortedArrayUsingSelector:@selector(compareDate:)];

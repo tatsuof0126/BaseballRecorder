@@ -20,6 +20,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *otherteam;
 @property (weak, nonatomic) IBOutlet UITextField *myscore;
 @property (weak, nonatomic) IBOutlet UITextField *otherscore;
+@property (weak, nonatomic) IBOutlet UILabel *datenLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *daten;
+@property (weak, nonatomic) IBOutlet UILabel *stealLabel;
+@property (weak, nonatomic) IBOutlet UITextField *steal;
+@property (weak, nonatomic) IBOutlet UILabel *errorsLabel;
+@property (weak, nonatomic) IBOutlet UITextField *errors;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroolview;
 

@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *battingstat;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult2;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult3;
+@property (weak, nonatomic) IBOutlet UILabel *battingresult4;
+
 @property (weak, nonatomic) IBOutlet UILabel *team;
 
 @property (weak, nonatomic) IBOutlet UILabel *year;

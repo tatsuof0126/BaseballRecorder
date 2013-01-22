@@ -32,4 +32,15 @@
     [defaults synchronize];
 }
 
++ (NSString*)getDefaultSendTo {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"SENDTO"];
+}
+
++ (void)setDefaultSendTo:(NSString*)sendto {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:sendto forKey:@"SENDTO"];
+    [defaults synchronize];
+}
+
 @end

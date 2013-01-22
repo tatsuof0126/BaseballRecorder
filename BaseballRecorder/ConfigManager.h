@@ -18,4 +18,8 @@
 
 + (void)setDefaultMyTeam:(NSString*)myteam;
 
++ (NSString*)getDefaultSendTo;
+
++ (void)setDefaultSendTo:(NSString*)sendto;
+
 @end

@@ -7,9 +7,10 @@
 //
 
 #import "ShowGameResultController.h"
+#import "GameResultManager.h"
 #import "GameResult.h"
 #import "BattingResult.h"
-#import "GameResultManager.h"
+#import "ConfigManager.h"
 #import "AppDelegate.h"
 
 @interface ShowGameResultController ()
@@ -99,7 +100,13 @@
     CGSize size = CGSizeMake(320, 480+gameResult.battingResultArray.count*30);
     _scrollview.contentSize = size;
 }
-     
+- (IBAction)backButton:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)editButton:(id)sender {
+}
+
 - (IBAction)mailButton:(id)sender {
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
@@ -107,18 +114,14 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     GameResult* gameResult = appDelegate.targetGameResult;
     
+    NSString* sendto = [ConfigManager getDefaultSendTo];
+    NSArray* sendtoArray = [sendto componentsSeparatedByString:@","];
+    [mailPicker setToRecipients:sendtoArray];
     [mailPicker setSubject:[gameResult getMailSubject]];
     [mailPicker setMessageBody:[gameResult getMailBody] isHTML:NO];
     
     // メール送信用のモーダルビューを表示
     [self presentViewController:mailPicker animated:YES completion:nil];
-}
-
-- (IBAction)backButton:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)editButton:(id)sender {
 }
 
 // メール送信処理完了時のイベント

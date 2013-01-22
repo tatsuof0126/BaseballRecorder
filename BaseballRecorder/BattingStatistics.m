@@ -51,8 +51,8 @@
         }
         
         battingStatistics.daten  += gameResult.daten;
+        battingStatistics.tokuten  += gameResult.tokuten;
         battingStatistics.steal  += gameResult.steal;
-        battingStatistics.errors += gameResult.errors;
         
     }
     

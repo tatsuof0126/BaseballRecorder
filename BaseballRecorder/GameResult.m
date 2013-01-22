@@ -24,8 +24,8 @@
 @synthesize myscore;
 @synthesize otherscore;
 @synthesize daten;
+@synthesize tokuten;
 @synthesize steal;
-@synthesize errors;
 
 - (BattingResult*)getBattingResult:(NSInteger)resultno {
     return [battingResultArray objectAtIndex:resultno];
@@ -54,6 +54,31 @@
 - (NSString*)getGameResultString {
     return [NSString stringWithFormat:@"%d-%d",myscore,otherscore];
 }
+
+- (NSString*)getMailSubject {
+    return [NSString stringWithFormat:@"【ベボレコ】%d年%d月%d日 %@ %d-%d %@"
+            ,year,month,day,myteam,myscore,otherscore,otherteam];
+}
+
+- (NSString*)getMailBody {
+    NSMutableString* bodyString = [NSMutableString string];
+    
+    [bodyString appendString:[NSString stringWithFormat:@"%d年%d月%d日 %@\n",year,month,day,place]];
+    [bodyString appendString:[NSString stringWithFormat:@"%@ %d-%d %@\n\n",myteam,myscore,otherscore,otherteam]];
+    [bodyString appendString:[NSString stringWithFormat:@"打撃成績\n"]];
+    for (int i=0;i<battingResultArray.count;i++){
+        BattingResult* battingResult = [battingResultArray objectAtIndex:i];
+        
+        [bodyString appendString:[NSString stringWithFormat:@"第%d打席：%@\n"
+                                  ,i+1,[battingResult getResultLongString]]];
+    }
+    
+    [bodyString appendString:[NSString stringWithFormat:@"打点：%d 得点：%d 盗塁：%d\n",
+                              daten,tokuten,steal]];
+    
+    return bodyString;
+}
+
 
 - (NSData*)getGameResultNSData {
     if( SAVE_VERSION == 1 ){
@@ -106,10 +131,10 @@
     // １行目：ファイル形式バージョン（V2）、UUID
     [resultStr appendString:[NSString stringWithFormat:@"V2,%@\n",UUID]];
     
-    // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、盗塁、失策）
+    // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
     [resultStr appendString:[NSString stringWithFormat:@"%d,%d,%d,%d,%@,%@,%@,%d,%d,%d,%d,%d\n"
                              ,resultid,year,month,day,place,myteam,otherteam,myscore,otherscore
-                             ,daten,steal,errors]];
+                             ,daten,tokuten,steal]];
     
     // ３行目：打撃成績（場所、結果、場所、結果・・・・）
     for(int i=0;i<battingResultArray.count;i++){
@@ -143,7 +168,7 @@
         NSString* versionStr = [headerStrArray objectAtIndex:0];
         NSString* resultUUID = [headerStrArray objectAtIndex:1];
     
-        if([versionStr isEqualToString:@"V2"] == true){
+        if([versionStr isEqualToString:@"V2"] == YES){
             // "V2"という文字列ならV2形式
             return [self makeGameResultV2:resultStrArray resultUUID:resultUUID];
         } else {
@@ -179,7 +204,7 @@
 
 // V2形式での読み込み
 // １行目：ファイル形式バージョン（V2）、UUID
-// ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、盗塁、失策）
+// ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
 // ３行目：打撃成績（場所、結果、場所、結果・・・・）
 + (GameResult*)makeGameResultV2:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
@@ -223,8 +248,8 @@
     gameResult.myscore = [[gameInfoStrArray objectAtIndex:7] intValue];
     gameResult.otherscore = [[gameInfoStrArray objectAtIndex:8] intValue];
     gameResult.daten = [[gameInfoStrArray objectAtIndex:9] intValue];
-    gameResult.steal = [[gameInfoStrArray objectAtIndex:10] intValue];
-    gameResult.errors = [[gameInfoStrArray objectAtIndex:11] intValue];
+    gameResult.tokuten = [[gameInfoStrArray objectAtIndex:10] intValue];
+    gameResult.steal = [[gameInfoStrArray objectAtIndex:11] intValue];
 }
 
 + (void)setBattingResult:(GameResult*)gameResult battingResultStr:(NSString*)battingResultStr {

@@ -70,7 +70,7 @@
             str = result.otherteam;
         }
         
-        if([selectlist containsObject:str] == false){
+        if([selectlist containsObject:str] == NO){
             [selectlist addObject:str];
         }
     }

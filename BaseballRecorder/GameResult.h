@@ -25,8 +25,8 @@
 @property int otherscore;
 
 @property int daten;
+@property int tokuten;
 @property int steal;
-@property int errors;
 
 @property (strong, nonatomic, readwrite) NSMutableArray *battingResultArray;
 
@@ -39,6 +39,10 @@
 - (void)removeBattingResult:(NSInteger)resultno;
 
 - (NSString*)getDateString;
+
+- (NSString*)getMailSubject;
+
+- (NSString*)getMailBody;
 
 - (NSString*)getGameResultString;
 

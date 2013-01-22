@@ -24,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *walks;
 @property (weak, nonatomic) IBOutlet UILabel *sacrifices;
 @property (weak, nonatomic) IBOutlet UILabel *daten;
+@property (weak, nonatomic) IBOutlet UILabel *tokuten;
 @property (weak, nonatomic) IBOutlet UILabel *steal;
-@property (weak, nonatomic) IBOutlet UILabel *errors;
 
 @property (weak, nonatomic) IBOutlet UILabel *team;
 @property (weak, nonatomic) IBOutlet UILabel *year;

@@ -104,6 +104,17 @@ static NSArray* battingStatisticsArray;
     return [positionStr stringByAppendingString:resultStr];
 }
 
+- (NSString*)getResultLongString {
+    NSArray *typeArray = [BattingResult getBattingResultTypeArray];
+    NSArray *positionArray = [typeArray objectAtIndex:0];
+    NSArray *resultArray = [typeArray objectAtIndex:1];
+    
+    NSString *positionStr = [positionArray objectAtIndex:position];
+    NSString *resultStr = [resultArray objectAtIndex:result];
+    
+    return [positionStr stringByAppendingString:resultStr];
+}
+
 - (int)getStatisticsCounts:(int)type {
     NSArray* statisticsArray = [BattingResult getBattingStatisticsCountArray];
     

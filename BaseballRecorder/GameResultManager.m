@@ -89,11 +89,11 @@
     NSString* dirpath = [dirpaths objectAtIndex:0];
     
     int count = 1;
-    while (true) {
+    while (YES) {
         NSString* tmpfilename = [NSString stringWithFormat:@"gameresult%d.dat",count];
         NSString* tmpfilepath = [dirpath stringByAppendingPathComponent:tmpfilename];
         
-        if([[NSFileManager defaultManager] fileExistsAtPath:tmpfilepath] == false){
+        if([[NSFileManager defaultManager] fileExistsAtPath:tmpfilepath] == NO){
             break;
         }
         count++;

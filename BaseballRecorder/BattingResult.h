@@ -31,6 +31,8 @@
 
 - (NSString*)getResultString;
 
+- (NSString*)getResultLongString;
+
 - (int)getStatisticsCounts:(int)type;
 
 @end

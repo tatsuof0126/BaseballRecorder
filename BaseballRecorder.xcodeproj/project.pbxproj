@@ -23,6 +23,7 @@
 		0B683703164279C50086E198 /* TeamStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683702164279C50086E198 /* TeamStatistics.m */; };
 		0B683706164279E00086E198 /* BattingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683705164279E00086E198 /* BattingStatistics.m */; };
 		0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */; };
+		0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6BB1D016AEC7A000B66509 /* MessageUI.framework */; };
 		0B7F8207164C0E2E00811465 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8205164C0E2E00811465 /* Icon-72.png */; };
 		0B7F8208164C0E2E00811465 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F8206164C0E2E00811465 /* Icon-72@2x.png */; };
 		0B9499AE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
@@ -83,6 +84,7 @@
 		0B683705164279E00086E198 /* BattingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatistics.m; sourceTree = "<group>"; };
 		0B6BB1B216AD9E1C00B66509 /* SelectInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInputViewController.h; sourceTree = "<group>"; };
 		0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInputViewController.m; sourceTree = "<group>"; };
+		0B6BB1D016AEC7A000B66509 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0B7F8205164C0E2E00811465 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "BaseballRecorder/images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		0B7F8206164C0E2E00811465 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "BaseballRecorder/images/Icon-72@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B7F820A164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -93,7 +95,6 @@
 		0B9499AF16325697007F574D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0B9499B116325697007F574D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0B9499B516325697007F574D /* BaseballRecorder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BaseballRecorder-Info.plist"; sourceTree = "<group>"; };
-		0B9499B716325697007F574D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0B9499B916325697007F574D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0B9499BB16325697007F574D /* BaseballRecorder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseballRecorder-Prefix.pch"; sourceTree = "<group>"; };
 		0B9499BC16325697007F574D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -101,13 +102,11 @@
 		0B9499BF16325697007F574D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0B9499C116325697007F574D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0B9499C316325697007F574D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0B9499C616325697007F574D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0B9499C816325697007F574D /* GameResultListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameResultListController.h; sourceTree = "<group>"; };
 		0B9499C916325697007F574D /* GameResultListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameResultListController.m; sourceTree = "<group>"; };
 		0B9499DB16325697007F574D /* BaseballRecorderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballRecorderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9499DC16325697007F574D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0B9499E416325697007F574D /* BaseballRecorderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BaseballRecorderTests-Info.plist"; sourceTree = "<group>"; };
-		0B9499E616325697007F574D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0B9499E816325697007F574D /* BaseballRecorderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseballRecorderTests.h; sourceTree = "<group>"; };
 		0B9499E916325697007F574D /* BaseballRecorderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseballRecorderTests.m; sourceTree = "<group>"; };
 		0B9499F316325AAF007F574D /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
@@ -186,6 +186,7 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B6BB1D016AEC7A000B66509 /* MessageUI.framework */,
 				0B9499AD16325697007F574D /* UIKit.framework */,
 				0B9499AF16325697007F574D /* Foundation.framework */,
 				0B9499B116325697007F574D /* CoreGraphics.framework */,
@@ -430,7 +431,6 @@
 		0B9499B616325697007F574D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0B9499B716325697007F574D /* en */,
 				0B7F820A164C134700811465 /* ja */,
 			);
 			name = InfoPlist.strings;
@@ -439,7 +439,6 @@
 		0B9499C516325697007F574D /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0B9499C616325697007F574D /* en */,
 				0B7F820B164C134700811465 /* ja */,
 			);
 			name = MainStoryboard.storyboard;
@@ -448,7 +447,6 @@
 		0B9499E516325697007F574D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0B9499E616325697007F574D /* en */,
 				0B7F820C164C134700811465 /* ja */,
 			);
 			name = InfoPlist.strings;

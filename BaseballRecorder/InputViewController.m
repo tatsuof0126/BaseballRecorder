@@ -28,6 +28,7 @@
 @synthesize scroolview;
 @synthesize resultPicker;
 @synthesize resultToolbar;
+@synthesize edited;
 @synthesize saveButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,8 +83,8 @@
     _otherscore.text = [NSString stringWithFormat:@"%d",gameResult.otherscore];
     
     _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
+    _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
-    _errors.text = [NSString stringWithFormat:@"%d",gameResult.errors];
     
     battingResultViewArray = [NSMutableArray array];
     
@@ -91,6 +92,8 @@
     
     // iPhone5対応
     [AppDelegate adjustForiPhone5:scroolview];
+    
+    edited = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +105,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
 //    NSLog(@"y : %f", scroolview.contentOffset.y);
     
-    if ((textField == _daten || textField == _steal || textField == _errors) &&
+    if ((textField == _daten || textField == _tokuten || textField == _steal) &&
         scroolview.contentOffset.y < 155.0f+gameResult.battingResultArray.count*40){
         [scroolview setContentOffset:CGPointMake(0.0f, 155.0f+gameResult.battingResultArray.count*40) animated:YES];
     }
@@ -116,6 +119,8 @@
     
     // ResultPickerを閉じる
     [self closeResultPicker];
+    
+    edited = YES;
 }
 
 //-(BOOL)textFieldShouldBeginEditing:(UITextField*)textField {
@@ -147,8 +152,8 @@
     [_myscore endEditing:YES];
     [_otherscore endEditing:YES];
     [_daten endEditing:YES];
+    [_tokuten endEditing:YES];
     [_steal endEditing:YES];
-    [_errors endEditing:YES];
 }
 
 - (void)makeBattingResult {
@@ -216,14 +221,14 @@
                               _datenLabel.frame.size.width, _datenLabel.frame.size.height);
     _daten.frame = CGRectMake(_daten.frame.origin.x, bottomY,
                               _daten.frame.size.width, _daten.frame.size.height);
+    _tokutenLabel.frame = CGRectMake(_tokutenLabel.frame.origin.x, bottomY+4,
+                                     _tokutenLabel.frame.size.width, _tokutenLabel.frame.size.height);
+    _tokuten.frame = CGRectMake(_tokuten.frame.origin.x, bottomY,
+                                _tokuten.frame.size.width, _tokuten.frame.size.height);
     _stealLabel.frame = CGRectMake(_stealLabel.frame.origin.x, bottomY+4,
                               _stealLabel.frame.size.width, _stealLabel.frame.size.height);
     _steal.frame = CGRectMake(_steal.frame.origin.x, bottomY,
                               _steal.frame.size.width, _steal.frame.size.height);
-    _errorsLabel.frame = CGRectMake(_errorsLabel.frame.origin.x, bottomY+4,
-                              _errorsLabel.frame.size.width, _errorsLabel.frame.size.height);
-    _errors.frame = CGRectMake(_errors.frame.origin.x, bottomY,
-                              _errors.frame.size.width, _errors.frame.size.height);
     
 //    int saveY = 365+battingResultArray.count*40;
 //    if(saveY < 365){saveY = 365;}
@@ -237,10 +242,12 @@
 
 - (void)inputResult:(UIButton*)button{
     [self makeResultPiker:NEW_INPUT];
+    edited = YES;
 }
 
 - (void)changeResult:(UIButton*)button{
     [self makeResultPiker:button.tag];
+    edited = YES;
 }
 
 - (void)makeResultPiker:(NSInteger)resultno {
@@ -337,7 +344,7 @@
     
     BattingResult *battingResult = [BattingResult makeBattingResult:position result:result];
     
-    if( battingResult != nil){
+    if(battingResult != nil){
         if(resultno == NEW_INPUT){
             [gameResult addBattingResult:battingResult];
         } else {
@@ -361,8 +368,7 @@
 - (IBAction)backButton:(id)sender {
 //    NSLog(@"Back resultid : %d",gameResult.resultid);
     
-    if(gameResult.resultid != 0){
-        // 入力エラーがない場合は保存確認のダイアログを表示
+    if(gameResult.resultid != 0 && edited == YES){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
             message:@"編集内容は保存されませんが、\nよろしいですか？"
             delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
@@ -432,10 +438,10 @@
 - (NSArray*)inputCheck {
     NSMutableArray* errorArray = [NSMutableArray array];
     // 未入力フラグ
-    BOOL blankFlg = false;    
+    BOOL blankFlg = NO;
     
     if(_year.text.length == 0 || _month.text.length == 0 || _day.text.length == 0){
-        blankFlg = true;
+        blankFlg = YES;
     } else {
         NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 09:00",
                              _year.text, _month.text, _day.text];
@@ -451,38 +457,38 @@
     }
     
     if(_place.text.length == 0){
-        blankFlg = true;
+        blankFlg = YES;
     }
     
     if(_myteam.text.length == 0){
-        blankFlg = true;
+        blankFlg = YES;
     }
     
     if(_otherteam.text.length == 0){
-        blankFlg = true;
+        blankFlg = YES;
     }
     
     if(_myscore.text.length == 0 || _otherscore.text.length == 0 ||
-       _daten.text.length == 0 || _steal.text.length == 0 || _errors.text.length == 0){
-        blankFlg = true;
+       _daten.text.length == 0 || _tokuten.text.length == 0 || _steal.text.length == 0){
+        blankFlg = YES;
     } else {
         // 数字以外が入っていたらエラーにする
         int myscore = [_myscore.text intValue];
         int otherscore = [_otherscore.text intValue];
         int daten = [_daten.text intValue];
+        int tokuten = [_tokuten.text intValue];
         int steal = [_steal.text intValue];
-        int errors = [_errors.text intValue];
         
-        if((myscore == 0 && [_myscore.text isEqualToString:@"0"] == false) ||
-           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == false) ||
-           (daten == 0 && [_daten.text isEqualToString:@"0"] == false) ||
-           (steal == 0 && [_steal.text isEqualToString:@"0"] == false) ||
-           (errors == 0 && [_errors.text isEqualToString:@"0"] == false) ){
+        if((myscore == 0 && [_myscore.text isEqualToString:@"0"] == NO) ||
+           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == NO) ||
+           (daten == 0 && [_daten.text isEqualToString:@"0"] == NO) ||
+           (tokuten == 0 && [_tokuten.text isEqualToString:@"0"] == NO) ||
+           (steal == 0 && [_steal.text isEqualToString:@"0"] == NO) ){
             [errorArray addObject:@"試合結果が正しくありません"];
         }
     }
     
-    if(blankFlg == true){
+    if(blankFlg == YES){
         [errorArray addObject:@"入力されていない項目があります。"];
     }    
     
@@ -515,8 +521,8 @@
     gameResult.otherscore = [_otherscore.text intValue];
     
     gameResult.daten = [_daten.text intValue];
+    gameResult.tokuten = [_tokuten.text intValue];
     gameResult.steal = [_steal.text intValue];
-    gameResult.errors = [_errors.text intValue];
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {
@@ -528,19 +534,19 @@
 {
     NSString* segueStr = [segue identifier];
     
-//    NSLog(@"%@",segueStr);
-    
     SelectInputViewController *viewController = [segue destinationViewController];
-    if ([segueStr isEqualToString:@"place"] == true) {
+    if ([segueStr isEqualToString:@"place"] == YES) {
         viewController.selecttype = PLACE;
         viewController.targetField = _place;
-    } else if ([segueStr isEqualToString:@"myteam"] == true) {
+    } else if ([segueStr isEqualToString:@"myteam"] == YES) {
         viewController.selecttype = MYTEAM;
         viewController.targetField = _myteam;
-    } else if ([segueStr isEqualToString:@"otherteam"] == true) {
+    } else if ([segueStr isEqualToString:@"otherteam"] == YES) {
         viewController.selecttype = OTHERTEAM;
         viewController.targetField = _otherteam;
     }
+    
+    edited = YES;
 }
 
 - (void)viewDidUnload {
@@ -555,10 +561,10 @@
     [self setOtherscore:nil];
     [self setDatenLabel:nil];
     [self setDaten:nil];
+    [self setTokutenLabel:nil];
+    [self setTokuten:nil];
     [self setStealLabel:nil];
     [self setSteal:nil];
-    [self setErrorsLabel:nil];
-    [self setErrors:nil];
     [super viewDidUnload];
 }
 

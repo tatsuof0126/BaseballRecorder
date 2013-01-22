@@ -92,7 +92,7 @@
         
         NSString* team = result.myteam;
         
-        if ([teamList containsObject:team] == false){
+        if ([teamList containsObject:team] == NO){
             [teamList addObject:team];
         }
     }
@@ -121,7 +121,7 @@
         
         for(int i=0;i<listOfYear.count;i++){
             GameResult* result = [listOfYear objectAtIndex:i];
-            if([targetTeamname isEqualToString:result.myteam] == true){
+            if([targetTeamname isEqualToString:result.myteam] == YES){
                 [gameResultListForCalc addObject:result];
             }
         }
@@ -148,8 +148,8 @@
     _walks.text = [NSString stringWithFormat:@"%d",battingStatistics.walks];
     _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices];
     _daten.text = [NSString stringWithFormat:@"%d",battingStatistics.daten];
+    _tokuten.text = [NSString stringWithFormat:@"%d",battingStatistics.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
-    _errors.text = [NSString stringWithFormat:@"%d",battingStatistics.errors];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
                          [BattingStatisticsViewController getFloatStr:battingStatistics.average],
@@ -173,8 +173,8 @@
     [self setWalks:nil];
     [self setSacrifices:nil];
     [self setDaten:nil];
+    [self setTokuten:nil];
     [self setSteal:nil];
-    [self setErrors:nil];
     [super viewDidUnload];
 }
 
@@ -266,7 +266,7 @@
 }
 
 + (NSString*)getFloatStr:(float)floatvalue {
-    if(isnan(floatvalue) == true){
+    if(isnan(floatvalue) == YES){
         return @".---";
     }
     

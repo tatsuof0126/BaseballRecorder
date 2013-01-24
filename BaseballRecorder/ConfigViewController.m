@@ -17,6 +17,7 @@
 
 @synthesize inputNavi;
 @synthesize scrollView;
+@synthesize appstoreLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,10 @@
     _place.text = [ConfigManager getDefaultPlace];
     _myteam.text = [ConfigManager getDefaultMyTeam];
     _sendto.text = [ConfigManager getDefaultSendTo];
+    
+    // AppStoreへリンクのタップを受け取るため
+    appstoreLabel.userInteractionEnabled = YES;
+    [appstoreLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +57,7 @@
     [self setInputNavi:nil];
     [self setSendto:nil];
     [self setScrollView:nil];
+    [self setAppstoreLabel:nil];
     [super viewDidUnload];
 }
 
@@ -175,6 +181,13 @@
     [self saveDefaultSendto];
     [self dismissModalViewControllerAnimated:YES];
     return NO;
+}
+
+- (void)tapAction:(UITapGestureRecognizer*)sender{
+    if(sender.view == appstoreLabel){
+        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end

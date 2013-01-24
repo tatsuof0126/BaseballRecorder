@@ -16,8 +16,19 @@
 {
     _url = url;
     
+    NSString* messageStr;
+    
+    if([[url absoluteString] hasPrefix:@"itms-apps://"] == YES){
+        messageStr = @"AppStoreを起動します";
+    } else if([[url absoluteString] hasPrefix:@"http://"] == YES ||
+              [[url absoluteString] hasPrefix:@"https://"] == YES ){
+        messageStr = @"Safariを起動します";
+    } else {
+        messageStr = @"アプリを起動します";
+    }
+    
     UIAlertView *alert = [[UIAlertView alloc] init];
-    alert.message = @"Safariを起動します。";
+    alert.message = messageStr;
     [alert addButtonWithTitle:@"キャンセル"];
     [alert addButtonWithTitle:@"OK"];
     alert.delegate = self;

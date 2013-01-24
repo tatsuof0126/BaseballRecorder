@@ -16,12 +16,12 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
 @property (weak, nonatomic) IBOutlet UITextField *place;
-
 @property (weak, nonatomic) IBOutlet UITextField *myteam;
-
 @property (weak, nonatomic) IBOutlet UITextField *sendto;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet UILabel *appstoreLabel;
 
 - (IBAction)placeEdited:(id)sender;
 

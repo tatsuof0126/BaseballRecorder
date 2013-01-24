@@ -29,29 +29,25 @@
     // iPhone5対応
     [AppDelegate adjustForiPhone5:gameResultListTableView];
     
+    // iAdの初期設定
     [AppDelegate adjustOriginForiPhone5:adView];
     adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     adView.delegate = self;
-    
     bannerIsVisible = NO;
     [self hiddenAdView];
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView*)banner{
-    NSLog(@"koko1");
     if (bannerIsVisible == NO){
         [self showAdView];
         bannerIsVisible = YES;
-        NSLog(@"koko1-2 x:%f, y:%f",banner.frame.origin.x, banner.frame.origin.y);
     }
 }
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError*)error{
-    NSLog(@"koko2");
     if (bannerIsVisible == YES){
         [self hiddenAdView];
         bannerIsVisible = NO;
-        NSLog(@"koko2-2 x:%f, y:%f",banner.frame.origin.x, banner.frame.origin.y);
     }
 }
 
@@ -209,8 +205,6 @@
     }
     
 }
-
-
 
 /*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

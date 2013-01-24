@@ -986,23 +986,30 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="草野球日記 ベボレコ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7pl-i4-ZJs">
-                                        <rect key="frame" x="20" y="300" width="158" height="21"/>
+                                        <rect key="frame" x="20" y="292" width="158" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="versionx.x" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtC-ue-9t7">
-                                        <rect key="frame" x="185" y="300" width="84" height="21"/>
+                                        <rect key="frame" x="185" y="292" width="84" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="− Baseball Recorder −" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="orV-0O-35J">
-                                        <rect key="frame" x="35" y="325" width="170" height="21"/>
+                                        <rect key="frame" x="35" y="317" width="170" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="left" text="AppStoreへ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e1R-b0-IWY">
+                                        <rect key="frame" x="220" y="324" width="80" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1014,6 +1021,7 @@
                     <tabBarItem key="tabBarItem" title="設定" image="settings.png" id="QdU-Ht-N7Q"/>
                     <navigationItem key="navigationItem" title="Title" id="AHc-Zs-ASF"/>
                     <connections>
+                        <outlet property="appstoreLabel" destination="e1R-b0-IWY" id="DnF-Pk-12y"/>
                         <outlet property="inputNavi" destination="ZbE-bK-WAj" id="6a2-6J-v0f"/>
                         <outlet property="myteam" destination="5EK-Py-si8" id="07Y-Fb-vWy"/>
                         <outlet property="place" destination="aIl-ze-lmZ" id="oRq-bt-Oqf"/>
@@ -1081,6 +1089,7 @@
                 <relationship kind="action" name="myteamEdited:"/>
                 <relationship kind="action" name="placeEdited:"/>
                 <relationship kind="action" name="sendtoEdited:"/>
+                <relationship kind="outlet" name="appstoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="inputNavi" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="myteam" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="place" candidateClass="UITextField"/>

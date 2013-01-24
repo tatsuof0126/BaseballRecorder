@@ -174,8 +174,6 @@
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
-				0B6BB1E516B0334200B66509 /* iAd.framework */,
-				0B6BB1D616AEF09200B66509 /* AddressBook.framework */,
 				0B5DD63216500FDE00C544D9 /* Icon.png */,
 				0B5DD63016500FCE00C544D9 /* Icon@2x.png */,
 				0B9499B316325697007F574D /* BaseballRecorder */,
@@ -197,6 +195,8 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B6BB1E516B0334200B66509 /* iAd.framework */,
+				0B6BB1D616AEF09200B66509 /* AddressBook.framework */,
 				0B6BB1D216AEE6E100B66509 /* AddressBookUI.framework */,
 				0B6BB1D016AEC7A000B66509 /* MessageUI.framework */,
 				0B9499AD16325697007F574D /* UIKit.framework */,

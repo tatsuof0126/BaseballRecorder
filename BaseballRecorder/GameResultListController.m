@@ -19,6 +19,8 @@
 @synthesize gameResultYearList;
 @synthesize gameResultListOfYear;
 @synthesize gameResultListTableView;
+@synthesize adView;
+@synthesize bannerIsVisible;
 
 - (void)viewDidLoad
 {
@@ -26,8 +28,47 @@
     
     // iPhone5対応
     [AppDelegate adjustForiPhone5:gameResultListTableView];
-        
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [AppDelegate adjustOriginForiPhone5:adView];
+    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    adView.delegate = self;
+    
+    bannerIsVisible = NO;
+    [self hiddenAdView];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView*)banner{
+    NSLog(@"koko1");
+    if (bannerIsVisible == NO){
+        [self showAdView];
+        bannerIsVisible = YES;
+        NSLog(@"koko1-2 x:%f, y:%f",banner.frame.origin.x, banner.frame.origin.y);
+    }
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError*)error{
+    NSLog(@"koko2");
+    if (bannerIsVisible == YES){
+        [self hiddenAdView];
+        bannerIsVisible = NO;
+        NSLog(@"koko2-2 x:%f, y:%f",banner.frame.origin.x, banner.frame.origin.y);
+    }
+}
+
+- (void)hiddenAdView {
+    CGRect oldRect = gameResultListTableView.frame;
+    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
+                                oldRect.size.width, oldRect.size.height+50);
+    gameResultListTableView.frame = newRect;
+    adView.hidden = YES;
+}
+
+- (void)showAdView {
+    CGRect oldRect = gameResultListTableView.frame;
+    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
+                                oldRect.size.width, oldRect.size.height-50);
+    gameResultListTableView.frame = newRect;
+    adView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +80,7 @@
 - (void)viewDidUnload {
     [self setGameResultListTableView:nil];
     [self setGameResultListOfYear:nil];
+    [self setAdView:nil];
     [super viewDidUnload];
 }
 

@@ -53,4 +53,14 @@
     }
 }
 
++ (void)adjustOriginForiPhone5:(UIView*)view {
+    // iPhone5対応
+    if([UIScreen mainScreen].bounds.size.height == 568){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y+88,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+}
+
 @end

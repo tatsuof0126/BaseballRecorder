@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
-@interface GameResultListController : UIViewController
+@interface GameResultListController : UIViewController <ADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *gameResultListTableView;
 
@@ -17,5 +18,8 @@
 @property (strong, nonatomic) NSMutableArray *gameResultYearList;
 
 @property (strong, nonatomic) NSMutableArray *gameResultListOfYear;
+
+@property (weak, nonatomic) IBOutlet ADBannerView *adView;
+@property BOOL bannerIsVisible;
 
 @end

@@ -23,4 +23,6 @@
 
 + (void)adjustForiPhone5:(UIView*)view;
 
++ (void)adjustOriginForiPhone5:(UIView*)view;
+
 @end

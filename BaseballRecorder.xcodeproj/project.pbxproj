@@ -16,6 +16,11 @@
 		0B1AA358163D772B00535116 /* statistics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA350163D772B00535116 /* statistics@2x.png */; };
 		0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D1FC616402BAF00330699 /* ShowGameResultController.m */; };
 		0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C77C2164952ED00A214EC /* ConfigManager.m */; };
+		0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E42A16C12AA300E0E95D /* PitchingResultController.m */; };
+		0B40E42E16C3EEE800E0E95D /* CheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */; };
+		0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43516C3F0DD00E0E95D /* disable_check.png */; };
+		0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43616C3F0DD00E0E95D /* nocheck.png */; };
+		0B40E43A16C3F0DD00E0E95D /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43716C3F0DD00E0E95D /* check.png */; };
 		0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63016500FCE00C544D9 /* Icon@2x.png */; };
 		0B5DD63316500FDE00C544D9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63216500FDE00C544D9 /* Icon.png */; };
 		0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EEE81163AE4C20038980D /* GameResultManager.m */; };
@@ -75,6 +80,13 @@
 		0B2D1FC616402BAF00330699 /* ShowGameResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowGameResultController.m; sourceTree = "<group>"; };
 		0B3C77C1164952ED00A214EC /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
 		0B3C77C2164952ED00A214EC /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
+		0B40E42916C12AA300E0E95D /* PitchingResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchingResultController.h; sourceTree = "<group>"; };
+		0B40E42A16C12AA300E0E95D /* PitchingResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingResultController.m; sourceTree = "<group>"; };
+		0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxButton.h; sourceTree = "<group>"; };
+		0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxButton.m; sourceTree = "<group>"; };
+		0B40E43516C3F0DD00E0E95D /* disable_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = disable_check.png; path = BaseballRecorder/images/disable_check.png; sourceTree = SOURCE_ROOT; };
+		0B40E43616C3F0DD00E0E95D /* nocheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nocheck.png; path = BaseballRecorder/images/nocheck.png; sourceTree = SOURCE_ROOT; };
+		0B40E43716C3F0DD00E0E95D /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = BaseballRecorder/images/check.png; sourceTree = SOURCE_ROOT; };
 		0B5DD63016500FCE00C544D9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		0B5DD63216500FDE00C544D9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0B5EEE80163AE4C20038980D /* GameResultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultManager.h; sourceTree = "<group>"; };
@@ -158,6 +170,9 @@
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0B40E43516C3F0DD00E0E95D /* disable_check.png */,
+				0B40E43616C3F0DD00E0E95D /* nocheck.png */,
+				0B40E43716C3F0DD00E0E95D /* check.png */,
 				0B7F8205164C0E2E00811465 /* Icon-72.png */,
 				0B7F8206164C0E2E00811465 /* Icon-72@2x.png */,
 				0B1AA349163D772B00535116 /* book.png */,
@@ -225,6 +240,8 @@
 				0B9499F416325AAF007F574D /* ConfigViewController.m */,
 				0B9499FA16326416007F574D /* InputViewController.h */,
 				0B949A001632A1E3007F574D /* InputViewController.m */,
+				0B40E42916C12AA300E0E95D /* PitchingResultController.h */,
+				0B40E42A16C12AA300E0E95D /* PitchingResultController.m */,
 				0B9499FD16329737007F574D /* ResultPickerViewController.h */,
 				0B9499FE16329737007F574D /* ResultPickerViewController.m */,
 				0B6BB1B216AD9E1C00B66509 /* SelectInputViewController.h */,
@@ -243,6 +260,8 @@
 				0B683702164279C50086E198 /* TeamStatistics.m */,
 				0B683704164279E00086E198 /* BattingStatistics.h */,
 				0B683705164279E00086E198 /* BattingStatistics.m */,
+				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
+				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -368,6 +387,9 @@
 				0B7F8208164C0E2E00811465 /* Icon-72@2x.png in Resources */,
 				0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */,
 				0B5DD63316500FDE00C544D9 /* Icon.png in Resources */,
+				0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */,
+				0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */,
+				0B40E43A16C3F0DD00E0E95D /* check.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +440,8 @@
 				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,
 				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
 				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
+				0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */,
+				0B40E42E16C3EEE800E0E95D /* CheckBoxButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

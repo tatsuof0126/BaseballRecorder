@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Game Result List Controller - First-->
@@ -67,10 +67,6 @@
                             <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZYo-Yi-ZAg">
                                 <rect key="frame" x="0.0" y="361" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <requiredContentSizeIdentifiers>
-                                    <string>ADBannerContentSizeLandscape</string>
-                                    <string>ADBannerContentSizePortrait</string>
-                                </requiredContentSizeIdentifiers>
                             </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -359,6 +355,11 @@
                                                 <action selector="backButton:" destination="CYm-Gx-IRt" id="wST-0J-jUE"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="投手成績" id="DE1-Tq-4bb">
+                                            <connections>
+                                                <segue destination="sOh-sz-83Q" kind="modal" modalTransitionStyle="flipHorizontal" id="OqL-sm-ZUf"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -380,6 +381,7 @@
                         <outlet property="scroolview" destination="coX-Kk-ahP" id="j09-ZD-mzM"/>
                         <outlet property="steal" destination="pJ3-tG-wOQ" id="fVZ-4C-c2i"/>
                         <outlet property="stealLabel" destination="42u-Gk-JMg" id="oV1-7P-t1V"/>
+                        <outlet property="toPitchingButton" destination="DE1-Tq-4bb" id="ecE-bU-ghn"/>
                         <outlet property="tokuten" destination="ti0-Gf-uRB" id="9Sg-Wu-Cg4"/>
                         <outlet property="tokutenLabel" destination="CIP-pc-Rsc" id="2X4-aW-0W3"/>
                         <outlet property="year" destination="qAH-4u-0GX" id="Y6h-Xs-Ejt"/>
@@ -450,6 +452,253 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAx-eI-hml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1493" y="-133"/>
+        </scene>
+        <!--Pitching Result Controller-->
+        <scene sceneID="WRU-f7-kyk">
+            <objects>
+                <viewController id="sOh-sz-83Q" customClass="PitchingResultController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="clm-l9-lmy">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="XhO-tN-r3w">
+                                <rect key="frame" x="0.0" y="44" width="320" height="400"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="自責" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ABw-wz-Yhg">
+                                        <rect key="frame" x="120" y="200" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="責任投手" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iwe-C1-krL">
+                                        <rect key="frame" x="30" y="250" width="68" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="3Bj-DQ-OgW">
+                                        <rect key="frame" x="165" y="196" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="aty-3F-vKG"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="失点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icG-bo-jI2">
+                                        <rect key="frame" x="30" y="200" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="fTI-im-ybi">
+                                        <rect key="frame" x="75" y="196" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="FAf-fh-IP1"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="三振" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lfn-My-KhQ">
+                                        <rect key="frame" x="30" y="150" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="ENb-1f-evW">
+                                        <rect key="frame" x="75" y="146" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="aKp-Fy-WRh"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="四球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eZx-h7-3hg">
+                                        <rect key="frame" x="120" y="150" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="oCe-zF-o9I">
+                                        <rect key="frame" x="165" y="146" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="3LB-JF-cPs"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="安打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jLu-0P-Hho">
+                                        <rect key="frame" x="30" y="100" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="投球回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3u-lm-9k5">
+                                        <rect key="frame" x="30" y="55" width="51" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="VhZ-3y-dN8">
+                                        <rect key="frame" x="75" y="96" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="U5D-0J-eLw"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="本塁打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zfF-xG-fYw">
+                                        <rect key="frame" x="120" y="100" width="51" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="Aee-ld-SoI">
+                                        <rect key="frame" x="180" y="96" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="t7T-VF-XNw"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="死球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pfe-iC-sxr">
+                                        <rect key="frame" x="210" y="150" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="完投" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w7V-y2-yYR">
+                                        <rect key="frame" x="210" y="200" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="h6r-hM-SfO">
+                                        <rect key="frame" x="255" y="146" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sOh-sz-83Q" id="EtK-Fr-2ws"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UIs-eY-Fdl">
+                                        <rect key="frame" x="100" y="51" width="60" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="入力">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="inputInning:" destination="sOh-sz-83Q" eventType="touchUpInside" id="zhU-rp-0iL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3oQ-R4-Mtp">
+                                        <rect key="frame" x="110" y="246" width="60" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="入力">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="inputResult:" destination="sOh-sz-83Q" eventType="touchUpInside" id="vmr-YC-zMK"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="投手成績" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kUQ-KB-CpY">
+                                        <rect key="frame" x="20" y="20" width="68" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="12回2/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cws-WD-99x">
+                                        <rect key="frame" x="100" y="55" width="70" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="勝利投手" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gCd-xu-Fj2">
+                                        <rect key="frame" x="110" y="250" width="70" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3ZZ-gx-gix" customClass="CheckBoxButton">
+                                        <rect key="frame" x="257" y="196" width="30" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </scrollView>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="cTw-xY-abI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="試合結果入力" id="wUt-Lv-RGS">
+                                        <barButtonItem key="rightBarButtonItem" title="打撃成績" id="goB-ec-kle">
+                                            <connections>
+                                                <action selector="backToBatting:" destination="sOh-sz-83Q" id="UOU-oG-snb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="dassanshin" destination="ENb-1f-evW" id="4q1-Y7-f1H"/>
+                        <outlet property="hianda" destination="VhZ-3y-dN8" id="afp-Ts-vEd"/>
+                        <outlet property="hihomerun" destination="Aee-ld-SoI" id="7G7-34-w6j"/>
+                        <outlet property="inningButton" destination="UIs-eY-Fdl" id="BsC-uu-wgN"/>
+                        <outlet property="inningLabel" destination="Cws-WD-99x" id="cfa-p6-ulC"/>
+                        <outlet property="inputNavi" destination="wUt-Lv-RGS" id="tTw-Gd-4Er"/>
+                        <outlet property="jisekiten" destination="3Bj-DQ-OgW" id="S63-4G-Jf4"/>
+                        <outlet property="scrollView" destination="XhO-tN-r3w" id="1py-O0-8DW"/>
+                        <outlet property="sekininButton" destination="3oQ-R4-Mtp" id="Lj4-YF-K1Z"/>
+                        <outlet property="sekininLabel" destination="gCd-xu-Fj2" id="c6o-XA-6Ez"/>
+                        <outlet property="shitten" destination="fTI-im-ybi" id="6CJ-T6-Zfd"/>
+                        <outlet property="toBattingButton" destination="goB-ec-kle" id="BQa-h5-NkM"/>
+                        <outlet property="yoshikyu" destination="oCe-zF-o9I" id="Tmb-6B-yad"/>
+                        <outlet property="yoshikyu2" destination="h6r-hM-SfO" id="FNB-XZ-ELJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIu-QM-3Vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1265" y="686"/>
         </scene>
         <!--Batting Statistics View Controller - Second-->
         <scene sceneID="13">
@@ -891,7 +1140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gH8-W5-TYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1045" y="633"/>
+            <point key="canvasLocation" x="643" y="529"/>
         </scene>
         <!--Config View Controller - Title-->
         <scene sceneID="Xzr-H3-yjN">
@@ -1082,6 +1331,9 @@
                 <relationship kind="outlet" name="year" candidateClass="UILabel"/>
             </relationships>
         </class>
+        <class className="CheckBoxButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBoxButton.h"/>
+        </class>
         <class className="ConfigViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigViewController.h"/>
             <relationships>
@@ -1124,9 +1376,32 @@
                 <relationship kind="outlet" name="scroolview" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="steal" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="stealLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="toPitchingButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tokuten" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tokutenLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="year" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="PitchingResultController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchingResultController.h"/>
+            <relationships>
+                <relationship kind="action" name="backToBatting:"/>
+                <relationship kind="action" name="inputInning:"/>
+                <relationship kind="action" name="inputResult:"/>
+                <relationship kind="outlet" name="dassanshin" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="hianda" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="hihomerun" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="inningButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="inningLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inputNavi" candidateClass="UINavigationItem"/>
+                <relationship kind="outlet" name="jisekiten" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sekininButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="sekininLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="shitten" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toBattingButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="yoshikyu" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="yoshikyu2" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="SelectInputViewController" superclassName="UIViewController">
@@ -1165,7 +1440,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="beY-vE-fQn"/>
+        <segue reference="7pF-G3-Z3a"/>
         <segue reference="BNo-wl-vcs"/>
     </inferredMetricsTieBreakers>
 </document>

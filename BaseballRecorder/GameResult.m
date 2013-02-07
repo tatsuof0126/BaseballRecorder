@@ -285,4 +285,19 @@
     return NSOrderedSame;
 }
 
++ (NSArray*)getInningPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:
+                      [NSArray arrayWithObjects:@"",@"1回",@"2回",@"3回",@"4回",
+                       @"5回",@"6回",@"7回",@"8回",@"9回",@"10回",@"11回",@"12回",nil],
+                      [NSArray arrayWithObjects:@"",@"0/3",@"1/3",@"2/3",nil], nil];
+    return array;
+}
+
++ (NSArray*)getSekininPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:@"",@"勝利投手",@"敗戦投手",@"ホールド",@"セーブ",nil];
+    return array;
+}
+
+
+
 @end

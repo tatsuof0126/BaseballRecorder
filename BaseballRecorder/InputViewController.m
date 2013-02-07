@@ -29,6 +29,7 @@
 @synthesize resultPicker;
 @synthesize resultToolbar;
 @synthesize edited;
+@synthesize toPitchingButton;
 @synthesize saveButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -139,7 +140,7 @@
 }
 
 - (void)hiddenDoneButton {
-    _inputNavi.rightBarButtonItem = nil;
+    _inputNavi.rightBarButtonItem = toPitchingButton;
 }
 
 - (void)doneButton {
@@ -241,16 +242,20 @@
 }
 
 - (void)inputResult:(UIButton*)button{
-    [self makeResultPiker:NEW_INPUT];
-    edited = YES;
+    if(resultPicker == nil){
+        [self makeResultPicker:NEW_INPUT];
+        edited = YES;
+    }
 }
 
 - (void)changeResult:(UIButton*)button{
-    [self makeResultPiker:button.tag];
-    edited = YES;
+    if(resultPicker == nil){
+        [self makeResultPicker:button.tag];
+        edited = YES;
+    }
 }
 
-- (void)makeResultPiker:(NSInteger)resultno {
+- (void)makeResultPicker:(NSInteger)resultno {
     // 初めに他の編集項目の編集を終了させる
     [self doneButton];
     
@@ -565,6 +570,7 @@
     [self setTokuten:nil];
     [self setStealLabel:nil];
     [self setSteal:nil];
+    [self setToPitchingButton:nil];
     [super viewDidUnload];
 }
 

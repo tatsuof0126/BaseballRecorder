@@ -52,4 +52,8 @@
 
 - (NSComparisonResult)compareDate:(GameResult*)data;
 
++ (NSArray*)getInningPickerArray;
+
++ (NSArray*)getSekininPickerArray;
+
 @end

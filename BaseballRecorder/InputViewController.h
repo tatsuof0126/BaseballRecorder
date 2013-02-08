@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
 @property (strong, nonatomic) GameResult *gameResult;
+@property (strong, nonatomic) GameResult *gameResultForPitching;
 
 @property (strong, nonatomic) NSMutableArray *battingResultViewArray;
 

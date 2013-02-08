@@ -7,7 +7,9 @@
 //
 
 #import "PitchingResultController.h"
+#import "InputViewController.h"
 #import "GameResult.h"
+#import "CheckBoxButton.h"
 
 #define PICKER_INNING  1
 #define PICKER_SEKININ 2
@@ -44,12 +46,22 @@
 
 - (void)showPitchingResult {
     
-    
-    
-    
+    InputViewController* controller = (InputViewController*)self.presentingViewController;
+    _inning = controller.gameResultForPitching.inning;
+    _inning2 = controller.gameResultForPitching.inning2;
+    _hianda.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.hianda];
+    _hihomerun.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.hihomerun];
+    _dassanshin.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.dassanshin];
+    _yoshikyu.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.yoshikyu];
+    _yoshikyu2.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.yoshikyu2];
+    _shitten.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.shitten];
+    _jisekiten.text = [NSString stringWithFormat:@"%d",controller.gameResultForPitching.jisekiten];
+    _kanto.checkBoxSelected = controller.gameResultForPitching.kanto;
+    _sekinin = controller.gameResultForPitching.sekinin;
     
     [self showInning];
     [self showSekinin];
+    [_kanto setState];
     
 }
 
@@ -283,7 +295,108 @@
 }
 
 - (IBAction)backToBatting:(id)sender {
+    NSArray* errorArray = [self inputCheck];
+    
+    // 入力エラーがある場合はダイアログを表示して戻らない
+    if(errorArray.count >= 1){
+        NSMutableString *errorStr = [NSMutableString string];
+        for(int i=0;i<errorArray.count;i++){
+            [errorStr appendString:[errorArray objectAtIndex:i]];
+            if(i != errorArray.count){
+                [errorStr appendString:@"\n"];
+            }
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+            message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
+    // 投球回が０で何らかの入力がある場合は、入力がクリアされる旨の確認メッセージを表示
+    if(_inning == 0 && _inning2 == 0 &&
+       ([_hianda.text isEqualToString:@"0"] == NO ||
+        [_hihomerun.text isEqualToString:@"0"] == NO ||
+        [_dassanshin.text isEqualToString:@"0"] == NO ||
+        [_yoshikyu.text isEqualToString:@"0"] == NO ||
+        [_yoshikyu2.text isEqualToString:@"0"] == NO ||
+        [_shitten.text isEqualToString:@"0"] == NO ||
+        [_jisekiten.text isEqualToString:@"0"] == NO ||
+        _kanto.checkBoxSelected == YES ||
+        _sekinin != 0)){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
+            message:@"投球回が空のため入力内容はクリアされます。よろしいですか？"
+            delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
+        [alert show];
+           
+    } else {
+        [self backToBattingView];
+    }
+}
+
+- (void)backToBattingView {
+    InputViewController* controller = (InputViewController*)self.presentingViewController;
+    controller.gameResultForPitching.inning     = _inning;
+    controller.gameResultForPitching.inning2    = _inning2;
+    controller.gameResultForPitching.hianda     = [_hianda.text intValue];
+    controller.gameResultForPitching.hihomerun  = [_hihomerun.text intValue];
+    controller.gameResultForPitching.dassanshin = [_dassanshin.text intValue];
+    controller.gameResultForPitching.yoshikyu   = [_yoshikyu.text intValue];
+    controller.gameResultForPitching.yoshikyu2  = [_yoshikyu2.text intValue];
+    controller.gameResultForPitching.shitten    = [_shitten.text intValue];
+    controller.gameResultForPitching.jisekiten  = [_jisekiten.text intValue];
+    controller.gameResultForPitching.kanto      = [_kanto checkBoxSelected];
+    controller.gameResultForPitching.sekinin    = _sekinin;
+    
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 1){
+        // 投手成績を初期化して戻る
+        InputViewController* controller = (InputViewController*)self.presentingViewController;
+        controller.gameResultForPitching = [[GameResult alloc] init];
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
+- (NSArray*)inputCheck {
+    NSMutableArray* errorArray = [NSMutableArray array];
+    // 未入力フラグ
+    BOOL blankFlg = NO;
+    
+    if(_hianda.text.length == 0 || _hihomerun.text.length == 0 ||
+       _dassanshin.text.length == 0 || _yoshikyu.text.length == 0 || _yoshikyu2.text.length == 0 ||
+       _shitten.text.length == 0 || _jisekiten.text.length == 0){
+        blankFlg = YES;
+    }
+    
+    // 数字以外が入っていたらエラーにする
+    int hianda = [_hianda.text intValue];
+    int hihomerun = [_hihomerun.text intValue];
+    int dassanshin = [_dassanshin.text intValue];
+    int yoshikyu = [_yoshikyu.text intValue];
+    int yoshikyu2 = [_yoshikyu2.text intValue];
+    int shitten = [_shitten.text intValue];
+    int jisekiten = [_jisekiten.text intValue];
+    
+    if((hianda == 0 && [_hianda.text isEqualToString:@"0"] == NO) ||
+       (hihomerun == 0 && [_hihomerun.text isEqualToString:@"0"] == NO) ||
+       (dassanshin == 0 && [_dassanshin.text isEqualToString:@"0"] == NO) ||
+       (yoshikyu == 0 && [_yoshikyu.text isEqualToString:@"0"] == NO) ||
+       (yoshikyu2 == 0 && [_yoshikyu2.text isEqualToString:@"0"] == NO) ||
+       (shitten == 0 && [_shitten.text isEqualToString:@"0"] == NO) ||
+       (jisekiten == 0 && [_jisekiten.text isEqualToString:@"0"] == NO) ){
+        [errorArray addObject:@"入力が正しくありません"];
+    }
+    
+    if(blankFlg == YES){
+        [errorArray addObject:@"入力されていない項目があります。"];
+    }
+    
+    return errorArray;
 }
 
 - (void)viewDidUnload {
@@ -302,6 +415,7 @@
     [self setSekininLabel:nil];
     [self setInningButton:nil];
     [self setSekininButton:nil];
+    [self setKanto:nil];
     [super viewDidUnload];
 }
 @end

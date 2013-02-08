@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) BOOL checkBoxSelected;
 
+- (void)setState;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CheckBoxButton.h"
 
 @interface PitchingResultController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *yoshikyu2;
 @property (weak, nonatomic) IBOutlet UITextField *shitten;
 @property (weak, nonatomic) IBOutlet UITextField *jisekiten;
+@property (weak, nonatomic) IBOutlet CheckBoxButton *kanto;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *inningLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sekininLabel;

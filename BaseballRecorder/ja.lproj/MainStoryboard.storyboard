@@ -687,6 +687,7 @@
                         <outlet property="inningLabel" destination="Cws-WD-99x" id="cfa-p6-ulC"/>
                         <outlet property="inputNavi" destination="wUt-Lv-RGS" id="tTw-Gd-4Er"/>
                         <outlet property="jisekiten" destination="3Bj-DQ-OgW" id="S63-4G-Jf4"/>
+                        <outlet property="kanto" destination="3ZZ-gx-gix" id="l5l-9g-48Q"/>
                         <outlet property="scrollView" destination="XhO-tN-r3w" id="1py-O0-8DW"/>
                         <outlet property="sekininButton" destination="3oQ-R4-Mtp" id="Lj4-YF-K1Z"/>
                         <outlet property="sekininLabel" destination="gCd-xu-Fj2" id="c6o-XA-6Ez"/>
@@ -1395,6 +1396,7 @@
                 <relationship kind="outlet" name="inningLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="inputNavi" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="jisekiten" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="kanto" candidateClass="CheckBoxButton"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="sekininButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="sekininLabel" candidateClass="UILabel"/>

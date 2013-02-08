@@ -30,6 +30,18 @@
 
 @property (strong, nonatomic, readwrite) NSMutableArray *battingResultArray;
 
+@property int inning;
+@property int inning2;
+@property int hianda;
+@property int hihomerun;
+@property int dassanshin;
+@property int yoshikyu;
+@property int yoshikyu2;
+@property int shitten;
+@property int jisekiten;
+@property BOOL kanto;
+@property int sekinin;
+
 - (BattingResult*)getBattingResult:(NSInteger)resultno;
 
 - (void)addBattingResult:(BattingResult*)battingResult;

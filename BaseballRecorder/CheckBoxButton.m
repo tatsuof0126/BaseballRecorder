@@ -43,9 +43,13 @@
     return self;
 }
 
-- (void)checkboxPush:(CheckBoxButton*) button {
+- (void)checkboxPush:(CheckBoxButton*)button {
     button.checkBoxSelected = !button.checkBoxSelected;
     [button setState:button];
+}
+
+- (void)setState {
+    [self setState:self];
 }
 
 - (void)setState:(CheckBoxButton*)button {

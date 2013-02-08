@@ -24,6 +24,7 @@
 @implementation InputViewController
 
 @synthesize gameResult;
+@synthesize gameResultForPitching;
 @synthesize battingResultViewArray;
 @synthesize scroolview;
 @synthesize resultPicker;
@@ -87,9 +88,22 @@
     _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     
-    battingResultViewArray = [NSMutableArray array];
-    
+//    battingResultViewArray = [NSMutableArray array];
     [self makeBattingResult];
+    
+    // 投手成績画面用の一時GameResultオブジェクトを作成
+    gameResultForPitching = [[GameResult alloc] init];
+    gameResultForPitching.inning     = gameResult.inning;
+    gameResultForPitching.inning2    = gameResult.inning2;
+    gameResultForPitching.hianda     = gameResult.hianda;
+    gameResultForPitching.hihomerun  = gameResult.hihomerun;
+    gameResultForPitching.dassanshin = gameResult.dassanshin;
+    gameResultForPitching.yoshikyu   = gameResult.yoshikyu;
+    gameResultForPitching.yoshikyu2  = gameResult.yoshikyu2;
+    gameResultForPitching.shitten    = gameResult.shitten;
+    gameResultForPitching.jisekiten  = gameResult.jisekiten;
+    gameResultForPitching.kanto      = gameResult.kanto;
+    gameResultForPitching.sekinin    = gameResult.sekinin;
     
     // iPhone5対応
     [AppDelegate adjustForiPhone5:scroolview];
@@ -485,12 +499,16 @@
         int steal = [_steal.text intValue];
         
         if((myscore == 0 && [_myscore.text isEqualToString:@"0"] == NO) ||
-           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == NO) ||
-           (daten == 0 && [_daten.text isEqualToString:@"0"] == NO) ||
-           (tokuten == 0 && [_tokuten.text isEqualToString:@"0"] == NO) ||
-           (steal == 0 && [_steal.text isEqualToString:@"0"] == NO) ){
+           (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == NO)){
             [errorArray addObject:@"試合結果が正しくありません"];
         }
+        
+        if((daten == 0 && [_daten.text isEqualToString:@"0"] == NO) ||
+           (tokuten == 0 && [_tokuten.text isEqualToString:@"0"] == NO) ||
+           (steal == 0 && [_steal.text isEqualToString:@"0"] == NO)){
+            [errorArray addObject:@"打撃成績が正しくありません"];
+        }
+        
     }
     
     if(blankFlg == YES){

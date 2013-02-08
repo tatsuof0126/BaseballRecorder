@@ -27,6 +27,18 @@
 @synthesize tokuten;
 @synthesize steal;
 
+@synthesize inning;
+@synthesize inning2;
+@synthesize hianda;
+@synthesize hihomerun;
+@synthesize dassanshin;
+@synthesize yoshikyu;
+@synthesize yoshikyu2;
+@synthesize shitten;
+@synthesize jisekiten;
+@synthesize kanto;
+@synthesize sekinin;
+
 - (BattingResult*)getBattingResult:(NSInteger)resultno {
     return [battingResultArray objectAtIndex:resultno];
 }

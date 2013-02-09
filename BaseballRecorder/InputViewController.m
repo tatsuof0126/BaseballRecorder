@@ -546,6 +546,18 @@
     gameResult.daten = [_daten.text intValue];
     gameResult.tokuten = [_tokuten.text intValue];
     gameResult.steal = [_steal.text intValue];
+    
+    gameResult.inning     = gameResultForPitching.inning;
+    gameResult.inning2    = gameResultForPitching.inning2;
+    gameResult.hianda     = gameResultForPitching.hianda;
+    gameResult.hihomerun  = gameResultForPitching.hihomerun;
+    gameResult.dassanshin = gameResultForPitching.dassanshin;
+    gameResult.yoshikyu   = gameResultForPitching.yoshikyu;
+    gameResult.yoshikyu2  = gameResultForPitching.yoshikyu2;
+    gameResult.shitten    = gameResultForPitching.shitten;
+    gameResult.jisekiten  = gameResultForPitching.jisekiten;
+    gameResult.kanto      = gameResultForPitching.kanto;
+    gameResult.sekinin    = gameResultForPitching.sekinin;
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {

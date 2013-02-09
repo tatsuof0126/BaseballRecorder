@@ -22,4 +22,12 @@
 
 + (void)setDefaultSendTo:(NSString*)sendto;
 
++ (NSString*)getCalcTargetTeam;
+
++ (void)setCalcTargetTeam:(NSString*)targetTeam;
+
++ (NSString*)getCalcTargetYear;
+
++ (void)setCalcTargetYear:(NSString*)targetYear;
+
 @end

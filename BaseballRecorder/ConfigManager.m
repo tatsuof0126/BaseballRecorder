@@ -43,4 +43,26 @@
     [defaults synchronize];
 }
 
++ (NSString*)getCalcTargetTeam {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"TARGETTEAM"];
+}
+
++ (void)setCalcTargetTeam:(NSString*)targetTeam {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:targetTeam forKey:@"TARGETTEAM"];
+    [defaults synchronize];
+}
+
++ (NSString*)getCalcTargetYear {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"TARGETYEAR"];
+}
+
++ (void)setCalcTargetYear:(NSString*)targetYear {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:targetYear forKey:@"TARGETYEAR"];
+    [defaults synchronize];
+}
+
 @end

@@ -262,11 +262,15 @@
         [inningButton setTitle:@"入力" forState:UIControlStateHighlighted];
         inningButton.frame = CGRectMake(100,51,60,30);
     } else {
+        _inningLabel.text = [GameResult getInningString:_inning inning2:_inning2];
+
+/*
         NSArray* array = [GameResult getInningPickerArray];
-        _inningLabel.text = [NSString stringWithFormat:@"%@%@%@",
+        [NSString stringWithFormat:@"%@%@%@",
                              [[array objectAtIndex:0] objectAtIndex:_inning],
                              [[array objectAtIndex:1] objectAtIndex:_inning2],
                              _inning == 0 ? @"回" : @""];
+ */
         [inningButton setTitle:@"変更" forState:UIControlStateNormal];
         [inningButton setTitle:@"変更" forState:UIControlStateHighlighted];
         if(_inning == 0 || _inning2 == 0){
@@ -336,6 +340,7 @@
 }
 
 - (void)backToBattingView {
+    // 入力内容をオブジェクトに保存して戻る
     InputViewController* controller = (InputViewController*)self.presentingViewController;
     controller.gameResultForPitching.inning     = _inning;
     controller.gameResultForPitching.inning2    = _inning2;
@@ -354,7 +359,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
-        // 投手成績を初期化して戻る
+        // 投手成績を初期化して戻る（入力内容は無視）
         InputViewController* controller = (InputViewController*)self.presentingViewController;
         controller.gameResultForPitching = [[GameResult alloc] init];
         
@@ -380,8 +385,7 @@
     int yoshikyu = [_yoshikyu.text intValue];
     int yoshikyu2 = [_yoshikyu2.text intValue];
     int shitten = [_shitten.text intValue];
-    int jisekiten = [_jisekiten.text intValue];
-    
+    int jisekiten = [_jisekiten.text intValue];    
     if((hianda == 0 && [_hianda.text isEqualToString:@"0"] == NO) ||
        (hihomerun == 0 && [_hihomerun.text isEqualToString:@"0"] == NO) ||
        (dassanshin == 0 && [_dassanshin.text isEqualToString:@"0"] == NO) ||

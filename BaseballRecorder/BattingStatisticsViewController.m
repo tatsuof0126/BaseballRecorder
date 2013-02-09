@@ -11,6 +11,7 @@
 #import "GameResult.h"
 #import "TeamStatistics.h"
 #import "BattingStatistics.h"
+#import "ConfigManager.h"
 
 @interface BattingStatisticsViewController ()
 
@@ -40,10 +41,7 @@
 {
     [super viewDidLoad];
     
-    targetyear = ALL_TARGET;
-    targetteam = ALL_TARGET;
-    
-    [self updateStatistics];
+//    [self updateStatistics];
     
 	// Do any additional setup after loading the view.
 }
@@ -56,6 +54,7 @@
 
 - (void)updateStatistics {
     [self loadGameResult];
+    [self setCalcTarget];
     NSArray* gameResultListForCalc = [self getGameResultListForCalc];
     [self showStatistics:gameResultListForCalc];
 }
@@ -71,7 +70,7 @@
     [teamList addObject:@"すべて"];
     [gameResultListOfYear addObject:gameResultList];
     
-    int listyear = 0;
+    int listyear = -999;
     NSMutableArray* resultArray = [NSMutableArray array];
     for (int i=0; i<gameResultList.count; i++) {
         GameResult* result = [gameResultList objectAtIndex:i];
@@ -96,16 +95,40 @@
             [teamList addObject:team];
         }
     }
+}
+
+- (void)setCalcTarget {
+    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
+    NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
-    // 本当は文字列ベースで追いかけたいが・・・。
-    if (targetyear >= yearList.count){
-        targetyear = ALL_TARGET;
+    targetyear = ALL_TARGET;
+    targetteam = ALL_TARGET;
+    
+    BOOL yearFlg = NO;
+    BOOL teamFlg = NO;
+    
+    for(int i=0;i<yearList.count;i++){
+        if([targetYearStr isEqualToString:[yearList objectAtIndex:i]]){
+            targetyear = i;
+            yearFlg = YES;
+            break;
+        }
     }
     
-    if (targetteam >= teamList.count){
-        targetteam = ALL_TARGET;
+    for(int i=0;i<teamList.count;i++){
+        if([targetTeamStr isEqualToString:[teamList objectAtIndex:i]]){
+            targetteam = i;
+            teamFlg = YES;
+            break;
+        }
     }
     
+    if(yearFlg == NO){
+        [ConfigManager setCalcTargetYear:@"すべて"];
+    }
+    if(teamFlg == NO){
+        [ConfigManager setCalcTargetTeam:@"すべて"];
+    }
 }
 
 - (NSArray*)getGameResultListForCalc {
@@ -249,6 +272,9 @@
 - (void)toolbarDoneButton:(id)sender {
     targetyear = [targetPicker selectedRowInComponent:0];
     targetteam = [targetPicker selectedRowInComponent:1];
+    
+    [ConfigManager setCalcTargetYear:[yearList objectAtIndex:targetyear]];
+    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:targetteam]];
     
     [self updateStatistics];
     

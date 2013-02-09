@@ -76,30 +76,107 @@
         [_scrollview addSubview:resultlabel];
     }
     
-    _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
-    _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
-    _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+    BOOL battingResultFlg = NO;
+    if( (gameResult.battingResultArray != nil && gameResult.battingResultArray.count >= 1) ||
+       gameResult.daten >= 1 || gameResult.tokuten >= 1 || gameResult.steal >= 1){
+        battingResultFlg = YES;
+    }
     
-    int bottomY = 240+gameResult.battingResultArray.count*30;
-    _datenLabel.frame = CGRectMake(_datenLabel.frame.origin.x, bottomY,
-                                   _datenLabel.frame.size.width, _datenLabel.frame.size.height);
-    _daten.frame = CGRectMake(_daten.frame.origin.x, bottomY,
-                              _daten.frame.size.width, _daten.frame.size.height);
-    _tokutenLabel.frame = CGRectMake(_tokutenLabel.frame.origin.x, bottomY,
-                                    _tokutenLabel.frame.size.width, _tokutenLabel.frame.size.height);
-    _tokuten.frame = CGRectMake(_tokuten.frame.origin.x, bottomY,
-                               _tokuten.frame.size.width, _tokuten.frame.size.height);
-    _stealLabel.frame = CGRectMake(_stealLabel.frame.origin.x, bottomY,
-                                   _stealLabel.frame.size.width, _stealLabel.frame.size.height);
-    _steal.frame = CGRectMake(_steal.frame.origin.x, bottomY,
-                              _steal.frame.size.width, _steal.frame.size.height);
+    _battingResultLabel.hidden = !battingResultFlg;
+    _datenLabel.hidden = !battingResultFlg;
+    _daten.hidden = !battingResultFlg;
+    _tokutenLabel.hidden = !battingResultFlg;
+    _tokuten.hidden = !battingResultFlg;
+    _stealLabel.hidden = !battingResultFlg;
+    _steal.hidden = !battingResultFlg;
     
-    _mailButton.frame = CGRectMake(_mailButton.frame.origin.x, bottomY+45,
-                                   _mailButton.frame.size.width, _mailButton.frame.size.height);
+    if(battingResultFlg == YES){
+        _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
+        _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
+        _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+    }
+ 
+    BOOL pitchingResultFlg = NO;
+    if(gameResult.inning != 0 || gameResult.inning2 != 0){
+        pitchingResultFlg = YES;
+    }
     
-    CGSize size = CGSizeMake(320, 480+gameResult.battingResultArray.count*30);
-    _scrollview.contentSize = size;
+    _pitchingResultLabel.hidden = !pitchingResultFlg;
+    _inningLabel.hidden = !pitchingResultFlg;
+    _inning.hidden = !pitchingResultFlg;
+    _sekinin.hidden = !pitchingResultFlg;
+    _hiandaLabel.hidden = !pitchingResultFlg;
+    _hianda.hidden = !pitchingResultFlg;
+    _hihomerunLabel.hidden = !pitchingResultFlg;
+    _hihomerun.hidden = !pitchingResultFlg;
+    _dassanshinLabel.hidden = !pitchingResultFlg;
+    _dassanshin.hidden = !pitchingResultFlg;
+    _yoshikyuLabel.hidden = !pitchingResultFlg;
+    _yoshikyu.hidden = !pitchingResultFlg;
+    _yoshikyu2Label.hidden = !pitchingResultFlg;
+    _yoshikyu2.hidden = !pitchingResultFlg;
+    _shittenLabel.hidden = !pitchingResultFlg;
+    _shitten.hidden = !pitchingResultFlg;
+    _jisekitenLabel.hidden = !pitchingResultFlg;
+    _jisekiten.hidden = !pitchingResultFlg;
+
+    if(pitchingResultFlg == YES){
+        _inning.text = [NSString stringWithFormat:@"%@%@",[GameResult getInningString:gameResult.inning inning2:gameResult.inning2],gameResult.kanto ? @" (完投)" : @""];
+        _sekinin.text = [NSString stringWithFormat:@"%@",
+                     [[GameResult getSekininPickerArray] objectAtIndex:gameResult.sekinin]];
+        _hianda.text = [NSString stringWithFormat:@"%d",gameResult.hianda];
+        _hihomerun.text = [NSString stringWithFormat:@"%d",gameResult.hihomerun];
+        _dassanshin.text = [NSString stringWithFormat:@"%d",gameResult.dassanshin];
+        _yoshikyu.text = [NSString stringWithFormat:@"%d",gameResult.yoshikyu];
+        _yoshikyu2.text = [NSString stringWithFormat:@"%d",gameResult.yoshikyu2];
+        _shitten.text = [NSString stringWithFormat:@"%d",gameResult.shitten];
+        _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
+    }
+    
+    int bottomY = 230+gameResult.battingResultArray.count*30;
+    if(battingResultFlg == NO){
+        bottomY -= 70;
+    }
+    
+    [self setFrameOriginY:_datenLabel originY:bottomY];
+    [self setFrameOriginY:_daten originY:bottomY];
+    [self setFrameOriginY:_tokutenLabel originY:bottomY];
+    [self setFrameOriginY:_tokuten originY:bottomY];
+    [self setFrameOriginY:_stealLabel originY:bottomY];
+    [self setFrameOriginY:_steal originY:bottomY];
+    
+    [self setFrameOriginY:_pitchingResultLabel originY:bottomY+40];
+    [self setFrameOriginY:_inningLabel originY:bottomY+70];
+    [self setFrameOriginY:_inning originY:bottomY+70];
+    [self setFrameOriginY:_sekinin originY:bottomY+70];
+    [self setFrameOriginY:_hiandaLabel originY:bottomY+100];
+    [self setFrameOriginY:_hianda originY:bottomY+100];
+    [self setFrameOriginY:_hihomerunLabel originY:bottomY+100];
+    [self setFrameOriginY:_hihomerun originY:bottomY+100];
+    [self setFrameOriginY:_dassanshinLabel originY:bottomY+130];
+    [self setFrameOriginY:_dassanshin originY:bottomY+130];
+    [self setFrameOriginY:_yoshikyuLabel originY:bottomY+130];
+    [self setFrameOriginY:_yoshikyu originY:bottomY+130];
+    [self setFrameOriginY:_yoshikyu2Label originY:bottomY+130];
+    [self setFrameOriginY:_yoshikyu2 originY:bottomY+130];
+    [self setFrameOriginY:_shittenLabel originY:bottomY+160];
+    [self setFrameOriginY:_shitten originY:bottomY+160];
+    [self setFrameOriginY:_jisekitenLabel originY:bottomY+160];
+    [self setFrameOriginY:_jisekiten originY:bottomY+160];
+    
+    if(pitchingResultFlg == YES){
+        [self setFrameOriginY:_mailButton originY:bottomY+205];
+        _scrollview.contentSize = CGSizeMake(320, bottomY+470);
+    } else {
+        [self setFrameOriginY:_mailButton originY:bottomY+40];
+        _scrollview.contentSize = CGSizeMake(320, bottomY+310);
+    }
 }
+
+- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
+    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
+}
+
 - (IBAction)backButton:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -168,6 +245,25 @@
     [self setTokuten:nil];
     [self setSteal:nil];
     [self setMailButton:nil];
+    [self setPitchingResultLabel:nil];
+    [self setInningLabel:nil];
+    [self setInning:nil];
+    [self setSekinin:nil];
+    [self setHiandaLabel:nil];
+    [self setHianda:nil];
+    [self setHihomerunLabel:nil];
+    [self setHihomerun:nil];
+    [self setDassanshinLabel:nil];
+    [self setDassanshin:nil];
+    [self setYoshikyuLabel:nil];
+    [self setYoshikyu:nil];
+    [self setYoshikyu2Label:nil];
+    [self setYoshikyu2:nil];
+    [self setShittenLabel:nil];
+    [self setShitten:nil];
+    [self setJisekitenLabel:nil];
+    [self setJisekiten:nil];
+    [self setBattingResultLabel:nil];
     [super viewDidUnload];
 }
 

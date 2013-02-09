@@ -66,6 +66,8 @@
 
 + (NSArray*)getInningPickerArray;
 
++ (NSString*)getInningString:(int)inning inning2:(int)inning2;
+
 + (NSArray*)getSekininPickerArray;
 
 @end

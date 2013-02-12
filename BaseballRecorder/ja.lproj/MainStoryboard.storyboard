@@ -93,7 +93,7 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="rZN-tH-TQ9">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="対戦相手を入力" minimumFontSize="17" id="rZN-tH-TQ9">
                                         <rect key="frame" x="120" y="140" width="155" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -111,7 +111,7 @@
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="Ep0-DK-4Xt"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="MC9-1Q-s8H">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="試合のあった場所を入力" minimumFontSize="17" id="MC9-1Q-s8H">
                                         <rect key="frame" x="90" y="60" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -120,7 +120,7 @@
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="3m6-zA-M3S"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="xRT-sV-3RH">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="参加したチームを入力" minimumFontSize="17" id="xRT-sV-3RH">
                                         <rect key="frame" x="90" y="100" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -269,21 +269,6 @@
                                             <segue destination="7b4-Vn-r1w" kind="modal" identifier="otherteam" modalTransitionStyle="crossDissolve" id="BNo-wl-vcs"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vwb-zK-sGH">
-                                        <rect key="frame" x="90" y="365" width="140" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="保 存">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="saveButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="hUN-hX-uUp"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合結果" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gZ1-I3-r73">
                                         <rect key="frame" x="20" y="184" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
@@ -343,6 +328,21 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DIK-rf-cB6">
+                                        <rect key="frame" x="190" y="365" width="100" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="投手成績へ">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="sOh-sz-83Q" kind="modal" modalTransitionStyle="flipHorizontal" id="dsI-l3-KDh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="L0F-mU-NhE">
@@ -355,9 +355,10 @@
                                                 <action selector="backButton:" destination="CYm-Gx-IRt" id="wST-0J-jUE"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="投手成績" id="DE1-Tq-4bb">
+                                        <barButtonItem key="rightBarButtonItem" title="  保存  " id="zbX-kA-Wxe">
+                                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <segue destination="sOh-sz-83Q" kind="modal" modalTransitionStyle="flipHorizontal" id="OqL-sm-ZUf"/>
+                                                <action selector="saveButton:" destination="CYm-Gx-IRt" id="6vj-89-4GD"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -377,11 +378,11 @@
                         <outlet property="otherscore" destination="jdu-Sb-Vsc" id="RTA-aw-Top"/>
                         <outlet property="otherteam" destination="rZN-tH-TQ9" id="vxn-e7-RN3"/>
                         <outlet property="place" destination="MC9-1Q-s8H" id="cVc-uD-U1W"/>
-                        <outlet property="saveButton" destination="Vwb-zK-sGH" id="NFe-Dp-UUw"/>
-                        <outlet property="scroolview" destination="coX-Kk-ahP" id="j09-ZD-mzM"/>
+                        <outlet property="saveButton" destination="zbX-kA-Wxe" id="o3G-wy-Cet"/>
+                        <outlet property="scrollView" destination="coX-Kk-ahP" id="8xH-V5-vNt"/>
                         <outlet property="steal" destination="pJ3-tG-wOQ" id="fVZ-4C-c2i"/>
                         <outlet property="stealLabel" destination="42u-Gk-JMg" id="oV1-7P-t1V"/>
-                        <outlet property="toPitchingButton" destination="DE1-Tq-4bb" id="ecE-bU-ghn"/>
+                        <outlet property="toPitchingButton" destination="DIK-rf-cB6" id="k9N-Ay-e58"/>
                         <outlet property="tokuten" destination="ti0-Gf-uRB" id="9Sg-Wu-Cg4"/>
                         <outlet property="tokutenLabel" destination="CIP-pc-Rsc" id="2X4-aW-0W3"/>
                         <outlet property="year" destination="qAH-4u-0GX" id="Y6h-Xs-Ejt"/>
@@ -668,7 +669,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="試合結果入力" id="wUt-Lv-RGS">
-                                        <barButtonItem key="rightBarButtonItem" title="打撃成績" id="goB-ec-kle">
+                                        <barButtonItem key="rightBarButtonItem" title="打撃成績へ" id="goB-ec-kle">
                                             <connections>
                                                 <action selector="backToBatting:" destination="sOh-sz-83Q" id="UOU-oG-snb"/>
                                             </connections>
@@ -679,6 +680,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="IGb-4O-C8x"/>
                     <connections>
                         <outlet property="dassanshin" destination="ENb-1f-evW" id="4q1-Y7-f1H"/>
                         <outlet property="hianda" destination="VhZ-3y-dN8" id="afp-Ts-vEd"/>
@@ -1328,7 +1330,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="aIl-ze-lmZ">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="普段活動する場所を入力" minimumFontSize="17" id="aIl-ze-lmZ">
                                         <rect key="frame" x="100" y="56" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1338,7 +1340,7 @@
                                             <outlet property="delegate" destination="sHv-AF-uZY" id="MB6-Bh-Zy5"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="5EK-Py-si8">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="普段参加するチームを入力" minimumFontSize="17" id="5EK-Py-si8">
                                         <rect key="frame" x="100" y="96" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1518,11 +1520,11 @@
                 <relationship kind="outlet" name="otherscore" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="otherteam" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="place" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="saveButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scroolview" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="steal" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="stealLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="toPitchingButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toPitchingButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tokuten" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tokutenLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="year" candidateClass="UITextField"/>

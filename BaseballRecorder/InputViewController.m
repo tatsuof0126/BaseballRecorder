@@ -26,7 +26,8 @@
 @synthesize gameResult;
 @synthesize gameResultForPitching;
 @synthesize battingResultViewArray;
-@synthesize scroolview;
+// @synthesize scroolview;
+@synthesize scrollView;
 @synthesize resultPicker;
 @synthesize resultToolbar;
 @synthesize edited;
@@ -74,6 +75,7 @@
         gameResult.myteam = defaultMyteam;
     }
     
+    // 初期値をセット
     _year.text = [NSString stringWithFormat:@"%d",gameResult.year];
     _month.text = [NSString stringWithFormat:@"%d",gameResult.month];
     _day.text = [NSString stringWithFormat:@"%d",gameResult.day];
@@ -88,7 +90,7 @@
     _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     
-//    battingResultViewArray = [NSMutableArray array];
+    // 打撃成績の部分を作る
     [self makeBattingResult];
     
     // 投手成績画面用の一時GameResultオブジェクトを作成
@@ -106,7 +108,7 @@
     gameResultForPitching.sekinin    = gameResult.sekinin;
     
     // iPhone5対応
-    [AppDelegate adjustForiPhone5:scroolview];
+    [AppDelegate adjustForiPhone5:scrollView];
     
     edited = NO;
 }
@@ -121,13 +123,13 @@
 //    NSLog(@"y : %f", scroolview.contentOffset.y);
     
     if ((textField == _daten || textField == _tokuten || textField == _steal) &&
-        scroolview.contentOffset.y < 155.0f+gameResult.battingResultArray.count*40){
-        [scroolview setContentOffset:CGPointMake(0.0f, 155.0f+gameResult.battingResultArray.count*40) animated:YES];
+        scrollView.contentOffset.y < 155.0f+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 155.0f+gameResult.battingResultArray.count*40) animated:YES];
     }
     
     if ((textField == _myscore || textField == _otherscore) &&
-        scroolview.contentOffset.y < 20.0f){
-        [scroolview setContentOffset:CGPointMake(0.0f, 20.0f) animated:YES];
+        scrollView.contentOffset.y < 20.0f){
+        [scrollView setContentOffset:CGPointMake(0.0f, 20.0f) animated:YES];
     }
     
     [self showDoneButton];
@@ -154,7 +156,7 @@
 }
 
 - (void)hiddenDoneButton {
-    _inputNavi.rightBarButtonItem = toPitchingButton;
+    _inputNavi.rightBarButtonItem = saveButton;
 }
 
 - (void)doneButton {
@@ -172,6 +174,7 @@
 }
 
 - (void)makeBattingResult {
+    // 表示しているViewを一度削除
     for (int i=0; i<battingResultViewArray.count; i++) {
         NSDictionary *dic = [battingResultViewArray objectAtIndex:i];
         
@@ -184,6 +187,7 @@
     
     battingResultViewArray = [NSMutableArray array];
     
+    // 打撃結果表示用のViewを作って配置（第◯打席、打撃結果、変更ボタン）
     NSArray *battingResultArray = gameResult.battingResultArray;
     
     for (int i=0; i<battingResultArray.count; i++) {
@@ -208,11 +212,12 @@
         
         [battingResultViewArray addObject:mdic];
         
-        [scroolview addSubview:titlelabel];
-        [scroolview addSubview:resultlabel];
-        [scroolview addSubview:changebutton];
+        [scrollView addSubview:titlelabel];
+        [scrollView addSubview:resultlabel];
+        [scrollView addSubview:changebutton];
     }
     
+    // 一番下に入力用の打撃成績（第◯打席、入力ボタン）
     UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+battingResultArray.count*40,80,21)];
     nlabel.text = [NSString stringWithFormat:@"第%d打席",battingResultArray.count+1];
     
@@ -227,32 +232,28 @@
     
     [battingResultViewArray addObject:nmdic];
     
-    [scroolview addSubview:nlabel];
-    [scroolview addSubview:nbutton];
+    [scrollView addSubview:nlabel];
+    [scrollView addSubview:nbutton];
     
+    // 打点・得点・盗塁入力欄と投手成績へボタンの配置を調整
     int bottomY = 310+battingResultArray.count*40;
     
-    _datenLabel.frame = CGRectMake(_datenLabel.frame.origin.x, bottomY+4,
-                              _datenLabel.frame.size.width, _datenLabel.frame.size.height);
-    _daten.frame = CGRectMake(_daten.frame.origin.x, bottomY,
-                              _daten.frame.size.width, _daten.frame.size.height);
-    _tokutenLabel.frame = CGRectMake(_tokutenLabel.frame.origin.x, bottomY+4,
-                                     _tokutenLabel.frame.size.width, _tokutenLabel.frame.size.height);
-    _tokuten.frame = CGRectMake(_tokuten.frame.origin.x, bottomY,
-                                _tokuten.frame.size.width, _tokuten.frame.size.height);
-    _stealLabel.frame = CGRectMake(_stealLabel.frame.origin.x, bottomY+4,
-                              _stealLabel.frame.size.width, _stealLabel.frame.size.height);
-    _steal.frame = CGRectMake(_steal.frame.origin.x, bottomY,
-                              _steal.frame.size.width, _steal.frame.size.height);
+    [self setFrameOriginY:_datenLabel originY:bottomY+4];
+    [self setFrameOriginY:_daten originY:bottomY];
+    [self setFrameOriginY:_tokutenLabel originY:bottomY+4];
+    [self setFrameOriginY:_tokuten originY:bottomY];
+    [self setFrameOriginY:_stealLabel originY:bottomY+4];
+    [self setFrameOriginY:_steal originY:bottomY];
+    [self setFrameOriginY:toPitchingButton originY:bottomY+55];
     
-//    int saveY = 365+battingResultArray.count*40;
-//    if(saveY < 365){saveY = 365;}
-    
-    saveButton.frame = CGRectMake(90,bottomY+55,140,43);
-    
+    // ScrollViewの長さを調整
     CGSize size = CGSizeMake(320, bottomY+350);
-    scroolview.contentSize = size;
+    scrollView.contentSize = size;
     
+}
+
+- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
+    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)inputResult:(UIButton*)button{
@@ -387,10 +388,18 @@
 - (IBAction)backButton:(id)sender {
 //    NSLog(@"Back resultid : %d",gameResult.resultid);
     
-    if(gameResult.resultid != 0 && edited == YES){
+//    if(gameResult.resultid != 0 && edited == YES){
+    
+    if(edited == YES){
+        // 入力・編集していたら警告ダイアログを出す
+        NSString* messageStr = nil;
+        if(gameResult.resultid == 0){
+            messageStr = @"入力内容は保存されませんが、\nよろしいですか？";
+        } else {
+            messageStr = @"編集内容は保存されませんが、\nよろしいですか？";
+        }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
-            message:@"編集内容は保存されませんが、\nよろしいですか？"
-            delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
+            message:messageStr delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
         [alert setTag:ALERT_BACK];
         [alert show];
     } else {
@@ -587,11 +596,9 @@
 - (void)viewDidUnload {
     [self setGameResult:nil];
     [self setBattingResultViewArray:nil];
-    [self setScroolview:nil];
+    [self setScrollView:nil];
     [self setResultPicker:nil];
     [self setResultToolbar:nil];
-    [self setSaveButton:nil];
-
     [self setMyscore:nil];
     [self setOtherscore:nil];
     [self setDatenLabel:nil];
@@ -600,6 +607,7 @@
     [self setTokuten:nil];
     [self setStealLabel:nil];
     [self setSteal:nil];
+    [self setSaveButton:nil];
     [self setToPitchingButton:nil];
     [super viewDidUnload];
 }

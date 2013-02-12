@@ -339,6 +339,49 @@
     }
 }
 
+/*
+- (IBAction)toBattingButton:(id)sender {
+    NSArray* errorArray = [self inputCheck];
+    
+    // 入力エラーがある場合はダイアログを表示して戻らない
+    if(errorArray.count >= 1){
+        NSMutableString *errorStr = [NSMutableString string];
+        for(int i=0;i<errorArray.count;i++){
+            [errorStr appendString:[errorArray objectAtIndex:i]];
+            if(i != errorArray.count){
+                [errorStr appendString:@"\n"];
+            }
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+            message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
+    // 投球回が０で何らかの入力がある場合は、入力がクリアされる旨の確認メッセージを表示
+    if(_inning == 0 && _inning2 == 0 &&
+       ([_hianda.text isEqualToString:@"0"] == NO ||
+        [_hihomerun.text isEqualToString:@"0"] == NO ||
+        [_dassanshin.text isEqualToString:@"0"] == NO ||
+        [_yoshikyu.text isEqualToString:@"0"] == NO ||
+        [_yoshikyu2.text isEqualToString:@"0"] == NO ||
+        [_shitten.text isEqualToString:@"0"] == NO ||
+        [_jisekiten.text isEqualToString:@"0"] == NO ||
+        _kanto.checkBoxSelected == YES ||
+        _sekinin != 0)){
+           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
+                message:@"投球回が空のため入力内容はクリアされます。よろしいですか？"
+                delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
+           [alert show];
+           
+       } else {
+           [self backToBattingView];
+       }
+}
+*/
+
 - (void)backToBattingView {
     // 入力内容をオブジェクトに保存して戻る
     InputViewController* controller = (InputViewController*)self.presentingViewController;

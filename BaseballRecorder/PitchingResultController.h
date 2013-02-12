@@ -44,5 +44,6 @@
 - (IBAction)inputResult:(id)sender;
 
 - (IBAction)backToBatting:(id)sender;
+// - (IBAction)toBattingButton:(id)sender;
 
 @end

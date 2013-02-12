@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *stealLabel;
 @property (weak, nonatomic) IBOutlet UITextField *steal;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scroolview;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
@@ -42,12 +42,12 @@
 
 @property BOOL edited;
 
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *toPitchingButton;
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *toPitchingButton;
-// @property (weak, nonatomic) IBOutlet UIBarButtonItem *toPitchingButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+
+- (IBAction)saveButton:(id)sender;
 
 - (IBAction)backButton:(id)sender;
-- (IBAction)saveButton:(id)sender;
 
 @end

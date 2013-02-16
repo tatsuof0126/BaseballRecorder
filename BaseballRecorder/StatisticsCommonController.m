@@ -1,36 +1,31 @@
 //
-//  BattingStatisticsViewController.m
+//  StatisticsCommonController.m
 //  BaseballRecorder
 //
-//  Created by 藤原 達郎 on 2012/11/01.
-//  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
+//  Created by 藤原 達郎 on 2013/02/14.
+//  Copyright (c) 2013年 Tatsuo Fujiwara. All rights reserved.
 //
 
-#import "BattingStatisticsViewController.h"
-#import "GameResultManager.h"
-#import "GameResult.h"
-#import "TeamStatistics.h"
-#import "BattingStatistics.h"
+#import "StatisticsCommonController.h"
 #import "ConfigManager.h"
+#import "GameResult.h"
+#import "GameResultManager.h"
 
-@interface BattingStatisticsViewController ()
+@interface StatisticsCommonController ()
 
 @end
 
-@implementation BattingStatisticsViewController
+@implementation StatisticsCommonController
 
+@synthesize gameResultList;
+@synthesize gameResultListOfYear;
 @synthesize yearList;
 @synthesize teamList;
 @synthesize targetyear;
 @synthesize targetteam;
-
-/*
-@synthesize gameResultList;
-@synthesize gameResultListOfYear;
 @synthesize targetPicker;
 @synthesize targetToolbar;
-*/
- 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,9 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    [self updateStatistics];
-    
 	// Do any additional setup after loading the view.
 }
 
@@ -55,7 +47,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 - (void)updateStatistics {
     [self loadGameResult];
     [self setCalcTarget];
@@ -65,7 +56,7 @@
 
 - (void)loadGameResult {
     gameResultList = [GameResultManager loadGameResultList];
-
+    
     yearList = [NSMutableArray array];
     teamList = [NSMutableArray array];
     gameResultListOfYear = [NSMutableArray array];
@@ -156,61 +147,17 @@
     
     return gameResultListForCalc;
 }
-*/
- 
+
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
-    [self showTarget:_year team:_team];
-    
-    TeamStatistics* teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
-    
-    _teamresult.text = [NSString stringWithFormat:@"%d勝 %d敗 %d分",
-                        teamStatistics.win, teamStatistics.lose, teamStatistics.draw];
-    
-    BattingStatistics* battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
-    
-    _battingresult.text = [NSString stringWithFormat:@"%d打席  %d打数  %d安打",
-                           battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits];
-    
-    _doubles.text = [NSString stringWithFormat:@"%d",battingStatistics.doubles];
-    _triples.text = [NSString stringWithFormat:@"%d",battingStatistics.triples];
-    _homeruns.text = [NSString stringWithFormat:@"%d",battingStatistics.homeruns];
-    _strikeouts.text = [NSString stringWithFormat:@"%d",battingStatistics.strikeouts];
-    _walks.text = [NSString stringWithFormat:@"%d",battingStatistics.walks];
-    _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices];
-    _daten.text = [NSString stringWithFormat:@"%d",battingStatistics.daten];
-    _tokuten.text = [NSString stringWithFormat:@"%d",battingStatistics.tokuten];
-    _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
-    
-    _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.average],
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.obp],
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.ops]];
-    
+    // 子クラスでオーバーライドする前提
+
 }
 
-- (void)viewDidUnload {
-    [self setTeamresult:nil];
-    [self setBattingresult:nil];
-    [self setBattingstat:nil];
-    [self setTeam:nil];
-    [self setYear:nil];
-    [self setDoubles:nil];
-    [self setTriples:nil];
-    [self setHomeruns:nil];
-    [self setStrikeouts:nil];
-    [self setWalks:nil];
-    [self setSacrifices:nil];
-    [self setDaten:nil];
-    [self setTokuten:nil];
-    [self setSteal:nil];
-    [super viewDidUnload];
+- (void)showTarget:(UILabel*)year team:(UILabel*)team {
+    year.text = [yearList objectAtIndex:targetyear];
+    team.text = [teamList objectAtIndex:targetteam];
 }
 
-- (IBAction)changeButton:(id)sender {
-    [self makeResultPiker];
-}
-
-/*
 - (void)makeResultPiker {
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGFloat width = rect.size.width;
@@ -295,21 +242,6 @@
     [super viewWillAppear:animated];
     
     [self updateStatistics];
-}
- */
-
-+ (NSString*)getFloatStr:(float)floatvalue {
-    if(isnan(floatvalue) == YES){
-        return @".---";
-    }
-    
-    NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
-    
-    if(floatvalue < 1.0){
-        floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
-    }
-    
-    return floatStr;
 }
 
 @end

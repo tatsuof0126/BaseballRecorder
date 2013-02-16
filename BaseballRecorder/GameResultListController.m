@@ -208,7 +208,7 @@
 
 /*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
+//    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
 }
 */
 

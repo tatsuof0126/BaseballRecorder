@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatisticsCommonController.h"
 
 #define ALL_TARGET 0
 
-@interface BattingStatisticsViewController : UIViewController
-    <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface BattingStatisticsViewController : StatisticsCommonController
 
 @property (weak, nonatomic) IBOutlet UILabel *teamresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult;
@@ -29,19 +29,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *team;
 @property (weak, nonatomic) IBOutlet UILabel *year;
-
-@property int targetyear;
-@property int targetteam;
-
-@property (strong, nonatomic) UIToolbar *targetToolbar;
-@property (strong, nonatomic) UIPickerView *targetPicker;
-
-@property (strong, nonatomic) NSArray *gameResultList;
-
-@property (strong, nonatomic) NSMutableArray *yearList;
-@property (strong, nonatomic) NSMutableArray *gameResultListOfYear;
-
-@property (strong, nonatomic) NSMutableArray *teamList;
 
 - (IBAction)changeButton:(id)sender;
 

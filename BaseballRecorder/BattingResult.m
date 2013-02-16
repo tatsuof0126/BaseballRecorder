@@ -116,13 +116,22 @@ static NSArray* battingStatisticsArray;
 }
 
 - (int)getStatisticsCounts:(int)type {
-    NSArray* statisticsArray = [BattingResult getBattingStatisticsCountArray];
-    
-    NSArray* statistics = [statisticsArray objectAtIndex:type];
-    
-    NSNumber* number = [statistics objectAtIndex:result];
-    
-    return [number intValue];
+    if ( type != S_SACRIFICEFLIES ){
+        // 犠飛以外
+        NSArray* statisticsArray = [BattingResult getBattingStatisticsCountArray];
+        NSArray* statistics = [statisticsArray objectAtIndex:type];
+        NSNumber* number = [statistics objectAtIndex:result];
+        return [number intValue];
+    } else {
+        // 犠飛だけ飛んだ方向を判断する
+        // 犠打のうち、飛んだ方向がレフト・センター・ライト・左中間・右中間の場合は犠飛として返す
+        if (result == 9 &&
+            (position == 7 || position == 8 || position == 9 || position == 10 || position == 11)){
+            return 1;
+        }
+        
+        return 0;
+    }
 }
 
 @end

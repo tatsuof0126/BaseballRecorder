@@ -20,6 +20,7 @@
 @property int strikeouts;
 @property int walks;
 @property int sacrifices;
+@property int sacrificeflies;
 @property int daten;
 @property int tokuten;
 @property int steal;

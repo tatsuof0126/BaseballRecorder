@@ -22,6 +22,7 @@
 @synthesize strikeouts;
 @synthesize walks;
 @synthesize sacrifices;
+@synthesize sacrificeflies;
 
 @synthesize average;
 @synthesize obp;
@@ -48,6 +49,7 @@
             battingStatistics.strikeouts += [battingResult getStatisticsCounts:S_STRIKEOUTS];
             battingStatistics.walks    += [battingResult getStatisticsCounts:S_WALKS];
             battingStatistics.sacrifices += [battingResult getStatisticsCounts:S_SACRIFICES];
+            battingStatistics.sacrificeflies += [battingResult getStatisticsCounts:S_SACRIFICEFLIES];
         }
         
         battingStatistics.daten  += gameResult.daten;
@@ -62,9 +64,16 @@
 }
 
 - (void)calculateStatistics {
+    // 打率＝安打／打数
     average = (float)hits / (float)atbats;
-    obp = (float)(hits+walks) / (float)(atbats+walks+sacrifices);
+    
+    // 出塁率＝（安打＋四死球）／（打数＋四死球＋犠飛）
+    obp = (float)(hits+walks) / (float)(atbats+walks+sacrificeflies);
+    
+    // 長打率＝（単打＋二塁打×２＋三塁打×３＋本塁打×４）／打数
     slg = (float)(singles+doubles*2+triples*3+homeruns*4) / (float)atbats;
+    
+    // OPS＝出塁率＋長打率
     ops = obp + slg;
 }
 

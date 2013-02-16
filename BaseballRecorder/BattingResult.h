@@ -17,6 +17,7 @@
 #define S_STRIKEOUTS 6
 #define S_WALKS    7
 #define S_SACRIFICES 8
+#define S_SACRIFICEFLIES 9
 
 @interface BattingResult : NSObject
 

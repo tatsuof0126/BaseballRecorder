@@ -14,6 +14,8 @@
 		0B1AA356163D772B00535116 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34E163D772B00535116 /* settings@2x.png */; };
 		0B1AA357163D772B00535116 /* statistics.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34F163D772B00535116 /* statistics.png */; };
 		0B1AA358163D772B00535116 /* statistics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA350163D772B00535116 /* statistics@2x.png */; };
+		0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */; };
+		0B21C2FD16CD3385005FF0C5 /* PitchingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */; };
 		0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D1FC616402BAF00330699 /* ShowGameResultController.m */; };
 		0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C77C2164952ED00A214EC /* ConfigManager.m */; };
 		0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E42A16C12AA300E0E95D /* PitchingResultController.m */; };
@@ -21,6 +23,9 @@
 		0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43516C3F0DD00E0E95D /* disable_check.png */; };
 		0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43616C3F0DD00E0E95D /* nocheck.png */; };
 		0B40E43A16C3F0DD00E0E95D /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E43716C3F0DD00E0E95D /* check.png */; };
+		0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */; };
+		0B40E44416CAB45100E0E95D /* baseball.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44216CAB45100E0E95D /* baseball.png */; };
+		0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44316CAB45100E0E95D /* baseball@2x.png */; };
 		0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63016500FCE00C544D9 /* Icon@2x.png */; };
 		0B5DD63316500FDE00C544D9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63216500FDE00C544D9 /* Icon.png */; };
 		0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EEE81163AE4C20038980D /* GameResultManager.m */; };
@@ -76,6 +81,10 @@
 		0B1AA34E163D772B00535116 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "BaseballRecorder/images/settings@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B1AA34F163D772B00535116 /* statistics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statistics.png; path = BaseballRecorder/images/statistics.png; sourceTree = SOURCE_ROOT; };
 		0B1AA350163D772B00535116 /* statistics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statistics@2x.png"; path = "BaseballRecorder/images/statistics@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B21C2F516CD2C6B005FF0C5 /* StatisticsCommonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsCommonController.h; sourceTree = "<group>"; };
+		0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCommonController.m; sourceTree = "<group>"; };
+		0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchingStatistics.h; sourceTree = "<group>"; };
+		0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatistics.m; sourceTree = "<group>"; };
 		0B2D1FC516402BAF00330699 /* ShowGameResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowGameResultController.h; sourceTree = "<group>"; };
 		0B2D1FC616402BAF00330699 /* ShowGameResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowGameResultController.m; sourceTree = "<group>"; };
 		0B3C77C1164952ED00A214EC /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
@@ -87,6 +96,10 @@
 		0B40E43516C3F0DD00E0E95D /* disable_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = disable_check.png; path = BaseballRecorder/images/disable_check.png; sourceTree = SOURCE_ROOT; };
 		0B40E43616C3F0DD00E0E95D /* nocheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nocheck.png; path = BaseballRecorder/images/nocheck.png; sourceTree = SOURCE_ROOT; };
 		0B40E43716C3F0DD00E0E95D /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = BaseballRecorder/images/check.png; sourceTree = SOURCE_ROOT; };
+		0B40E43B16CAB08C00E0E95D /* PitchingStatisticsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchingStatisticsController.h; sourceTree = "<group>"; };
+		0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatisticsController.m; sourceTree = "<group>"; };
+		0B40E44216CAB45100E0E95D /* baseball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baseball.png; path = BaseballRecorder/images/baseball.png; sourceTree = SOURCE_ROOT; };
+		0B40E44316CAB45100E0E95D /* baseball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "baseball@2x.png"; path = "BaseballRecorder/images/baseball@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B5DD63016500FCE00C544D9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		0B5DD63216500FDE00C544D9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0B5EEE80163AE4C20038980D /* GameResultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultManager.h; sourceTree = "<group>"; };
@@ -170,6 +183,8 @@
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0B40E44216CAB45100E0E95D /* baseball.png */,
+				0B40E44316CAB45100E0E95D /* baseball@2x.png */,
 				0B40E43516C3F0DD00E0E95D /* disable_check.png */,
 				0B40E43616C3F0DD00E0E95D /* nocheck.png */,
 				0B40E43716C3F0DD00E0E95D /* check.png */,
@@ -234,8 +249,12 @@
 				0B9499C516325697007F574D /* MainStoryboard.storyboard */,
 				0B9499C816325697007F574D /* GameResultListController.h */,
 				0B9499C916325697007F574D /* GameResultListController.m */,
+				0B21C2F516CD2C6B005FF0C5 /* StatisticsCommonController.h */,
+				0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */,
 				0B6836FE164277220086E198 /* BattingStatisticsViewController.h */,
 				0B6836FF164277220086E198 /* BattingStatisticsViewController.m */,
+				0B40E43B16CAB08C00E0E95D /* PitchingStatisticsController.h */,
+				0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */,
 				0B9499F316325AAF007F574D /* ConfigViewController.h */,
 				0B9499F416325AAF007F574D /* ConfigViewController.m */,
 				0B9499FA16326416007F574D /* InputViewController.h */,
@@ -262,6 +281,8 @@
 				0B683705164279E00086E198 /* BattingStatistics.m */,
 				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
 				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
+				0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */,
+				0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -390,6 +411,8 @@
 				0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */,
 				0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */,
 				0B40E43A16C3F0DD00E0E95D /* check.png in Resources */,
+				0B40E44416CAB45100E0E95D /* baseball.png in Resources */,
+				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +465,9 @@
 				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
 				0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */,
 				0B40E42E16C3EEE800E0E95D /* CheckBoxButton.m in Sources */,
+				0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */,
+				0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */,
+				0B21C2FD16CD3385005FF0C5 /* PitchingStatistics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

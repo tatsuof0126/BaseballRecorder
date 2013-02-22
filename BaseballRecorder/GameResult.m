@@ -100,7 +100,7 @@
 }
 
 - (NSString*)getMailSubject {
-    return [NSString stringWithFormat:@"【ベボレコ】%d年%d月%d日 %@ %d-%d %@"
+    return [NSString stringWithFormat:@"【ベボレコ】%d年%d月%d日 %@ %d-%d %@ @ベボレコ"
             ,year,month,day,myteam,myscore,otherscore,otherteam];
 }
 
@@ -124,13 +124,14 @@
     
     if(inning != 0 || inning2 != 0){
         [bodyString appendString:[NSString stringWithFormat:@"\n投手成績\n"]];
-        [bodyString appendString:[NSString stringWithFormat:@"投球回数：%@%@ %@\n"
+        [bodyString appendString:[NSString stringWithFormat:@"投球回：%@%@ %@\n"
                                   ,[GameResult getInningString:inning inning2:inning2]
                                   ,kanto ? @" (完投)" : @""
                                   ,[[GameResult getSekininPickerArray] objectAtIndex:sekinin]]];
         [bodyString appendString:[NSString stringWithFormat:
-                                  @"被安打：%d 被本塁打：%d 奪三振：%d 与四球：%d 与死球：%d\n",
-                                  hianda,hihomerun,dassanshin,yoshikyu,yoshikyu2]];
+                                  @"被安打：%d 被本塁打：%d\n",hianda,hihomerun]];
+        [bodyString appendString:[NSString stringWithFormat:
+                                  @"奪三振：%d 与四球：%d 与死球：%d\n",dassanshin,yoshikyu,yoshikyu2]];
         [bodyString appendString:[NSString stringWithFormat:
                                   @"失点：%d 自責点：%d\n",shitten,jisekiten]];
     }

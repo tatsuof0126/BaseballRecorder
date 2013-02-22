@@ -11,8 +11,6 @@
 
 @interface ConfigViewController : UIViewController <ABPeoplePickerNavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *versionName;
-
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
 @property (weak, nonatomic) IBOutlet UITextField *place;
@@ -21,10 +19,12 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (strong, nonatomic) IBOutlet UILabel *apptitle;
+@property (strong, nonatomic) IBOutlet UILabel *appsubtitle;
+@property (weak, nonatomic) IBOutlet UILabel *versionName;
 @property (weak, nonatomic) IBOutlet UILabel *appstoreLabel;
 
 - (IBAction)placeEdited:(id)sender;
-
 - (IBAction)myteamEdited:(id)sender;
 - (IBAction)sendtoEdited:(id)sender;
 - (IBAction)addSendtoButton:(id)sender;

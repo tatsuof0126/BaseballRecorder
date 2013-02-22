@@ -108,11 +108,11 @@
     
     // 試合結果が0件の場合はメッセージを表示
     if(gameResultList.count == 0){
-        UILabel* initLabel = [[UILabel alloc] initWithFrame:CGRectMake(40,105,240,30)];
-        initLabel.text = @"「追加」ボタンを押して";
+        UILabel* initLabel = [[UILabel alloc] initWithFrame:CGRectMake(40,120,240,35)];
+        initLabel.text = @" 「追加」ボタンを押して";
         initLabel.tag = 9;
-        UILabel* initLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(40,135,240,30)];
-        initLabel2.text = @"試合結果を入力してください";
+        UILabel* initLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(40,155,240,35)];
+        initLabel2.text = @" 試合結果を入力してください";
         initLabel2.tag = 9;
         
         [self.view addSubview:initLabel];

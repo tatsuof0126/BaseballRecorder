@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *toBattingButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *inningButton;
 @property (weak, nonatomic) IBOutlet UIButton *sekininButton;
@@ -40,10 +40,9 @@
 @property (strong, nonatomic) UIPickerView *selectPicker;
 
 - (IBAction)inputInning:(id)sender;
-
 - (IBAction)inputResult:(id)sender;
 
-- (IBAction)backToBatting:(id)sender;
-// - (IBAction)toBattingButton:(id)sender;
+- (IBAction)toBattingButton:(id)sender;
+- (IBAction)saveButton:(id)sender;
 
 @end

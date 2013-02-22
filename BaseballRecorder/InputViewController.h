@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
 @property (strong, nonatomic) GameResult *gameResult;
-@property (strong, nonatomic) GameResult *gameResultForPitching;
+// @property (strong, nonatomic) GameResult *gameResultForPitching;
 
 @property (strong, nonatomic) NSMutableArray *battingResultViewArray;
 
@@ -43,11 +43,10 @@
 @property BOOL edited;
 
 @property (weak, nonatomic) IBOutlet UIButton *toPitchingButton;
-
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
+- (IBAction)toPitchingButton:(id)sender;
 - (IBAction)saveButton:(id)sender;
-
 - (IBAction)backButton:(id)sender;
 
 @end

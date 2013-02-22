@@ -8,6 +8,7 @@
 
 #import "ConfigViewController.h"
 #import "ConfigManager.h"
+#import "AppDelegate.h"
 
 @interface ConfigViewController ()
 
@@ -43,6 +44,12 @@
     // AppStoreへリンクのタップを受け取るため
     appstoreLabel.userInteractionEnabled = YES;
     [appstoreLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
+    
+    // iPhone5対応
+    [AppDelegate adjustOriginForiPhone5:_apptitle];
+    [AppDelegate adjustOriginForiPhone5:_appsubtitle];
+    [AppDelegate adjustOriginForiPhone5:_versionName];
+    [AppDelegate adjustOriginForiPhone5:appstoreLabel];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +65,8 @@
     [self setSendto:nil];
     [self setScrollView:nil];
     [self setAppstoreLabel:nil];
+    [self setApptitle:nil];
+    [self setAppsubtitle:nil];
     [super viewDidUnload];
 }
 

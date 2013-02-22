@@ -24,7 +24,7 @@
 @implementation InputViewController
 
 @synthesize gameResult;
-@synthesize gameResultForPitching;
+// @synthesize gameResultForPitching;
 @synthesize battingResultViewArray;
 // @synthesize scroolview;
 @synthesize scrollView;
@@ -93,20 +93,6 @@
     // 打撃成績の部分を作る
     [self makeBattingResult];
     
-    // 投手成績画面用の一時GameResultオブジェクトを作成
-    gameResultForPitching = [[GameResult alloc] init];
-    gameResultForPitching.inning     = gameResult.inning;
-    gameResultForPitching.inning2    = gameResult.inning2;
-    gameResultForPitching.hianda     = gameResult.hianda;
-    gameResultForPitching.hihomerun  = gameResult.hihomerun;
-    gameResultForPitching.dassanshin = gameResult.dassanshin;
-    gameResultForPitching.yoshikyu   = gameResult.yoshikyu;
-    gameResultForPitching.yoshikyu2  = gameResult.yoshikyu2;
-    gameResultForPitching.shitten    = gameResult.shitten;
-    gameResultForPitching.jisekiten  = gameResult.jisekiten;
-    gameResultForPitching.kanto      = gameResult.kanto;
-    gameResultForPitching.sekinin    = gameResult.sekinin;
-    
     // iPhone5対応
     [AppDelegate adjustForiPhone5:scrollView];
     
@@ -140,11 +126,19 @@
     edited = YES;
 }
 
-//-(BOOL)textFieldShouldBeginEditing:(UITextField*)textField {
-//    return YES;
-//}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    // 数値入力項目で「0」の場合は入力時に「0」を消す
+    if(textField.tag == 1 && [textField.text isEqualToString:@"0"]){
+        textField.text = @"";
+    }
+    return YES;
+}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    // 数値入力項目で空の場合は「0」を設定
+    if(textField.tag == 1 && [textField.text isEqualToString:@""]){
+        textField.text = @"0";
+    }
     [self hiddenDoneButton];
     return YES;
 }
@@ -160,6 +154,10 @@
 }
 
 - (void)doneButton {
+    [self endTextEdit];
+}
+
+- (void)endTextEdit {
     [_year endEditing:YES];
     [_month endEditing:YES];
     [_day endEditing:YES];
@@ -386,10 +384,6 @@
 }
 
 - (IBAction)backButton:(id)sender {
-//    NSLog(@"Back resultid : %d",gameResult.resultid);
-    
-//    if(gameResult.resultid != 0 && edited == YES){
-    
     if(edited == YES){
         // 入力・編集していたら警告ダイアログを出す
         NSString* messageStr = nil;
@@ -398,13 +392,44 @@
         } else {
             messageStr = @"編集内容は保存されませんが、\nよろしいですか？";
         }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:messageStr delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
         [alert setTag:ALERT_BACK];
         [alert show];
     } else {
         [self dismissModalViewControllerAnimated:YES];
     }
+}
+
+- (IBAction)toPitchingButton:(id)sender {
+    // 入力中状態を解除
+    [self endTextEdit];
+    [self closeResultPicker];
+    
+    NSArray* errorArray = [self inputCheck];
+    
+    // 入力エラーがある場合はダイアログを表示して保存しない
+    if(errorArray.count >= 1){
+        NSMutableString *errorStr = [NSMutableString string];
+        for(int i=0;i<errorArray.count;i++){
+            [errorStr appendString:[errorArray objectAtIndex:i]];
+            if(i != errorArray.count){
+                [errorStr appendString:@"\n"];
+            }
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+            message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
+    // GameResultオブジェクトに入力内容を反映
+    [self updateGameResult];
+    
+    // 投手成績入力画面に画面遷移
+    [self performSegueWithIdentifier:@"toPitching" sender:self];
 }
 
 - (IBAction)saveButton:(id)sender {
@@ -428,7 +453,7 @@
     }
     
     // 入力エラーがない場合は保存確認のダイアログを表示
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力" message:@"保存してよろしいですか？"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の保存" message:@"保存してよろしいですか？"
                               delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
     [alert setTag:ALERT_SAVE];
     [alert show];
@@ -528,7 +553,6 @@
 }
 
 - (void)updateGameResult {
-    
     // 日付は一度カレンダーに変換してから取得する。
     NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 09:00",
                          _year.text, _month.text, _day.text];
@@ -555,18 +579,6 @@
     gameResult.daten = [_daten.text intValue];
     gameResult.tokuten = [_tokuten.text intValue];
     gameResult.steal = [_steal.text intValue];
-    
-    gameResult.inning     = gameResultForPitching.inning;
-    gameResult.inning2    = gameResultForPitching.inning2;
-    gameResult.hianda     = gameResultForPitching.hianda;
-    gameResult.hihomerun  = gameResultForPitching.hihomerun;
-    gameResult.dassanshin = gameResultForPitching.dassanshin;
-    gameResult.yoshikyu   = gameResultForPitching.yoshikyu;
-    gameResult.yoshikyu2  = gameResultForPitching.yoshikyu2;
-    gameResult.shitten    = gameResultForPitching.shitten;
-    gameResult.jisekiten  = gameResultForPitching.jisekiten;
-    gameResult.kanto      = gameResultForPitching.kanto;
-    gameResult.sekinin    = gameResultForPitching.sekinin;
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {
@@ -574,8 +586,7 @@
     return [sourceString stringByReplacingOccurrencesOfString:@"," withString:@"."];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     NSString* segueStr = [segue identifier];
     
     SelectInputViewController *viewController = [segue destinationViewController];

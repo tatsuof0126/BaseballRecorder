@@ -238,7 +238,7 @@
     targetToolbar = nil;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self updateStatistics];

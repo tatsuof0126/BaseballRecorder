@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "GameResultManager.h"
 
+#define AD_VIEW 1 // 1=表示,0=非表示
+
 @interface GameResultListController ()
 
 @end
@@ -38,7 +40,7 @@
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView*)banner{
-    if (bannerIsVisible == NO){
+    if (bannerIsVisible == NO && AD_VIEW == 1){
         [self showAdView];
         bannerIsVisible = YES;
     }
@@ -51,20 +53,20 @@
     }
 }
 
-- (void)hiddenAdView {
-    CGRect oldRect = gameResultListTableView.frame;
-    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
-                                oldRect.size.width, oldRect.size.height+50);
-    gameResultListTableView.frame = newRect;
-    adView.hidden = YES;
-}
-
 - (void)showAdView {
     CGRect oldRect = gameResultListTableView.frame;
     CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
                                 oldRect.size.width, oldRect.size.height-50);
     gameResultListTableView.frame = newRect;
     adView.hidden = NO;
+}
+
+- (void)hiddenAdView {
+    CGRect oldRect = gameResultListTableView.frame;
+    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
+                                oldRect.size.width, oldRect.size.height+50);
+    gameResultListTableView.frame = newRect;
+    adView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning

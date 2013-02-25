@@ -158,7 +158,12 @@
     team.text = [teamList objectAtIndex:targetteam];
 }
 
-- (void)makeResultPiker {
+- (void)makeResultPicker {
+    // すでにPickerが立ち上がっていたら無視
+    if( targetPicker != nil ){
+        return;
+    }
+    
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGFloat width = rect.size.width;
     CGFloat height = rect.size.height;

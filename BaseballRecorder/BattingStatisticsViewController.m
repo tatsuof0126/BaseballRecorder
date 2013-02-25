@@ -207,7 +207,7 @@
 }
 
 - (IBAction)changeButton:(id)sender {
-    [self makeResultPiker];
+    [self makeResultPicker];
 }
 
 /*

@@ -28,7 +28,7 @@
 
 - (void)updateStatistics;
 
-- (void)makeResultPiker;
+- (void)makeResultPicker;
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team;
 

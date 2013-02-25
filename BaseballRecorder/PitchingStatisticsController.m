@@ -73,7 +73,7 @@
 }
 
 - (IBAction)changeButton:(id)sender {
-    [self makeResultPiker];
+    [self makeResultPicker];
 }
 
 + (NSString*)getFloatStr:(float)floatvalue {

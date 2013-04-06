@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "StatisticsCommonController.h"
 
 @interface PitchingStatisticsController : StatisticsCommonController
+    <MFMailComposeViewControllerDelegate>
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) IBOutlet UILabel *pitchingresult;
 @property (strong, nonatomic) IBOutlet UILabel *inning;
@@ -29,5 +34,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *team;
 
 - (IBAction)changeButton:(id)sender;
+- (IBAction)mailButton:(id)sender;
 
 @end

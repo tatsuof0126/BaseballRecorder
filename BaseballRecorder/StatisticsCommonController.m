@@ -243,6 +243,46 @@
     targetToolbar = nil;
 }
 
+- (NSString*)getMailTitle:(int)type {
+    NSString* year = @"";
+    NSString* team = @"";
+    NSString* tsusan = @"";
+    NSString* today = @"";
+    
+    // 今日の日付を取得する
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate *date = [NSDate date];
+    NSDateComponents *dateComps
+    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    
+    today = [NSString stringWithFormat:@"（%d年%d月%d日現在）",dateComps.year,dateComps.month,dateComps.day];
+    
+    if(targetyear != 0){
+        year = [yearList objectAtIndex:targetyear];
+        
+        // 今日の年を取得する
+        NSString* todayYear = [NSString stringWithFormat:@"%d年",dateComps.year];
+        if([year isEqualToString:todayYear] == NO){
+            // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
+            today = @"";
+        }
+    } else {
+        // targetyearが0（すべて）なら通算成績
+        tsusan = @"通算";
+    }
+    
+    if(targetteam != 0){
+        team = [teamList objectAtIndex:targetteam];
+    }
+    
+    // MailTitleを返す（例．2013年バットマンズ打撃成績、通算打撃成績（2013年3月27日現在））
+    if (type == BATTING_RESULT) {
+        return [NSString stringWithFormat:@"%@%@%@打撃成績%@",year,team,tsusan,today];
+    } else {
+        return [NSString stringWithFormat:@"%@%@%@投手成績%@",year,team,tsusan,today];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     

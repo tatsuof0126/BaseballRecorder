@@ -22,11 +22,14 @@
 @property (strong, nonatomic) IBOutlet UILabel *apptitle;
 @property (strong, nonatomic) IBOutlet UILabel *appsubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *versionName;
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *removeadsButton;
 @property (weak, nonatomic) IBOutlet UILabel *appstoreLabel;
 
 - (IBAction)placeEdited:(id)sender;
 - (IBAction)myteamEdited:(id)sender;
 - (IBAction)sendtoEdited:(id)sender;
 - (IBAction)addSendtoButton:(id)sender;
+- (IBAction)removeadsButton:(id)sender;
 
 @end

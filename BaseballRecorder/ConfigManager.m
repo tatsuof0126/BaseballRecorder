@@ -7,6 +7,7 @@
 //
 
 #import "ConfigManager.h"
+#import "Utility.h"
 
 @implementation ConfigManager
 
@@ -62,6 +63,17 @@
 + (void)setCalcTargetYear:(NSString*)targetYear {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:targetYear forKey:@"TARGETYEAR"];
+    [defaults synchronize];
+}
+
++ (BOOL)isRemoveAdsFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"REMOVEADSFLG"];
+}
+
++ (void)setRemoveAdsFlg:(BOOL)removeAdsFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:removeAdsFlg forKey:@"REMOVEADSFLG"];
     [defaults synchronize];
 }
 

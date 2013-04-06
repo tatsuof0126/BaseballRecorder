@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "GameResult.h"
-
-// #define NO_TARGET -1
+#import "InAppPurchaseManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-//@property (strong, nonatomic) NSArray* gameResultList;
-
 @property (strong, nonatomic) GameResult* targetGameResult;
 
-// @property int targatResultid;
+@property (strong, nonatomic) InAppPurchaseManager* purchaseManager;
+
+- (InAppPurchaseManager*)getInAppPurchaseManager;
 
 + (void)adjustForiPhone5:(UIView*)view;
 

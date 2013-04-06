@@ -11,7 +11,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface ShowGameResultController : UIViewController
-    <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+    <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;

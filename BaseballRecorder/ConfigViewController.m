@@ -18,6 +18,7 @@
 
 @synthesize inputNavi;
 @synthesize scrollView;
+@synthesize removeadsButton;
 @synthesize appstoreLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,6 +51,11 @@
     [AppDelegate adjustOriginForiPhone5:_appsubtitle];
     [AppDelegate adjustOriginForiPhone5:_versionName];
     [AppDelegate adjustOriginForiPhone5:appstoreLabel];
+    
+    // すでに広告が非表示ならボタンを消す
+    if([ConfigManager isRemoveAdsFlg] == YES){
+        inputNavi.rightBarButtonItem = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,6 +73,7 @@
     [self setAppstoreLabel:nil];
     [self setApptitle:nil];
     [self setAppsubtitle:nil];
+    [self setRemoveadsButton:nil];
     [super viewDidUnload];
 }
 
@@ -158,6 +165,9 @@
     [self presentModalViewController:picker animated:YES];
 }
 
+- (IBAction)removeadsButton:(id)sender {
+}
+
 - (void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -194,7 +204,10 @@
 
 - (void)tapAction:(UITapGestureRecognizer*)sender{
     if(sender.view == appstoreLabel){
-        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
+//        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
+        
+        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
+
         [[UIApplication sharedApplication] openURL:url];
     }
 }

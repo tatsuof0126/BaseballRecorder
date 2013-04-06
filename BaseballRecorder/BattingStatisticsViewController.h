@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "StatisticsCommonController.h"
 
 #define ALL_TARGET 0
 
 @interface BattingStatisticsViewController : StatisticsCommonController
+    <MFMailComposeViewControllerDelegate>
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UILabel *teamresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult;
@@ -31,5 +36,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *year;
 
 - (IBAction)changeButton:(id)sender;
+- (IBAction)mailButton:(id)sender;
 
 @end

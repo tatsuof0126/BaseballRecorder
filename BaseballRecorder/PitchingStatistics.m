@@ -115,4 +115,29 @@
     }
 }
 
++ (NSString*)getFloatStr:(float)floatvalue {
+    if(isnan(floatvalue) == YES || isinf(floatvalue)){
+        return @"-.--";
+    }
+    
+    NSString* floatStr = [NSString stringWithFormat:@"%0.02f",floatvalue];
+    
+    return floatStr;
+}
+
+- (NSString*)getMailBody {
+    NSMutableString* bodyString = [NSMutableString string];
+    
+    [bodyString appendString:[NSString stringWithFormat:@"%d試合 %d勝 %d敗 %dセーブ %dホールド\n",games,win,lose,save,hold]];
+    [bodyString appendString:[NSString stringWithFormat:@"投球回：%@　防御率：%@\n",
+                              [self getInningString],[PitchingStatistics getFloatStr:era]]];
+    [bodyString appendString:[NSString stringWithFormat:@"被安打：%d　被本塁打：%d\n",hianda, hihomerun]];
+    [bodyString appendString:[NSString stringWithFormat:@"奪三振：%d　与四球：%d　与死球：%d\n",dassanshin, yoshikyu, yoshikyu2]];
+    [bodyString appendString:[NSString stringWithFormat:@"失点：%d　自責点：%d　完投：%d\n",shitten, jisekiten, kanto]];
+    [bodyString appendString:[NSString stringWithFormat:@"WHIP：%@　奪三振率：%@\n",
+                              [PitchingStatistics getFloatStr:whip],[PitchingStatistics getFloatStr:k9]]];
+    
+    return bodyString;
+}
+
 @end

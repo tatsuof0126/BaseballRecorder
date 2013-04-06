@@ -12,6 +12,7 @@
 #import "TeamStatistics.h"
 #import "BattingStatistics.h"
 #import "ConfigManager.h"
+#import "AppDelegate.h"
 
 @interface BattingStatisticsViewController ()
 
@@ -19,17 +20,11 @@
 
 @implementation BattingStatisticsViewController
 
-@synthesize yearList;
-@synthesize teamList;
-@synthesize targetyear;
-@synthesize targetteam;
-
-/*
-@synthesize gameResultList;
-@synthesize gameResultListOfYear;
-@synthesize targetPicker;
-@synthesize targetToolbar;
-*/
+@synthesize scrollView;
+//@synthesize yearList;
+//@synthesize teamList;
+//@synthesize targetyear;
+//@synthesize targetteam;
  
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +39,8 @@
 {
     [super viewDidLoad];
     
-//    [self updateStatistics];
+    [AppDelegate adjustForiPhone5:scrollView];
+    scrollView.contentSize = CGSizeMake(320, 455);
     
 	// Do any additional setup after loading the view.
 }
@@ -55,109 +51,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-- (void)updateStatistics {
-    [self loadGameResult];
-    [self setCalcTarget];
-    NSArray* gameResultListForCalc = [self getGameResultListForCalc];
-    [self showStatistics:gameResultListForCalc];
-}
-
-- (void)loadGameResult {
-    gameResultList = [GameResultManager loadGameResultList];
-
-    yearList = [NSMutableArray array];
-    teamList = [NSMutableArray array];
-    gameResultListOfYear = [NSMutableArray array];
-    
-    [yearList addObject:@"すべて"];
-    [teamList addObject:@"すべて"];
-    [gameResultListOfYear addObject:gameResultList];
-    
-    int listyear = -999;
-    NSMutableArray* resultArray = [NSMutableArray array];
-    for (int i=0; i<gameResultList.count; i++) {
-        GameResult* result = [gameResultList objectAtIndex:i];
-        
-        if(listyear != result.year){
-            [yearList addObject:[NSString stringWithFormat:@"%d年",result.year]];
-            listyear = result.year;
-            
-            resultArray = [NSMutableArray array];
-            [gameResultListOfYear addObject:resultArray];
-        }
-        
-        [resultArray addObject:result];
-    }
-    
-    for (int i=0; i<gameResultList.count; i++) {
-        GameResult* result = [gameResultList objectAtIndex:i];
-        
-        NSString* team = result.myteam;
-        
-        if ([teamList containsObject:team] == NO){
-            [teamList addObject:team];
-        }
-    }
-}
-
-- (void)setCalcTarget {
-    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
-    NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
-    
-    targetyear = ALL_TARGET;
-    targetteam = ALL_TARGET;
-    
-    BOOL yearFlg = NO;
-    BOOL teamFlg = NO;
-    
-    for(int i=0;i<yearList.count;i++){
-        if([targetYearStr isEqualToString:[yearList objectAtIndex:i]]){
-            targetyear = i;
-            yearFlg = YES;
-            break;
-        }
-    }
-    
-    for(int i=0;i<teamList.count;i++){
-        if([targetTeamStr isEqualToString:[teamList objectAtIndex:i]]){
-            targetteam = i;
-            teamFlg = YES;
-            break;
-        }
-    }
-    
-    if(yearFlg == NO){
-        [ConfigManager setCalcTargetYear:@"すべて"];
-    }
-    if(teamFlg == NO){
-        [ConfigManager setCalcTargetTeam:@"すべて"];
-    }
-}
-
-- (NSArray*)getGameResultListForCalc {
-    NSMutableArray* gameResultListForCalc = nil;
-    
-    NSArray* listOfYear = [gameResultListOfYear objectAtIndex:targetyear];
-    NSString* targetTeamname = [teamList objectAtIndex:targetteam];
-    
-    if(targetteam == ALL_TARGET){
-        gameResultListForCalc = [NSMutableArray arrayWithArray:listOfYear];
-    } else {
-        gameResultListForCalc = [NSMutableArray array];
-        
-        for(int i=0;i<listOfYear.count;i++){
-            GameResult* result = [listOfYear objectAtIndex:i];
-            if([targetTeamname isEqualToString:result.myteam] == YES){
-                [gameResultListForCalc addObject:result];
-            }
-        }
-    }
-    
-    return gameResultListForCalc;
-}
-*/
- 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
     [self showTarget:_year team:_team];
     
@@ -182,10 +75,9 @@
     _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.average],
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.obp],
-                         [BattingStatisticsViewController getFloatStr:battingStatistics.ops]];
-    
+                         [BattingStatistics getFloatStr:battingStatistics.average],
+                         [BattingStatistics getFloatStr:battingStatistics.obp],
+                         [BattingStatistics getFloatStr:battingStatistics.ops]];
 }
 
 - (void)viewDidUnload {
@@ -203,6 +95,7 @@
     [self setDaten:nil];
     [self setTokuten:nil];
     [self setSteal:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 
@@ -210,93 +103,106 @@
     [self makeResultPicker];
 }
 
+- (IBAction)mailButton:(id)sender {
+    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+    mailPicker.mailComposeDelegate = self;
+    
+    // TOを作る
+    NSString* sendto = [ConfigManager getDefaultSendTo];
+    NSArray* sendtoArray = [sendto componentsSeparatedByString:@","];
+    
+    // Subjectを作る
+    NSString* mailTitle = [super getMailTitle:BATTING_RESULT];
+    
+    // 本文を作る
+    NSMutableString* bodyString = [NSMutableString string];
+
+    NSArray* gameResultListForCalc = [super getGameResultListForCalc];
+    TeamStatistics* teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
+    BattingStatistics* battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
+    
+    [bodyString appendString:mailTitle];
+    [bodyString appendString:@"\n\n"];
+    
+    [bodyString appendString:[NSString stringWithFormat:@"試合成績：%@\n\n",[teamStatistics getMailBody]]];
+    
+    [bodyString appendString:@"打撃成績\n"];
+    [bodyString appendString:[battingStatistics getMailBody]];
+    
+    
+    [mailPicker setToRecipients:sendtoArray];
+    [mailPicker setSubject:[NSString stringWithFormat:@"【ベボレコ】%@ @ベボレコ",mailTitle]];
+    [mailPicker setMessageBody:bodyString isHTML:NO];
+    
+    // メール送信用のモーダルビューを表示
+    [self presentViewController:mailPicker animated:YES completion:nil];
+}
+
 /*
-- (void)makeResultPiker {
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    CGFloat width = rect.size.width;
-    CGFloat height = rect.size.height;
+- (NSString*)getMailTitle {
+    NSString* year = @"";
+    NSString* team = @"";
+    NSString* tsusan = @"";
+    NSString* today = @"";
     
-    targetPicker = [[UIPickerView alloc] init];
+    // 今日の日付を取得する
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate *date = [NSDate date];
+    NSDateComponents *dateComps
+    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     
-    targetPicker.center = CGPointMake(width/2, height+125+60);
-    targetPicker.delegate = self;  // デリゲートを自分自身に設定
-    targetPicker.dataSource = self;  // データソースを自分自身に設定
-    targetPicker.showsSelectionIndicator = YES;
+    today = [NSString stringWithFormat:@"（%d年%d月%d日現在）",dateComps.year,dateComps.month,dateComps.day];
     
-    [targetPicker selectRow:targetyear inComponent:0 animated:NO];
-    [targetPicker selectRow:targetteam inComponent:1 animated:NO];
+    if(super.targetyear != 0){
+        year = [super.yearList objectAtIndex:super.targetyear];
+        
+        // 今日の年を取得する
+        NSString* todayYear = [NSString stringWithFormat:@"%d年",dateComps.year];
+        if([year isEqualToString:todayYear] == NO){
+            // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
+            today = @"";
+        }
+    } else {
+        tsusan = @"通算";
+    }
     
-    targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height, 320, 44)];
-    targetToolbar.barStyle = UIBarStyleBlack;
+    if(super.targetteam != 0){
+        team = [super.teamList objectAtIndex:super.targetteam];
+    }
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"設定"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    NSArray *items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
-    
-    [targetToolbar setItems:items animated:YES];
-    
-    [self.view addSubview:targetToolbar];
-    [self.view addSubview:targetPicker];
-    
-    //アニメーションの設定開始
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
-    [UIView setAnimationDuration:0.3];    // 時間の指定
-    targetPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
-    targetToolbar.center = CGPointMake(width/2, height-255);
-    
-    [UIView commitAnimations];
-}
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
-    return 2;
-}
-
--(NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return component == 0 ? yearList.count : teamList.count;
-}
-
--(NSString*)pickerView:(UIPickerView*)pickerView
-           titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return component == 0 ? [yearList objectAtIndex:row] : [teamList objectAtIndex:row];
-}
-
-- (void)toolbarBackButton:(UIBarButtonItem*)sender {
-    [targetPicker removeFromSuperview];
-    [targetToolbar removeFromSuperview];
-    
-    targetPicker = nil;
-    targetToolbar = nil;
-}
-
-- (void)toolbarDoneButton:(id)sender {
-    targetyear = [targetPicker selectedRowInComponent:0];
-    targetteam = [targetPicker selectedRowInComponent:1];
-    
-    [ConfigManager setCalcTargetYear:[yearList objectAtIndex:targetyear]];
-    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:targetteam]];
-    
-    [self updateStatistics];
-    
-    [targetPicker removeFromSuperview];
-    [targetToolbar removeFromSuperview];
-    
-    targetPicker = nil;
-    targetToolbar = nil;
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self updateStatistics];
+    return [NSString stringWithFormat:@"%@%@%@打撃成績%@",year,team,tsusan,today];
 }
  */
+ 
+// メール送信処理完了時のイベント
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result){
+        // キャンセル
+        case MFMailComposeResultCancelled:
+            break;
+        // 保存
+        case MFMailComposeResultSaved:
+            break;
+        // 送信成功
+        case MFMailComposeResultSent: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                message:@"送信しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+        // 送信失敗
+        case MFMailComposeResultFailed: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                message:@"送信に失敗しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            break;
+        }
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 + (NSString*)getFloatStr:(float)floatvalue {
     if(isnan(floatvalue) == YES){

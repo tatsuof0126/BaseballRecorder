@@ -23,6 +23,9 @@
 @synthesize walks;
 @synthesize sacrifices;
 @synthesize sacrificeflies;
+@synthesize daten;
+@synthesize tokuten;
+@synthesize steal;
 
 @synthesize average;
 @synthesize obp;
@@ -75,6 +78,35 @@
     
     // OPS＝出塁率＋長打率
     ops = obp + slg;
+}
+
+- (NSString*)getMailBody {
+    NSMutableString* bodyString = [NSMutableString string];
+    
+    [bodyString appendString:[NSString stringWithFormat:@"%d打席　%d打数　%d安打\n",boxs, atbats, hits]];
+    [bodyString appendString:[NSString stringWithFormat:@"二塁打：%d　三塁打：%d　本塁打：%d\n",doubles, triples, homeruns]];
+    [bodyString appendString:[NSString stringWithFormat:@"三振：%d　四死球：%d　犠打：%d\n",strikeouts, walks, sacrifices]];
+    [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　盗塁：%d\n",daten, tokuten, steal]];
+    [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　OPS：%@\n",
+                              [BattingStatistics getFloatStr:average],
+                              [BattingStatistics getFloatStr:obp],
+                              [BattingStatistics getFloatStr:ops]]];
+    
+    return bodyString;
+}
+
++ (NSString*)getFloatStr:(float)floatvalue {
+    if(isnan(floatvalue) == YES){
+        return @".---";
+    }
+    
+    NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
+    
+    if(floatvalue < 1.0){
+        floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
+    }
+    
+    return floatStr;
 }
 
 @end

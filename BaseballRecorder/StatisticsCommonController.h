@@ -10,6 +10,9 @@
 
 #define ALL_TARGET 0
 
+#define BATTING_RESULT  1
+#define PITCHING_RESULT 2
+
 @interface StatisticsCommonController : UIViewController
     <UIPickerViewDelegate, UIPickerViewDataSource>
 
@@ -26,10 +29,14 @@
 
 @property (strong, nonatomic) NSMutableArray *teamList;
 
+- (NSArray*)getGameResultListForCalc;
+
 - (void)updateStatistics;
 
 - (void)makeResultPicker;
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team;
+
+- (NSString*)getMailTitle:(int)type;
 
 @end

@@ -118,7 +118,7 @@
             [bodyString appendString:[NSString stringWithFormat:@"第%d打席：%@\n"
                                   ,i+1,[battingResult getResultLongString]]];
         }
-        [bodyString appendString:[NSString stringWithFormat:@"打点：%d 得点：%d 盗塁：%d\n",
+        [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　盗塁：%d\n",
                               daten,tokuten,steal]];
     }
     
@@ -129,11 +129,11 @@
                                   ,kanto ? @" (完投)" : @""
                                   ,[[GameResult getSekininPickerArray] objectAtIndex:sekinin]]];
         [bodyString appendString:[NSString stringWithFormat:
-                                  @"被安打：%d 被本塁打：%d\n",hianda,hihomerun]];
+                                  @"被安打：%d　被本塁打：%d\n",hianda,hihomerun]];
         [bodyString appendString:[NSString stringWithFormat:
-                                  @"奪三振：%d 与四球：%d 与死球：%d\n",dassanshin,yoshikyu,yoshikyu2]];
+                                  @"奪三振：%d　与四球：%d　与死球：%d\n",dassanshin,yoshikyu,yoshikyu2]];
         [bodyString appendString:[NSString stringWithFormat:
-                                  @"失点：%d 自責点：%d\n",shitten,jisekiten]];
+                                  @"失点：%d　自責点：%d\n",shitten,jisekiten]];
     }
     
     return bodyString;

@@ -16,4 +16,6 @@
 
 + (TeamStatistics*)calculateTeamStatistics:(NSArray*)gameResultList;
 
+- (NSString*)getMailBody;
+
 @end

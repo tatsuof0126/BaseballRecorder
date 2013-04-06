@@ -30,4 +30,8 @@
 
 + (void)setCalcTargetYear:(NSString*)targetYear;
 
++ (BOOL)isRemoveAdsFlg;
+
++ (void)setRemoveAdsFlg:(BOOL)removeAdsFlg;
+
 @end

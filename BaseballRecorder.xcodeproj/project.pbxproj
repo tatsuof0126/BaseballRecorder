@@ -60,6 +60,10 @@
 		0B949A011632A1E3007F574D /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A001632A1E3007F574D /* InputViewController.m */; };
 		0B949A0416335C33007F574D /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0316335C33007F574D /* GameResult.m */; };
 		0B949A0716335C8B007F574D /* BattingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0616335C8B007F574D /* BattingResult.m */; };
+		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
+		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
+		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
+		0BE4C4A516FF406D00DAD11F /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A416FF406C00DAD11F /* Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +154,14 @@
 		0B949A0316335C33007F574D /* GameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResult.m; sourceTree = "<group>"; };
 		0B949A0516335C8A007F574D /* BattingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingResult.h; sourceTree = "<group>"; };
 		0B949A0616335C8B007F574D /* BattingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingResult.m; sourceTree = "<group>"; };
+		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
+		0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseAddonController.m; sourceTree = "<group>"; };
+		0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0BE4C49F16FF0D0000DAD11F /* InAppPurchaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseProtocol.h; sourceTree = "<group>"; };
+		0BE4C4A016FF0D2E00DAD11F /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
+		0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		0BE4C4A316FF406C00DAD11F /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		0BE4C4A416FF406C00DAD11F /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1E616B0334300B66509 /* iAd.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
 				0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */,
@@ -225,6 +238,7 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */,
 				0B6BB1E516B0334200B66509 /* iAd.framework */,
 				0B6BB1D616AEF09200B66509 /* AddressBook.framework */,
 				0B6BB1D216AEE6E100B66509 /* AddressBookUI.framework */,
@@ -257,6 +271,8 @@
 				0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */,
 				0B9499F316325AAF007F574D /* ConfigViewController.h */,
 				0B9499F416325AAF007F574D /* ConfigViewController.m */,
+				0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */,
+				0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */,
 				0B9499FA16326416007F574D /* InputViewController.h */,
 				0B949A001632A1E3007F574D /* InputViewController.m */,
 				0B40E42916C12AA300E0E95D /* PitchingResultController.h */,
@@ -283,6 +299,11 @@
 				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
 				0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */,
 				0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */,
+				0BE4C49F16FF0D0000DAD11F /* InAppPurchaseProtocol.h */,
+				0BE4C4A016FF0D2E00DAD11F /* InAppPurchaseManager.h */,
+				0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */,
+				0BE4C4A316FF406C00DAD11F /* Utility.h */,
+				0BE4C4A416FF406C00DAD11F /* Utility.m */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -468,6 +489,9 @@
 				0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */,
 				0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */,
 				0B21C2FD16CD3385005FF0C5 /* PitchingStatistics.m in Sources */,
+				0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */,
+				0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */,
+				0BE4C4A516FF406D00DAD11F /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +598,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tatsuo Fujiwara (59Q7GGKNL2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

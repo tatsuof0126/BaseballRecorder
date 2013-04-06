@@ -11,6 +11,10 @@
 
 @implementation TeamStatistics
 
+@synthesize win;
+@synthesize lose;
+@synthesize draw;
+
 + (TeamStatistics*)calculateTeamStatistics:(NSArray*)gameResultList {
     TeamStatistics* teamStatistics = [[TeamStatistics alloc] init];
     
@@ -23,13 +27,13 @@
         } else {
             teamStatistics.lose++;
         }
-        
-        
-        
-        
     }
     
     return teamStatistics;
+}
+
+- (NSString*)getMailBody {
+    return [NSString stringWithFormat:@"%d勝 %d敗 %d分",win,lose,draw];
 }
 
 @end

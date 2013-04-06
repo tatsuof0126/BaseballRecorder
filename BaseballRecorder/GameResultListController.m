@@ -9,6 +9,7 @@
 #import "GameResultListController.h"
 #import "AppDelegate.h"
 #import "GameResultManager.h"
+#import "ConfigManager.h"
 
 #define AD_VIEW 1 // 1=表示,0=非表示
 
@@ -40,7 +41,7 @@
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView*)banner{
-    if (bannerIsVisible == NO && AD_VIEW == 1){
+    if (bannerIsVisible == NO && AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         [self showAdView];
         bannerIsVisible = YES;
     }

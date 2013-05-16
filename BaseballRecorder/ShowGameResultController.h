@@ -47,6 +47,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *jisekitenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jisekiten;
 
+@property (strong, nonatomic) IBOutlet UILabel *memoLabel;
+@property (strong, nonatomic) IBOutlet UITextView *memo;
+
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
 
 - (IBAction)mailButton:(id)sender;

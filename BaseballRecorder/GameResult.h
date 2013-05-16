@@ -28,6 +28,8 @@
 @property int tokuten;
 @property int steal;
 
+@property (strong, nonatomic, readwrite) NSString *memo;
+
 @property (strong, nonatomic, readwrite) NSMutableArray *battingResultArray;
 
 @property int inning;

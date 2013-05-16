@@ -84,10 +84,7 @@
 }
 
 - (void)loadGameResult {
-//    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
     NSArray* gameResultList = [GameResultManager loadGameResultList];
-//    appDelegate.gameResultList = resultList;
     
     gameResultYearList = [NSMutableArray array];
     gameResultListOfYear = [NSMutableArray array];
@@ -155,8 +152,6 @@
                                       reuseIdentifier:cellName];
     }
     
-//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:[NSString stringWithFormat:@"%d",result.resultid]];
-    
     cell.textLabel.text = [NSString stringWithFormat:@"%d月%d日  %@ %d-%d %@",
         result.month, result.day, result.myteam, result.myscore, result.otherscore, result.otherteam];
     
@@ -209,12 +204,6 @@
     
 }
 
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
-}
-*/
-
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
@@ -225,21 +214,15 @@
     if(tag == 1){
         // 追加ボタン
         appDelegate.targetGameResult = nil;
-//        appDelegate.targatResultid = NO_TARGET;
     } else {
         // 個別の試合結果を選択
         NSIndexPath* indexPath = [gameResultListTableView indexPathForSelectedRow];
         
-//        int section = indexPath.section;
-//        int row = indexPath.row;
-//        NSLog(@"Selected in Segue %d-%d",section, row);
-
         NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];
         GameResult* result = [array objectAtIndex:indexPath.row];
 
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         appDelegate.targetGameResult = result;
-//        appDelegate.targatResultid = result.resultid;
     }
 }
 

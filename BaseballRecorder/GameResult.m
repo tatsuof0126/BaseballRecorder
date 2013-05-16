@@ -8,7 +8,7 @@
 
 #import "GameResult.h"
 
-#define SAVE_VERSION 3
+#define SAVE_VERSION 4
 
 @implementation GameResult
 
@@ -26,6 +26,7 @@
 @synthesize daten;
 @synthesize tokuten;
 @synthesize steal;
+@synthesize memo;
 
 @synthesize inning;
 @synthesize inning2;
@@ -55,6 +56,7 @@
         daten = 0;
         tokuten = 0;
         steal = 0;
+        memo = @"";
         
         inning = 0;
         inning2 = 0;
@@ -110,6 +112,7 @@
     [bodyString appendString:[NSString stringWithFormat:@"%d年%d月%d日 %@\n",year,month,day,place]];
     [bodyString appendString:[NSString stringWithFormat:@"%@ %d-%d %@\n",myteam,myscore,otherscore,otherteam]];
     
+    // 打撃成績
     if( (battingResultArray != nil && battingResultArray.count >= 1) ||
        daten >= 1 || tokuten >= 1 || steal >= 1){
         [bodyString appendString:[NSString stringWithFormat:@"\n打撃成績\n"]];
@@ -122,6 +125,7 @@
                               daten,tokuten,steal]];
     }
     
+    // 投手成績
     if(inning != 0 || inning2 != 0){
         [bodyString appendString:[NSString stringWithFormat:@"\n投手成績\n"]];
         [bodyString appendString:[NSString stringWithFormat:@"投球回：%@%@ %@\n"
@@ -136,6 +140,12 @@
                                   @"失点：%d　自責点：%d\n",shitten,jisekiten]];
     }
     
+    // メモ
+    if([@"" isEqualToString:memo] == NO){
+        [bodyString appendString:[NSString stringWithFormat:@"\nメモ\n"]];
+        [bodyString appendString:[NSString stringWithFormat:@"%@\n",memo]];
+    }
+    
     return bodyString;
 }
 
@@ -147,6 +157,8 @@
         return [self getGameResultNSDataV2];
     } else if( SAVE_VERSION == 3 ){
         return [self getGameResultNSDataV3];
+    } else if( SAVE_VERSION == 4 ){
+        return [self getGameResultNSDataV4];
     } else {
         return [self getGameResultNSDataV1];
     }
@@ -259,6 +271,49 @@
     return data;
 }
 
+- (NSData*)getGameResultNSDataV4 {
+    NSMutableString* resultStr = [NSMutableString string];
+    
+    if (UUID == nil || [UUID isEqualToString:@""] || [UUID isEqualToString:@"(null)"]) {
+        // UUIDを作成
+        CFUUIDRef uuidObj = CFUUIDCreate(nil);
+        UUID = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
+        CFRelease(uuidObj);
+    }
+    
+    // １行目：ファイル形式バージョン（V3）、UUID
+    [resultStr appendString:[NSString stringWithFormat:@"V4,%@\n",UUID]];
+    
+    // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
+    [resultStr appendString:[NSString stringWithFormat:@"%d,%d,%d,%d,%@,%@,%@,%d,%d,%d,%d,%d\n"
+                             ,resultid,year,month,day,place,myteam,otherteam,myscore,otherscore
+                             ,daten,tokuten,steal]];
+    
+    // ３行目：打撃成績（場所、結果、場所、結果・・・・）
+    for(int i=0;i<battingResultArray.count;i++){
+        BattingResult* battingResult = [battingResultArray objectAtIndex:i];
+        
+        [resultStr appendString:[NSString stringWithFormat:@"%d,%d"
+                                 ,battingResult.position,battingResult.result]];
+        
+        if( i+1 != battingResultArray.count){
+            [resultStr appendString:@","];
+        }
+    }
+    [resultStr appendString:@"\n"];
+    
+    // ４行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手）
+    [resultStr appendString:[NSString stringWithFormat:@"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
+                             ,inning,inning2,hianda,hihomerun,dassanshin,yoshikyu,yoshikyu2,shitten,jisekiten,kanto,sekinin]];
+    
+    // ５行目以降：メモ
+    [resultStr appendString:[NSString stringWithFormat:@"%@",memo]];
+    
+    NSData* data = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return data;
+}
+
 + (GameResult*)makeGameResult:(NSData*)data {
     NSString* resultStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSArray* resultStrArray = [resultStr componentsSeparatedByString:@"\n"];
@@ -276,8 +331,11 @@
             // "V2"という文字列ならV2形式
             return [self makeGameResultV2:resultStrArray resultUUID:resultUUID];
         } else if([versionStr isEqualToString:@"V3"] == YES){
-            // "V3"という文字列ならV2形式
+            // "V3"という文字列ならV3形式
             return [self makeGameResultV3:resultStrArray resultUUID:resultUUID];
+        } else if([versionStr isEqualToString:@"V4"] == YES){
+            // "V4"という文字列ならV4形式
+            return [self makeGameResultV4:resultStrArray resultUUID:resultUUID];
         } else {
             // どのバージョンでもない場合はV1形式と見なす
             return [self makeGameResultV1:resultStrArray];
@@ -331,7 +389,7 @@
 }
 
 // V3形式での読み込み
-// １行目：ファイル形式バージョン（V2）、UUID
+// １行目：ファイル形式バージョン（V3）、UUID
 // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
 // ３行目：打撃成績（場所、結果、場所、結果・・・・）
 // ４行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手）
@@ -352,6 +410,44 @@
     // ４行目は投手成績（打撃成績がないときは空行だが３行目自体は存在する）
     NSString* pitchingResultStr = [resultStrArray objectAtIndex:3];
     [self setPitchingResult:gameResult pitchingResultStr:pitchingResultStr];
+    
+    return gameResult;
+}
+
+// V4形式での読み込み
+// １行目：ファイル形式バージョン（V4）、UUID
+// ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
+// ３行目：打撃成績（場所、結果、場所、結果・・・・）
+// ４行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手）
+// ５行目以降：メモ
++ (GameResult*)makeGameResultV4:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
+    GameResult* gameResult = [[GameResult alloc] init];
+    
+    // １行目は読み込み済のためUUIDのみ設定
+    gameResult.UUID = resultUUID;
+    
+    // ２行目は試合情報
+    NSString* gameInfoStr = [resultStrArray objectAtIndex:1];
+    [self setGameInfoV2:gameResult gameInfoStr:gameInfoStr];
+    
+    // ３行目は打撃成績（打撃成績がないときは空行だが３行目自体は存在する）
+    NSString* battingResultStr = [resultStrArray objectAtIndex:2];
+    [self setBattingResult:gameResult battingResultStr:battingResultStr];
+    
+    // ４行目は投手成績（投手成績がないときは空行だが４行目自体は存在する）
+    NSString* pitchingResultStr = [resultStrArray objectAtIndex:3];
+    [self setPitchingResult:gameResult pitchingResultStr:pitchingResultStr];
+    
+    // ５行目以降はメモ（メモがないときは空行だが５行目自体は存在する）
+    NSMutableString* memoStr = [NSMutableString string];
+    for(int i=4;i<resultStrArray.count;i++){
+        [memoStr appendString:@"\n"];
+        [memoStr appendString:[resultStrArray objectAtIndex:i]];
+    }
+    
+    gameResult.memo = [memoStr substringFromIndex:1];
+    
+//    NSLog(@"memo : %@",gameResult.memo);
     
     return gameResult;
 }
@@ -428,6 +524,13 @@
     if (self.day > data.day) {
         return NSOrderedAscending;
     } else if (self.day < data.day) {
+        return NSOrderedDescending;
+    }
+    
+    // 年月日すべて一緒ならresultidで判断
+    if (self.resultid > data.resultid) {
+        return NSOrderedAscending;
+    } else if (self.resultid < data.resultid) {
         return NSOrderedDescending;
     }
     

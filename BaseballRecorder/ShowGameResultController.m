@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ShowGameResultController.h"
 #import "GameResultManager.h"
 #import "GameResult.h"
@@ -133,44 +134,64 @@
         _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
     }
     
-    int bottomY = 230+gameResult.battingResultArray.count*30;
-    if(battingResultFlg == NO){
-        bottomY -= 70;
+    BOOL memoFlg = ![@"" isEqualToString:gameResult.memo];
+    _memoLabel.hidden = !memoFlg;
+    _memo.hidden = !memoFlg;
+    
+    if(memoFlg == YES){
+        _memo.text = gameResult.memo;
+        
+        // TextViewを整形
+        _memo.font = [UIFont systemFontOfSize:14];
+        _memo.layer.borderWidth = 1;
+        _memo.layer.borderColor = [[UIColor grayColor] CGColor];
+        _memo.layer.cornerRadius = 8;
+        
+        CGRect f = _memo.frame;
+        f.size.height = _memo.contentSize.height > 90.0f ? _memo.contentSize.height : 90.0f;
+        _memo.frame = f;
     }
     
-    [self setFrameOriginY:_datenLabel originY:bottomY];
-    [self setFrameOriginY:_daten originY:bottomY];
-    [self setFrameOriginY:_tokutenLabel originY:bottomY];
-    [self setFrameOriginY:_tokuten originY:bottomY];
-    [self setFrameOriginY:_stealLabel originY:bottomY];
-    [self setFrameOriginY:_steal originY:bottomY];
+//    int battingAdjust = 230+gameResult.battingResultArray.count*30;
+//    if(battingResultFlg == NO){
+//        battingAdjust -= 70;
+//    }
+
+    int battingAdjust = battingResultFlg ? 230+gameResult.battingResultArray.count*30 : 160;
+    int pitchingAdjust = pitchingResultFlg ? 160 : 0;
+    int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     
-    [self setFrameOriginY:_pitchingResultLabel originY:bottomY+40];
-    [self setFrameOriginY:_inningLabel originY:bottomY+70];
-    [self setFrameOriginY:_inning originY:bottomY+70];
-    [self setFrameOriginY:_sekinin originY:bottomY+70];
-    [self setFrameOriginY:_hiandaLabel originY:bottomY+100];
-    [self setFrameOriginY:_hianda originY:bottomY+100];
-    [self setFrameOriginY:_hihomerunLabel originY:bottomY+100];
-    [self setFrameOriginY:_hihomerun originY:bottomY+100];
-    [self setFrameOriginY:_dassanshinLabel originY:bottomY+130];
-    [self setFrameOriginY:_dassanshin originY:bottomY+130];
-    [self setFrameOriginY:_yoshikyuLabel originY:bottomY+130];
-    [self setFrameOriginY:_yoshikyu originY:bottomY+130];
-    [self setFrameOriginY:_yoshikyu2Label originY:bottomY+130];
-    [self setFrameOriginY:_yoshikyu2 originY:bottomY+130];
-    [self setFrameOriginY:_shittenLabel originY:bottomY+160];
-    [self setFrameOriginY:_shitten originY:bottomY+160];
-    [self setFrameOriginY:_jisekitenLabel originY:bottomY+160];
-    [self setFrameOriginY:_jisekiten originY:bottomY+160];
+    [self setFrameOriginY:_datenLabel originY:battingAdjust];
+    [self setFrameOriginY:_daten originY:battingAdjust];
+    [self setFrameOriginY:_tokutenLabel originY:battingAdjust];
+    [self setFrameOriginY:_tokuten originY:battingAdjust];
+    [self setFrameOriginY:_stealLabel originY:battingAdjust];
+    [self setFrameOriginY:_steal originY:battingAdjust];
     
-    if(pitchingResultFlg == YES){
-        [self setFrameOriginY:_mailButton originY:bottomY+205];
-        _scrollview.contentSize = CGSizeMake(320, bottomY+470);
-    } else {
-        [self setFrameOriginY:_mailButton originY:bottomY+40];
-        _scrollview.contentSize = CGSizeMake(320, bottomY+310);
-    }
+    [self setFrameOriginY:_pitchingResultLabel originY:battingAdjust+40];
+    [self setFrameOriginY:_inningLabel originY:battingAdjust+70];
+    [self setFrameOriginY:_inning originY:battingAdjust+70];
+    [self setFrameOriginY:_sekinin originY:battingAdjust+70];
+    [self setFrameOriginY:_hiandaLabel originY:battingAdjust+100];
+    [self setFrameOriginY:_hianda originY:battingAdjust+100];
+    [self setFrameOriginY:_hihomerunLabel originY:battingAdjust+100];
+    [self setFrameOriginY:_hihomerun originY:battingAdjust+100];
+    [self setFrameOriginY:_dassanshinLabel originY:battingAdjust+130];
+    [self setFrameOriginY:_dassanshin originY:battingAdjust+130];
+    [self setFrameOriginY:_yoshikyuLabel originY:battingAdjust+130];
+    [self setFrameOriginY:_yoshikyu originY:battingAdjust+130];
+    [self setFrameOriginY:_yoshikyu2Label originY:battingAdjust+130];
+    [self setFrameOriginY:_yoshikyu2 originY:battingAdjust+130];
+    [self setFrameOriginY:_shittenLabel originY:battingAdjust+160];
+    [self setFrameOriginY:_shitten originY:battingAdjust+160];
+    [self setFrameOriginY:_jisekitenLabel originY:battingAdjust+160];
+    [self setFrameOriginY:_jisekiten originY:battingAdjust+160];
+    
+    [self setFrameOriginY:_memoLabel originY:battingAdjust+pitchingAdjust+40];
+    [self setFrameOriginY:_memo originY:battingAdjust+pitchingAdjust+70];
+    
+    [self setFrameOriginY:_mailButton originY:battingAdjust+pitchingAdjust+memoAdjust+45];
+    _scrollview.contentSize = CGSizeMake(320, battingAdjust+pitchingAdjust+memoAdjust+310);
 }
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
@@ -264,6 +285,8 @@
     [self setJisekitenLabel:nil];
     [self setJisekiten:nil];
     [self setBattingResultLabel:nil];
+    [self setMemoLabel:nil];
+    [self setMemo:nil];
     [super viewDidUnload];
 }
 

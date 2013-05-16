@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "InputViewController.h"
 #import "AppDelegate.h"
 #import "ConfigManager.h"
@@ -24,9 +25,7 @@
 @implementation InputViewController
 
 @synthesize gameResult;
-// @synthesize gameResultForPitching;
 @synthesize battingResultViewArray;
-// @synthesize scroolview;
 @synthesize scrollView;
 @synthesize resultPicker;
 @synthesize resultToolbar;
@@ -58,7 +57,8 @@
         gameResult = [[GameResult alloc] init];
         
         // 日付を今日に初期設定
-        NSCalendar* calendar = [NSCalendar currentCalendar];
+//        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDate *date = [NSDate date];
         NSDateComponents *dateComps
         = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
@@ -90,6 +90,15 @@
     _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     
+    _memo.text = gameResult.memo;
+    
+    // TextViewを整形
+    _memo.font = [UIFont systemFontOfSize:14];
+    _memo.layer.borderWidth = 1;
+    _memo.layer.borderColor = [[UIColor grayColor] CGColor];
+	_memo.layer.cornerRadius = 8;
+    [self adjustMemoHeight];
+
     // 打撃成績の部分を作る
     [self makeBattingResult];
     
@@ -143,6 +152,34 @@
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+//    NSLog(@"y : %f", scrollView.contentOffset.y);
+    
+    if (textView == _memo &&
+        scrollView.contentOffset.y < 345.0f+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 345.0f+gameResult.battingResultArray.count*40) animated:YES];
+    }
+    
+    [self showDoneButton];
+    
+    // ResultPickerを閉じる
+    [self closeResultPicker];
+    
+    edited = YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    [self hiddenDoneButton];
+    return YES;
+}
+
+-(void)textViewDidChange:(UITextView *)textView {
+    [self adjustMemoHeight];
+    
+    // コンテンツの配置を調整（投手成績へボタンとScrollViewの高さ）
+    [self adjustContentFrame];
+}
+
 - (void)showDoneButton {
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"完了"
         style:UIBarButtonItemStylePlain target:self action:@selector(doneButton)];
@@ -169,6 +206,7 @@
     [_daten endEditing:YES];
     [_tokuten endEditing:YES];
     [_steal endEditing:YES];
+    [_memo endEditing:YES];
 }
 
 - (void)makeBattingResult {
@@ -233,26 +271,40 @@
     [scrollView addSubview:nlabel];
     [scrollView addSubview:nbutton];
     
-    // 打点・得点・盗塁入力欄と投手成績へボタンの配置を調整
-    int bottomY = 310+battingResultArray.count*40;
+    [self adjustContentFrame];
+}
+
+- (void)adjustContentFrame {
+    // 打点・得点・盗塁入力欄とメモ欄・投手成績へボタンの配置を調整
+    int battingAdjust = 310+gameResult.battingResultArray.count*40;
+    int memoAdjust = _memo.frame.size.height;
     
-    [self setFrameOriginY:_datenLabel originY:bottomY+4];
-    [self setFrameOriginY:_daten originY:bottomY];
-    [self setFrameOriginY:_tokutenLabel originY:bottomY+4];
-    [self setFrameOriginY:_tokuten originY:bottomY];
-    [self setFrameOriginY:_stealLabel originY:bottomY+4];
-    [self setFrameOriginY:_steal originY:bottomY];
-    [self setFrameOriginY:toPitchingButton originY:bottomY+55];
+    [self setFrameOriginY:_datenLabel originY:battingAdjust+4];
+    [self setFrameOriginY:_daten originY:battingAdjust];
+    [self setFrameOriginY:_tokutenLabel originY:battingAdjust+4];
+    [self setFrameOriginY:_tokuten originY:battingAdjust];
+    [self setFrameOriginY:_stealLabel originY:battingAdjust+4];
+    [self setFrameOriginY:_steal originY:battingAdjust];
+    [self setFrameOriginY:_memoLabel originY:battingAdjust+45];
+    [self setFrameOriginY:_memo originY:battingAdjust+75];
+    [self setFrameOriginY:toPitchingButton originY:battingAdjust+memoAdjust+95];
     
     // ScrollViewの長さを調整
-    CGSize size = CGSizeMake(320, bottomY+350);
+    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+410);
     scrollView.contentSize = size;
-    
 }
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
     view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
 }
+
+- (void)adjustMemoHeight {
+    // 入力内容の高さに合わせてTextViewの高さを変える（最低は90.0f）
+    CGRect f = _memo.frame;
+    f.size.height = _memo.contentSize.height > 90.0f ? _memo.contentSize.height : 90.0f;
+    _memo.frame = f;
+}
+
 
 - (void)inputResult:(UIButton*)button{
     if(resultPicker == nil){
@@ -401,6 +453,16 @@
     }
 }
 
+- (IBAction)commentButton:(id)sender {
+    // 投手成績へボタンの配置を調整
+    [self setFrameOriginY:_memo originY:_memo.frame.origin.y+120];
+    [self setFrameOriginY:toPitchingButton originY:toPitchingButton.frame.origin.y+120];
+    
+    // ScrollViewの長さを調整
+    CGSize size = CGSizeMake(320, scrollView.frame.size.height+120);
+    scrollView.contentSize = size;
+}
+
 - (IBAction)toPitchingButton:(id)sender {
     // 入力中状態を解除
     [self endTextEdit];
@@ -496,11 +558,12 @@
     if(_year.text.length == 0 || _month.text.length == 0 || _day.text.length == 0){
         blankFlg = YES;
     } else {
-        NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 09:00",
+        NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00",
                              _year.text, _month.text, _day.text];
         
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
         
         NSDate *date = [formatter dateFromString:dateStr];
         
@@ -579,6 +642,9 @@
     gameResult.daten = [_daten.text intValue];
     gameResult.tokuten = [_tokuten.text intValue];
     gameResult.steal = [_steal.text intValue];
+    
+    // 末尾の空白・改行はカット
+    gameResult.memo = [[self escapeString:_memo.text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {
@@ -620,6 +686,8 @@
     [self setSteal:nil];
     [self setSaveButton:nil];
     [self setToPitchingButton:nil];
+    [self setMemoLabel:nil];
+    [self setMemo:nil];
     [super viewDidUnload];
 }
 

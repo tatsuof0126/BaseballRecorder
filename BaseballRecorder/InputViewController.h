@@ -28,12 +28,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *stealLabel;
 @property (weak, nonatomic) IBOutlet UITextField *steal;
 
+@property (strong, nonatomic) IBOutlet UILabel *memoLabel;
+@property (strong, nonatomic) IBOutlet UITextView *memo;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 
 @property (strong, nonatomic) GameResult *gameResult;
-// @property (strong, nonatomic) GameResult *gameResultForPitching;
 
 @property (strong, nonatomic) NSMutableArray *battingResultViewArray;
 

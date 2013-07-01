@@ -34,6 +34,8 @@
 
 - (NSString*)getResultLongString;
 
+- (UIColor*)getResultColor;
+
 - (int)getStatisticsCounts:(int)type;
 
 @end

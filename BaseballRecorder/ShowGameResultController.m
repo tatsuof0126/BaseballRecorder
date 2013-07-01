@@ -65,13 +65,16 @@
     }
     
     for(int i=0;i<gameResult.battingResultArray.count;i++){
+        BattingResult* battingResult = [gameResult.battingResultArray objectAtIndex:i];
+        
         UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,225+i*30,90,30)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         titlelabel.tag = 1;
         
         UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+i*30,200,30)];
-        resultlabel.text = [[gameResult.battingResultArray objectAtIndex:i] getResultLongString];
+        resultlabel.text = [battingResult getResultLongString];
         resultlabel.tag = 1;
+        resultlabel.textColor = [battingResult getResultColor];
         
         [_scrollview addSubview:titlelabel];
         [_scrollview addSubview:resultlabel];

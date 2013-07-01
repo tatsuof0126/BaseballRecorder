@@ -23,6 +23,10 @@ static NSArray* battingStatisticsArray;
         NSNumber* byes = [NSNumber numberWithBool:YES];
         NSNumber* bno  = [NSNumber numberWithBool:NO];
         
+        UIColor* black = [UIColor blackColor];
+        UIColor* blue = [UIColor blueColor];
+        UIColor* red = [UIColor redColor];
+        
         battingResultTypeArray = [NSArray arrayWithObjects:
             [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",
                 @"サード",@"ショート",@"レフト",@"センター",@"ライト",@"左中間",@"右中間",nil],
@@ -33,7 +37,10 @@ static NSArray* battingStatisticsArray;
             [NSArray arrayWithObjects:@"",@"投",@"捕",@"一",@"二",
                 @"三",@"遊",@"左",@"中",@"右",@"左中",@"右中",nil],
             [NSArray arrayWithObjects:@"",@"ゴ",@"飛",@"直",@"失",@"安",
-                @"二",@"三",@"本",@"犠",@"三振",@"四球",@"死球",nil],nil];
+                @"二",@"三",@"本",@"犠",@"三振",@"四球",@"死球",nil],
+            [NSArray arrayWithObjects:
+                black,black,black,black,black,red,red,red,red,blue,black,blue,blue,nil],
+            nil];
         
     }
     
@@ -113,6 +120,11 @@ static NSArray* battingStatisticsArray;
     NSString *resultStr = [resultArray objectAtIndex:result];
     
     return [positionStr stringByAppendingString:resultStr];
+}
+
+- (UIColor*)getResultColor {
+    NSArray *typeArray = [BattingResult getBattingResultTypeArray];
+    return [[typeArray objectAtIndex:5] objectAtIndex:result];
 }
 
 - (int)getStatisticsCounts:(int)type {

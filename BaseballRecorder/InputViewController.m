@@ -234,6 +234,7 @@
         
         UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,265+i*40,160,21)];
         resultlabel.text = [battingResult getResultString];
+        resultlabel.textColor = [battingResult getResultColor];
         
         UIButton *changebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         changebutton.frame = CGRectMake(210,260+i*40,55,30);
@@ -558,15 +559,8 @@
     if(_year.text.length == 0 || _month.text.length == 0 || _day.text.length == 0){
         blankFlg = YES;
     } else {
-        NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00",
-                             _year.text, _month.text, _day.text];
-        
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
-        
-        NSDate *date = [formatter dateFromString:dateStr];
-        
+        // 日付チェック
+        NSDate* date = [self getDate:_year.text month:_month.text day:_day.text];
         if(date == NULL){
             [errorArray addObject:@"日付が正しくありません。"];
         }
@@ -617,15 +611,10 @@
 
 - (void)updateGameResult {
     // 日付は一度カレンダーに変換してから取得する。
-    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 09:00",
-                         _year.text, _month.text, _day.text];
+    NSDate* date = [self getDate:_year.text month:_month.text day:_day.text];
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"]; // YYYYだとiOS6で1年ずれる
-    NSDate *date = [formatter dateFromString:dateStr];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
     // 日時をカレンダーで年月日に分解する
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComps
         = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     
@@ -669,6 +658,23 @@
     
     edited = YES;
 }
+
+-(NSDate*)getDate:(NSString*)year month:(NSString*)month day:(NSString*)day {
+    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00", year, month, day];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [formatter setLocale:[NSLocale systemLocale]];
+    [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [formatter setCalendar:calendar];
+    
+    NSDate *date = [formatter dateFromString:dateStr];
+    
+    return date;
+}
+
 
 - (void)viewDidUnload {
     [self setGameResult:nil];

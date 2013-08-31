@@ -10,6 +10,8 @@
 #import "GameResult.h"
 #import "InAppPurchaseManager.h"
 
+#define AD_VIEW 1 // 1=表示,0=非表示
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

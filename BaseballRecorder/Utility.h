@@ -14,4 +14,9 @@
 
 + (void)showAlert:(NSString*)title message:(NSString*)message;
 
+//+ (NSString*)getFloatStr:(float)floatvalue;
++ (NSString*)getFloatStr:(float)floatvalue appendBlank:(BOOL)appendBlank;
+
++ (NSString*)getFloatStr2:(float)floatvalue;
+
 @end

@@ -22,7 +22,9 @@
         messageStr = @"AppStoreを起動します";
     } else if([[url absoluteString] hasPrefix:@"http://"] == YES ||
               [[url absoluteString] hasPrefix:@"https://"] == YES ){
-        messageStr = @"Safariを起動します";
+//        messageStr = @"Safariを起動します";
+        [super openURL:_url];
+        return YES;
     } else {
         messageStr = @"アプリを起動します";
     }

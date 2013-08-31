@@ -11,6 +11,7 @@
 #import "GameResultManager.h"
 #import "GameResult.h"
 #import "BattingResult.h"
+#import "BattingStatistics.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 
@@ -19,6 +20,9 @@
 @end
 
 @implementation ShowGameResultController
+
+@synthesize nadView;
+@synthesize tweeted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +38,44 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // ←→ボタンを動作させるための初期設定
+    _arrowleft.userInteractionEnabled = YES;
+    _arrowright.userInteractionEnabled = YES;
+    [_arrowleft addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(arrowButton:)]];
+    [_arrowright addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(arrowButton:)]];
+    
+    // ScrollViewの高さを定義＆iPhone5対応
+    _scrollview.frame = CGRectMake(0, 44, 320, 416);
+    [AppDelegate adjustForiPhone5:_scrollview];
+    
+    
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        // NADViewの作成（表示はこの時点ではしない）
+        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 410, 320, 50)];
+        [AppDelegate adjustOriginForiPhone5:nadView];
+    
+        [nadView setIsOutputLog:NO];
+        [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
+        // [nadView setNendID:@"a6eca9dd074372c898dd1df549301f277c53f2b9" spotID:@"3172"]; // テスト用
+        [nadView setDelegate:self];
+        
+        // NADViewの中身（広告）を読み込み
+        [nadView load];
+    }
+    
     [self showGameResult];    
+}
+
+-(void)nadViewDidFinishLoad:(NADView *)adView {
+    // NADViewの中身（広告）の読み込みに成功した場合
+    // ScrollViewの高さを調整＆iPhone5対応
+    _scrollview.frame = CGRectMake(0, 44, 320, 366);
+    [AppDelegate adjustForiPhone5:_scrollview];
+    
+    // NADViewを表示
+    [self.view addSubview:nadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +113,7 @@
         titlelabel.tag = 1;
         
         UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+i*30,200,30)];
-        resultlabel.text = [battingResult getResultLongString];
+        resultlabel.text = [battingResult getResultSemiLongString];
         resultlabel.tag = 1;
         resultlabel.textColor = [battingResult getResultColor];
         
@@ -125,9 +166,8 @@
     _jisekiten.hidden = !pitchingResultFlg;
 
     if(pitchingResultFlg == YES){
-        _inning.text = [NSString stringWithFormat:@"%@%@",[GameResult getInningString:gameResult.inning inning2:gameResult.inning2],gameResult.kanto ? @" (完投)" : @""];
-        _sekinin.text = [NSString stringWithFormat:@"%@",
-                     [[GameResult getSekininPickerArray] objectAtIndex:gameResult.sekinin]];
+        _inning.text = [NSString stringWithFormat:@"%@%@",[gameResult getInningString],gameResult.kanto ? @" (完投)" : @""];
+        _sekinin.text = [NSString stringWithFormat:@"%@",[gameResult getSekininString]];
         _hianda.text = [NSString stringWithFormat:@"%d",gameResult.hianda];
         _hihomerun.text = [NSString stringWithFormat:@"%d",gameResult.hihomerun];
         _dassanshin.text = [NSString stringWithFormat:@"%d",gameResult.dassanshin];
@@ -193,7 +233,8 @@
     [self setFrameOriginY:_memoLabel originY:battingAdjust+pitchingAdjust+40];
     [self setFrameOriginY:_memo originY:battingAdjust+pitchingAdjust+70];
     
-    [self setFrameOriginY:_mailButton originY:battingAdjust+pitchingAdjust+memoAdjust+45];
+    [self setFrameOriginY:_tweetButton originY:battingAdjust+pitchingAdjust+memoAdjust+50];
+    [self setFrameOriginY:_mailButton originY:battingAdjust+pitchingAdjust+memoAdjust+115];
     _scrollview.contentSize = CGSizeMake(320, battingAdjust+pitchingAdjust+memoAdjust+310);
 }
 
@@ -206,6 +247,148 @@
 }
 
 - (IBAction)editButton:(id)sender {
+}
+
+- (void)arrowButton:(UITapGestureRecognizer*)sender{
+    NSArray* gameResultList = [GameResultManager loadGameResultList];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
+
+    int nowIndex = -999;
+    int newIndex = -999;
+    
+    for (int i=0;i<gameResultList.count;i++){
+        GameResult* tmpResult = [gameResultList objectAtIndex:i];
+        if(gameResult.resultid == tmpResult.resultid){
+            nowIndex = i;
+            break;
+        }
+    }
+    
+    if(sender.view == _arrowright){
+        if(nowIndex+1 < gameResultList.count){
+            newIndex = nowIndex+1;
+        }
+    } else if(sender.view == _arrowleft){
+        if(nowIndex > 0){
+            newIndex = nowIndex-1;
+        }
+    }
+    
+    if (newIndex != -999) {
+        appDelegate.targetGameResult = [gameResultList objectAtIndex:newIndex];
+        [self showGameResult];
+    }
+}
+
+- (IBAction)tweetButton:(id)sender {
+    NSString* tweetString = [self makeTweetString];
+
+    tweeted = NO;
+    
+    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
+    [controller setInitialText:tweetString];
+    
+    TWTweetComposeViewControllerCompletionHandler completionHandler
+                             = ^(TWTweetComposeViewControllerResult result) {
+        switch (result) {
+            case TWTweetComposeViewControllerResultDone:
+                tweeted = YES;
+                break;
+            case TWTweetComposeViewControllerResultCancelled:
+                break;
+            default:
+                break;
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            if(tweeted == YES){
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    };
+    
+    [controller setCompletionHandler:completionHandler];
+    [self presentModalViewController:controller animated:YES];
+}
+
+- (NSString*)makeTweetString {
+    // 試合結果の文言を作る
+    NSMutableString* tweetString = [NSMutableString string];
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
+    
+    // 今日の試合だったら日付ではなく「今日の試合」と表示する
+    NSString* dateString = @"";
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *date = [NSDate date];
+    NSDateComponents *dateComps
+    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    
+    if (gameResult.year == dateComps.year && gameResult.month == dateComps.month
+        && gameResult.day == dateComps.day) {
+        //        dateString = [NSString stringWithFormat:@"今日(%d/%d)",gameResult.month, gameResult.day];
+        dateString = @"今日";
+    } else {
+        dateString = [NSString stringWithFormat:@"%d月%d日",gameResult.month, gameResult.day];
+    }
+    
+    NSString* resultString = @"";
+    if (gameResult.myscore > gameResult.otherscore) {
+        resultString = @"勝ちました。";
+    } else if (gameResult.myscore == gameResult.otherscore) {
+        resultString = @"引き分けでした。";
+    } else {
+        resultString = @"負けました。";
+    }
+    
+    [tweetString appendFormat:@"%@の試合は %@ %d-%d %@ で%@",dateString, gameResult.myteam, gameResult.myscore,gameResult.otherscore, gameResult.otherteam,resultString];
+    
+    BOOL hasBatting = (gameResult.battingResultArray.count > 0);
+    BOOL hasPitching = (gameResult.inning != 0 || gameResult.inning2 != 0);
+    
+    // 打撃成績の文言をつける
+    if(hasBatting){
+        NSArray* array = [NSArray arrayWithObjects:gameResult, nil];
+        BattingStatistics* stats = [BattingStatistics calculateBattingStatistics:array];
+        
+        NSMutableString* battingString = [NSMutableString string];
+        for (BattingResult* battingResult in gameResult.battingResultArray){
+            [battingString appendString:[battingResult getResultShortString]];
+            [battingString appendString:@"、"];
+        }
+        [battingString deleteCharactersInRange:NSMakeRange([battingString length]-1, 1)];
+        
+        [tweetString appendFormat:@"打撃成績は %d打数%d安打%d打点%d盗塁（%@）",
+         stats.atbats, stats.hits, gameResult.daten, gameResult.steal, battingString];
+    }
+    
+    // 投手成績の文言をつける
+    if(hasPitching){
+        if(hasBatting){
+            [tweetString appendString:@"、"];
+        }
+        
+        [tweetString appendFormat:@"投手成績は %@ %d失点 自責点%d %@",
+         [gameResult getInningString], gameResult.shitten, gameResult.jisekiten, [gameResult getSekininString]];
+        
+        if(gameResult.sekinin != 0){
+            // 勝ち負けセーブホールドの場合はスペースを一つつける
+            [tweetString appendString:@" "];
+        }
+    }
+    
+    if(hasBatting || hasPitching){
+        [tweetString appendString:@"でした。"];
+    }
+    
+    [tweetString appendString:@" #ベボレコ"];
+    
+    return tweetString;
 }
 
 - (IBAction)mailButton:(id)sender {
@@ -290,13 +473,27 @@
     [self setBattingResultLabel:nil];
     [self setMemoLabel:nil];
     [self setMemo:nil];
+    [self setArrowleft:nil];
+    [self setArrowright:nil];
+    [self setTweetButton:nil];
     [super viewDidUnload];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [nadView resume];
+    
     [self showGameResult];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [nadView pause];
+}
+
+- (void) dealloc {
+    [nadView setDelegate:nil];
+    nadView = nil;
 }
 
 @end

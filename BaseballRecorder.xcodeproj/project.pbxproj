@@ -26,6 +26,8 @@
 		0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */; };
 		0B40E44416CAB45100E0E95D /* baseball.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44216CAB45100E0E95D /* baseball.png */; };
 		0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44316CAB45100E0E95D /* baseball@2x.png */; };
+		0B53464E17BF561A00601AAE /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B53464D17BF561A00601AAE /* arrow_right.png */; };
+		0B53465417BF676900601AAE /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B53465317BF676900601AAE /* arrow_left.png */; };
 		0B5DD63116500FCE00C544D9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63016500FCE00C544D9 /* Icon@2x.png */; };
 		0B5DD63316500FDE00C544D9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5DD63216500FDE00C544D9 /* Icon.png */; };
 		0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EEE81163AE4C20038980D /* GameResultManager.m */; };
@@ -60,6 +62,11 @@
 		0B949A011632A1E3007F574D /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A001632A1E3007F574D /* InputViewController.m */; };
 		0B949A0416335C33007F574D /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0316335C33007F574D /* GameResult.m */; };
 		0B949A0716335C8B007F574D /* BattingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0616335C8B007F574D /* BattingResult.m */; };
+		0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC4265417C663A500AB95D0 /* Twitter.framework */; };
+		0BC5F7F517C26D0B00C755A7 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F217C26D0B00C755A7 /* libNendAd.a */; };
+		0BC5F7F617C26D0B00C755A7 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */; };
+		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
 		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
@@ -104,6 +111,8 @@
 		0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatisticsController.m; sourceTree = "<group>"; };
 		0B40E44216CAB45100E0E95D /* baseball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baseball.png; path = BaseballRecorder/images/baseball.png; sourceTree = SOURCE_ROOT; };
 		0B40E44316CAB45100E0E95D /* baseball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "baseball@2x.png"; path = "BaseballRecorder/images/baseball@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B53464D17BF561A00601AAE /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_right.png; path = BaseballRecorder/images/arrow_right.png; sourceTree = SOURCE_ROOT; };
+		0B53465317BF676900601AAE /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_left.png; path = BaseballRecorder/images/arrow_left.png; sourceTree = SOURCE_ROOT; };
 		0B5DD63016500FCE00C544D9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		0B5DD63216500FDE00C544D9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0B5EEE80163AE4C20038980D /* GameResultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultManager.h; sourceTree = "<group>"; };
@@ -154,6 +163,12 @@
 		0B949A0316335C33007F574D /* GameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResult.m; sourceTree = "<group>"; };
 		0B949A0516335C8A007F574D /* BattingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingResult.h; sourceTree = "<group>"; };
 		0B949A0616335C8B007F574D /* BattingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingResult.m; sourceTree = "<group>"; };
+		0BC4265417C663A500AB95D0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		0BC5F7F217C26D0B00C755A7 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		0BC5F7F317C26D0B00C755A7 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
+		0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0BC5F7F917C26D5400C755A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
 		0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseAddonController.m; sourceTree = "<group>"; };
 		0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -169,6 +184,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
+				0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */,
+				0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1E616B0334300B66509 /* iAd.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
@@ -177,6 +195,7 @@
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
+				0BC5F7F517C26D0B00C755A7 /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +215,8 @@
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0B53465317BF676900601AAE /* arrow_left.png */,
+				0B53464D17BF561A00601AAE /* arrow_right.png */,
 				0B40E44216CAB45100E0E95D /* baseball.png */,
 				0B40E44316CAB45100E0E95D /* baseball@2x.png */,
 				0B40E43516C3F0DD00E0E95D /* disable_check.png */,
@@ -217,12 +238,13 @@
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
-				0B5DD63216500FDE00C544D9 /* Icon.png */,
-				0B5DD63016500FCE00C544D9 /* Icon@2x.png */,
 				0B9499B316325697007F574D /* BaseballRecorder */,
 				0B9499E216325697007F574D /* BaseballRecorderTests */,
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
+				0BC5F7F117C26D0B00C755A7 /* NendAd */,
+				0B5DD63016500FCE00C544D9 /* Icon@2x.png */,
+				0B5DD63216500FDE00C544D9 /* Icon.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,7 +260,10 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BC4265417C663A500AB95D0 /* Twitter.framework */,
+				0BC5F7F917C26D5400C755A7 /* Security.framework */,
 				0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */,
+				0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */,
 				0B6BB1E516B0334200B66509 /* iAd.framework */,
 				0B6BB1D616AEF09200B66509 /* AddressBook.framework */,
 				0B6BB1D216AEE6E100B66509 /* AddressBookUI.framework */,
@@ -295,10 +320,10 @@
 				0B683702164279C50086E198 /* TeamStatistics.m */,
 				0B683704164279E00086E198 /* BattingStatistics.h */,
 				0B683705164279E00086E198 /* BattingStatistics.m */,
-				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
-				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
 				0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */,
 				0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */,
+				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
+				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
 				0BE4C49F16FF0D0000DAD11F /* InAppPurchaseProtocol.h */,
 				0BE4C4A016FF0D2E00DAD11F /* InAppPurchaseManager.h */,
 				0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */,
@@ -339,6 +364,16 @@
 				0B9499E516325697007F574D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0BC5F7F117C26D0B00C755A7 /* NendAd */ = {
+			isa = PBXGroup;
+			children = (
+				0BC5F7F217C26D0B00C755A7 /* libNendAd.a */,
+				0BC5F7F317C26D0B00C755A7 /* NADView.h */,
+				0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */,
+			);
+			path = NendAd;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +469,9 @@
 				0B40E43A16C3F0DD00E0E95D /* check.png in Resources */,
 				0B40E44416CAB45100E0E95D /* baseball.png in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
+				0B53464E17BF561A00601AAE /* arrow_right.png in Resources */,
+				0B53465417BF676900601AAE /* arrow_left.png in Resources */,
+				0BC5F7F617C26D0B00C755A7 /* NADView_readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,9 +639,13 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/NendAd\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DEC599EF-5E66-4026-9F07-7C36CC841C86";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DEC599EF-5E66-4026-9F07-7C36CC841C86";
+				PROVISIONING_PROFILE = "8B8F828E-A9B3-4253-8580-45620FFC76FA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B8F828E-A9B3-4253-8580-45620FFC76FA";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -618,6 +660,10 @@
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/NendAd\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2111860D-9F42-4C75-8B70-8422A1026FBB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2111860D-9F42-4C75-8B70-8422A1026FBB";

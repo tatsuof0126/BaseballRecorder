@@ -34,8 +34,6 @@
 
 - (NSString*)getInningString;
 
-+ (NSString*)getFloatStr:(float)floatvalue;
-
 - (NSString*)getMailBody;
 
 @end

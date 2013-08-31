@@ -233,7 +233,7 @@
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         
         UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,265+i*40,160,21)];
-        resultlabel.text = [battingResult getResultString];
+        resultlabel.text = [battingResult getResultShortString];
         resultlabel.textColor = [battingResult getResultColor];
         
         UIButton *changebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -384,12 +384,20 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [[[BattingResult getBattingResultTypeArray] objectAtIndex:component] count];
+    if (component == 0){
+        return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] count];
+    } else {
+        return [[BattingResult getBattingResultStringArray:R_STR_PICKER] count];
+    }
 }
 
 -(NSString*)pickerView:(UIPickerView*)pickerView
-           titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return [[[BattingResult getBattingResultTypeArray] objectAtIndex:component] objectAtIndex:row];
+           titleForRow:(NSInteger)row forComponent:(NSInteger)component{    
+    if (component == 0){
+        return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] objectAtIndex:row];
+    } else {
+        return [[BattingResult getBattingResultStringArray:R_STR_PICKER] objectAtIndex:row];
+    }
 }
 
 

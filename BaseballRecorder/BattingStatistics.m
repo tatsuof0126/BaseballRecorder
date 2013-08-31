@@ -9,6 +9,7 @@
 #import "BattingStatistics.h"
 #import "GameResult.h"
 #import "BattingResult.h"
+#import "Utility.h"
 
 @implementation BattingStatistics
 
@@ -87,26 +88,13 @@
     [bodyString appendString:[NSString stringWithFormat:@"二塁打：%d　三塁打：%d　本塁打：%d\n",doubles, triples, homeruns]];
     [bodyString appendString:[NSString stringWithFormat:@"三振：%d　四死球：%d　犠打：%d\n",strikeouts, walks, sacrifices]];
     [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　盗塁：%d\n",daten, tokuten, steal]];
-    [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　OPS：%@\n",
-                              [BattingStatistics getFloatStr:average],
-                              [BattingStatistics getFloatStr:obp],
-                              [BattingStatistics getFloatStr:ops]]];
+    [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　OPS：%@　長打率：%@\n",
+                              [Utility getFloatStr:average appendBlank:NO],
+                              [Utility getFloatStr:obp appendBlank:NO],
+                              [Utility getFloatStr:ops appendBlank:NO],
+                              [Utility getFloatStr:slg appendBlank:NO]]];
     
     return bodyString;
-}
-
-+ (NSString*)getFloatStr:(float)floatvalue {
-    if(isnan(floatvalue) == YES){
-        return @".---";
-    }
-    
-    NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
-    
-    if(floatvalue < 1.0){
-        floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
-    }
-    
-    return floatStr;
 }
 
 @end

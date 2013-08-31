@@ -20,4 +20,28 @@
     [alert show];
 }
 
++ (NSString*)getFloatStr:(float)floatvalue appendBlank:(BOOL)appendBlank {
+    if(isnan(floatvalue) == YES){
+        return @".--- ";
+    }
+    
+    NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
+    
+    if(floatvalue < 1.0){
+        floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
+    }
+    
+    return floatStr;
+}
+
++ (NSString*)getFloatStr2:(float)floatvalue {
+    if(isnan(floatvalue) == YES || isinf(floatvalue)){
+        return @"-.--";
+    }
+    
+    NSString* floatStr = [NSString stringWithFormat:@"%0.02f",floatvalue];
+    
+    return floatStr;
+}
+
 @end

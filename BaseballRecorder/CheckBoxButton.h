@@ -14,4 +14,6 @@
 
 - (void)setState;
 
+- (void)checkboxPush:(CheckBoxButton*)button;
+
 @end

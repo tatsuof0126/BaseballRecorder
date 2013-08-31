@@ -22,6 +22,10 @@
 
 + (void)setDefaultSendTo:(NSString*)sendto;
 
++ (BOOL)isCalcInning7Flg;
+
++ (void)setCalcInning7Flg:(BOOL)calcInning7Flg;
+
 + (NSString*)getCalcTargetTeam;
 
 + (void)setCalcTargetTeam:(NSString*)targetTeam;

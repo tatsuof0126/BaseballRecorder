@@ -44,6 +44,17 @@
     [defaults synchronize];
 }
 
++ (BOOL)isCalcInning7Flg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"CALCINNING7"];
+}
+
++ (void)setCalcInning7Flg:(BOOL)calcInning7Flg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:calcInning7Flg forKey:@"CALCINNING7"];
+    [defaults synchronize];
+}
+
 + (NSString*)getCalcTargetTeam {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"TARGETTEAM"];

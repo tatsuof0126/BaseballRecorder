@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "StatisticsCommonController.h"
+#import "TeamStatistics.h"
+#import "BattingStatistics.h"
 
 #define ALL_TARGET 0
 
@@ -21,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingstat;
+@property (weak, nonatomic) IBOutlet UILabel *battingstat2;
 
 @property (weak, nonatomic) IBOutlet UILabel *doubles;
 @property (weak, nonatomic) IBOutlet UILabel *triples;
@@ -35,7 +39,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *team;
 @property (weak, nonatomic) IBOutlet UILabel *year;
 
+@property (strong, nonatomic) TeamStatistics* teamStatistics;
+@property (strong, nonatomic) BattingStatistics* battingStatistics;
+
+@property BOOL tweeted;
+
 - (IBAction)changeButton:(id)sender;
+- (IBAction)tweetButton:(id)sender;
 - (IBAction)mailButton:(id)sender;
 
 @end

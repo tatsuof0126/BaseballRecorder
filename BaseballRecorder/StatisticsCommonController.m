@@ -10,6 +10,7 @@
 #import "ConfigManager.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
+#import "AppDelegate.h"
 
 @interface StatisticsCommonController ()
 
@@ -38,7 +39,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+    // 子クラスでオーバーライドする前提
+}
+
+
+-(void)nadViewDidFinishLoad:(NADView *)adView {
+    // 子クラスでオーバーライドする前提
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,8 +70,10 @@
     gameResultListOfYear = [NSMutableArray array];
     
     [yearList addObject:@"すべて"];
+    [yearList addObject:@"最近5試合"];
     [teamList addObject:@"すべて"];
     [gameResultListOfYear addObject:gameResultList];
+    [gameResultListOfYear addObject:gameResultList]; // とりあえず全件を登録
     
     int listyear = -999;
     NSMutableArray* resultArray = [NSMutableArray array];
@@ -78,7 +88,7 @@
             [gameResultListOfYear addObject:resultArray];
         }
         
-        [resultArray addObject:result];
+        [resultArray addObject:result];        
     }
     
     for (int i=0; i<gameResultList.count; i++) {
@@ -89,7 +99,7 @@
         if ([teamList containsObject:team] == NO){
             [teamList addObject:team];
         }
-    }
+    }    
 }
 
 - (void)setCalcTarget {
@@ -145,7 +155,17 @@
         }
     }
     
+    // 「最近５試合」の場合は直近の５件に絞る
+    if (targetyear == RECENT5_TARGET) {
+        [self adjustGameResultListForRecent5:gameResultListForCalc];
+    }
+    
     return gameResultListForCalc;
+}
+
+- (void)adjustGameResultListForRecent5:(NSMutableArray*)gameResultListForCalc {
+    // 子クラスでオーバーライドする前提
+    
 }
 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
@@ -257,7 +277,13 @@
     
     today = [NSString stringWithFormat:@"（%d年%d月%d日現在）",dateComps.year,dateComps.month,dateComps.day];
     
-    if(targetyear != 0){
+    if(targetyear == 0){
+        // targetyearが0（すべて）なら通算成績
+        tsusan = @"通算";
+    } else if(targetyear == 1){
+        // targetyearが1（最近５試合）なら最近５試合の成績
+        tsusan = @"最近5試合の";
+    } else {
         year = [yearList objectAtIndex:targetyear];
         
         // 今日の年を取得する
@@ -266,9 +292,6 @@
             // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
             today = @"";
         }
-    } else {
-        // targetyearが0（すべて）なら通算成績
-        tsusan = @"通算";
     }
     
     if(targetteam != 0){
@@ -285,7 +308,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [self updateStatistics];
 }
 

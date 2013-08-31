@@ -32,8 +32,6 @@
 
 + (BattingStatistics*)calculateBattingStatistics:(NSArray*)gameResultList;
 
-+ (NSString*)getFloatStr:(float)floatvalue;
-
 - (NSString*)getMailBody;
 
 @end

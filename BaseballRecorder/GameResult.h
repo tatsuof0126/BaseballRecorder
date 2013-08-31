@@ -62,6 +62,10 @@
 
 - (NSData*)getGameResultNSData;
 
+- (NSString*)getInningString;
+
+- (NSString*)getSekininString;
+
 + (GameResult*)makeGameResult:(NSData*)data;
 
 - (NSComparisonResult)compareDate:(GameResult*)data;

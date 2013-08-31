@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
+#import "NADView.h"
 
-@interface GameResultListController : UIViewController <ADBannerViewDelegate>
+@interface GameResultListController : UIViewController <NADViewDelegate>
+
+@property (nonatomic, retain) NADView* nadView;
 
 @property (weak, nonatomic) IBOutlet UITableView *gameResultListTableView;
 
@@ -18,8 +21,5 @@
 @property (strong, nonatomic) NSMutableArray *gameResultYearList;
 
 @property (strong, nonatomic) NSMutableArray *gameResultListOfYear;
-
-@property (weak, nonatomic) IBOutlet ADBannerView *adView;
-@property BOOL bannerIsVisible;
 
 @end

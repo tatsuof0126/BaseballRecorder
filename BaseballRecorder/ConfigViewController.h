@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "CheckBoxButton.h"
 
 @interface ConfigViewController : UIViewController <ABPeoplePickerNavigationControllerDelegate>
 
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *place;
 @property (weak, nonatomic) IBOutlet UITextField *myteam;
 @property (weak, nonatomic) IBOutlet UITextField *sendto;
+@property (strong, nonatomic) IBOutlet CheckBoxButton *calcInning7;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

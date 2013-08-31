@@ -9,10 +9,9 @@
 #import "BattingStatisticsViewController.h"
 #import "GameResultManager.h"
 #import "GameResult.h"
-#import "TeamStatistics.h"
-#import "BattingStatistics.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
+#import "Utility.h"
 
 @interface BattingStatisticsViewController ()
 
@@ -21,11 +20,11 @@
 @implementation BattingStatisticsViewController
 
 @synthesize scrollView;
-//@synthesize yearList;
-//@synthesize teamList;
-//@synthesize targetyear;
-//@synthesize targetteam;
- 
+@synthesize nadView;
+@synthesize teamStatistics;
+@synthesize battingStatistics;
+@synthesize tweeted;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,10 +38,33 @@
 {
     [super viewDidLoad];
     
+    // ScrollViewの高さを定義＆iPhone5対応
+    scrollView.contentSize = CGSizeMake(320, 520);
+    scrollView.frame = CGRectMake(0, 44, 320, 416);
     [AppDelegate adjustForiPhone5:scrollView];
-    scrollView.contentSize = CGSizeMake(320, 455);
     
-	// Do any additional setup after loading the view.
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        // NADViewの作成（表示はこの時点ではしない）
+        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 361, 320, 50)];
+        [AppDelegate adjustOriginForiPhone5:nadView];
+        
+        [nadView setIsOutputLog:NO];
+        [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
+        [nadView setDelegate:self];
+        
+        // NADViewの中身（広告）を読み込み
+        [nadView load];
+    }
+}
+
+-(void)nadViewDidFinishLoad:(NADView *)adView {
+    // NADViewの中身（広告）の読み込みに成功した場合
+    // ScrollViewの高さを調整＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 44, 320, 316);
+    [AppDelegate adjustForiPhone5:scrollView];
+    
+    // NADViewを表示
+    [self.view addSubview:nadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,12 +76,28 @@
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
     [self showTarget:_year team:_team];
     
-    TeamStatistics* teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
+    teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
     
-    _teamresult.text = [NSString stringWithFormat:@"%d勝 %d敗 %d分",
-                        teamStatistics.win, teamStatistics.lose, teamStatistics.draw];
+    // 「99勝 99敗 99分  勝率 9.999」という文字列を作る
+    NSMutableString* teamresultStr = [NSMutableString string];
+    [teamresultStr appendFormat:@"%d勝 %d敗 %d分  ",
+        teamStatistics.win, teamStatistics.lose,teamStatistics.draw];
     
-    BattingStatistics* battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
+    if( [teamresultStr length] <= 12 ){
+        [teamresultStr appendString:@"勝率 "];
+    }
+    
+    [teamresultStr appendString:[Utility getFloatStr:
+        (float)(teamStatistics.win) / (float)(teamStatistics.win+teamStatistics.lose)
+                                 appendBlank:NO]];
+    
+    if( [teamresultStr length] <= 19 ){
+        [teamresultStr insertString:@" " atIndex:0];
+    }
+    
+    _teamresult.text = teamresultStr;
+    
+    battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
     
     _battingresult.text = [NSString stringWithFormat:@"%d打席  %d打数  %d安打",
                            battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits];
@@ -75,9 +113,12 @@
     _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
-                         [BattingStatistics getFloatStr:battingStatistics.average],
-                         [BattingStatistics getFloatStr:battingStatistics.obp],
-                         [BattingStatistics getFloatStr:battingStatistics.ops]];
+                         [Utility getFloatStr:battingStatistics.average appendBlank:YES],
+                         [Utility getFloatStr:battingStatistics.obp appendBlank:YES],
+                         [Utility getFloatStr:battingStatistics.ops appendBlank:YES]];
+
+    _battingstat2.text = [NSString stringWithFormat:@"長打率 %@",
+                          [Utility getFloatStr:battingStatistics.slg appendBlank:YES]];
 }
 
 - (void)viewDidUnload {
@@ -96,11 +137,108 @@
     [self setTokuten:nil];
     [self setSteal:nil];
     [self setScrollView:nil];
+    [self setBattingstat2:nil];
     [super viewDidUnload];
 }
 
 - (IBAction)changeButton:(id)sender {
     [self makeResultPicker];
+}
+
+- (IBAction)tweetButton:(id)sender {
+    NSString* tweetString = [self makeTweetString];
+    
+    tweeted = NO;
+    
+    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
+    [controller setInitialText:tweetString];
+    
+    TWTweetComposeViewControllerCompletionHandler completionHandler
+    = ^(TWTweetComposeViewControllerResult result) {
+        switch (result) {
+            case TWTweetComposeViewControllerResultDone:
+                tweeted = YES;
+                break;
+            case TWTweetComposeViewControllerResultCancelled:
+                break;
+            default:
+                break;
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            if(tweeted == YES){
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    };
+    
+    [controller setCompletionHandler:completionHandler];
+    [self presentModalViewController:controller animated:YES];
+}
+
+- (NSString*)makeTweetString {
+    // 試合結果の文言を作る
+    NSMutableString* tweetString = [NSMutableString string];
+    
+    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
+    NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
+    
+    NSString* tsusanStr = @"";
+    if([targetYearStr isEqualToString:@"すべて"] != YES){
+        [tweetString appendString:targetYearStr];
+        [tweetString appendString:@"の"];
+    } else {
+        tsusanStr = @"通算";
+    }
+    
+    if([targetTeamStr isEqualToString:@"すべて"] != YES){
+        [tweetString appendString:targetTeamStr];
+        [tweetString appendString:@"での"];
+    }
+    
+    [tweetString appendFormat:@"%@打撃成績は、",tsusanStr];
+    
+    [tweetString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
+     ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
+     ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
+     ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
+     ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
+     ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
+    
+    if(battingStatistics.doubles != 0){
+        [tweetString appendFormat:@"二塁打%d ", battingStatistics.doubles];
+    }
+    if(battingStatistics.triples != 0){
+        [tweetString appendFormat:@"三塁打%d ", battingStatistics.triples];
+    }
+    if(battingStatistics.homeruns != 0){
+        [tweetString appendFormat:@"本塁打%d ", battingStatistics.homeruns];
+    }
+    if(battingStatistics.strikeouts != 0){
+        [tweetString appendFormat:@"三振%d ", battingStatistics.strikeouts];
+    }
+    if(battingStatistics.walks != 0){
+        [tweetString appendFormat:@"四死球%d ", battingStatistics.walks];
+    }
+    if(battingStatistics.sacrifices != 0){
+        [tweetString appendFormat:@"犠打%d ", battingStatistics.sacrifices];
+    }
+    if(battingStatistics.daten != 0){
+        [tweetString appendFormat:@"打点%d ", battingStatistics.daten];
+    }
+    if(battingStatistics.tokuten != 0){
+        [tweetString appendFormat:@"得点%d ", battingStatistics.tokuten];
+    }
+    if(battingStatistics.steal != 0){
+        [tweetString appendFormat:@"盗塁%d ", battingStatistics.steal];
+    }
+    
+    [tweetString appendString:@"です。 #ベボレコ"];
+    
+    return tweetString;
 }
 
 - (IBAction)mailButton:(id)sender {
@@ -117,9 +255,9 @@
     // 本文を作る
     NSMutableString* bodyString = [NSMutableString string];
 
-    NSArray* gameResultListForCalc = [super getGameResultListForCalc];
-    TeamStatistics* teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
-    BattingStatistics* battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
+//    NSArray* gameResultListForCalc = [super getGameResultListForCalc];
+//    TeamStatistics* teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
+//    BattingStatistics* battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
     
     [bodyString appendString:mailTitle];
     [bodyString appendString:@"\n\n"];
@@ -137,42 +275,6 @@
     // メール送信用のモーダルビューを表示
     [self presentViewController:mailPicker animated:YES completion:nil];
 }
-
-/*
-- (NSString*)getMailTitle {
-    NSString* year = @"";
-    NSString* team = @"";
-    NSString* tsusan = @"";
-    NSString* today = @"";
-    
-    // 今日の日付を取得する
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate *date = [NSDate date];
-    NSDateComponents *dateComps
-    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
-    
-    today = [NSString stringWithFormat:@"（%d年%d月%d日現在）",dateComps.year,dateComps.month,dateComps.day];
-    
-    if(super.targetyear != 0){
-        year = [super.yearList objectAtIndex:super.targetyear];
-        
-        // 今日の年を取得する
-        NSString* todayYear = [NSString stringWithFormat:@"%d年",dateComps.year];
-        if([year isEqualToString:todayYear] == NO){
-            // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
-            today = @"";
-        }
-    } else {
-        tsusan = @"通算";
-    }
-    
-    if(super.targetteam != 0){
-        team = [super.teamList objectAtIndex:super.targetteam];
-    }
-    
-    return [NSString stringWithFormat:@"%@%@%@打撃成績%@",year,team,tsusan,today];
-}
- */
  
 // メール送信処理完了時のイベント
 - (void)mailComposeController:(MFMailComposeViewController*)controller
@@ -204,18 +306,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-+ (NSString*)getFloatStr:(float)floatvalue {
-    if(isnan(floatvalue) == YES){
-        return @".---";
+- (void)adjustGameResultListForRecent5:(NSMutableArray*)gameResultListForCalc {
+    // 「最近５試合」の場合は直近の５件に絞る
+    if(gameResultListForCalc.count > 5){
+        [gameResultListForCalc removeObjectsInRange:
+         NSMakeRange(5, gameResultListForCalc.count-5)];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
+    [nadView resume];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
-    if(floatvalue < 1.0){
-        floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
-    }
-    
-    return floatStr;
+    [nadView pause];
+}
+
+- (void)dealloc {
+    [nadView setDelegate:nil];
+    nadView = nil;
 }
 
 @end

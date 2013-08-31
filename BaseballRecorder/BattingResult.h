@@ -19,18 +19,37 @@
 #define S_SACRIFICES 8
 #define S_SACRIFICEFLIES 9
 
+#define P_STR_PICKER 0
+#define P_STR_SHORT  1
+#define P_STR_LONG   2
+
+#define R_STR_PICKER 0
+#define R_STR_SHORT  1
+#define R_STR_SEMILONG 2
+#define R_STR_LONG   3
+
+#define R_TYPE_NEEDP 0
+#define R_TYPE_COLOR 1
+
+
 @interface BattingResult : NSObject
 
 @property int position;
 @property int result;
 
-+ (NSArray*)getBattingResultTypeArray;
++ (NSArray*)getBattingPositionStringArray:(int)type;
+
++ (NSArray*)getBattingResultStringArray:(int)type;
+
++ (NSArray*)getBattingResultTypeArray2:(int)type;
 
 + (NSArray*)getBattingStatisticsCountArray;
 
 + (BattingResult*)makeBattingResult:(int)position result:(int)result;
 
-- (NSString*)getResultString;
+- (NSString*)getResultShortString;
+
+- (NSString*)getResultSemiLongString;
 
 - (NSString*)getResultLongString;
 

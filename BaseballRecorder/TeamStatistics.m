@@ -8,6 +8,7 @@
 
 #import "TeamStatistics.h"
 #import "GameResult.h"
+#import "Utility.h"
 
 @implementation TeamStatistics
 
@@ -33,7 +34,8 @@
 }
 
 - (NSString*)getMailBody {
-    return [NSString stringWithFormat:@"%d勝 %d敗 %d分",win,lose,draw];
+    return [NSString stringWithFormat:@"%d勝 %d敗 %d分  勝率 %@",win,lose,draw,
+            [Utility getFloatStr:(float)win/(float)(win+lose) appendBlank:NO]];
 }
 
 @end

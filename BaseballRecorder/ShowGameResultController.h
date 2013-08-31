@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "NADView.h"
 
 @interface ShowGameResultController : UIViewController
-    <MFMailComposeViewControllerDelegate>
+    <MFMailComposeViewControllerDelegate,NADViewDelegate>
+
+@property (nonatomic, retain) NADView* nadView;
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;
@@ -46,11 +50,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *shitten;
 @property (weak, nonatomic) IBOutlet UILabel *jisekitenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jisekiten;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowleft;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowright;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UITextView *memo;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *tweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
+
+@property BOOL tweeted;
+
+- (IBAction)tweetButton:(id)sender;
 
 - (IBAction)mailButton:(id)sender;
 

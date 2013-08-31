@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NADView.h"
 
 #define ALL_TARGET 0
+#define RECENT5_TARGET 1
 
 #define BATTING_RESULT  1
 #define PITCHING_RESULT 2
 
 @interface StatisticsCommonController : UIViewController
-    <UIPickerViewDelegate, UIPickerViewDataSource>
+    <UIPickerViewDelegate, UIPickerViewDataSource, NADViewDelegate>
+
+@property (nonatomic, retain) NADView* nadView;
 
 @property int targetyear;
 @property int targetteam;

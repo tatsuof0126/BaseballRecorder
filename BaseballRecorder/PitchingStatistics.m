@@ -8,6 +8,8 @@
 
 #import "PitchingStatistics.h"
 #import "GameResult.h"
+#import "ConfigManager.h"
+#import "Utility.h"
 
 @implementation PitchingStatistics
 
@@ -94,14 +96,22 @@
 - (void)calculateStatistics {
     float realinning = (float)(inning*3 + inning2) / 3.0f;
     
-    // 防御率＝自責点／投球回数×９
-    era = (float)jisekiten / realinning * 9.0f;
+    // 設定ファイルから９回で計算するか７回で計算するかを取得
+    float gameinning = 0.0f;
+    if( [ConfigManager isCalcInning7Flg] == YES){
+        gameinning = 7.0f;
+    } else {
+        gameinning = 9.0f;
+    }
 
+    // 防御率＝自責点／投球回数×９or７
+    era = (float)jisekiten / realinning * gameinning;
+    
     // WHIP＝（被安打＋与四球）／投球回数
     whip = (float)(hianda + yoshikyu) / realinning;
 
     // 奪三振率＝奪三振／投球回数×９
-    k9 = (float)dassanshin / realinning * 9.0f;
+    k9 = (float)dassanshin / realinning * gameinning;
 }
 
 - (NSString*)getInningString {
@@ -114,28 +124,20 @@
         return @"0回";
     }
 }
-
-+ (NSString*)getFloatStr:(float)floatvalue {
-    if(isnan(floatvalue) == YES || isinf(floatvalue)){
-        return @"-.--";
-    }
-    
-    NSString* floatStr = [NSString stringWithFormat:@"%0.02f",floatvalue];
-    
-    return floatStr;
-}
-
+ 
 - (NSString*)getMailBody {
     NSMutableString* bodyString = [NSMutableString string];
     
     [bodyString appendString:[NSString stringWithFormat:@"%d試合 %d勝 %d敗 %dセーブ %dホールド\n",games,win,lose,save,hold]];
-    [bodyString appendString:[NSString stringWithFormat:@"投球回：%@　防御率：%@\n",
-                              [self getInningString],[PitchingStatistics getFloatStr:era]]];
+    [bodyString appendString:[NSString stringWithFormat:@"防御率：%@　勝率：%@\n",
+                              [Utility getFloatStr2:era],
+                              [Utility getFloatStr:(float)(win) / (float)(win+lose) appendBlank:NO]]];
+    [bodyString appendString:[NSString stringWithFormat:@"投球回：%@ ",[self getInningString]]];
     [bodyString appendString:[NSString stringWithFormat:@"被安打：%d　被本塁打：%d\n",hianda, hihomerun]];
     [bodyString appendString:[NSString stringWithFormat:@"奪三振：%d　与四球：%d　与死球：%d\n",dassanshin, yoshikyu, yoshikyu2]];
     [bodyString appendString:[NSString stringWithFormat:@"失点：%d　自責点：%d　完投：%d\n",shitten, jisekiten, kanto]];
     [bodyString appendString:[NSString stringWithFormat:@"WHIP：%@　奪三振率：%@\n",
-                              [PitchingStatistics getFloatStr:whip],[PitchingStatistics getFloatStr:k9]]];
+                              [Utility getFloatStr2:whip],[Utility getFloatStr2:k9]]];
     
     return bodyString;
 }

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "StatisticsCommonController.h"
+#import "PitchingStatistics.h"
 
 @interface PitchingStatisticsController : StatisticsCommonController
     <MFMailComposeViewControllerDelegate>
@@ -19,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *pitchingresult;
 @property (strong, nonatomic) IBOutlet UILabel *inning;
 @property (strong, nonatomic) IBOutlet UILabel *era;
+@property (strong, nonatomic) IBOutlet UILabel *shoritsu;
 @property (strong, nonatomic) IBOutlet UILabel *hianda;
 @property (strong, nonatomic) IBOutlet UILabel *hihomerun;
 @property (strong, nonatomic) IBOutlet UILabel *dassanshin;
@@ -33,7 +36,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *year;
 @property (strong, nonatomic) IBOutlet UILabel *team;
 
+@property (strong, nonatomic) PitchingStatistics* pitchingStatistics;
+
+@property BOOL tweeted;
+
 - (IBAction)changeButton:(id)sender;
+- (IBAction)tweetButton:(id)sender;
 - (IBAction)mailButton:(id)sender;
 
 @end

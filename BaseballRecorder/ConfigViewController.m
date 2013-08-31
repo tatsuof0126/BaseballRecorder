@@ -41,6 +41,10 @@
     _place.text = [ConfigManager getDefaultPlace];
     _myteam.text = [ConfigManager getDefaultMyTeam];
     _sendto.text = [ConfigManager getDefaultSendTo];
+    _calcInning7.checkBoxSelected = [ConfigManager isCalcInning7Flg];
+    [_calcInning7 setState];
+    [_calcInning7 addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(checkBoxSelected:)]];
     
     // AppStoreへリンクのタップを受け取るため
     appstoreLabel.userInteractionEnabled = YES;
@@ -74,6 +78,7 @@
     [self setApptitle:nil];
     [self setAppsubtitle:nil];
     [self setRemoveadsButton:nil];
+    [self setCalcInning7:nil];
     [super viewDidUnload];
 }
 
@@ -91,8 +96,8 @@
     scrollView.contentSize = size;
     
     // ちょうどいいところにスクロール
-    if (textField == _sendto && scrollView.contentOffset.y < 140.0f){
-        [scrollView setContentOffset:CGPointMake(0.0f, 140.0f) animated:YES];
+    if (textField == _sendto && scrollView.contentOffset.y < 135.0f){
+        [scrollView setContentOffset:CGPointMake(0.0f, 135.0f) animated:YES];
     }
 }
 
@@ -108,7 +113,12 @@
 }
 
 - (void)hiddenDoneButton {
-    inputNavi.rightBarButtonItem = nil;
+    // すでに広告が非表示ならボタンを消す
+    if([ConfigManager isRemoveAdsFlg] == YES){
+        inputNavi.rightBarButtonItem = nil;
+    } else {
+        inputNavi.rightBarButtonItem = removeadsButton;
+    }
 }
 
 - (void)doneButton {
@@ -138,6 +148,11 @@
 - (void)saveDefaultSendto {
     NSString* email = _sendto.text;
     [ConfigManager setDefaultSendTo:email];
+}
+
+- (void)checkBoxSelected:(UITapGestureRecognizer*)sender {
+    [_calcInning7 checkboxPush:_calcInning7];
+    [ConfigManager setCalcInning7Flg:_calcInning7.selected];
 }
 
 - (void)addAddress:(NSString*)email {

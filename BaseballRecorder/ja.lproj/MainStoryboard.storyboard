@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -64,16 +64,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZYo-Yi-ZAg">
-                                <rect key="frame" x="0.0" y="361" width="320" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="試合結果一覧" image="book.png" id="7"/>
                     <connections>
-                        <outlet property="adView" destination="ZYo-Yi-ZAg" id="zZp-Pt-OXQ"/>
                         <outlet property="gameResultListTableView" destination="MV9-42-5Zq" id="ilg-vP-aYp"/>
                     </connections>
                 </viewController>
@@ -90,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" id="coX-Kk-ahP">
-                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="対戦相手を入力" minimumFontSize="17" id="rZN-tH-TQ9">
@@ -749,7 +744,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="◯打席◯打数◯安打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="omK-t0-btv">
-                                        <rect key="frame" x="30" y="196" width="280" height="21"/>
+                                        <rect key="frame" x="30" y="191" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -806,161 +801,168 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【試合成績】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="awf-Xa-9dS">
-                                        <rect key="frame" x="10" y="131" width="102" height="21"/>
+                                        <rect key="frame" x="10" y="126" width="102" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合成績" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zMW-zz-lf2">
-                                        <rect key="frame" x="120" y="131" width="174" height="21"/>
+                                        <rect key="frame" x="110" y="126" width="200" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【打撃成績】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pxN-0O-cgT">
-                                        <rect key="frame" x="10" y="166" width="102" height="21"/>
+                                        <rect key="frame" x="10" y="161" width="102" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="二塁打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hpl-P0-5BT">
-                                        <rect key="frame" x="40" y="226" width="60" height="21"/>
+                                        <rect key="frame" x="40" y="221" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NFD-Fx-qgC">
-                                        <rect key="frame" x="95" y="226" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="221" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="三塁打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RsW-OL-BDf">
-                                        <rect key="frame" x="130" y="226" width="60" height="21"/>
+                                        <rect key="frame" x="130" y="221" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TFm-hd-Otl">
-                                        <rect key="frame" x="185" y="226" width="30" height="21"/>
+                                        <rect key="frame" x="185" y="221" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="本塁打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lZy-4E-KAB">
-                                        <rect key="frame" x="220" y="226" width="60" height="21"/>
+                                        <rect key="frame" x="220" y="221" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XWT-jS-OU6">
-                                        <rect key="frame" x="275" y="226" width="30" height="21"/>
+                                        <rect key="frame" x="275" y="221" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="三振" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tnM-zH-H0m">
-                                        <rect key="frame" x="40" y="256" width="60" height="21"/>
+                                        <rect key="frame" x="40" y="251" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jne-FM-mXc">
-                                        <rect key="frame" x="95" y="256" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="251" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="四死球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SpA-l9-9IR">
-                                        <rect key="frame" x="130" y="256" width="60" height="21"/>
+                                        <rect key="frame" x="130" y="251" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Txa-3y-9dc">
-                                        <rect key="frame" x="185" y="256" width="30" height="21"/>
+                                        <rect key="frame" x="185" y="251" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="犠打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jmK-ya-0dm">
-                                        <rect key="frame" x="220" y="256" width="60" height="21"/>
+                                        <rect key="frame" x="220" y="251" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sB3-Wk-Xv8">
-                                        <rect key="frame" x="275" y="256" width="30" height="21"/>
+                                        <rect key="frame" x="275" y="251" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZYl-Wg-NLH">
-                                        <rect key="frame" x="40" y="286" width="60" height="21"/>
+                                        <rect key="frame" x="40" y="281" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uj8-y3-BfI">
-                                        <rect key="frame" x="95" y="286" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="281" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="得点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I2e-IQ-aPJ">
-                                        <rect key="frame" x="130" y="286" width="60" height="21"/>
+                                        <rect key="frame" x="130" y="281" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1JE-hb-cWe">
-                                        <rect key="frame" x="185" y="286" width="30" height="21"/>
+                                        <rect key="frame" x="185" y="281" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W8l-4N-ry3">
-                                        <rect key="frame" x="220" y="286" width="60" height="21"/>
+                                        <rect key="frame" x="220" y="281" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="izK-2G-ck1">
-                                        <rect key="frame" x="275" y="286" width="30" height="21"/>
+                                        <rect key="frame" x="275" y="281" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　OPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BFW-xk-lX8">
-                                        <rect key="frame" x="30" y="321" width="280" height="21"/>
+                                        <rect key="frame" x="30" y="311" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="長打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfR-53-tKv">
+                                        <rect key="frame" x="30" y="341" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aTi-Nb-YJl">
-                                        <rect key="frame" x="70" y="371" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="450" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="打撃成績をメール送信">
@@ -974,6 +976,21 @@
                                             <action selector="mailButton:" destination="3" eventType="touchUpInside" id="3VT-fN-XJ6"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QFa-fM-5jq">
+                                        <rect key="frame" x="70" y="385" width="180" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="打撃成績をつぶやく">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tweetButton:" destination="3" eventType="touchUpInside" id="8Nb-p0-Uae"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -983,6 +1000,7 @@
                     <connections>
                         <outlet property="battingresult" destination="omK-t0-btv" id="laI-9O-YXJ"/>
                         <outlet property="battingstat" destination="BFW-xk-lX8" id="2G0-Mu-g50"/>
+                        <outlet property="battingstat2" destination="XfR-53-tKv" id="zfT-x7-d80"/>
                         <outlet property="daten" destination="Uj8-y3-BfI" id="xfr-3R-aUX"/>
                         <outlet property="doubles" destination="NFD-Fx-qgC" id="PzR-k3-lob"/>
                         <outlet property="homeruns" destination="XWT-jS-OU6" id="Q0f-zn-ACL"/>
@@ -1015,91 +1033,91 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="◯勝 ◯敗 ◯セーブ ◯ホールド" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UAw-ra-HIm">
-                                        <rect key="frame" x="30" y="161" width="280" height="21"/>
+                                        <rect key="frame" x="30" y="156" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="投球回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bhk-qF-RvP">
-                                        <rect key="frame" x="40" y="191" width="51" height="21"/>
+                                        <rect key="frame" x="40" y="216" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="防御率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xeq-ws-2lw">
-                                        <rect key="frame" x="195" y="191" width="51" height="21"/>
+                                        <rect key="frame" x="40" y="186" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="被安打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="en4-xK-IPL">
-                                        <rect key="frame" x="40" y="221" width="51" height="21"/>
+                                        <rect key="frame" x="40" y="246" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="被本塁打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zqk-wM-56M">
-                                        <rect key="frame" x="130" y="221" width="68" height="21"/>
+                                        <rect key="frame" x="130" y="246" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="奪三振" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b2N-z1-lnf">
-                                        <rect key="frame" x="40" y="251" width="51" height="21"/>
+                                        <rect key="frame" x="40" y="276" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="与四球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mRc-7U-I1d">
-                                        <rect key="frame" x="130" y="251" width="51" height="21"/>
+                                        <rect key="frame" x="130" y="276" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="与死球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Hp-SR-fRu">
-                                        <rect key="frame" x="220" y="251" width="51" height="21"/>
+                                        <rect key="frame" x="220" y="276" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="失点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wJd-Bs-JRX">
-                                        <rect key="frame" x="40" y="281" width="34" height="21"/>
+                                        <rect key="frame" x="40" y="306" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="WHIP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u5F-Ve-UD0">
-                                        <rect key="frame" x="40" y="311" width="45" height="21"/>
+                                        <rect key="frame" x="40" y="336" width="45" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="自責点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LeM-xx-CmF">
-                                        <rect key="frame" x="130" y="281" width="51" height="21"/>
+                                        <rect key="frame" x="130" y="306" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="奪三振率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RB5-Qs-JMW">
-                                        <rect key="frame" x="148" y="311" width="68" height="21"/>
+                                        <rect key="frame" x="147" y="336" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="完投" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d6n-Vh-tTM">
-                                        <rect key="frame" x="220" y="281" width="34" height="21"/>
+                                        <rect key="frame" x="220" y="306" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1157,98 +1175,112 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【投手成績】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybh-iz-8nD">
-                                        <rect key="frame" x="10" y="131" width="102" height="21"/>
+                                        <rect key="frame" x="10" y="126" width="102" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dN9-PH-k8K">
-                                        <rect key="frame" x="95" y="221" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="246" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0aZ-Iw-uuZ">
-                                        <rect key="frame" x="95" y="251" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="276" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eHp-L6-BS0">
-                                        <rect key="frame" x="95" y="281" width="30" height="21"/>
+                                        <rect key="frame" x="95" y="306" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qEt-m8-nrB">
-                                        <rect key="frame" x="95" y="311" width="45" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qEt-m8-nrB">
+                                        <rect key="frame" x="95" y="336" width="52" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B1i-T9-XiV">
-                                        <rect key="frame" x="185" y="281" width="30" height="21"/>
+                                        <rect key="frame" x="185" y="306" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yyL-aC-6x8">
-                                        <rect key="frame" x="185" y="251" width="30" height="21"/>
+                                        <rect key="frame" x="185" y="276" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3HL-j7-YH1">
-                                        <rect key="frame" x="205" y="221" width="30" height="21"/>
+                                        <rect key="frame" x="205" y="246" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YRm-rZ-vNT">
-                                        <rect key="frame" x="226" y="311" width="45" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YRm-rZ-vNT">
+                                        <rect key="frame" x="223" y="336" width="45" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H0D-hS-QBt">
-                                        <rect key="frame" x="255" y="191" width="52" height="21"/>
+                                        <rect key="frame" x="99" y="186" width="52" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="勝率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yfv-w9-iEh">
+                                        <rect key="frame" x="181" y="186" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1.000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xfl-nb-yAI">
+                                        <rect key="frame" x="223" y="186" width="43" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="999回2/3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CrK-lu-cnc">
-                                        <rect key="frame" x="105" y="191" width="80" height="21"/>
+                                        <rect key="frame" x="105" y="216" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Na7-Cr-xr7">
-                                        <rect key="frame" x="275" y="251" width="30" height="21"/>
+                                        <rect key="frame" x="275" y="276" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qfv-cB-Lie">
-                                        <rect key="frame" x="275" y="281" width="30" height="21"/>
+                                        <rect key="frame" x="275" y="306" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gh3-Yq-ccR">
-                                        <rect key="frame" x="70" y="361" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="450" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="投手成績をメール送信">
@@ -1260,6 +1292,21 @@
                                         </state>
                                         <connections>
                                             <action selector="mailButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="r0c-5y-8nd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KgJ-K6-JcA">
+                                        <rect key="frame" x="70" y="385" width="180" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="投手成績をつぶやく">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tweetButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="emg-3M-9Ll"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1287,6 +1334,7 @@
                         <outlet property="pitchingresult" destination="UAw-ra-HIm" id="k2X-aS-VNe"/>
                         <outlet property="scrollView" destination="WcK-7X-JDS" id="Uad-uQ-bTW"/>
                         <outlet property="shitten" destination="eHp-L6-BS0" id="7kf-UW-SVl"/>
+                        <outlet property="shoritsu" destination="xfl-nb-yAI" id="HMd-XJ-7Mx"/>
                         <outlet property="team" destination="S8m-FO-JMB" id="3wj-aA-a8h"/>
                         <outlet property="whip" destination="qEt-m8-nrB" id="QdR-qb-mpx"/>
                         <outlet property="year" destination="KYq-Ct-N99" id="lVy-gi-k2h"/>
@@ -1326,7 +1374,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="PSL-Xw-zeH">
-                                <rect key="frame" x="0.0" y="44" width="328" height="512"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="800"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="日付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="61F-HC-JE9">
@@ -1581,8 +1629,23 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kBP-3Z-Jx2">
+                                        <rect key="frame" x="70" y="560" width="180" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="試合結果をつぶやく">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tweetButton:" destination="5rJ-uI-mNK" eventType="touchUpInside" id="HP8-C7-tII"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MBY-sy-Zt9">
-                                        <rect key="frame" x="70" y="550" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="615" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="試合結果をメール送信">
@@ -1603,6 +1666,14 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_right.png" id="Nkm-9o-2Qo">
+                                        <rect key="frame" x="272" y="15" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_left.png" id="bTm-zL-57y">
+                                        <rect key="frame" x="233" y="15" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1610,6 +1681,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="yD1-Pe-DMg"/>
                     <connections>
+                        <outlet property="arrowleft" destination="bTm-zL-57y" id="ZFd-9B-AdN"/>
+                        <outlet property="arrowright" destination="Nkm-9o-2Qo" id="xJI-2m-alc"/>
                         <outlet property="battingResultLabel" destination="FUg-ni-9WU" id="Vp2-bs-dhS"/>
                         <outlet property="dassanshin" destination="G7k-A7-NOB" id="vmB-B5-Lod"/>
                         <outlet property="dassanshinLabel" destination="Ua3-NU-l1m" id="BgJ-Ce-bND"/>
@@ -1640,6 +1713,7 @@
                         <outlet property="stealLabel" destination="6vc-FK-C9f" id="Hcn-xc-dol"/>
                         <outlet property="tokuten" destination="S5x-SB-KN8" id="dsP-kt-5Ot"/>
                         <outlet property="tokutenLabel" destination="xms-5R-n5c" id="9M1-ye-j79"/>
+                        <outlet property="tweetButton" destination="kBP-3Z-Jx2" id="Tmb-iq-uOO"/>
                         <outlet property="yoshikyu" destination="ijX-1j-P3Z" id="bmN-z3-enz"/>
                         <outlet property="yoshikyu2" destination="dad-MW-6Qi" id="7JI-Sf-hkE"/>
                         <outlet property="yoshikyu2Label" destination="GrA-zJ-IAT" id="CDs-OF-M6z"/>
@@ -1717,21 +1791,28 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合結果のメール送信先 初期表示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uf4-o5-0xI">
-                                        <rect key="frame" x="20" y="155" width="260" height="21"/>
+                                        <rect key="frame" x="20" y="145" width="260" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="防御率等を７回で計算する" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jQE-dH-Xan">
+                                        <rect key="frame" x="20" y="248" width="204" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="例. 自宅PCのアドレス、Evernote送信用アドレス" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ErP-Tp-5PF">
-                                        <rect key="frame" x="46" y="223" width="239" height="21"/>
+                                        <rect key="frame" x="46" y="205" width="239" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレスを入力" minimumFontSize="17" clearButtonMode="whileEditing" id="XNU-0e-1fH">
-                                        <rect key="frame" x="30" y="186" width="220" height="30"/>
+                                        <rect key="frame" x="30" y="176" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -1741,7 +1822,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="P6C-lC-vDM">
-                                        <rect key="frame" x="259" y="187" width="29" height="29"/>
+                                        <rect key="frame" x="259" y="177" width="29" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -1756,14 +1837,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="草野球日記 ベボレコ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7pl-i4-ZJs">
-                                        <rect key="frame" x="20" y="297" width="158" height="21"/>
+                                        <rect key="frame" x="20" y="302" width="158" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="versionx.x" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtC-ue-9t7">
-                                        <rect key="frame" x="185" y="297" width="84" height="21"/>
+                                        <rect key="frame" x="185" y="302" width="84" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1776,6 +1857,18 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jey-je-fi3" customClass="CheckBoxButton">
+                                        <rect key="frame" x="258" y="244" width="30" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1786,6 +1879,7 @@
                     <connections>
                         <outlet property="appstoreLabel" destination="e1R-b0-IWY" id="DnF-Pk-12y"/>
                         <outlet property="apptitle" destination="7pl-i4-ZJs" id="gDu-Wh-Rc7"/>
+                        <outlet property="calcInning7" destination="Jey-je-fi3" id="A93-2k-kun"/>
                         <outlet property="inputNavi" destination="ZbE-bK-WAj" id="6a2-6J-v0f"/>
                         <outlet property="myteam" destination="5EK-Py-si8" id="07Y-Fb-vWy"/>
                         <outlet property="place" destination="aIl-ze-lmZ" id="oRq-bt-Oqf"/>
@@ -1886,6 +1980,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_left.png" width="44" height="44"/>
+        <image name="arrow_right.png" width="44" height="44"/>
         <image name="baseball.png" width="24" height="24"/>
         <image name="book.png" width="24" height="24"/>
         <image name="settings.png" width="24" height="24"/>
@@ -1897,8 +1993,10 @@
             <relationships>
                 <relationship kind="action" name="changeButton:"/>
                 <relationship kind="action" name="mailButton:"/>
+                <relationship kind="action" name="tweetButton:"/>
                 <relationship kind="outlet" name="battingresult" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="battingstat" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="battingstat2" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="daten" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="doubles" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="homeruns" candidateClass="UILabel"/>
@@ -1928,6 +2026,7 @@
                 <relationship kind="outlet" name="appstoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="appsubtitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="apptitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="calcInning7" candidateClass="CheckBoxButton"/>
                 <relationship kind="outlet" name="inputNavi" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="myteam" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="place" candidateClass="UITextField"/>
@@ -1940,7 +2039,6 @@
         <class className="GameResultListController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameResultListController.h"/>
             <relationships>
-                <relationship kind="outlet" name="adView" candidateClass="ADBannerView"/>
                 <relationship kind="outlet" name="gameResultListTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -2001,6 +2099,7 @@
             <relationships>
                 <relationship kind="action" name="changeButton:"/>
                 <relationship kind="action" name="mailButton:"/>
+                <relationship kind="action" name="tweetButton:"/>
                 <relationship kind="outlet" name="dassanshin" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="era" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="hianda" candidateClass="UILabel"/>
@@ -2012,6 +2111,7 @@
                 <relationship kind="outlet" name="pitchingresult" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="shitten" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="shoritsu" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="team" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="whip" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="year" candidateClass="UILabel"/>
@@ -2040,6 +2140,9 @@
                 <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="editButton:"/>
                 <relationship kind="action" name="mailButton:"/>
+                <relationship kind="action" name="tweetButton:"/>
+                <relationship kind="outlet" name="arrowleft" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="arrowright" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="battingResultLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dassanshin" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dassanshinLabel" candidateClass="UILabel"/>
@@ -2070,6 +2173,7 @@
                 <relationship kind="outlet" name="stealLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tokuten" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tokutenLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tweetButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="yoshikyu" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="yoshikyu2" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="yoshikyu2Label" candidateClass="UILabel"/>
@@ -2086,7 +2190,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7pF-G3-Z3a"/>
         <segue reference="Ofd-zu-7oJ"/>
+        <segue reference="7pF-G3-Z3a"/>
     </inferredMetricsTieBreakers>
 </document>

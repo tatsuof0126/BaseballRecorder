@@ -11,63 +11,47 @@
 #import "GameResultManager.h"
 #import "ConfigManager.h"
 
-#define AD_VIEW 1 // 1=表示,0=非表示
-
 @interface GameResultListController ()
 
 @end
 
 @implementation GameResultListController
 
+@synthesize nadView;
 @synthesize gameResultYearList;
 @synthesize gameResultListOfYear;
 @synthesize gameResultListTableView;
-@synthesize adView;
-@synthesize bannerIsVisible;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // iPhone5対応
+    // TableViewの大きさ定義＆iPhone5対応
+    gameResultListTableView.frame = CGRectMake(0, 44, 320, 366);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
     
-    // iAdの初期設定
-    [AppDelegate adjustOriginForiPhone5:adView];
-    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-    adView.delegate = self;
-    bannerIsVisible = NO;
-    [self hiddenAdView];
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView*)banner{
-    if (bannerIsVisible == NO && AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        [self showAdView];
-        bannerIsVisible = YES;
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        // NADViewの作成（表示はこの時点ではしない）
+        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 361, 320, 50)];
+        [AppDelegate adjustOriginForiPhone5:nadView];
+        
+        [nadView setIsOutputLog:NO];
+        [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
+        [nadView setDelegate:self];
+    
+        // NADViewの中身（広告）を読み込み
+        [nadView load];
     }
 }
 
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError*)error{
-    if (bannerIsVisible == YES){
-        [self hiddenAdView];
-        bannerIsVisible = NO;
-    }
-}
-
-- (void)showAdView {
-    CGRect oldRect = gameResultListTableView.frame;
-    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
-                                oldRect.size.width, oldRect.size.height-50);
-    gameResultListTableView.frame = newRect;
-    adView.hidden = NO;
-}
-
-- (void)hiddenAdView {
-    CGRect oldRect = gameResultListTableView.frame;
-    CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
-                                oldRect.size.width, oldRect.size.height+50);
-    gameResultListTableView.frame = newRect;
-    adView.hidden = YES;
+-(void)nadViewDidFinishLoad:(NADView *)adView {
+    // NADViewの中身（広告）の読み込みに成功した場合
+    // TableViewの大きさ定義＆iPhone5対応
+    gameResultListTableView.frame = CGRectMake(0, 44, 320, 316);
+    [AppDelegate adjustForiPhone5:gameResultListTableView];
+    
+    // NADViewを表示
+    [self.view addSubview:nadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +63,6 @@
 - (void)viewDidUnload {
     [self setGameResultListTableView:nil];
     [self setGameResultListOfYear:nil];
-    [self setAdView:nil];
     [super viewDidUnload];
 }
 
@@ -152,16 +135,62 @@
                                       reuseIdentifier:cellName];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%d月%d日  %@ %d-%d %@",
-        result.month, result.day, result.myteam, result.myscore, result.otherscore, result.otherteam];
+    NSString* resultStr = nil;
+    if(result.myscore == result.otherscore){
+        resultStr = @"△";
+    } else {
+        resultStr = result.myscore > result.otherscore ? @"○" : @"●";
+    }
     
-    NSMutableString* battingStr = [NSMutableString string];
+    NSString* viewText = [NSString stringWithFormat:@"%d月%d日 %@ %d‐%d %@",
+                          result.month, result.day, resultStr, result.myscore, result.otherscore, result.otherteam];
+    
+    // iOS6以上とiOS5系で処理を分ける
+    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+    if ( [osVersion compare:@"6.0" options:NSNumericSearch] == NSOrderedAscending ){
+        // iOS5系はシステムフォントで表示（●が小さく表示されてしまうががまん）
+        cell.textLabel.text = viewText;
+    } else {
+        // iOS6以上ならAttributedTextを使ってヒラギノ角ゴで表示
+        cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+        
+        NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+        paragrahStyle.lineSpacing = - 2.0f;
+        paragrahStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+        
+        NSMutableAttributedString *attributedText
+            = [[NSMutableAttributedString alloc] initWithString:viewText];
+        
+        [attributedText addAttribute:NSParagraphStyleAttributeName
+                           value:paragrahStyle
+                           range:NSMakeRange(0, attributedText.length)];
+    
+        cell.textLabel.attributedText = attributedText;
+    }
+    
+    // サブ行に詳細成績（打撃成績 / 投手成績）
+    NSMutableString* detailStr = [NSMutableString string];
     for (int i=0;i<result.battingResultArray.count;i++){
         BattingResult* battingResult = [result.battingResultArray objectAtIndex:i];
-        [battingStr appendString:@" "];
-        [battingStr appendString:[battingResult getResultString]];
+        [detailStr appendString:@" "];
+        [detailStr appendString:[battingResult getResultShortString]];
     }
-    cell.detailTextLabel.text = battingStr;
+    
+    if( result.inning != 0 || result.inning2 != 0 ){
+        if([@"" isEqualToString:detailStr] == NO){
+            [detailStr appendString:@"  /  "];
+        } else {
+            [detailStr appendString:@" "];
+        }
+        
+        [detailStr appendString:[result getInningString]];
+        [detailStr appendString:@" "];
+        [detailStr appendString:result.shitten == 0 ? @"無失点" : [NSString stringWithFormat:@"%d失点",result.shitten]];
+        [detailStr appendString:@" "];
+        [detailStr appendString:[result getSekininString]];
+    }
+
+    cell.detailTextLabel.text = detailStr;
     
     return cell;
 }
@@ -194,8 +223,6 @@
     if(buttonIndex == 1){
         int resultid = alertView.tag;
 
-//        NSLog(@"Deleting resultid : %d",resultid);
-
         [GameResultManager removeGameResult:resultid];
         
         [self loadGameResult];
@@ -208,8 +235,6 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     int tag = ((UIView*)sender).tag;
-    
-//    NSLog(@"Tag : %d",tag);
     
     if(tag == 1){
         // 追加ボタン
@@ -228,11 +253,25 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [nadView resume];
+    
     [gameResultListTableView deselectRowAtIndexPath:
         [gameResultListTableView indexPathForSelectedRow] animated:NO];
 
     [self loadGameResult];
     [gameResultListTableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [nadView pause];
+}
+
+- (void)dealloc {
+    [nadView setDelegate:nil];
+    nadView = nil;
 }
 
 @end

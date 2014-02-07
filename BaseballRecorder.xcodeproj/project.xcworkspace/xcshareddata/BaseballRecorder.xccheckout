@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>24AA46EF-DF4B-4507-A72F-748B57FC9B70</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BaseballRecorder</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</key>
+		<string>https://github.com/tatsuof0126/BaseballRecorder.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BaseballRecorder.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tatsuof0126/BaseballRecorder.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BaseballRecorder</string>
+		</dict>
+	</array>
+</dict>
+</plist>

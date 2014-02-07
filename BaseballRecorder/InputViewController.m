@@ -27,6 +27,7 @@
 @synthesize gameResult;
 @synthesize battingResultViewArray;
 @synthesize scrollView;
+@synthesize pickerBaseView;
 @synthesize resultPicker;
 @synthesize resultToolbar;
 @synthesize edited;
@@ -322,16 +323,20 @@
 }
 
 - (void)makeResultPicker:(NSInteger)resultno {
-    // 初めに他の編集項目の編集を終了させる
-    [self doneButton];
+    [self doneButton]; // 初めに他の編集項目の編集を終了させる
     
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGFloat width = rect.size.width;
     CGFloat height = rect.size.height;
     
-    resultPicker = [[UIPickerView alloc] init];
+    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
+    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
+    pickerBaseView.backgroundColor = [UIColor clearColor];
     
-    resultPicker.center = CGPointMake(width/2, height+125+60);
+    // PickerView
+    resultPicker = [[UIPickerView alloc] init];
+    resultPicker.center = CGPointMake(width/2, 135);
+    resultPicker.backgroundColor = [UIColor whiteColor];
     resultPicker.delegate = self;  // デリゲートを自分自身に設定
     resultPicker.dataSource = self;  // データソースを自分自身に設定
     resultPicker.showsSelectionIndicator = YES;
@@ -342,7 +347,8 @@
         [resultPicker selectRow:battingResult.result inComponent:1 animated:NO];
     }
     
-    resultToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height, 320, 44)];
+    // Toolbar（既存の成績の編集の場合のみクリアボタンを出す）
+    resultToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     resultToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
@@ -364,17 +370,24 @@
     
     [resultToolbar setItems:items animated:YES];
     
-    [self.view addSubview:resultToolbar];
-    [self.view addSubview:resultPicker];
+    [pickerBaseView addSubview:resultPicker];
+    [pickerBaseView addSubview:resultToolbar];
     
+    [self.view addSubview:pickerBaseView];
+
     //アニメーションの設定開始
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
     [UIView setAnimationDuration:0.3];    // 時間の指定
-    resultPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
-    resultToolbar.center = CGPointMake(width/2, height-255);
+//    pickerBaseView.center = CGPointMake(width/2, height-103);
+    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
+    
+//    resultPicker.center = CGPointMake(width/2, height-81);    // 表示する中心座標を表示画面中央に
+//    resultToolbar.center = CGPointMake(width/2, height-184);
+//    resultPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
+//    resultToolbar.center = CGPointMake(width/2, height-255);
     
     [UIView commitAnimations];
 }
@@ -439,7 +452,9 @@
 - (void)closeResultPicker {
     [resultPicker removeFromSuperview];
     [resultToolbar removeFromSuperview];
-    
+    [pickerBaseView removeFromSuperview];
+
+    pickerBaseView = nil;
     resultPicker = nil;
     resultToolbar = nil;
 }

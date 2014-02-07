@@ -47,13 +47,13 @@
                                        initWithTarget:self action:@selector(arrowButton:)]];
     
     // ScrollViewの高さを定義＆iPhone5対応
-    _scrollview.frame = CGRectMake(0, 44, 320, 416);
+    _scrollview.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:_scrollview];
     
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // NADViewの作成（表示はこの時点ではしない）
-        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 410, 320, 50)];
+        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
         [AppDelegate adjustOriginForiPhone5:nadView];
     
         [nadView setIsOutputLog:NO];
@@ -71,7 +71,7 @@
 -(void)nadViewDidFinishLoad:(NADView *)adView {
     // NADViewの中身（広告）の読み込みに成功した場合
     // ScrollViewの高さを調整＆iPhone5対応
-    _scrollview.frame = CGRectMake(0, 44, 320, 366);
+    _scrollview.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:_scrollview];
     
     // NADViewを表示

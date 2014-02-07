@@ -39,6 +39,7 @@
 
 @property (strong, nonatomic) NSMutableArray *battingResultViewArray;
 
+@property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *resultToolbar;
 @property (strong, nonatomic) UIPickerView *resultPicker;
 

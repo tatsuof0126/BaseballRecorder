@@ -22,7 +22,8 @@
 @implementation ShowGameResultController
 
 @synthesize nadView;
-@synthesize tweeted;
+@synthesize posted;
+// @synthesize tweeted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,16 +47,26 @@
     [_arrowright addGestureRecognizer:[[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(arrowButton:)]];
     
+    // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
+    // あとで対応
+    
+    
+    
+    
+    
+    
+    
     // ScrollViewの高さを定義＆iPhone5対応
     _scrollview.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:_scrollview];
-    
+    [AppDelegate adjustOriginForBeforeiOS6:_scrollview];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // NADViewの作成（表示はこの時点ではしない）
         nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
         [AppDelegate adjustOriginForiPhone5:nadView];
-    
+        [AppDelegate adjustOriginForBeforeiOS6:nadView];
+        
         [nadView setIsOutputLog:NO];
         [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
         // [nadView setNendID:@"a6eca9dd074372c898dd1df549301f277c53f2b9" spotID:@"3172"]; // テスト用
@@ -73,6 +84,7 @@
     // ScrollViewの高さを調整＆iPhone5対応
     _scrollview.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:_scrollview];
+    [AppDelegate adjustOriginForBeforeiOS6:_scrollview];
     
     // NADViewを表示
     [self.view addSubview:nadView];
@@ -167,7 +179,11 @@
 
     if(pitchingResultFlg == YES){
         _inning.text = [NSString stringWithFormat:@"%@%@",[gameResult getInningString],gameResult.kanto ? @" (完投)" : @""];
-        _sekinin.text = [NSString stringWithFormat:@"%@",[gameResult getSekininString]];
+        NSAttributedString *sekininText = [[NSAttributedString alloc]
+            initWithString:[gameResult getSekininString]
+            attributes:@{NSForegroundColorAttributeName : [gameResult getSekininColor]}];
+        _sekinin.attributedText = sekininText;
+        // _sekinin.text = [NSString stringWithFormat:@"%@",[gameResult getSekininString]];
         _hianda.text = [NSString stringWithFormat:@"%d",gameResult.hianda];
         _hihomerun.text = [NSString stringWithFormat:@"%d",gameResult.hihomerun];
         _dassanshin.text = [NSString stringWithFormat:@"%d",gameResult.dassanshin];
@@ -243,7 +259,8 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)editButton:(id)sender {
@@ -282,40 +299,83 @@
 }
 
 - (IBAction)tweetButton:(id)sender {
-    NSString* tweetString = [self makeTweetString];
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.delegate = self;
+    [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
+    [actionSheet addButtonWithTitle:@"Facebookに投稿"];
+    [actionSheet addButtonWithTitle:@"キャンセル"];
+    actionSheet.cancelButtonIndex = 2;
+    [actionSheet showInView:self.view.window];
+}
 
-    tweeted = NO;
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self postToTwitter];
+            break;
+        case 1:
+            [self postToFacebook];
+            break;
+    }
+}
+
+- (void)postToTwitter {
+    posted = NO;
     
-    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
-    [controller setInitialText:tweetString];
+    NSString* shareString = [self makeShareString];
     
-    TWTweetComposeViewControllerCompletionHandler completionHandler
-                             = ^(TWTweetComposeViewControllerResult result) {
+    SLComposeViewController* vc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result){
         switch (result) {
-            case TWTweetComposeViewControllerResultDone:
-                tweeted = YES;
-                break;
-            case TWTweetComposeViewControllerResultCancelled:
+            case SLComposeViewControllerResultDone:
+                posted = YES;
                 break;
             default:
                 break;
         }
-        
         [self dismissViewControllerAnimated:YES completion:^{
-            if(tweeted == YES){
+            if(posted == YES){
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil];
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
             }
         }];
-    };
+    }];
     
-    [controller setCompletionHandler:completionHandler];
-    [self presentModalViewController:controller animated:YES];
+    [vc setInitialText:shareString];
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (NSString*)makeTweetString {
+- (void)postToFacebook {
+    posted = NO;
+    
+    NSString* shareString = [self makeShareString];
+    
+    SLComposeViewController *vc = [SLComposeViewController
+                                   composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result){
+        switch (result) {
+            case SLComposeViewControllerResultDone:
+                posted = YES;
+                break;
+            default:
+                break;
+        }
+        if(posted == YES){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                message:@"投稿しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+    
+    [vc setInitialText:shareString];
+    [vc addURL:[NSURL URLWithString:@"https://itunes.apple.com/jp/app/id578136103"]];
+    
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (NSString*)makeShareString {
     // 試合結果の文言を作る
     NSMutableString* tweetString = [NSMutableString string];
     

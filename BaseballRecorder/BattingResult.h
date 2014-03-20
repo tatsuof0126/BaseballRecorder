@@ -28,9 +28,12 @@
 #define R_STR_SEMILONG 2
 #define R_STR_LONG   3
 
+#define R_HOMERUN 10
+
 #define R_TYPE_NEEDP 0
 #define R_TYPE_COLOR 1
-
+#define R_TYPE_COLOR2 2
+#define R_TYPE_COLOR3 3
 
 @interface BattingResult : NSObject
 
@@ -54,6 +57,10 @@
 - (NSString*)getResultLongString;
 
 - (UIColor*)getResultColor;
+
+- (UIColor*)getResultColorForListView;
+
+- (UIColor*)getResultColorForAnalysisView;
 
 - (int)getStatisticsCounts:(int)type;
 

@@ -29,11 +29,13 @@
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
+    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // NADViewの作成（表示はこの時点ではしない）
         nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 381, 320, 50)];
         [AppDelegate adjustOriginForiPhone5:nadView];
+        [AppDelegate adjustOriginForBeforeiOS6:nadView];
         
         [nadView setIsOutputLog:NO];
         [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
@@ -49,6 +51,7 @@
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
+    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
     
     // NADViewを表示
     [self.view addSubview:nadView];
@@ -167,7 +170,8 @@
     
         cell.textLabel.attributedText = attributedText;
     }
-    
+
+    /*
     // サブ行に詳細成績（打撃成績 / 投手成績）
     NSMutableString* detailStr = [NSMutableString string];
     for (int i=0;i<result.battingResultArray.count;i++){
@@ -189,8 +193,54 @@
         [detailStr appendString:@" "];
         [detailStr appendString:[result getSekininString]];
     }
+     */
+    
+    
+    
+    
+    // サブ行に詳細成績（打撃成績 / 投手成績）
+    NSMutableAttributedString* detailStr = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    NSAttributedString* blank = [[NSAttributedString alloc] initWithString:@" "];
+    
+    for (int i=0;i<result.battingResultArray.count;i++){
+        BattingResult* battingResult = [result.battingResultArray objectAtIndex:i];
+        [detailStr appendAttributedString:blank];
+        NSAttributedString *btresult = [[NSAttributedString alloc]
+            initWithString:[battingResult getResultShortString]
+            attributes:@{NSForegroundColorAttributeName : [battingResult getResultColorForListView]}];
+        [detailStr appendAttributedString:btresult];
+    }
+    
+    if( result.inning != 0 || result.inning2 != 0 ){
+        if([[[NSMutableAttributedString alloc] initWithString:@""] isEqual:detailStr] == NO){
+            [detailStr appendAttributedString:[[NSAttributedString alloc] initWithString:@"  /  "]];
+        } else {
+            [detailStr appendAttributedString:blank];
+        }
+        
+        [detailStr appendAttributedString:[[NSAttributedString alloc] initWithString:[result getInningString]]];
+        [detailStr appendAttributedString:blank];
+        [detailStr appendAttributedString:[[NSAttributedString alloc] initWithString:result.shitten == 0 ? @"無失点" : [NSString stringWithFormat:@"%d失点",result.shitten]]];
+        [detailStr appendAttributedString:blank];
+        [detailStr appendAttributedString:[[NSAttributedString alloc] initWithString:[result getSekininString]]];
+    }
 
-    cell.detailTextLabel.text = detailStr;
+    /*
+    NSAttributedString *end = [[NSAttributedString alloc] initWithString:@"終わるっ"
+        attributes:@{ NSForegroundColorAttributeName : [UIColor redColor],
+                      NSFontAttributeName : [UIFont boldSystemFontOfSize:16]}];
+    
+    NSAttributedString *march = [[NSAttributedString alloc] initWithString:@"3月が"];
+    NSAttributedString *exclamation = [[NSAttributedString alloc] initWithString:@"!!!"];
+    
+    NSMutableAttributedString *endMarch = [[NSMutableAttributedString alloc] initWithAttributedString:march];
+    [endMarch appendAttributedString:end];
+    [endMarch appendAttributedString:exclamation];
+    */
+    
+    cell.detailTextLabel.attributedText = detailStr;
+//    cell.detailTextLabel.text = detailStr;
     
     return cell;
 }

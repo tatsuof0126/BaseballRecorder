@@ -177,14 +177,16 @@
     // アドレス帳を呼び出す
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
-    [self presentModalViewController:picker animated:YES];
+    [self presentViewController:picker animated:YES completion:nil];
+//    [self presentModalViewController:picker animated:YES];
 }
 
 - (IBAction)removeadsButton:(id)sender {
 }
 
 - (void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker
@@ -200,7 +202,8 @@
         
         [self addAddress:email];
         [self saveDefaultSendto];
-        [self dismissModalViewControllerAnimated:YES];
+//        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
         return NO;  
     }  
 }
@@ -213,7 +216,8 @@
     
     [self addAddress:email];
     [self saveDefaultSendto];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     return NO;
 }
 

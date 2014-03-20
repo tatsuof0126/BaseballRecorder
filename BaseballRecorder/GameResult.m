@@ -654,6 +654,15 @@
     return [[GameResult getSekininPickerArray] objectAtIndex:sekinin];
 }
 
+- (UIColor*)getSekininColor {
+    UIColor* red = [UIColor redColor];
+    UIColor* black = [UIColor blackColor];
+    
+    NSArray* array = [NSArray arrayWithObjects:black,red,black,red,red,nil];
+    
+    return [array objectAtIndex:sekinin];
+}
+
 + (NSString*)getInningString:(int)inning inning2:(int)inning2 {
     NSArray* array = [GameResult getInningPickerArray];
     return [NSString stringWithFormat:@"%@%@%@",

@@ -90,11 +90,13 @@
     //    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
     
     targetField.text = [selectlist objectAtIndex:indexPath.row];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)backButton:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

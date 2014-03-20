@@ -24,8 +24,10 @@
 @synthesize teamList;
 @synthesize targetyear;
 @synthesize targetteam;
+@synthesize pickerBaseView;
 @synthesize targetPicker;
 @synthesize targetToolbar;
+@synthesize posted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -174,8 +176,16 @@
 }
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team {
+//    NSString* oldyear = year.text;
+//    NSString* oldteam = team.text;
     year.text = [yearList objectAtIndex:targetyear];
     team.text = [teamList objectAtIndex:targetteam];
+    
+    // 変更していなければNOを返す
+//    if([oldyear isEqualToString:year.text] && [oldteam isEqualToString:team.text]){
+//        return NO;
+//    }
+//    return YES;
 }
 
 - (void)makeResultPicker {
@@ -188,17 +198,22 @@
     CGFloat width = rect.size.width;
     CGFloat height = rect.size.height;
     
-    targetPicker = [[UIPickerView alloc] init];
+    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
+    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
+    pickerBaseView.backgroundColor = [UIColor clearColor];
     
-    targetPicker.center = CGPointMake(width/2, height+125+60);
+    targetPicker = [[UIPickerView alloc] init];
+//    targetPicker.center = CGPointMake(width/2, height+125+60);
+    targetPicker.center = CGPointMake(width/2, 135);
     targetPicker.delegate = self;  // デリゲートを自分自身に設定
     targetPicker.dataSource = self;  // データソースを自分自身に設定
     targetPicker.showsSelectionIndicator = YES;
+    targetPicker.backgroundColor = [UIColor whiteColor];
     
     [targetPicker selectRow:targetyear inComponent:0 animated:NO];
     [targetPicker selectRow:targetteam inComponent:1 animated:NO];
     
-    targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height, 320, 44)];
+    targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     targetToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
@@ -211,8 +226,10 @@
     
     [targetToolbar setItems:items animated:YES];
     
-    [self.view addSubview:targetToolbar];
-    [self.view addSubview:targetPicker];
+    [pickerBaseView addSubview:targetPicker];
+    [pickerBaseView addSubview:targetToolbar];
+    
+    [self.view addSubview:pickerBaseView];
     
     //アニメーションの設定開始
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -220,8 +237,9 @@
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
     [UIView setAnimationDuration:0.3];    // 時間の指定
-    targetPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
-    targetToolbar.center = CGPointMake(width/2, height-255);
+    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
+//    targetPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
+//    targetToolbar.center = CGPointMake(width/2, height-255);
     
     [UIView commitAnimations];
 }
@@ -242,9 +260,11 @@
 - (void)toolbarBackButton:(UIBarButtonItem*)sender {
     [targetPicker removeFromSuperview];
     [targetToolbar removeFromSuperview];
+    [pickerBaseView removeFromSuperview];
     
     targetPicker = nil;
     targetToolbar = nil;
+    pickerBaseView = nil;
 }
 
 - (void)toolbarDoneButton:(id)sender {
@@ -258,9 +278,119 @@
     
     [targetPicker removeFromSuperview];
     [targetToolbar removeFromSuperview];
+    [pickerBaseView removeFromSuperview];
     
     targetPicker = nil;
     targetToolbar = nil;
+    pickerBaseView = nil;
+}
+
+- (void)shareStatistics {
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.delegate = self;
+    [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
+    [actionSheet addButtonWithTitle:@"Facebookに投稿"];
+    [actionSheet addButtonWithTitle:@"キャンセル"];
+    actionSheet.cancelButtonIndex = 2;
+    [actionSheet showInView:self.view.window];
+}
+
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self postToTwitter];
+            break;
+        case 1:
+            [self postToFacebook];
+            break;
+    }
+}
+
+- (void)postToTwitter {
+    posted = NO;
+    
+    NSString* shareString = [self makeShareString:POST_TWITTER];
+    NSString* shareURLString = [self getShareURLString:POST_TWITTER];
+    UIImage* shareImage = [self getShareImage:POST_TWITTER];
+    
+    SLComposeViewController* vc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result){
+        switch (result) {
+            case SLComposeViewControllerResultDone:
+                posted = YES;
+                break;
+            default:
+                break;
+        }
+        [self dismissViewControllerAnimated:YES completion:^{
+            if(posted == YES){
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    }];
+    
+    if (shareURLString != nil){
+        shareString = [[shareString stringByAppendingString:@" "] stringByAppendingString:shareURLString];
+    }
+    [vc setInitialText:shareString];
+    if (shareImage != nil){
+        [vc addImage:shareImage];
+    }
+    
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)postToFacebook {
+    posted = NO;
+    
+    NSString* shareString = [self makeShareString:POST_FACEBOOK];
+    NSString* shareURLString = [self getShareURLString:POST_FACEBOOK];
+    UIImage* shareImage = [self getShareImage:POST_FACEBOOK];
+    
+    SLComposeViewController *vc = [SLComposeViewController
+                                   composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result){
+        switch (result) {
+            case SLComposeViewControllerResultDone:
+                posted = YES;
+                break;
+            default:
+                break;
+        }
+        if(posted == YES){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"投稿しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+    
+    [vc setInitialText:shareString];
+    if (shareURLString != nil){
+        [vc addURL:[NSURL URLWithString:shareURLString]];
+    }
+    if (shareImage != nil){
+        [vc addImage:shareImage];
+    }
+    
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+
+- (NSString*)makeShareString:(int)type {
+    // 子クラスでオーバーライドする前提
+    return nil;
+}
+
+- (NSString*)getShareURLString:(int)type {
+    // 子クラスでオーバーライドする前提
+    return nil;
+}
+
+- (UIImage*)getShareImage:(int)type {
+    // 子クラスでオーバーライドする前提
+    return nil;
 }
 
 - (NSString*)getMailTitle:(int)type {

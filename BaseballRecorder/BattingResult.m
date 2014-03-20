@@ -63,6 +63,8 @@ static NSArray* battingStatisticsArray;
         UIColor* black = [UIColor blackColor];
         UIColor* blue = [UIColor blueColor];
         UIColor* red = [UIColor redColor];
+        UIColor* dgray = [UIColor darkGrayColor];
+        UIColor* gray = [UIColor grayColor];
         
         battingResultTypeArray
             = [NSArray arrayWithObjects:
@@ -70,7 +72,11 @@ static NSArray* battingStatisticsArray;
                 byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,bno,bno,bno,bno,nil],
                [NSArray arrayWithObjects:
                 black,black,black,black,black,black,black,red,red,red,red,blue,black,black,blue,blue,nil],
-               nil];        
+               [NSArray arrayWithObjects:
+                dgray,dgray,dgray,dgray,dgray,dgray,dgray,blue,red,red,red,dgray,dgray,dgray,dgray,dgray,nil],
+               [NSArray arrayWithObjects:
+                gray,gray,gray,gray,gray,gray,gray,red,red,red,red,blue,gray,gray,blue,blue,nil],
+               nil];
     }
     
     return [battingResultTypeArray objectAtIndex:type];
@@ -202,6 +208,16 @@ static NSArray* battingStatisticsArray;
 
 - (UIColor*)getResultColor {
     NSArray *colorArray = [BattingResult getBattingResultTypeArray2:R_TYPE_COLOR];
+    return [colorArray objectAtIndex:result];
+}
+
+- (UIColor*)getResultColorForAnalysisView {
+    NSArray *colorArray = [BattingResult getBattingResultTypeArray2:R_TYPE_COLOR2];
+    return [colorArray objectAtIndex:result];
+}
+
+- (UIColor*)getResultColorForListView {
+    NSArray *colorArray = [BattingResult getBattingResultTypeArray2:R_TYPE_COLOR3];
     return [colorArray objectAtIndex:result];
 }
 

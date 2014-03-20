@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "StatisticsCommonController.h"
@@ -37,8 +36,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *team;
 
 @property (strong, nonatomic) PitchingStatistics* pitchingStatistics;
-
-@property BOOL tweeted;
 
 - (IBAction)changeButton:(id)sender;
 - (IBAction)tweetButton:(id)sender;

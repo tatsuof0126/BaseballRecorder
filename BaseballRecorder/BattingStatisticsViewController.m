@@ -23,7 +23,6 @@
 @synthesize nadView;
 @synthesize teamStatistics;
 @synthesize battingStatistics;
-@synthesize tweeted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,11 +41,13 @@
     scrollView.contentSize = CGSizeMake(320, 520);
     scrollView.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // NADViewの作成（表示はこの時点ではしない）
         nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 381, 320, 50)];
         [AppDelegate adjustOriginForiPhone5:nadView];
+        [AppDelegate adjustOriginForBeforeiOS6:nadView];
         
         [nadView setIsOutputLog:NO];
         [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
@@ -62,6 +63,7 @@
     // ScrollViewの高さを調整＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     // NADViewを表示
     [self.view addSubview:nadView];
@@ -146,62 +148,33 @@
 }
 
 - (IBAction)tweetButton:(id)sender {
-    NSString* tweetString = [self makeTweetString];
-    
-    tweeted = NO;
-    
-    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
-    [controller setInitialText:tweetString];
-    
-    TWTweetComposeViewControllerCompletionHandler completionHandler
-    = ^(TWTweetComposeViewControllerResult result) {
-        switch (result) {
-            case TWTweetComposeViewControllerResultDone:
-                tweeted = YES;
-                break;
-            case TWTweetComposeViewControllerResultCancelled:
-                break;
-            default:
-                break;
-        }
-        
-        [self dismissViewControllerAnimated:YES completion:^{
-            if(tweeted == YES){
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil];
-                [alert show];
-            }
-        }];
-    };
-    
-    [controller setCompletionHandler:completionHandler];
-    [self presentModalViewController:controller animated:YES];
+    // 親クラスのメソッドを呼び出してシェア
+    [super shareStatistics];
 }
 
-- (NSString*)makeTweetString {
+- (NSString*)makeShareString:(int)type {
     // 試合結果の文言を作る
-    NSMutableString* tweetString = [NSMutableString string];
+    NSMutableString* shareString = [NSMutableString string];
     
     NSString* targetYearStr = [ConfigManager getCalcTargetYear];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";
     if([targetYearStr isEqualToString:@"すべて"] != YES){
-        [tweetString appendString:targetYearStr];
-        [tweetString appendString:@"の"];
+        [shareString appendString:targetYearStr];
+        [shareString appendString:@"の"];
     } else {
         tsusanStr = @"通算";
     }
     
     if([targetTeamStr isEqualToString:@"すべて"] != YES){
-        [tweetString appendString:targetTeamStr];
-        [tweetString appendString:@"での"];
+        [shareString appendString:targetTeamStr];
+        [shareString appendString:@"での"];
     }
     
-    [tweetString appendFormat:@"%@打撃成績は、",tsusanStr];
+    [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
     
-    [tweetString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
+    [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
      ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
      ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
      ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
@@ -209,36 +182,43 @@
      ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
     
     if(battingStatistics.doubles != 0){
-        [tweetString appendFormat:@"二塁打%d ", battingStatistics.doubles];
+        [shareString appendFormat:@"二塁打%d ", battingStatistics.doubles];
     }
     if(battingStatistics.triples != 0){
-        [tweetString appendFormat:@"三塁打%d ", battingStatistics.triples];
+        [shareString appendFormat:@"三塁打%d ", battingStatistics.triples];
     }
     if(battingStatistics.homeruns != 0){
-        [tweetString appendFormat:@"本塁打%d ", battingStatistics.homeruns];
+        [shareString appendFormat:@"本塁打%d ", battingStatistics.homeruns];
     }
     if(battingStatistics.strikeouts != 0){
-        [tweetString appendFormat:@"三振%d ", battingStatistics.strikeouts];
+        [shareString appendFormat:@"三振%d ", battingStatistics.strikeouts];
     }
     if(battingStatistics.walks != 0){
-        [tweetString appendFormat:@"四死球%d ", battingStatistics.walks];
+        [shareString appendFormat:@"四死球%d ", battingStatistics.walks];
     }
     if(battingStatistics.sacrifices != 0){
-        [tweetString appendFormat:@"犠打%d ", battingStatistics.sacrifices];
+        [shareString appendFormat:@"犠打%d ", battingStatistics.sacrifices];
     }
     if(battingStatistics.daten != 0){
-        [tweetString appendFormat:@"打点%d ", battingStatistics.daten];
+        [shareString appendFormat:@"打点%d ", battingStatistics.daten];
     }
     if(battingStatistics.tokuten != 0){
-        [tweetString appendFormat:@"得点%d ", battingStatistics.tokuten];
+        [shareString appendFormat:@"得点%d ", battingStatistics.tokuten];
     }
     if(battingStatistics.steal != 0){
-        [tweetString appendFormat:@"盗塁%d ", battingStatistics.steal];
+        [shareString appendFormat:@"盗塁%d ", battingStatistics.steal];
     }
     
-    [tweetString appendString:@"です。 #ベボレコ"];
+    [shareString appendString:@"です。 #ベボレコ"];
     
-    return tweetString;
+    return shareString;
+}
+
+- (NSString*)getShareURLString:(int)type {
+    if (type == POST_FACEBOOK){
+        return @"https://itunes.apple.com/jp/app/id578136103";
+    }
+    return nil;
 }
 
 - (IBAction)mailButton:(id)sender {

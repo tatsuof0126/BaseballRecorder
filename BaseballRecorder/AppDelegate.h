@@ -26,4 +26,6 @@
 
 + (void)adjustOriginForiPhone5:(UIView*)view;
 
++ (void)adjustOriginForBeforeiOS6:(UIView*)view;
+
 @end

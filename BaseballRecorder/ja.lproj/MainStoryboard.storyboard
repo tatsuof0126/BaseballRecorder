@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -17,6 +17,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="321"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="GameResultCell" textLabel="jWn-L3-2YT" detailTextLabel="kOa-SN-qBy" style="IBUITableViewCellStyleSubtitle" id="mjq-vo-2XG">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -54,9 +55,10 @@
                             <navigationBar contentMode="top" barStyle="black" id="yxX-vr-plN">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="試合結果一覧" id="6Wt-uO-NRw">
-                                        <barButtonItem key="rightBarButtonItem" tag="1" title="追加" id="znF-Vh-XId">
+                                        <barButtonItem key="rightBarButtonItem" tag="1" title="追加" style="done" id="znF-Vh-XId">
                                             <connections>
                                                 <segue destination="CYm-Gx-IRt" kind="modal" modalTransitionStyle="crossDissolve" id="beY-vE-fQn"/>
                                             </connections>
@@ -344,10 +346,12 @@
                                         </connections>
                                     </textView>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="L0F-mU-NhE">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="打撃成績入力" id="jrB-6f-Y6I">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="Z84-Mk-8Ca">
@@ -355,8 +359,7 @@
                                                 <action selector="backButton:" destination="CYm-Gx-IRt" id="wST-0J-jUE"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="  保存  " id="zbX-kA-Wxe">
-                                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="  保存  " style="done" id="zbX-kA-Wxe">
                                             <connections>
                                                 <action selector="saveButton:" destination="CYm-Gx-IRt" id="6vj-89-4GD"/>
                                             </connections>
@@ -407,6 +410,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SelectInputCell" textLabel="TTT-Wm-MTc" style="IBUITableViewCellStyleDefault" id="FmX-a8-wnI">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -434,6 +438,7 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="IIb-5U-3jT">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="場所の選択" id="YvR-JV-NF7">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="Mu3-2m-iE5">
@@ -651,10 +656,12 @@
                                         </state>
                                     </button>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="cTw-xY-abI">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="投手成績入力" id="wUt-Lv-RGS">
                                         <barButtonItem key="leftBarButtonItem" title="打撃成績へ" id="aPz-pR-w4Y">
@@ -662,8 +669,7 @@
                                                 <action selector="toBattingButton:" destination="sOh-sz-83Q" id="zeT-Qg-ejg"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="  保存  " id="7k8-iH-8H5">
-                                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <barButtonItem key="rightBarButtonItem" title="  保存  " style="done" id="7k8-iH-8H5">
                                             <connections>
                                                 <action selector="saveButton:" destination="sOh-sz-83Q" id="YwP-Ir-EZK"/>
                                             </connections>
@@ -708,6 +714,7 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="kHe-ML-ySr">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="打撃成績" id="ry7-Yd-Gdv"/>
                                 </items>
@@ -724,7 +731,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eko-F1-NAj">
-                                        <rect key="frame" x="120" y="17" width="60" height="31"/>
+                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="変更">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -930,7 +937,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aTi-Nb-YJl">
-                                        <rect key="frame" x="70" y="450" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="430" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="打撃成績をメール送信">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -940,9 +947,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QFa-fM-5jq">
-                                        <rect key="frame" x="70" y="385" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="375" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <state key="normal" title="打撃成績をつぶやく">
+                                        <state key="normal" title="打撃成績をシェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -950,6 +957,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1117,7 +1125,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1fV-QY-RDu">
-                                        <rect key="frame" x="120" y="17" width="60" height="31"/>
+                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="変更">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1233,7 +1241,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gh3-Yq-ccR">
-                                        <rect key="frame" x="70" y="450" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="430" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="投手成績をメール送信">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1243,9 +1251,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KgJ-K6-JcA">
-                                        <rect key="frame" x="70" y="385" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="375" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <state key="normal" title="投手成績をつぶやく">
+                                        <state key="normal" title="投手成績をシェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1253,10 +1261,12 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="52j-9A-b37">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="投手成績" id="ons-m5-xv2"/>
                                 </items>
@@ -1264,7 +1274,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="投手成績" image="baseball.png" id="t8E-oj-4jk"/>
+                    <tabBarItem key="tabBarItem" title="投手成績" image="baseball.png" id="Zzi-29-sld"/>
                     <connections>
                         <outlet property="dassanshin" destination="0aZ-Iw-uuZ" id="hKl-q5-jiJ"/>
                         <outlet property="era" destination="H0D-hS-QBt" id="imK-2R-1Li"/>
@@ -1300,6 +1310,7 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="ZWi-Kd-7Rt">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="試合結果" id="6BK-rF-IqO">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="MmO-X1-Zmj">
@@ -1575,7 +1586,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kBP-3Z-Jx2">
                                         <rect key="frame" x="70" y="560" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <state key="normal" title="試合結果をつぶやく">
+                                        <state key="normal" title="試合結果をシェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1608,6 +1619,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1668,9 +1680,10 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="vAq-Fo-uz0">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="設定" id="ZbE-bK-WAj">
-                                        <barButtonItem key="rightBarButtonItem" title="広告を削除" id="ueX-kT-PhL">
+                                        <barButtonItem key="rightBarButtonItem" title="広告を削除" style="done" id="ueX-kT-PhL">
                                             <connections>
                                                 <segue destination="bNr-Js-zLU" kind="modal" modalTransitionStyle="crossDissolve" id="3x3-xL-RrQ"/>
                                             </connections>
@@ -1799,6 +1812,7 @@
                                         </state>
                                     </button>
                                 </subviews>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1834,6 +1848,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="80"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PurchaseCell" textLabel="lEy-OZ-SJT" style="IBUITableViewCellStyleDefault" id="59L-K4-Uuv">
@@ -1863,6 +1878,7 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="Aod-ER-aWk">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="アドオン購入" id="Prt-jQ-fhB">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="xB0-yU-ias">
@@ -1898,6 +1914,7 @@
                     <connections>
                         <segue destination="2" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="27"/>
+                        <segue destination="m1s-Pa-ZZL" kind="relationship" relationship="viewControllers" id="obM-RM-9H9"/>
                         <segue destination="roP-hv-BV2" kind="relationship" relationship="viewControllers" id="98Q-ht-fgz"/>
                         <segue destination="sHv-AF-uZY" kind="relationship" relationship="viewControllers" id="Tjd-ml-8zF"/>
                     </connections>
@@ -1906,12 +1923,154 @@
             </objects>
             <point key="canvasLocation" x="110" y="180"/>
         </scene>
+        <!--Batting Analysis Controller - 打撃分析-->
+        <scene sceneID="R87-Ob-lwK">
+            <objects>
+                <viewController id="m1s-Pa-ZZL" customClass="BattingAnalysisController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W0S-gX-qZF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" id="59N-va-oJf">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                                <items>
+                                    <navigationItem title="打撃分析" id="YBA-xL-vEC"/>
+                                </items>
+                            </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="bcR-cg-eis">
+                                <rect key="frame" x="0.0" y="64" width="320" height="454"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【打撃分析】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aAQ-rF-k4i">
+                                        <rect key="frame" x="10" y="126" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pSB-Si-KHe">
+                                        <rect key="frame" x="35" y="86" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xd0-gd-GIC">
+                                        <rect key="frame" x="100" y="86" width="210" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uye-4J-vnu">
+                                        <rect key="frame" x="100" y="56" width="210" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Bp-yZ-BfA">
+                                        <rect key="frame" x="35" y="56" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【集計範囲】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vif-0n-SLZ">
+                                        <rect key="frame" x="10" y="21" width="107" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="to9-74-YKp">
+                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="変更">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeButton:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="URd-lf-K2t"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" id="Uba-wM-tnx" customClass="BattingAnalysisView">
+                                        <rect key="frame" x="20" y="151" width="280" height="296"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="凡打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dr2-H4-AVZ">
+                                                <rect key="frame" x="35" y="278" width="30" height="20"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="単打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CLJ-e7-5cB">
+                                                <rect key="frame" x="35" y="258" width="30" height="20"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cmE-wm-g6s">
+                                                <rect key="frame" x="35" y="238" width="30" height="20"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rMc-YI-dMb">
+                                        <rect key="frame" x="120" y="121" width="60" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="保存">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveAnalysis:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="O1L-91-I70"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NJD-HC-evW">
+                                        <rect key="frame" x="220" y="121" width="60" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="シェア">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shareAnalysis:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="5iR-xz-Jtd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="打撃分析" image="browser_window.png" id="f0P-Wi-yS7"/>
+                    <connections>
+                        <outlet property="analysysView" destination="Uba-wM-tnx" id="IDK-F0-NGU"/>
+                        <outlet property="changeBtn" destination="to9-74-YKp" id="I9r-bK-DZh"/>
+                        <outlet property="saveBtn" destination="rMc-YI-dMb" id="b0H-ON-i29"/>
+                        <outlet property="scrollView" destination="bcR-cg-eis" id="9JO-xZ-N8l"/>
+                        <outlet property="shareBtn" destination="NJD-HC-evW" id="vPu-DH-Oyc"/>
+                        <outlet property="team" destination="xd0-gd-GIC" id="8XC-76-bmp"/>
+                        <outlet property="year" destination="Uye-4J-vnu" id="ncE-kk-fUh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9I-wB-LOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1457" y="1041"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow_left.png" width="44" height="44"/>
         <image name="arrow_right.png" width="44" height="44"/>
         <image name="baseball.png" width="24" height="24"/>
         <image name="book.png" width="24" height="24"/>
+        <image name="browser_window.png" width="24" height="24"/>
         <image name="settings.png" width="24" height="24"/>
         <image name="statistics.png" width="24" height="24"/>
     </resources>
@@ -1921,7 +2080,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7pF-G3-Z3a"/>
+        <segue reference="beY-vE-fQn"/>
         <segue reference="Ofd-zu-7oJ"/>
     </inferredMetricsTieBreakers>
 </document>

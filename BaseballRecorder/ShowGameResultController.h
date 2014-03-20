@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "NADView.h"
 
 @interface ShowGameResultController : UIViewController
-    <MFMailComposeViewControllerDelegate,NADViewDelegate>
+    <MFMailComposeViewControllerDelegate, NADViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain) NADView* nadView;
 
@@ -60,7 +61,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *tweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
 
-@property BOOL tweeted;
+@property BOOL posted;
+// @property BOOL tweeted;
 
 - (IBAction)tweetButton:(id)sender;
 

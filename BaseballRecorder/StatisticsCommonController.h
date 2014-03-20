@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Social/Social.h>
 #import "NADView.h"
 
 #define ALL_TARGET 0
@@ -15,14 +16,18 @@
 #define BATTING_RESULT  1
 #define PITCHING_RESULT 2
 
+#define POST_TWITTER 1
+#define POST_FACEBOOK 2
+
 @interface StatisticsCommonController : UIViewController
-    <UIPickerViewDelegate, UIPickerViewDataSource, NADViewDelegate>
+    <UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, NADViewDelegate>
 
 @property (nonatomic, retain) NADView* nadView;
 
 @property int targetyear;
 @property int targetteam;
 
+@property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *targetToolbar;
 @property (strong, nonatomic) UIPickerView *targetPicker;
 
@@ -33,6 +38,8 @@
 
 @property (strong, nonatomic) NSMutableArray *teamList;
 
+@property BOOL posted;
+
 - (NSArray*)getGameResultListForCalc;
 
 - (void)updateStatistics;
@@ -40,6 +47,10 @@
 - (void)makeResultPicker;
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team;
+
+- (void)shareStatistics;
+
+- (NSString*)makeShareString:(int)type;
 
 - (NSString*)getMailTitle:(int)type;
 

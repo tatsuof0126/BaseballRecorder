@@ -165,7 +165,8 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

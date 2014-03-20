@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *inningButton;
 @property (weak, nonatomic) IBOutlet UIButton *sekininButton;
 
+@property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *pickerToolbar;
 @property (strong, nonatomic) UIPickerView *selectPicker;
 

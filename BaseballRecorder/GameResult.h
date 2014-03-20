@@ -66,6 +66,8 @@
 
 - (NSString*)getSekininString;
 
+- (UIColor*)getSekininColor;
+
 + (GameResult*)makeGameResult:(NSData*)data;
 
 - (NSComparisonResult)compareDate:(GameResult*)data;

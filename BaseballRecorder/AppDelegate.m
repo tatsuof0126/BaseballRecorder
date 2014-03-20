@@ -74,4 +74,15 @@
     }
 }
 
++ (void)adjustOriginForBeforeiOS6:(UIView*)view {
+    // iOS5/6対応
+    if([[[UIDevice currentDevice] systemVersion] compare:@"7" options:NSNumericSearch]
+       == NSOrderedAscending){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y-20,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+}
+
 @end

@@ -473,7 +473,8 @@
         [alert setTag:ALERT_BACK];
         [alert show];
     } else {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissModalViewControllerAnimated:YES];
     }
 }
 
@@ -553,7 +554,8 @@
     switch (alertView.tag) {
         case ALERT_BACK:
             if(buttonIndex == 1){
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+//                [self dismissModalViewControllerAnimated:YES];
             }
             break;
             
@@ -565,7 +567,8 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:gameResult];
                 
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+//                [self dismissModalViewControllerAnimated:YES];
             }
             break;
             

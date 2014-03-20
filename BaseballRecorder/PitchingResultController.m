@@ -30,6 +30,7 @@
 @synthesize saveButton;
 @synthesize inningButton;
 @synthesize sekininButton;
+@synthesize pickerBaseView;
 @synthesize pickerToolbar;
 @synthesize selectPicker;
 
@@ -147,9 +148,14 @@
     CGFloat width = rect.size.width;
     CGFloat height = rect.size.height;
     
-    selectPicker = [[UIPickerView alloc] init];
+    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
+    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
+    pickerBaseView.backgroundColor = [UIColor clearColor];
     
-    selectPicker.center = CGPointMake(width/2, height+125+60);
+    // PickerView
+    selectPicker = [[UIPickerView alloc] init];
+    selectPicker.center = CGPointMake(width/2, 135);
+//    selectPicker.center = CGPointMake(width/2, height+125+60);
     selectPicker.delegate = self;
     selectPicker.dataSource = self;
     selectPicker.showsSelectionIndicator = YES;
@@ -170,7 +176,9 @@
         }
     }
     
-    pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height, 320, 44)];
+    // ToolBar
+    pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+//    pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height, 320, 44)];
     pickerToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
@@ -190,8 +198,13 @@
     
     [pickerToolbar setItems:items animated:YES];
     
-    [self.view addSubview:pickerToolbar];
-    [self.view addSubview:selectPicker];
+    [pickerBaseView addSubview:selectPicker];
+    [pickerBaseView addSubview:pickerToolbar];
+    
+    [self.view addSubview:pickerBaseView];
+    
+//    [self.view addSubview:pickerToolbar];
+//    [self.view addSubview:selectPicker];
     
     //アニメーションの設定開始
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -199,8 +212,10 @@
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
     [UIView setAnimationDuration:0.3];    // 時間の指定
-    selectPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
-    pickerToolbar.center = CGPointMake(width/2, height-255);
+    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
+    
+//    selectPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
+//    pickerToolbar.center = CGPointMake(width/2, height-255);
     
     [UIView commitAnimations];
 }
@@ -264,9 +279,11 @@
 }
 
 - (void)closeSelectPicker {
-    [pickerToolbar removeFromSuperview];
     [selectPicker removeFromSuperview];
+    [pickerToolbar removeFromSuperview];
+    [pickerBaseView removeFromSuperview];
     
+    pickerBaseView = nil;
     pickerToolbar = nil;
     selectPicker = nil;
 }
@@ -349,7 +366,8 @@
 
 - (void)backToBattingView {
     [self updateGameResult];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)updateGameResult {
@@ -390,7 +408,8 @@
             if(buttonIndex == 1){
                 // 投手成績を初期化して戻る（入力内容は無視）
                 [self clearGameResult];
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+//                [self dismissModalViewControllerAnimated:YES];
             }
             break;
         case ALERT_SAVE:
@@ -404,7 +423,8 @@
                 
                 // 一覧画面に戻る
                 self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
             }
             break;
         case ALERT_SAVE_ONLY_BATTING:
@@ -418,7 +438,8 @@
                 
                 // 一覧画面に戻る
                 self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
             }
             break;
         default:

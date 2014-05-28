@@ -19,4 +19,6 @@
 
 + (NSString*)getFloatStr2:(float)floatvalue;
 
++ (int)convert2int:(NSInteger)integer;
+
 @end

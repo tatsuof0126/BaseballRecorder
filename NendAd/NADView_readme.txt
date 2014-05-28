@@ -12,16 +12,18 @@ README
 また、Build Phases > Link Binary With Libraries へ
 
 * Security.framework (version 1.2.2~)
-* AdSupport.framework (version 2.0.0~)
+* AdSupport.framework (version 2.0.0~) ※iOS6未満も対象に含める場合には必ずOptionalに設定してください。
 
 の追加が必要です。
 
 端末環境
- デバイスは、iPhone 3GS (armv7 対応)以上、iPhone 5 (armv7s 対応)
+ デバイスは、iPhone 3GS (armv7 対応)以上、iPhone 5, iPod Touch 5th (armv7s 対応)
  OS バージョンは、iOS 4.3 以上 iOS6.1.3 (2013/4/11 時点現在最新) が動作保証対象となります。
  それ以外の端末では正常に動作しない場合があります。
 
-具体的な実装方法、詳細については、別途設定マニュアルをお読みください。
+具体的な実装方法、詳細情報、よくある質問等は、nendSDK設定マニュアルをお読みください。
+
+
 
 著作権表記
 

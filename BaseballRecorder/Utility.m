@@ -44,4 +44,9 @@
     return floatStr;
 }
 
++ (int)convert2int:(NSInteger)integer {
+    // NSIntegerを無理やりintに直している
+    return [[NSNumber numberWithInteger:integer] intValue];
+}
+
 @end

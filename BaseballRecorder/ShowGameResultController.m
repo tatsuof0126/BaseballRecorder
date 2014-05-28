@@ -14,6 +14,7 @@
 #import "BattingStatistics.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
+#import "Utility.h"
 
 @interface ShowGameResultController ()
 
@@ -216,7 +217,7 @@
 //        battingAdjust -= 70;
 //    }
 
-    int battingAdjust = battingResultFlg ? 230+gameResult.battingResultArray.count*30 : 160;
+    int battingAdjust = battingResultFlg ? 230+[Utility convert2int:gameResult.battingResultArray.count]*30 : 160;
     int pitchingAdjust = pitchingResultFlg ? 160 : 0;
     int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     

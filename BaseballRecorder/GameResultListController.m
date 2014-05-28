@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "GameResultManager.h"
 #import "ConfigManager.h"
+#import "Utility.h"
 
 @interface GameResultListController ()
 
@@ -271,8 +272,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
-        int resultid = alertView.tag;
-
+        int resultid = [Utility convert2int:alertView.tag];
+        
         [GameResultManager removeGameResult:resultid];
         
         [self loadGameResult];
@@ -284,8 +285,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    int tag = ((UIView*)sender).tag;
-    
+    int tag = [Utility convert2int:((UIView*)sender).tag];
+
     if(tag == 1){
         // 追加ボタン
         appDelegate.targetGameResult = nil;

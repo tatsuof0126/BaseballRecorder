@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B02212D18CAEC570002E33B /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02212B18CAEC570002E33B /* ground.png */; };
-		0B02212E18CAEC570002E33B /* ground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02212C18CAEC570002E33B /* ground@2x.png */; };
 		0B02218D18CB17610002E33B /* Icon-small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218518CB17610002E33B /* Icon-small-40@2x.png */; };
 		0B02218E18CB17610002E33B /* Icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218618CB17610002E33B /* Icon-small@2x.png */; };
 		0B02218F18CB17610002E33B /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218718CB17610002E33B /* icon-small.png */; };
@@ -17,6 +15,14 @@
 		0B02219218CB17610002E33B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218A18CB17610002E33B /* Icon-72.png */; };
 		0B02219318CB17610002E33B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218B18CB17610002E33B /* Icon@2x.png */; };
 		0B02219418CB17610002E33B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218C18CB17610002E33B /* Icon.png */; };
+		0B16F8A919338AAF00C82E16 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B16F89D19338AAF00C82E16 /* libNendAd.a */; };
+		0B16F8AA19338AAF00C82E16 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8A219338AAF00C82E16 /* NADView_readme.txt */; };
+		0B16F8B41933918400C82E16 /* arrow_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B31933918400C82E16 /* arrow_none.png */; };
+		0B16F8B7193391CB00C82E16 /* browser_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B5193391CB00C82E16 /* browser_window.png */; };
+		0B16F8B8193391CB00C82E16 /* browser_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B6193391CB00C82E16 /* browser_window@2x.png */; };
+		0B16F8BB193391FE00C82E16 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B9193391FE00C82E16 /* ground.png */; };
+		0B16F8BC193391FE00C82E16 /* ground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8BA193391FE00C82E16 /* ground@2x.png */; };
+		0B16F8BF19339BFA00C82E16 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B16F8BE19339BFA00C82E16 /* UIPlaceHolderTextView.m */; };
 		0B1AA348163D59F800535116 /* BaseballRecorderUIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1AA347163D59F800535116 /* BaseballRecorderUIApplication.m */; };
 		0B1AA351163D772B00535116 /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA349163D772B00535116 /* book.png */; };
 		0B1AA352163D772B00535116 /* book@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34A163D772B00535116 /* book@2x.png */; };
@@ -24,8 +30,6 @@
 		0B1AA356163D772B00535116 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34E163D772B00535116 /* settings@2x.png */; };
 		0B1AA357163D772B00535116 /* statistics.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA34F163D772B00535116 /* statistics.png */; };
 		0B1AA358163D772B00535116 /* statistics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1AA350163D772B00535116 /* statistics@2x.png */; };
-		0B20309618BA4C7E00B94D8C /* browser_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B20309418BA4C7E00B94D8C /* browser_window.png */; };
-		0B20309718BA4C7E00B94D8C /* browser_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B20309518BA4C7E00B94D8C /* browser_window@2x.png */; };
 		0B20309A18BA54DA00B94D8C /* BattingAnalysisController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B20309918BA54DA00B94D8C /* BattingAnalysisController.m */; };
 		0B20309D18BA566200B94D8C /* BattingAnalysisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B20309C18BA566200B94D8C /* BattingAnalysisView.m */; };
 		0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */; };
@@ -62,7 +66,6 @@
 		0B9499C416325697007F574D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C316325697007F574D /* Default-568h@2x.png */; };
 		0B9499C716325697007F574D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C516325697007F574D /* MainStoryboard.storyboard */; };
 		0B9499CA16325697007F574D /* GameResultListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499C916325697007F574D /* GameResultListController.m */; };
-		0B9499DD16325697007F574D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499DC16325697007F574D /* SenTestingKit.framework */; };
 		0B9499DE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
 		0B9499DF16325697007F574D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AF16325697007F574D /* Foundation.framework */; };
 		0B9499E716325697007F574D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499E516325697007F574D /* InfoPlist.strings */; };
@@ -73,10 +76,7 @@
 		0B949A0416335C33007F574D /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0316335C33007F574D /* GameResult.m */; };
 		0B949A0716335C8B007F574D /* BattingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0616335C8B007F574D /* BattingResult.m */; };
 		0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9AA57218C35E53001F42F4 /* Social.framework */; };
-		0BC2F43518A54FBC0085089E /* arrow_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BC2F43418A54FBC0085089E /* arrow_none.png */; };
 		0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC4265417C663A500AB95D0 /* Twitter.framework */; };
-		0BC5F7F517C26D0B00C755A7 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F217C26D0B00C755A7 /* libNendAd.a */; };
-		0BC5F7F617C26D0B00C755A7 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */; };
 		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
@@ -96,8 +96,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B02212B18CAEC570002E33B /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ground.png; path = ../../../../Users/tatsuo/Dropbox/result2/ground.png; sourceTree = "<group>"; };
-		0B02212C18CAEC570002E33B /* ground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ground@2x.png"; path = "../../../../Users/tatsuo/Dropbox/result2/ground@2x.png"; sourceTree = "<group>"; };
 		0B02218518CB17610002E33B /* Icon-small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-small-40@2x.png"; path = "BaseballRecorder/images/Icon-small-40@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B02218618CB17610002E33B /* Icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-small@2x.png"; path = "BaseballRecorder/images/Icon-small@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B02218718CB17610002E33B /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-small.png"; path = "BaseballRecorder/images/icon-small.png"; sourceTree = SOURCE_ROOT; };
@@ -106,6 +104,19 @@
 		0B02218A18CB17610002E33B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "BaseballRecorder/images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		0B02218B18CB17610002E33B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "BaseballRecorder/images/Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B02218C18CB17610002E33B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = BaseballRecorder/images/Icon.png; sourceTree = SOURCE_ROOT; };
+		0B16F89D19338AAF00C82E16 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		0B16F89E19338AAF00C82E16 /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
+		0B16F89F19338AAF00C82E16 /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
+		0B16F8A019338AAF00C82E16 /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
+		0B16F8A119338AAF00C82E16 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		0B16F8A219338AAF00C82E16 /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
+		0B16F8B31933918400C82E16 /* arrow_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_none.png; path = BaseballRecorder/images/arrow_none.png; sourceTree = SOURCE_ROOT; };
+		0B16F8B5193391CB00C82E16 /* browser_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = browser_window.png; path = BaseballRecorder/images/browser_window.png; sourceTree = SOURCE_ROOT; };
+		0B16F8B6193391CB00C82E16 /* browser_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser_window@2x.png"; path = "BaseballRecorder/images/browser_window@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B16F8B9193391FE00C82E16 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ground.png; path = BaseballRecorder/images/ground.png; sourceTree = SOURCE_ROOT; };
+		0B16F8BA193391FE00C82E16 /* ground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ground@2x.png"; path = "BaseballRecorder/images/ground@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B16F8BD19339BFA00C82E16 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		0B16F8BE19339BFA00C82E16 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		0B1AA346163D59F700535116 /* BaseballRecorderUIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseballRecorderUIApplication.h; sourceTree = "<group>"; };
 		0B1AA347163D59F800535116 /* BaseballRecorderUIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseballRecorderUIApplication.m; sourceTree = "<group>"; };
 		0B1AA349163D772B00535116 /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = book.png; path = BaseballRecorder/images/book.png; sourceTree = SOURCE_ROOT; };
@@ -114,8 +125,6 @@
 		0B1AA34E163D772B00535116 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "BaseballRecorder/images/settings@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B1AA34F163D772B00535116 /* statistics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statistics.png; path = BaseballRecorder/images/statistics.png; sourceTree = SOURCE_ROOT; };
 		0B1AA350163D772B00535116 /* statistics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statistics@2x.png"; path = "BaseballRecorder/images/statistics@2x.png"; sourceTree = SOURCE_ROOT; };
-		0B20309418BA4C7E00B94D8C /* browser_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = browser_window.png; path = "../../../../Users/tatsuo/Desktop/AppDev/ベボレコ/アイコンその他/browser_window_picol/browser_window.png"; sourceTree = "<group>"; };
-		0B20309518BA4C7E00B94D8C /* browser_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "browser_window@2x.png"; path = "../../../../Users/tatsuo/Desktop/AppDev/ベボレコ/アイコンその他/browser_window_picol/browser_window@2x.png"; sourceTree = "<group>"; };
 		0B20309818BA54DA00B94D8C /* BattingAnalysisController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingAnalysisController.h; sourceTree = "<group>"; };
 		0B20309918BA54DA00B94D8C /* BattingAnalysisController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingAnalysisController.m; sourceTree = "<group>"; };
 		0B20309B18BA566200B94D8C /* BattingAnalysisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingAnalysisView.h; sourceTree = "<group>"; };
@@ -172,8 +181,7 @@
 		0B9499C316325697007F574D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B9499C816325697007F574D /* GameResultListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameResultListController.h; sourceTree = "<group>"; };
 		0B9499C916325697007F574D /* GameResultListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameResultListController.m; sourceTree = "<group>"; };
-		0B9499DB16325697007F574D /* BaseballRecorderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballRecorderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B9499DC16325697007F574D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0B9499DB16325697007F574D /* BaseballRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9499E416325697007F574D /* BaseballRecorderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BaseballRecorderTests-Info.plist"; sourceTree = "<group>"; };
 		0B9499E816325697007F574D /* BaseballRecorderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseballRecorderTests.h; sourceTree = "<group>"; };
 		0B9499E916325697007F574D /* BaseballRecorderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseballRecorderTests.m; sourceTree = "<group>"; };
@@ -188,11 +196,7 @@
 		0B949A0516335C8A007F574D /* BattingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingResult.h; sourceTree = "<group>"; };
 		0B949A0616335C8B007F574D /* BattingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingResult.m; sourceTree = "<group>"; };
 		0B9AA57218C35E53001F42F4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		0BC2F43418A54FBC0085089E /* arrow_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_none.png; path = "../../../../Users/tatsuo/Desktop/AppDev/ベボレコ/アイコンその他/arrow_none.png"; sourceTree = "<group>"; };
 		0BC4265417C663A500AB95D0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		0BC5F7F217C26D0B00C755A7 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
-		0BC5F7F317C26D0B00C755A7 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
-		0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
 		0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0BC5F7F917C26D5400C755A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 			files = (
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
+				0B16F8A919338AAF00C82E16 /* libNendAd.a in Frameworks */,
 				0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */,
 				0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
@@ -222,7 +227,6 @@
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
-				0BC5F7F517C26D0B00C755A7 /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +234,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9499DD16325697007F574D /* SenTestingKit.framework in Frameworks */,
 				0B9499DE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499DF16325697007F574D /* Foundation.framework in Frameworks */,
 			);
@@ -239,21 +242,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B16F89C19338AAF00C82E16 /* NendAd */ = {
+			isa = PBXGroup;
+			children = (
+				0B16F89D19338AAF00C82E16 /* libNendAd.a */,
+				0B16F89E19338AAF00C82E16 /* NADIconArrayView.h */,
+				0B16F89F19338AAF00C82E16 /* NADIconLoader.h */,
+				0B16F8A019338AAF00C82E16 /* NADIconView.h */,
+				0B16F8A119338AAF00C82E16 /* NADView.h */,
+				0B16F8A219338AAF00C82E16 /* NADView_readme.txt */,
+			);
+			path = NendAd;
+			sourceTree = "<group>";
+		};
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
 				0B53465317BF676900601AAE /* arrow_left.png */,
 				0B53464D17BF561A00601AAE /* arrow_right.png */,
-				0BC2F43418A54FBC0085089E /* arrow_none.png */,
+				0B16F8B31933918400C82E16 /* arrow_none.png */,
 				0B40E44216CAB45100E0E95D /* baseball.png */,
 				0B40E44316CAB45100E0E95D /* baseball@2x.png */,
-				0B20309418BA4C7E00B94D8C /* browser_window.png */,
-				0B20309518BA4C7E00B94D8C /* browser_window@2x.png */,
+				0B16F8B5193391CB00C82E16 /* browser_window.png */,
+				0B16F8B6193391CB00C82E16 /* browser_window@2x.png */,
 				0B40E43516C3F0DD00E0E95D /* disable_check.png */,
-				0B02212B18CAEC570002E33B /* ground.png */,
-				0B02212C18CAEC570002E33B /* ground@2x.png */,
 				0B40E43616C3F0DD00E0E95D /* nocheck.png */,
 				0B40E43716C3F0DD00E0E95D /* check.png */,
+				0B16F8B9193391FE00C82E16 /* ground.png */,
+				0B16F8BA193391FE00C82E16 /* ground@2x.png */,
 				0B02218518CB17610002E33B /* Icon-small-40@2x.png */,
 				0B02218618CB17610002E33B /* Icon-small@2x.png */,
 				0B02218718CB17610002E33B /* icon-small.png */,
@@ -280,7 +296,7 @@
 				0B9499E216325697007F574D /* BaseballRecorderTests */,
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
-				0BC5F7F117C26D0B00C755A7 /* NendAd */,
+				0B16F89C19338AAF00C82E16 /* NendAd */,
 			);
 			sourceTree = "<group>";
 		};
@@ -288,7 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				0B9499A916325697007F574D /* BaseballRecorder.app */,
-				0B9499DB16325697007F574D /* BaseballRecorderTests.octest */,
+				0B9499DB16325697007F574D /* BaseballRecorderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,7 +324,6 @@
 				0B9499AD16325697007F574D /* UIKit.framework */,
 				0B9499AF16325697007F574D /* Foundation.framework */,
 				0B9499B116325697007F574D /* CoreGraphics.framework */,
-				0B9499DC16325697007F574D /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -363,6 +378,8 @@
 				0B683705164279E00086E198 /* BattingStatistics.m */,
 				0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */,
 				0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */,
+				0B16F8BD19339BFA00C82E16 /* UIPlaceHolderTextView.h */,
+				0B16F8BE19339BFA00C82E16 /* UIPlaceHolderTextView.m */,
 				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
 				0B40E42D16C3EEE800E0E95D /* CheckBoxButton.m */,
 				0BE4C49F16FF0D0000DAD11F /* InAppPurchaseProtocol.h */,
@@ -407,16 +424,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0BC5F7F117C26D0B00C755A7 /* NendAd */ = {
-			isa = PBXGroup;
-			children = (
-				0BC5F7F217C26D0B00C755A7 /* libNendAd.a */,
-				0BC5F7F317C26D0B00C755A7 /* NADView.h */,
-				0BC5F7F417C26D0B00C755A7 /* NADView_readme.txt */,
-			);
-			path = NendAd;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,8 +460,8 @@
 			);
 			name = BaseballRecorderTests;
 			productName = BaseballRecorderTests;
-			productReference = 0B9499DB16325697007F574D /* BaseballRecorderTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 0B9499DB16325697007F574D /* BaseballRecorderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -462,6 +469,7 @@
 		0B9499A016325696007F574D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Tatsuo Fujiwara";
 				TargetAttributes = {
@@ -496,10 +504,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B9499B816325697007F574D /* InfoPlist.strings in Resources */,
-				0B20309718BA4C7E00B94D8C /* browser_window@2x.png in Resources */,
 				0B9499C016325697007F574D /* Default.png in Resources */,
 				0B9499C216325697007F574D /* Default@2x.png in Resources */,
-				0BC2F43518A54FBC0085089E /* arrow_none.png in Resources */,
 				0B9499C416325697007F574D /* Default-568h@2x.png in Resources */,
 				0B02218D18CB17610002E33B /* Icon-small-40@2x.png in Resources */,
 				0B02219318CB17610002E33B /* Icon@2x.png in Resources */,
@@ -510,23 +516,25 @@
 				0B1AA352163D772B00535116 /* book@2x.png in Resources */,
 				0B1AA355163D772B00535116 /* settings.png in Resources */,
 				0B02219418CB17610002E33B /* Icon.png in Resources */,
+				0B16F8B8193391CB00C82E16 /* browser_window@2x.png in Resources */,
 				0B1AA356163D772B00535116 /* settings@2x.png in Resources */,
 				0B02218F18CB17610002E33B /* icon-small.png in Resources */,
 				0B1AA357163D772B00535116 /* statistics.png in Resources */,
 				0B1AA358163D772B00535116 /* statistics@2x.png in Resources */,
-				0B02212D18CAEC570002E33B /* ground.png in Resources */,
-				0B02212E18CAEC570002E33B /* ground@2x.png in Resources */,
 				0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */,
-				0B20309618BA4C7E00B94D8C /* browser_window.png in Resources */,
 				0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */,
+				0B16F8B7193391CB00C82E16 /* browser_window.png in Resources */,
 				0B40E43A16C3F0DD00E0E95D /* check.png in Resources */,
 				0B40E44416CAB45100E0E95D /* baseball.png in Resources */,
 				0B02219118CB17610002E33B /* Icon-72@2x.png in Resources */,
+				0B16F8BB193391FE00C82E16 /* ground.png in Resources */,
+				0B16F8BC193391FE00C82E16 /* ground@2x.png in Resources */,
+				0B16F8AA19338AAF00C82E16 /* NADView_readme.txt in Resources */,
+				0B16F8B41933918400C82E16 /* arrow_none.png in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
 				0B53464E17BF561A00601AAE /* arrow_right.png in Resources */,
 				0B02219218CB17610002E33B /* Icon-72.png in Resources */,
 				0B53465417BF676900601AAE /* arrow_left.png in Resources */,
-				0BC5F7F617C26D0B00C755A7 /* NADView_readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +585,7 @@
 				0B683703164279C50086E198 /* TeamStatistics.m in Sources */,
 				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,
 				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
+				0B16F8BF19339BFA00C82E16 /* UIPlaceHolderTextView.m in Sources */,
 				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
 				0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */,
 				0B20309A18BA54DA00B94D8C /* BattingAnalysisController.m in Sources */,
@@ -698,7 +707,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/NendAd\"",
+					"$(PROJECT_DIR)/NendAd",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -719,7 +729,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/NendAd\"",
+					"$(PROJECT_DIR)/NendAd",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -736,13 +747,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorderTests/BaseballRecorderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -753,13 +764,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorderTests/BaseballRecorderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

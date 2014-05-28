@@ -63,7 +63,7 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    int section = indexPath.section;
+    int section = [Utility convert2int:indexPath.section];
     
     UITableViewCell* cell;
     

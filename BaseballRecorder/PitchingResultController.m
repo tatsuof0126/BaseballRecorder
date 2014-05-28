@@ -11,6 +11,7 @@
 #import "GameResult.h"
 #import "GameResultManager.h"
 #import "CheckBoxButton.h"
+#import "Utility.h"
 
 #define PICKER_INNING  1
 #define PICKER_SEKININ 2
@@ -267,11 +268,11 @@
 
 - (void)toolbarDoneButton:(id)sender {
     if(selectPicker.tag == PICKER_INNING){
-        _inning  = [selectPicker selectedRowInComponent:0];
-        _inning2 = [selectPicker selectedRowInComponent:1];
+        _inning  = [Utility convert2int:[selectPicker selectedRowInComponent:0]];
+        _inning2 = [Utility convert2int:[selectPicker selectedRowInComponent:1]];
         [self showInning];
     } else if(selectPicker.tag == PICKER_SEKININ){
-        _sekinin = [selectPicker selectedRowInComponent:0];
+        _sekinin = [Utility convert2int:[selectPicker selectedRowInComponent:0]];
         [self showSekinin];
     }
     

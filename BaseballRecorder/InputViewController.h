@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GameResult.h"
 #import "BattingResult.h"
+#import "UIPlaceHolderTextView.h"
 
 @interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
@@ -29,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *steal;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
-@property (strong, nonatomic) IBOutlet UITextView *memo;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *memo;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 

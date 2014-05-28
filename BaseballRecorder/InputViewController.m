@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "InputViewController.h"
 #import "AppDelegate.h"
+#import "Utility.h"
 #import "ConfigManager.h"
 #import "GameResultManager.h"
 #import "ResultPickerViewController.h"
@@ -64,13 +65,36 @@
         NSDateComponents *dateComps
         = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
         
-        gameResult.year = dateComps.year;
-        gameResult.month = dateComps.month;
-        gameResult.day = dateComps.day;
+        gameResult.year = [Utility convert2int:dateComps.year];
+        gameResult.month = [Utility convert2int:dateComps.month];
+        gameResult.day = [Utility convert2int:dateComps.day];
         
         // 場所・チームにデフォルト値を設定
         NSString* defaultPlace = [ConfigManager getDefaultPlace];
         NSString* defaultMyteam = [ConfigManager getDefaultMyTeam];
+        
+        // 場所やチームが１種類しか登録がない場合はそれをデフォルトにする
+        if([defaultPlace isEqualToString:@""] || [defaultMyteam isEqualToString:@""]){
+            NSMutableArray* placeArray = [NSMutableArray array];
+            NSMutableArray* teamArray = [NSMutableArray array];
+        
+            NSArray* gameResultList = [GameResultManager loadGameResultList];
+            for (GameResult* result in gameResultList){
+                if([placeArray containsObject:result.place] == NO){
+                    [placeArray addObject:result.place];
+                }
+                if([teamArray containsObject:result.myteam] == NO){
+                    [teamArray addObject:result.myteam];
+                }
+            }
+            
+            if([defaultPlace isEqualToString:@""] && placeArray.count == 1){
+                defaultPlace = [placeArray objectAtIndex:0];
+            }
+            if([defaultMyteam isEqualToString:@""] && teamArray.count == 1){
+                defaultMyteam = [teamArray objectAtIndex:0];
+            }
+        }
         
         gameResult.place = defaultPlace;
         gameResult.myteam = defaultMyteam;
@@ -92,6 +116,7 @@
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     
     _memo.text = gameResult.memo;
+    _memo.placeholder = @"打順や守備位置、サヨナラ勝ちなど　試合のメモが入力できます";
     
     // TextViewを整形
     _memo.font = [UIFont systemFontOfSize:14];
@@ -257,7 +282,7 @@
     
     // 一番下に入力用の打撃成績（第◯打席、入力ボタン）
     UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+battingResultArray.count*40,80,21)];
-    nlabel.text = [NSString stringWithFormat:@"第%d打席",battingResultArray.count+1];
+    nlabel.text = [NSString stringWithFormat:@"第%ld打席",battingResultArray.count+1];
     
     UIButton *nbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     nbutton.frame = CGRectMake(110,260+battingResultArray.count*40,55,30);
@@ -278,7 +303,7 @@
 
 - (void)adjustContentFrame {
     // 打点・得点・盗塁入力欄とメモ欄・投手成績へボタンの配置を調整
-    int battingAdjust = 310+gameResult.battingResultArray.count*40;
+    int battingAdjust = 310+[Utility convert2int:gameResult.battingResultArray.count]*40;
     int memoAdjust = _memo.frame.size.height;
     
     [self setFrameOriginY:_datenLabel originY:battingAdjust+4];
@@ -419,7 +444,7 @@
 }
 
 - (void)toolbarClearButton:(id)sender {
-    int resultno = [sender tag];
+    int resultno = [Utility convert2int:[sender tag]];
     
     [gameResult removeBattingResult:resultno];
     
@@ -429,10 +454,10 @@
 }
 
 - (void)toolbarDoneButton:(id)sender {
-    int resultno = [sender tag];
+    int resultno = [Utility convert2int:[sender tag]];
     
-    int position = [resultPicker selectedRowInComponent:0];
-    int result = [resultPicker selectedRowInComponent:1];
+    int position = [Utility convert2int:[resultPicker selectedRowInComponent:0]];
+    int result = [Utility convert2int:[resultPicker selectedRowInComponent:1]];
     
     BattingResult *battingResult = [BattingResult makeBattingResult:position result:result];
     
@@ -644,9 +669,9 @@
     NSDateComponents *dateComps
         = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     
-    gameResult.year = dateComps.year;
-    gameResult.month = dateComps.month;
-    gameResult.day = dateComps.day;
+    gameResult.year = [Utility convert2int:dateComps.year];
+    gameResult.month = [Utility convert2int:dateComps.month];
+    gameResult.day = [Utility convert2int:dateComps.day];
     
     gameResult.place = [self escapeString:_place.text];
     gameResult.myteam = [self escapeString:_myteam.text];

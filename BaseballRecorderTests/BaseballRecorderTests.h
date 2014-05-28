@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface BaseballRecorderTests : SenTestCase
+@interface BaseballRecorderTests : XCTestCase
 
 @end

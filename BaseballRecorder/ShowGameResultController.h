@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *place;
 @property (weak, nonatomic) IBOutlet UILabel *myteam;
 @property (weak, nonatomic) IBOutlet UILabel *otherteam;
+@property (strong, nonatomic) IBOutlet UILabel *tagTextLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tagText;
+@property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *result;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 

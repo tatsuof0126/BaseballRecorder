@@ -49,7 +49,7 @@
                                        initWithTarget:self action:@selector(arrowButton:)]];
     
     // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
-    // あとで対応
+    // TODOあとで対応
     
     
     
@@ -109,6 +109,32 @@
     _myteam.text = gameResult.myteam;
     _otherteam.text = gameResult.otherteam;
     _result.text = [gameResult getGameResultString];
+    _tagText.text = gameResult.tagtext;
+    
+    // タグが空なら非表示
+    int tagAdjust = 0;
+    if ([gameResult.tagtext isEqualToString:@""] == YES){
+        _tagText.hidden = YES;
+        _tagTextLabel.hidden = YES;
+    } else {
+        _tagText.hidden = NO;
+        _tagTextLabel.hidden = NO;
+        tagAdjust = 35;
+    }
+    
+    // タグが長い場合は少し左に寄せる
+    if ([gameResult.tagtext lengthOfBytesUsingEncoding:NSShiftJISStringEncoding] >= 23){
+        _tagText.frame = CGRectMake(70, 160, 240, 21);
+    } else {
+        _tagText.frame = CGRectMake(100, 160, 210, 21);
+    }
+    
+    // 打撃成績
+    BOOL battingResultFlg = NO;
+    if( (gameResult.battingResultArray != nil && gameResult.battingResultArray.count >= 1) ||
+       gameResult.daten >= 1 || gameResult.tokuten >= 1 || gameResult.steal >= 1){
+        battingResultFlg = YES;
+    }
     
     NSArray* viewArray = [_scrollview subviews];
     for(int i=0;i<viewArray.count;i++){
@@ -121,23 +147,17 @@
     for(int i=0;i<gameResult.battingResultArray.count;i++){
         BattingResult* battingResult = [gameResult.battingResultArray objectAtIndex:i];
         
-        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,225+i*30,90,30)];
+        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,225+tagAdjust+i*30,90,30)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         titlelabel.tag = 1;
         
-        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+i*30,200,30)];
+        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+tagAdjust+i*30,200,30)];
         resultlabel.text = [battingResult getResultSemiLongString];
         resultlabel.tag = 1;
         resultlabel.textColor = [battingResult getResultColor];
         
         [_scrollview addSubview:titlelabel];
         [_scrollview addSubview:resultlabel];
-    }
-    
-    BOOL battingResultFlg = NO;
-    if( (gameResult.battingResultArray != nil && gameResult.battingResultArray.count >= 1) ||
-       gameResult.daten >= 1 || gameResult.tokuten >= 1 || gameResult.steal >= 1){
-        battingResultFlg = YES;
     }
     
     _battingResultLabel.hidden = !battingResultFlg;
@@ -154,6 +174,7 @@
         _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     }
  
+    // 投手成績
     BOOL pitchingResultFlg = NO;
     if(gameResult.inning != 0 || gameResult.inning2 != 0){
         pitchingResultFlg = YES;
@@ -216,43 +237,54 @@
 //    if(battingResultFlg == NO){
 //        battingAdjust -= 70;
 //    }
-
-    int battingAdjust = battingResultFlg ? 230+[Utility convert2int:gameResult.battingResultArray.count]*30 : 160;
+    
+    // 表示の高さを調整
+    int baseAdjust = 160;
+    int battingAdjust = battingResultFlg ? 70+[Utility convert2int:gameResult.battingResultArray.count]*30 : 0;
     int pitchingAdjust = pitchingResultFlg ? 160 : 0;
     int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     
-    [self setFrameOriginY:_datenLabel originY:battingAdjust];
-    [self setFrameOriginY:_daten originY:battingAdjust];
-    [self setFrameOriginY:_tokutenLabel originY:battingAdjust];
-    [self setFrameOriginY:_tokuten originY:battingAdjust];
-    [self setFrameOriginY:_stealLabel originY:battingAdjust];
-    [self setFrameOriginY:_steal originY:battingAdjust];
+    int adjust1 = baseAdjust+tagAdjust;
+    int adjust2 = baseAdjust+tagAdjust+battingAdjust;
+    int adjust3 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust;
+    int adjust4 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+memoAdjust;
     
-    [self setFrameOriginY:_pitchingResultLabel originY:battingAdjust+40];
-    [self setFrameOriginY:_inningLabel originY:battingAdjust+70];
-    [self setFrameOriginY:_inning originY:battingAdjust+70];
-    [self setFrameOriginY:_sekinin originY:battingAdjust+70];
-    [self setFrameOriginY:_hiandaLabel originY:battingAdjust+100];
-    [self setFrameOriginY:_hianda originY:battingAdjust+100];
-    [self setFrameOriginY:_hihomerunLabel originY:battingAdjust+100];
-    [self setFrameOriginY:_hihomerun originY:battingAdjust+100];
-    [self setFrameOriginY:_dassanshinLabel originY:battingAdjust+130];
-    [self setFrameOriginY:_dassanshin originY:battingAdjust+130];
-    [self setFrameOriginY:_yoshikyuLabel originY:battingAdjust+130];
-    [self setFrameOriginY:_yoshikyu originY:battingAdjust+130];
-    [self setFrameOriginY:_yoshikyu2Label originY:battingAdjust+130];
-    [self setFrameOriginY:_yoshikyu2 originY:battingAdjust+130];
-    [self setFrameOriginY:_shittenLabel originY:battingAdjust+160];
-    [self setFrameOriginY:_shitten originY:battingAdjust+160];
-    [self setFrameOriginY:_jisekitenLabel originY:battingAdjust+160];
-    [self setFrameOriginY:_jisekiten originY:battingAdjust+160];
+    [self setFrameOriginY:_resultLabel originY:adjust1];
+    [self setFrameOriginY:_result originY:adjust1];
+    [self setFrameOriginY:_battingResultLabel originY:adjust1+40];
     
-    [self setFrameOriginY:_memoLabel originY:battingAdjust+pitchingAdjust+40];
-    [self setFrameOriginY:_memo originY:battingAdjust+pitchingAdjust+70];
+    [self setFrameOriginY:_datenLabel originY:adjust2];
+    [self setFrameOriginY:_daten originY:adjust2];
+    [self setFrameOriginY:_tokutenLabel originY:adjust2];
+    [self setFrameOriginY:_tokuten originY:adjust2];
+    [self setFrameOriginY:_stealLabel originY:adjust2];
+    [self setFrameOriginY:_steal originY:adjust2];
     
-    [self setFrameOriginY:_tweetButton originY:battingAdjust+pitchingAdjust+memoAdjust+50];
-    [self setFrameOriginY:_mailButton originY:battingAdjust+pitchingAdjust+memoAdjust+115];
-    _scrollview.contentSize = CGSizeMake(320, battingAdjust+pitchingAdjust+memoAdjust+310);
+    [self setFrameOriginY:_pitchingResultLabel originY:adjust2+40];
+    [self setFrameOriginY:_inningLabel originY:adjust2+70];
+    [self setFrameOriginY:_inning originY:adjust2+70];
+    [self setFrameOriginY:_sekinin originY:adjust2+70];
+    [self setFrameOriginY:_hiandaLabel originY:adjust2+100];
+    [self setFrameOriginY:_hianda originY:adjust2+100];
+    [self setFrameOriginY:_hihomerunLabel originY:adjust2+100];
+    [self setFrameOriginY:_hihomerun originY:adjust2+100];
+    [self setFrameOriginY:_dassanshinLabel originY:adjust2+130];
+    [self setFrameOriginY:_dassanshin originY:adjust2+130];
+    [self setFrameOriginY:_yoshikyuLabel originY:adjust2+130];
+    [self setFrameOriginY:_yoshikyu originY:adjust2+130];
+    [self setFrameOriginY:_yoshikyu2Label originY:adjust2+130];
+    [self setFrameOriginY:_yoshikyu2 originY:adjust2+130];
+    [self setFrameOriginY:_shittenLabel originY:adjust2+160];
+    [self setFrameOriginY:_shitten originY:adjust2+160];
+    [self setFrameOriginY:_jisekitenLabel originY:adjust2+160];
+    [self setFrameOriginY:_jisekiten originY:adjust2+160];
+    
+    [self setFrameOriginY:_memoLabel originY:adjust3+40];
+    [self setFrameOriginY:_memo originY:adjust3+70];
+    
+    [self setFrameOriginY:_tweetButton originY:adjust4+50];
+    [self setFrameOriginY:_mailButton originY:adjust4+115];
+    _scrollview.contentSize = CGSizeMake(320, adjust4+310);
 }
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
@@ -386,16 +418,18 @@
     // 今日の試合だったら日付ではなく「今日の試合」と表示する
     NSString* dateString = @"";
     NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *date = [NSDate date];
-    NSDateComponents *dateComps
-    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *todayComps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
     
-    if (gameResult.year == dateComps.year && gameResult.month == dateComps.month
-        && gameResult.day == dateComps.day) {
+    if (gameResult.year == todayComps.year && gameResult.month == todayComps.month
+        && gameResult.day == todayComps.day) {
         //        dateString = [NSString stringWithFormat:@"今日(%d/%d)",gameResult.month, gameResult.day];
         dateString = @"今日";
-    } else {
+    } else if(gameResult.year == todayComps.year){
+        // 年だけ一緒の場合
         dateString = [NSString stringWithFormat:@"%d月%d日",gameResult.month, gameResult.day];
+    } else {
+        // 年も違う場合
+        dateString = [NSString stringWithFormat:@"%d年%d月%d日",gameResult.year, gameResult.month, gameResult.day];
     }
     
     NSString* resultString = @"";

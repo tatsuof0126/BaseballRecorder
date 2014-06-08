@@ -20,6 +20,7 @@
 @property (strong, nonatomic, readwrite) NSString *place;
 @property (strong, nonatomic, readwrite) NSString *myteam;
 @property (strong, nonatomic, readwrite) NSString *otherteam;
+@property (strong, nonatomic, readwrite) NSString *tagtext;
 
 @property int myscore;
 @property int otherscore;
@@ -68,6 +69,8 @@
 
 - (UIColor*)getSekininColor;
 
+- (NSArray*)getTagList;
+
 + (GameResult*)makeGameResult:(NSData*)data;
 
 - (NSComparisonResult)compareDate:(GameResult*)data;
@@ -77,5 +80,7 @@
 + (NSString*)getInningString:(int)inning inning2:(int)inning2;
 
 + (NSArray*)getSekininPickerArray;
+
++ (NSString*)adjustTagText:(NSString*)sourceString;
 
 @end

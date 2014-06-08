@@ -17,6 +17,7 @@
 @implementation SelectInputViewController
 
 @synthesize titleItem;
+@synthesize selecttableview;
 @synthesize selectlist;
 @synthesize selecttype;
 @synthesize targetField;
@@ -47,6 +48,8 @@
         str = @"チームの選択";
     } else if (selecttype == OTHERTEAM) {
         str = @"相手チームの選択";
+    } else if (selecttype == TAGTEXT) {
+        str = @"タグの選択";
     }
     
     titleItem.title = str;
@@ -58,21 +61,39 @@
     
     NSArray* gameResultList = [GameResultManager loadGameResultList];
     
-    for (int i=0; i<gameResultList.count; i++) {
-        GameResult* result = [gameResultList objectAtIndex:i];
-        
-        NSString* str = @"";
-        if (selecttype == PLACE){
-            str = result.place;
-        } else if (selecttype == MYTEAM) {
-            str = result.myteam;
-        } else if (selecttype == OTHERTEAM) {
-            str = result.otherteam;
+    if (selecttype == TAGTEXT){
+        // タグの場合は１試合で複数ある場合がある
+        for (GameResult *result in gameResultList){
+            for (NSString* str in [result getTagList]){
+                if([str isEqualToString:@""] == NO && [selectlist containsObject:str] == NO){
+                    [selectlist addObject:str];
+                }
+            }
         }
         
-        if([selectlist containsObject:str] == NO){
-            [selectlist addObject:str];
+        // タグの場合は複数選択を可能にする
+        selecttableview.allowsMultipleSelection = YES;
+        titleItem.rightBarButtonItem = _registBtn;
+    } else {
+        // それ以外の場合は１試合で１つ
+        for (GameResult *result in gameResultList){
+            NSString* str = @"";
+            if (selecttype == PLACE){
+                str = result.place;
+            } else if (selecttype == MYTEAM) {
+                str = result.myteam;
+            } else if (selecttype == OTHERTEAM) {
+                str = result.otherteam;
+            }
+            
+            if([str isEqualToString:@""] == NO && [selectlist containsObject:str] == NO){
+                [selectlist addObject:str];
+            }
         }
+        
+        // 複数選択は不可とし右上の決定ボタンを隠す
+        selecttableview.allowsMultipleSelection = NO;
+        titleItem.rightBarButtonItem = nil;
     }
 }
 
@@ -89,13 +110,49 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
     
-    targetField.text = [selectlist objectAtIndex:indexPath.row];
-//    [self dismissModalViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (selecttype == TAGTEXT){
+        // 選択されたセルにチェックをつける
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+/*
+        if(cell.accessoryType == UITableViewCellAccessoryNone){
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+ */
+    } else {
+        targetField.text = [selectlist objectAtIndex:indexPath.row];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (selecttype == TAGTEXT){
+        // 選択がはずれたセルのチェックをはずす
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
 }
 
 - (IBAction)backButton:(id)sender {
-//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)registButton:(id)sender {
+    NSMutableString* newTagText = [NSMutableString stringWithString:targetField.text];
+    
+    // 選択されたタグを入力欄に追加
+    NSArray* selectedList = [selecttableview indexPathsForSelectedRows];
+    for(NSIndexPath* indexPath in selectedList){
+        NSString* str = [selectlist objectAtIndex:indexPath.row];
+        [newTagText appendFormat:@",%@",str];
+    }
+    
+    targetField.text = [GameResult adjustTagText:newTagText];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

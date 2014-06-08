@@ -11,6 +11,7 @@
 #define PLACE     1
 #define MYTEAM    2
 #define OTHERTEAM 3
+#define TAGTEXT   4
 
 @interface SelectInputViewController : UIViewController
 
@@ -22,8 +23,12 @@
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *titleItem;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *registBtn;
+
 @property (weak, nonatomic) IBOutlet UITableView *selecttableview;
 
 - (IBAction)backButton:(id)sender;
+
+- (IBAction)registButton:(id)sender;
 
 @end

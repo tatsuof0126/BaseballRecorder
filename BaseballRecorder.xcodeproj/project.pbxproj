@@ -15,6 +15,7 @@
 		0B02219218CB17610002E33B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218A18CB17610002E33B /* Icon-72.png */; };
 		0B02219318CB17610002E33B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218B18CB17610002E33B /* Icon@2x.png */; };
 		0B02219418CB17610002E33B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B02218C18CB17610002E33B /* Icon.png */; };
+		0B1092E2193A4C620097C938 /* RectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1092E1193A4C620097C938 /* RectView.m */; };
 		0B16F8A919338AAF00C82E16 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B16F89D19338AAF00C82E16 /* libNendAd.a */; };
 		0B16F8AA19338AAF00C82E16 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8A219338AAF00C82E16 /* NADView_readme.txt */; };
 		0B16F8B41933918400C82E16 /* arrow_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B31933918400C82E16 /* arrow_none.png */; };
@@ -104,6 +105,8 @@
 		0B02218A18CB17610002E33B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "BaseballRecorder/images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		0B02218B18CB17610002E33B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "BaseballRecorder/images/Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		0B02218C18CB17610002E33B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = BaseballRecorder/images/Icon.png; sourceTree = SOURCE_ROOT; };
+		0B1092E0193A4C620097C938 /* RectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectView.h; sourceTree = "<group>"; };
+		0B1092E1193A4C620097C938 /* RectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectView.m; sourceTree = "<group>"; };
 		0B16F89D19338AAF00C82E16 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
 		0B16F89E19338AAF00C82E16 /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
 		0B16F89F19338AAF00C82E16 /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				0B683705164279E00086E198 /* BattingStatistics.m */,
 				0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */,
 				0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */,
+				0B1092E0193A4C620097C938 /* RectView.h */,
+				0B1092E1193A4C620097C938 /* RectView.m */,
 				0B16F8BD19339BFA00C82E16 /* UIPlaceHolderTextView.h */,
 				0B16F8BE19339BFA00C82E16 /* UIPlaceHolderTextView.m */,
 				0B40E42C16C3EEE800E0E95D /* CheckBoxButton.h */,
@@ -587,6 +592,7 @@
 				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
 				0B16F8BF19339BFA00C82E16 /* UIPlaceHolderTextView.m in Sources */,
 				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
+				0B1092E2193A4C620097C938 /* RectView.m in Sources */,
 				0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */,
 				0B20309A18BA54DA00B94D8C /* BattingAnalysisController.m in Sources */,
 				0B40E42E16C3EEE800E0E95D /* CheckBoxButton.m in Sources */,

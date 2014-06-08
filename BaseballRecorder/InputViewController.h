@@ -10,6 +10,7 @@
 #import "GameResult.h"
 #import "BattingResult.h"
 #import "UIPlaceHolderTextView.h"
+#import "RectView.h"
 
 @interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *place;
 @property (weak, nonatomic) IBOutlet UITextField *myteam;
 @property (weak, nonatomic) IBOutlet UITextField *otherteam;
+@property (strong, nonatomic) IBOutlet UITextField *tagtext;
 @property (weak, nonatomic) IBOutlet UITextField *myscore;
 @property (weak, nonatomic) IBOutlet UITextField *otherscore;
 
@@ -43,6 +45,7 @@
 @property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *resultToolbar;
 @property (strong, nonatomic) UIPickerView *resultPicker;
+@property (strong, nonatomic) RectView *rectView;
 
 @property BOOL edited;
 

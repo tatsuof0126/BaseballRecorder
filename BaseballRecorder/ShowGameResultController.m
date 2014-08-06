@@ -251,6 +251,7 @@
     
     [self setFrameOriginY:_resultLabel originY:adjust1];
     [self setFrameOriginY:_result originY:adjust1];
+    [self setFrameOriginY:_tweetButton originY:adjust1-5];
     [self setFrameOriginY:_battingResultLabel originY:adjust1+40];
     
     [self setFrameOriginY:_datenLabel originY:adjust2];
@@ -282,8 +283,9 @@
     [self setFrameOriginY:_memoLabel originY:adjust3+40];
     [self setFrameOriginY:_memo originY:adjust3+70];
     
-    [self setFrameOriginY:_tweetButton originY:adjust4+50];
-    [self setFrameOriginY:_mailButton originY:adjust4+115];
+//    [self setFrameOriginY:_tweetButton originY:adjust4+50];
+//    [self setFrameOriginY:_mailButton originY:adjust4+115];
+    [self setFrameOriginY:_mailButton originY:adjust4+50];
     _scrollview.contentSize = CGSizeMake(320, adjust4+310);
 }
 

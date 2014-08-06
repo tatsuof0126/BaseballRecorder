@@ -599,7 +599,7 @@
 }
 
 - (IBAction)saveButton:(id)sender {
-    NSLog(@"y : %f", scrollView.contentOffset.y);
+//    NSLog(@"y : %f", scrollView.contentOffset.y);
     
     NSArray* errorArray = [self inputCheck];
     

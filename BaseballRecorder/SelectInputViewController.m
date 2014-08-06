@@ -49,7 +49,7 @@
     } else if (selecttype == OTHERTEAM) {
         str = @"相手チームの選択";
     } else if (selecttype == TAGTEXT) {
-        str = @"タグの選択";
+        str = @"タグを追加";
     }
     
     titleItem.title = str;

@@ -45,6 +45,7 @@
 		0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */; };
 		0B40E44416CAB45100E0E95D /* baseball.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44216CAB45100E0E95D /* baseball.png */; };
 		0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B40E44316CAB45100E0E95D /* baseball@2x.png */; };
+		0B4E8D6F1944BB80007D7F71 /* CustomSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E8D6E1944BB80007D7F71 /* CustomSummaryController.m */; };
 		0B53464E17BF561A00601AAE /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B53464D17BF561A00601AAE /* arrow_right.png */; };
 		0B53465417BF676900601AAE /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B53465317BF676900601AAE /* arrow_left.png */; };
 		0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EEE81163AE4C20038980D /* GameResultManager.m */; };
@@ -151,6 +152,8 @@
 		0B40E43C16CAB08C00E0E95D /* PitchingStatisticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatisticsController.m; sourceTree = "<group>"; };
 		0B40E44216CAB45100E0E95D /* baseball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baseball.png; path = BaseballRecorder/images/baseball.png; sourceTree = SOURCE_ROOT; };
 		0B40E44316CAB45100E0E95D /* baseball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "baseball@2x.png"; path = "BaseballRecorder/images/baseball@2x.png"; sourceTree = SOURCE_ROOT; };
+		0B4E8D6D1944BB80007D7F71 /* CustomSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSummaryController.h; sourceTree = "<group>"; };
+		0B4E8D6E1944BB80007D7F71 /* CustomSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSummaryController.m; sourceTree = "<group>"; };
 		0B53464D17BF561A00601AAE /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_right.png; path = BaseballRecorder/images/arrow_right.png; sourceTree = SOURCE_ROOT; };
 		0B53465317BF676900601AAE /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_left.png; path = BaseballRecorder/images/arrow_left.png; sourceTree = SOURCE_ROOT; };
 		0B5EEE80163AE4C20038980D /* GameResultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultManager.h; sourceTree = "<group>"; };
@@ -363,6 +366,8 @@
 				0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */,
 				0B2D1FC516402BAF00330699 /* ShowGameResultController.h */,
 				0B2D1FC616402BAF00330699 /* ShowGameResultController.m */,
+				0B4E8D6D1944BB80007D7F71 /* CustomSummaryController.h */,
+				0B4E8D6E1944BB80007D7F71 /* CustomSummaryController.m */,
 				0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */,
 				0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */,
 				0B20309B18BA566200B94D8C /* BattingAnalysisView.h */,
@@ -586,6 +591,7 @@
 				0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */,
 				0B1AA348163D59F800535116 /* BaseballRecorderUIApplication.m in Sources */,
 				0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */,
+				0B4E8D6F1944BB80007D7F71 /* CustomSummaryController.m in Sources */,
 				0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */,
 				0B683703164279C50086E198 /* TeamStatistics.m in Sources */,
 				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,

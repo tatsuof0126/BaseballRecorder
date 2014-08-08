@@ -41,10 +41,16 @@
     _place.text = [ConfigManager getDefaultPlace];
     _myteam.text = [ConfigManager getDefaultMyTeam];
     _sendto.text = [ConfigManager getDefaultSendTo];
+    
     _calcInning7.checkBoxSelected = [ConfigManager isCalcInning7Flg];
     [_calcInning7 setState];
     [_calcInning7 addGestureRecognizer:[[UITapGestureRecognizer alloc]
                                       initWithTarget:self action:@selector(checkBoxSelected:)]];
+    
+    _showMyteam.checkBoxSelected = [ConfigManager isShowMyteamFlg];
+    [_showMyteam setState];
+    [_showMyteam addGestureRecognizer:[[UITapGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(checkBoxSelected:)]];
     
     // AppStoreへリンクのタップを受け取るため
     appstoreLabel.userInteractionEnabled = YES;
@@ -151,8 +157,13 @@
 }
 
 - (void)checkBoxSelected:(UITapGestureRecognizer*)sender {
-    [_calcInning7 checkboxPush:_calcInning7];
-    [ConfigManager setCalcInning7Flg:_calcInning7.selected];
+    if(sender.view == _calcInning7){
+        [_calcInning7 checkboxPush:_calcInning7];
+        [ConfigManager setCalcInning7Flg:_calcInning7.selected];
+    } else if(sender.view == _showMyteam){
+        [_showMyteam checkboxPush:_showMyteam];
+        [ConfigManager setShowMyteamFlg:_showMyteam.selected];
+    }
 }
 
 - (void)addAddress:(NSString*)email {

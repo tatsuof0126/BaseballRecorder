@@ -26,6 +26,10 @@
 
 + (void)setCalcInning7Flg:(BOOL)calcInning7Flg;
 
++ (BOOL)isShowMyteamFlg;
+
++ (void)setShowMyteamFlg:(BOOL)showMyteamFlg;
+
 + (NSString*)getCalcTargetTeam;
 
 + (void)setCalcTargetTeam:(NSString*)targetTeam;

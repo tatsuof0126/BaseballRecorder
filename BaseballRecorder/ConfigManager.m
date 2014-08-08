@@ -55,6 +55,17 @@
     [defaults synchronize];
 }
 
++ (BOOL)isShowMyteamFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"SHOWMYTEAM"];
+}
+
++ (void)setShowMyteamFlg:(BOOL)showMyteamFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:showMyteamFlg forKey:@"SHOWMYTEAM"];
+    [defaults synchronize];
+}
+
 + (NSString*)getCalcTargetTeam {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"TARGETTEAM"];

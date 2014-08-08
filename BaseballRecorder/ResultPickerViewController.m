@@ -51,7 +51,7 @@
            titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     
     // 行インデックス番号を返す
-    return [NSString stringWithFormat:@"%ld", row];
+    return [NSString stringWithFormat:@"%zd", row];
     
 }
 

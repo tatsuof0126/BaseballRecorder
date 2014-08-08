@@ -139,65 +139,41 @@
                                       reuseIdentifier:cellName];
     }
     
-    NSString* resultStr = nil;
-    if(result.myscore == result.otherscore){
-        resultStr = @"△";
+    // メイン行に試合結果（月日、勝敗、チーム、得点など）
+    NSString* mainText = nil;
+    int fontsize = 0;
+    
+    NSString* resultStr = result.myscore == result.otherscore ? @"△" :
+        result.myscore > result.otherscore ? @"○" : @"●";
+    
+    if([ConfigManager isShowMyteamFlg] == YES){
+        NSString* myteam = result.myteam;
+        mainText = [NSString stringWithFormat:@"%d/%d %@ %@ %d‐%d %@",
+                    result.month, result.day, resultStr, myteam,
+                    result.myscore, result.otherscore, result.otherteam];
+        fontsize = 15;
     } else {
-        resultStr = result.myscore > result.otherscore ? @"○" : @"●";
+        mainText = [NSString stringWithFormat:@"%d月%d日 %@ %d‐%d %@",
+                    result.month, result.day, resultStr,
+                    result.myscore, result.otherscore, result.otherteam];
+        fontsize = 17;
     }
     
-    NSString* viewText = [NSString stringWithFormat:@"%d月%d日 %@ %d‐%d %@",
-                          result.month, result.day, resultStr, result.myscore, result.otherscore, result.otherteam];
-    
-    // iOS6以上とiOS5系で処理を分ける
-    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
-    if ( [osVersion compare:@"6.0" options:NSNumericSearch] == NSOrderedAscending ){
-        // iOS5系はシステムフォントで表示（●が小さく表示されてしまうががまん）
-        cell.textLabel.text = viewText;
-    } else {
-        // iOS6以上ならAttributedTextを使ってヒラギノ角ゴで表示
-        cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    // iOS6以上が担保されるのでAttributedTextを使ってヒラギノ角ゴで表示
+    cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:fontsize];
         
-        NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
-        paragrahStyle.lineSpacing = - 2.0f;
-        paragrahStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+    paragrahStyle.lineSpacing = - 2.0f;
+    paragrahStyle.lineBreakMode = NSLineBreakByTruncatingTail;
         
-        NSMutableAttributedString *attributedText
-            = [[NSMutableAttributedString alloc] initWithString:viewText];
+    NSMutableAttributedString *attributedText
+        = [[NSMutableAttributedString alloc] initWithString:mainText];
         
-        [attributedText addAttribute:NSParagraphStyleAttributeName
+    [attributedText addAttribute:NSParagraphStyleAttributeName
                            value:paragrahStyle
                            range:NSMakeRange(0, attributedText.length)];
     
-        cell.textLabel.attributedText = attributedText;
-    }
-
-    /*
-    // サブ行に詳細成績（打撃成績 / 投手成績）
-    NSMutableString* detailStr = [NSMutableString string];
-    for (int i=0;i<result.battingResultArray.count;i++){
-        BattingResult* battingResult = [result.battingResultArray objectAtIndex:i];
-        [detailStr appendString:@" "];
-        [detailStr appendString:[battingResult getResultShortString]];
-    }
-    
-    if( result.inning != 0 || result.inning2 != 0 ){
-        if([@"" isEqualToString:detailStr] == NO){
-            [detailStr appendString:@"  /  "];
-        } else {
-            [detailStr appendString:@" "];
-        }
-        
-        [detailStr appendString:[result getInningString]];
-        [detailStr appendString:@" "];
-        [detailStr appendString:result.shitten == 0 ? @"無失点" : [NSString stringWithFormat:@"%d失点",result.shitten]];
-        [detailStr appendString:@" "];
-        [detailStr appendString:[result getSekininString]];
-    }
-     */
-    
-    
-    
+    cell.textLabel.attributedText = attributedText;
     
     // サブ行に詳細成績（打撃成績 / 投手成績）
     NSMutableAttributedString* detailStr = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -226,22 +202,8 @@
         [detailStr appendAttributedString:blank];
         [detailStr appendAttributedString:[[NSAttributedString alloc] initWithString:[result getSekininString]]];
     }
-
-    /*
-    NSAttributedString *end = [[NSAttributedString alloc] initWithString:@"終わるっ"
-        attributes:@{ NSForegroundColorAttributeName : [UIColor redColor],
-                      NSFontAttributeName : [UIFont boldSystemFontOfSize:16]}];
-    
-    NSAttributedString *march = [[NSAttributedString alloc] initWithString:@"3月が"];
-    NSAttributedString *exclamation = [[NSAttributedString alloc] initWithString:@"!!!"];
-    
-    NSMutableAttributedString *endMarch = [[NSMutableAttributedString alloc] initWithAttributedString:march];
-    [endMarch appendAttributedString:end];
-    [endMarch appendAttributedString:exclamation];
-    */
     
     cell.detailTextLabel.attributedText = detailStr;
-//    cell.detailTextLabel.text = detailStr;
     
     return cell;
 }

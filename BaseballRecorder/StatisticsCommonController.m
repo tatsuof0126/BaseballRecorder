@@ -406,7 +406,7 @@
     NSDateComponents *dateComps
     = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     
-    today = [NSString stringWithFormat:@"（%ld年%ld月%ld日現在）",dateComps.year,dateComps.month,dateComps.day];
+    today = [NSString stringWithFormat:@"（%zd年%zd月%zd日現在）",dateComps.year,dateComps.month,dateComps.day];
     
     if(targetyear == 0){
         // targetyearが0（すべて）なら通算成績
@@ -418,7 +418,7 @@
         year = [yearList objectAtIndex:targetyear];
         
         // 今日の年を取得する
-        NSString* todayYear = [NSString stringWithFormat:@"%ld年",dateComps.year];
+        NSString* todayYear = [NSString stringWithFormat:@"%zd年",dateComps.year];
         if([year isEqualToString:todayYear] == NO){
             // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
             today = @"";

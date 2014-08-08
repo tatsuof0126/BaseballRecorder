@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *sendto;
 @property (strong, nonatomic) IBOutlet CheckBoxButton *calcInning7;
 
+@property (strong, nonatomic) IBOutlet CheckBoxButton *showMyteam;
+
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) IBOutlet UILabel *apptitle;

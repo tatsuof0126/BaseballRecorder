@@ -292,7 +292,7 @@
     
     // 一番下に入力用の打撃成績（第◯打席、入力ボタン）
     UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+battingResultArray.count*40,80,21)];
-    nlabel.text = [NSString stringWithFormat:@"第%ld打席",battingResultArray.count+1];
+    nlabel.text = [NSString stringWithFormat:@"第%zd打席",battingResultArray.count+1];
     
     UIButton *nbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     nbutton.frame = CGRectMake(110,260+battingResultArray.count*40,55,30);

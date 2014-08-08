@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -126,7 +126,7 @@
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="NAU-vc-fVw"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="大会名など集計キーを入力" minimumFontSize="17" id="Rzz-ma-3Sq">
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="大会名など集計キーを入力" minimumFontSize="17" id="Rzz-ma-3Sq">
                                         <rect key="frame" x="90" y="180" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -156,7 +156,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="タグ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aRd-cH-Wd8">
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="タグ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aRd-cH-Wd8">
                                         <rect key="frame" x="20" y="184" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -210,7 +210,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打撃成績" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cTe-Wb-pNG">
-                                        <rect key="frame" x="20" y="269" width="68" height="21"/>
+                                        <rect key="frame" x="20" y="229" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -282,7 +282,7 @@
                                             <segue destination="7b4-Vn-r1w" kind="modal" identifier="otherteam" modalTransitionStyle="crossDissolve" id="BNo-wl-vcs"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="XQX-7K-cYP">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="XQX-7K-cYP">
                                         <rect key="frame" x="283" y="184" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -298,14 +298,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合結果" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gZ1-I3-r73">
-                                        <rect key="frame" x="20" y="224" width="68" height="21"/>
+                                        <rect key="frame" x="20" y="184" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="7wM-fo-M7g">
-                                        <rect key="frame" x="120" y="220" width="45" height="30"/>
+                                        <rect key="frame" x="120" y="180" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -341,7 +341,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="jdu-Sb-Vsc">
-                                        <rect key="frame" x="200" y="220" width="45" height="30"/>
+                                        <rect key="frame" x="200" y="180" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -350,7 +350,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="対" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u4g-AQ-Pzq">
-                                        <rect key="frame" x="174" y="224" width="17" height="21"/>
+                                        <rect key="frame" x="174" y="184" width="17" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -994,7 +994,7 @@
                                             <action selector="tweetButton:" destination="3" eventType="touchUpInside" id="8Nb-p0-Uae"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ioA-Fi-lJr">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ioA-Fi-lJr">
                                         <rect key="frame" x="211" y="16" width="89" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="カスタム集計">
@@ -1646,7 +1646,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kBP-3Z-Jx2">
-                                        <rect key="frame" x="155" y="190" width="80" height="31"/>
+                                        <rect key="frame" x="160" y="190" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1672,8 +1672,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_none.png" id="AR4-UE-TJm">
+                                        <rect key="frame" x="272" y="15" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_right.png" id="Nkm-9o-2Qo">
                                         <rect key="frame" x="272" y="15" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_none.png" id="WJw-ip-q4W">
+                                        <rect key="frame" x="233" y="15" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="arrow_left.png" id="bTm-zL-57y">
@@ -1708,6 +1716,8 @@
                         <outlet property="memo" destination="w7B-dg-G0m" id="7BM-2y-veF"/>
                         <outlet property="memoLabel" destination="Cio-0Q-qBo" id="m84-hc-IGm"/>
                         <outlet property="myteam" destination="H26-OG-kAd" id="6Je-1U-Ze2"/>
+                        <outlet property="noneleft" destination="WJw-ip-q4W" id="Dji-13-x99"/>
+                        <outlet property="noneright" destination="AR4-UE-TJm" id="DeH-2S-eVm"/>
                         <outlet property="otherteam" destination="o7q-nY-Sek" id="m6H-4H-PPc"/>
                         <outlet property="pitchingResultLabel" destination="mfJ-bJ-FDT" id="Tt4-gP-Fb6"/>
                         <outlet property="place" destination="DM5-Xq-CTs" id="NV1-TV-3IX"/>
@@ -2167,6 +2177,7 @@
     </scenes>
     <resources>
         <image name="arrow_left.png" width="44" height="44"/>
+        <image name="arrow_none.png" width="44" height="44"/>
         <image name="arrow_right.png" width="44" height="44"/>
         <image name="baseball.png" width="24" height="24"/>
         <image name="book.png" width="24" height="24"/>

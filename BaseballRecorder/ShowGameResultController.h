@@ -56,6 +56,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *jisekiten;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowleft;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowright;
+@property (strong, nonatomic) IBOutlet UIImageView *noneleft;
+@property (strong, nonatomic) IBOutlet UIImageView *noneright;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UITextView *memo;

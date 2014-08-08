@@ -50,11 +50,50 @@
     
     // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
     // TODOあとで対応
+    NSArray* gameResultList = [GameResultManager loadGameResultList];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
     
+    BOOL leftMoveFlg = NO;
+    BOOL rightMoveFlg = NO;
     
+    int nowIndex = -999;
+    for (int i=0;i<gameResultList.count;i++){
+        GameResult* tmpResult = [gameResultList objectAtIndex:i];
+        if(gameResult.resultid == tmpResult.resultid){
+            nowIndex = i;
+            break;
+        }
+    }
+
+    if(nowIndex+1 < gameResultList.count){
+        rightMoveFlg = YES;
+    }
+    if(nowIndex > 0){
+        leftMoveFlg = YES;
+    }
     
-    
-    
+    if(rightMoveFlg == NO && leftMoveFlg == NO){
+        _arrowleft.hidden = YES;
+        _arrowright.hidden = YES;
+        _noneleft.hidden = YES;
+        _noneright.hidden = YES;
+    } else if (rightMoveFlg == NO) {
+        _arrowleft.hidden = NO;
+        _arrowright.hidden = YES;
+        _noneleft.hidden = YES;
+        _noneright.hidden = NO;
+    } else if (leftMoveFlg == NO) {
+        _arrowleft.hidden = YES;
+        _arrowright.hidden = NO;
+        _noneleft.hidden = NO;
+        _noneright.hidden = YES;
+    } else {
+        _arrowleft.hidden = NO;
+        _arrowright.hidden = NO;
+        _noneleft.hidden = YES;
+        _noneright.hidden = YES;
+    }
     
     
     // ScrollViewの高さを定義＆iPhone5対応
@@ -101,7 +140,10 @@
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     GameResult* gameResult = appDelegate.targetGameResult;
-
+    
+    // 矢印の表示有無を決定
+    [self setArrowImage];
+    
 //    NSLog(@"targetResultid : %d",gameResult.resultid);
     
     _date.text = [gameResult getDateString];
@@ -291,6 +333,54 @@
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
     view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
+}
+
+- (void)setArrowImage {
+    // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
+    NSArray* gameResultList = [GameResultManager loadGameResultList];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
+    
+    BOOL leftMoveFlg = NO;
+    BOOL rightMoveFlg = NO;
+    
+    int nowIndex = -999;
+    for (int i=0;i<gameResultList.count;i++){
+        GameResult* tmpResult = [gameResultList objectAtIndex:i];
+        if(gameResult.resultid == tmpResult.resultid){
+            nowIndex = i;
+            break;
+        }
+    }
+    
+    if(nowIndex+1 < gameResultList.count){
+        rightMoveFlg = YES;
+    }
+    if(nowIndex > 0){
+        leftMoveFlg = YES;
+    }
+    
+    if(rightMoveFlg == NO && leftMoveFlg == NO){
+        _arrowleft.hidden = YES;
+        _arrowright.hidden = YES;
+        _noneleft.hidden = YES;
+        _noneright.hidden = YES;
+    } else if (rightMoveFlg == NO) {
+        _arrowleft.hidden = NO;
+        _arrowright.hidden = YES;
+        _noneleft.hidden = YES;
+        _noneright.hidden = NO;
+    } else if (leftMoveFlg == NO) {
+        _arrowleft.hidden = YES;
+        _arrowright.hidden = NO;
+        _noneleft.hidden = NO;
+        _noneright.hidden = YES;
+    } else {
+        _arrowleft.hidden = NO;
+        _arrowright.hidden = NO;
+        _noneleft.hidden = YES;
+        _noneright.hidden = YES;
+    }
 }
 
 - (IBAction)backButton:(id)sender {

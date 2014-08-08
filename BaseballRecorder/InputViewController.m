@@ -264,15 +264,16 @@
     for (int i=0; i<battingResultArray.count; i++) {
         BattingResult *battingResult = [battingResultArray objectAtIndex:i];
         
-        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,305+i*40,80,21)];
+        // タグを隠す対応で、305→265、300→260に変更
+        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+i*40,80,21)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         
-        UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,305+i*40,160,21)];
+        UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,265+i*40,160,21)];
         resultlabel.text = [battingResult getResultShortString];
         resultlabel.textColor = [battingResult getResultColor];
         
         UIButton *changebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        changebutton.frame = CGRectMake(210,300+i*40,55,30);
+        changebutton.frame = CGRectMake(210,260+i*40,55,30);
         [changebutton setTitle:@"変更" forState:UIControlStateNormal];
         [changebutton setTag:i];
         [changebutton addTarget:self action:@selector(changeResult:) forControlEvents:UIControlEventTouchDown];
@@ -290,11 +291,11 @@
     }
     
     // 一番下に入力用の打撃成績（第◯打席、入力ボタン）
-    UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,305+battingResultArray.count*40,80,21)];
+    UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+battingResultArray.count*40,80,21)];
     nlabel.text = [NSString stringWithFormat:@"第%ld打席",battingResultArray.count+1];
     
     UIButton *nbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    nbutton.frame = CGRectMake(110,300+battingResultArray.count*40,55,30);
+    nbutton.frame = CGRectMake(110,260+battingResultArray.count*40,55,30);
     [nbutton setTitle:@"入力" forState:UIControlStateNormal];
     [nbutton addTarget:self action:@selector(inputResult:) forControlEvents:UIControlEventTouchDown];
     nbutton.tag = NEW_INPUT;
@@ -313,7 +314,8 @@
 
 - (void)adjustContentFrame {
     // 打点・得点・盗塁入力欄とメモ欄・投手成績へボタンの配置を調整
-    int battingAdjust = 350+[Utility convert2int:gameResult.battingResultArray.count]*40;
+    // タグを隠す対応で350→310、410→370に修正
+    int battingAdjust = 310+[Utility convert2int:gameResult.battingResultArray.count]*40;
     int memoAdjust = _memo.frame.size.height;
     
     [self setFrameOriginY:_datenLabel originY:battingAdjust+4];
@@ -327,7 +329,7 @@
     [self setFrameOriginY:toPitchingButton originY:battingAdjust+memoAdjust+95];
     
     // ScrollViewの長さを調整
-    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+410);
+    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+370);
     scrollView.contentSize = size;
 }
 
@@ -374,10 +376,12 @@
         count = resultno;
     }
     
-    [scrollView setContentOffset:CGPointMake(0.0f, 250.0f+count*40) animated:YES];
+    // タグを隠す対応で、250→210
+    [scrollView setContentOffset:CGPointMake(0.0f, 210.0f+count*40) animated:YES];
     
     // 入力対象の打撃結果を赤線で囲う
-    rectView = [[RectView alloc] initWithFrame:CGRectMake(20, 295+count*40, 280, 40)];
+    // タグを隠す対応で、295→255
+    rectView = [[RectView alloc] initWithFrame:CGRectMake(20, 255+count*40, 280, 40)];
     [scrollView addSubview:rectView];
     
     // ResultPickerを作る

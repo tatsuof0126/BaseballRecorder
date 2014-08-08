@@ -100,7 +100,7 @@
 }
 
 - (NSString*)getGameResultString {
-    return [NSString stringWithFormat:@"%d-%d",myscore,otherscore];
+    return [NSString stringWithFormat:@"%d - %d",myscore,otherscore];
 }
 
 - (NSString*)getMailSubject {

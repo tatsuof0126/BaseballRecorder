@@ -74,6 +74,13 @@
         NSString* defaultPlace = [ConfigManager getDefaultPlace];
         NSString* defaultMyteam = [ConfigManager getDefaultMyTeam];
         
+        if(defaultPlace == nil){
+            defaultPlace = @"";
+        }
+        if(defaultMyteam == nil){
+            defaultMyteam = @"";
+        }
+        
         // 場所やチームが１種類しか登録がない場合はそれをデフォルトにする
         if([defaultPlace isEqualToString:@""] || [defaultMyteam isEqualToString:@""]){
             NSMutableArray* placeArray = [NSMutableArray array];

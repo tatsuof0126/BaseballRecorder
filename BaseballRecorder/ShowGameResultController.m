@@ -543,15 +543,25 @@
         NSArray* array = [NSArray arrayWithObjects:gameResult, nil];
         BattingStatistics* stats = [BattingStatistics calculateBattingStatistics:array];
         
+        [tweetString appendFormat:@"打撃成績は %d打数%d安打",stats.atbats, stats.hits];
+        
+        if(stats.daten != 0){
+            [tweetString appendFormat:@"%d打点",stats.daten];
+        }
+        if(stats.steal != 0){
+            [tweetString appendFormat:@"%d盗塁",stats.steal];
+        }
+        
         NSMutableString* battingString = [NSMutableString string];
         for (BattingResult* battingResult in gameResult.battingResultArray){
             [battingString appendString:[battingResult getResultShortString]];
             [battingString appendString:@"、"];
         }
         [battingString deleteCharactersInRange:NSMakeRange([battingString length]-1, 1)];
+        [tweetString appendFormat:@"(%@)",battingString];
         
-        [tweetString appendFormat:@"打撃成績は %d打数%d安打%d打点%d盗塁（%@）",
-         stats.atbats, stats.hits, gameResult.daten, gameResult.steal, battingString];
+//        [tweetString appendFormat:@"打撃成績は %d打数%d安打%d打点%d盗塁（%@）",
+//         stats.atbats, stats.hits, gameResult.daten, gameResult.steal, battingString];
     }
     
     // 投手成績の文言をつける

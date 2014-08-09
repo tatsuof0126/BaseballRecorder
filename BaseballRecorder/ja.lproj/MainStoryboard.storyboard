@@ -1646,7 +1646,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kBP-3Z-Jx2">
-                                        <rect key="frame" x="160" y="190" width="80" height="31"/>
+                                        <rect key="frame" x="155" y="190" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

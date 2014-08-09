@@ -110,7 +110,7 @@
     // WHIP＝（被安打＋与四球）／投球回数
     whip = (float)(hianda + yoshikyu) / realinning;
 
-    // 奪三振率＝奪三振／投球回数×９
+    // 奪三振率＝奪三振／投球回数×９or７
     k9 = (float)dassanshin / realinning * gameinning;
 }
 

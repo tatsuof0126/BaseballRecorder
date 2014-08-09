@@ -102,8 +102,8 @@
     scrollView.contentSize = size;
     
     // ちょうどいいところにスクロール
-    if (textField == _sendto && scrollView.contentOffset.y < 135.0f){
-        [scrollView setContentOffset:CGPointMake(0.0f, 135.0f) animated:YES];
+    if (textField == _sendto && scrollView.contentOffset.y < 130.0f){
+        [scrollView setContentOffset:CGPointMake(0.0f, 130.0f) animated:YES];
     }
 }
 

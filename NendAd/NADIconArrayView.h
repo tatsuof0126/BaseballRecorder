@@ -1,10 +1,8 @@
 //
 //  NADIconArrayView.h
-//
-//  Ver 2.3.3
+//  NendAd
 //
 //  アイコン型広告ビュークラス(InterfaceBuilder用)
-//
 
 #import <UIKit/UIKit.h>
 #import "NADIconLoader.h"

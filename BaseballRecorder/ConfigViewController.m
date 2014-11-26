@@ -9,6 +9,7 @@
 #import "ConfigViewController.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
+#import "TrackingManager.h"
 
 @interface ConfigViewController ()
 
@@ -34,6 +35,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"設定画面"];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     _versionName.text = [NSString stringWithFormat:@"version%@",version];

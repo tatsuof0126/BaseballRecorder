@@ -15,6 +15,7 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "TrackingManager.h"
 
 @interface ShowGameResultController ()
 
@@ -40,6 +41,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"試合結果参照画面"];
+    
     // ←→ボタンを動作させるための初期設定
     _arrowleft.userInteractionEnabled = YES;
     _arrowright.userInteractionEnabled = YES;
@@ -49,7 +53,6 @@
                                        initWithTarget:self action:@selector(arrowButton:)]];
     
     // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
-    // TODOあとで対応
     NSArray* gameResultList = [GameResultManager loadGameResultList];
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     GameResult* gameResult = appDelegate.targetGameResult;
@@ -445,6 +448,8 @@
 }
 
 - (void)postToTwitter {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Twitterシェア" value:nil screen:@"試合結果参照画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString];
@@ -473,6 +478,8 @@
 }
 
 - (void)postToFacebook {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Facebookシェア" value:nil screen:@"試合結果参照画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString];
@@ -589,6 +596,8 @@
 }
 
 - (IBAction)mailButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―メール送信" value:nil screen:@"試合結果参照画面"];
+    
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
     

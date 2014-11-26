@@ -9,6 +9,7 @@
 #import "BattingAnalysisController.h"
 #import "AppDelegate.h"
 #import "ConfigManager.h"
+#import "TrackingManager.h"
 
 @interface BattingAnalysisController ()
 
@@ -35,6 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"打撃分析画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.contentSize = CGSizeMake(320, 510);
@@ -89,6 +93,8 @@
 }
 
 - (IBAction)saveAnalysis:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―保存" value:nil screen:@"打撃分析画面"];
+    
     // UIImageでキャプチャを取得
     UIImage* capturedUIImage = [self getBattingAnalysisImage];
     

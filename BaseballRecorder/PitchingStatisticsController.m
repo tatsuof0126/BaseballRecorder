@@ -14,6 +14,7 @@
 #import "PitchingStatistics.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "TrackingManager.h"
 
 @interface PitchingStatisticsController ()
 
@@ -37,6 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"投手成績参照画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.contentSize = CGSizeMake(320, 520);
@@ -175,6 +179,8 @@
 }
 
 - (IBAction)mailButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―メール送信" value:nil screen:@"投手成績参照画面"];
+    
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
     

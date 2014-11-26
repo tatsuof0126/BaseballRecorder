@@ -10,29 +10,29 @@
 	<string>BaseballRecorder</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</key>
+		<key>E31EE97B353D8F136453CE0A74796FE33B9BB74B</key>
 		<string>https://github.com/tatsuof0126/BaseballRecorder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BaseballRecorder.xcodeproj/project.xcworkspace</string>
+	<string>BaseballRecorder.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</key>
+		<key>E31EE97B353D8F136453CE0A74796FE33B9BB74B</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/tatsuof0126/BaseballRecorder.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</string>
+	<string>E31EE97B353D8F136453CE0A74796FE33B9BB74B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9874AD08-E1EC-40A1-BEBC-7F4A7480D319</string>
+			<string>E31EE97B353D8F136453CE0A74796FE33B9BB74B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BaseballRecorder</string>
 		</dict>

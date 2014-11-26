@@ -10,6 +10,7 @@
 #import "InAppPurchaseManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "TrackingManager.h"
 
 #define APPSTORELABEL 1
 
@@ -36,6 +37,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"アドオン購入画面"];
 }
 
 - (void)didReceiveMemoryWarning

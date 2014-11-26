@@ -12,6 +12,7 @@
 #import "GameResultManager.h"
 #import "CheckBoxButton.h"
 #import "Utility.h"
+#import "TrackingManager.h"
 
 #define PICKER_INNING  1
 #define PICKER_SEKININ 2
@@ -48,6 +49,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"投手成績入力画面"];
     
     [self showPitchingResult];
 }
@@ -415,6 +419,8 @@
             break;
         case ALERT_SAVE:
             if(buttonIndex == 1){
+                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存" value:nil screen:@"投手成績入力画面"];
+                
                 // 入力内容をGameResultオブジェクトに反映
                 [self updateGameResult];
                 

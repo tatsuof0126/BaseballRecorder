@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "GAI.h"
+#import "NADInterstitial.h"
 
 @implementation AppDelegate
 
@@ -15,6 +17,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // Google Analyticsの初期化
+    [self initializeGoogleAnalytics];
+    
+    // AppBankNetworkのインタースティシャル広告の初期化
+    [[NADInterstitial sharedInstance] loadAdWithApiKey:@"ced5049f9d729e1847dbfa8b0d188218a720f20e"
+                                                spotId:@"271381"];
+    
     return YES;
 }
 							
@@ -83,6 +93,14 @@
                                     oldRect.size.width, oldRect.size.height);
         view.frame = newRect;
     }
+}
+
+- (void)initializeGoogleAnalytics {
+    // トラッキングIDを設定
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-23529359-5"];
+    
+    // 例外を Google Analytics に送る
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
 }
 
 @end

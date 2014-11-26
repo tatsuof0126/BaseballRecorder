@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "GameResultManager.h"
 #import "ConfigManager.h"
+#import "TrackingManager.h"
 #import "Utility.h"
 
 @interface GameResultListController ()
@@ -26,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"試合結果一覧画面"];
     
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
@@ -234,6 +238,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―削除" value:nil screen:@"試合結果一覧画面"];
+
         int resultid = [Utility convert2int:alertView.tag];
         
         [GameResultManager removeGameResult:resultid];
@@ -251,9 +257,12 @@
 
     if(tag == 1){
         // 追加ボタン
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―追加" value:nil screen:@"試合結果一覧画面"];
         appDelegate.targetGameResult = nil;
     } else {
         // 個別の試合結果を選択
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―既存選択" value:nil screen:@"試合結果一覧画面"];
+        
         NSIndexPath* indexPath = [gameResultListTableView indexPathForSelectedRow];
         
         NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];

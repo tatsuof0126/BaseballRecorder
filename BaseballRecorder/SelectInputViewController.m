@@ -9,6 +9,7 @@
 #import "SelectInputViewController.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
+#import "TrackingManager.h"
 
 @interface SelectInputViewController ()
 
@@ -36,10 +37,29 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self setTitleString];
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:[NSString stringWithFormat:@"%@画面",[self getTitleString]]];
+    
+    titleItem.title = [self getTitleString];
     [self makeSelectList];
 }
 
+- (NSString*)getTitleString {
+    NSString* str = @"";
+    if (selecttype == PLACE){
+        str = @"場所の選択";
+    } else if (selecttype == MYTEAM) {
+        str = @"チームの選択";
+    } else if (selecttype == OTHERTEAM) {
+        str = @"相手チームの選択";
+    } else if (selecttype == TAGTEXT) {
+        str = @"タグを追加";
+    }
+    
+    return str;
+}
+
+/*
 - (void)setTitleString {
     NSString* str = @"";
     if (selecttype == PLACE){
@@ -54,6 +74,7 @@
     
     titleItem.title = str;
 }
+ */
 
 
 - (void)makeSelectList {
@@ -124,6 +145,8 @@
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
  */
     } else {
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:[NSString stringWithFormat:@"%@画面-選択",[self getTitleString]] value:nil screen:[NSString stringWithFormat:@"%@画面",[self getTitleString]]];
+        
         targetField.text = [selectlist objectAtIndex:indexPath.row];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

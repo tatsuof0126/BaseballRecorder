@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Game Result List Controller - First-->
+        <!--First-->
         <scene sceneID="11">
             <objects>
                 <viewController title="First" id="2" customClass="GameResultListController" sceneMemberID="viewController">
@@ -741,7 +741,7 @@
             </objects>
             <point key="canvasLocation" x="1925" y="581"/>
         </scene>
-        <!--Batting Statistics View Controller - Second-->
+        <!--Second-->
         <scene sceneID="13">
             <objects>
                 <viewController title="Second" id="3" customClass="BattingStatisticsViewController" sceneMemberID="viewController">
@@ -1034,7 +1034,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="1041"/>
         </scene>
-        <!--Pitching Statistics Controller - 投手成績-->
+        <!--投手成績-->
         <scene sceneID="ODU-4B-hhp">
             <objects>
                 <viewController id="roP-hv-BV2" customClass="PitchingStatisticsController" sceneMemberID="viewController">
@@ -1744,7 +1744,7 @@
             </objects>
             <point key="canvasLocation" x="1057" y="269"/>
         </scene>
-        <!--Config View Controller - Title-->
+        <!--Title-->
         <scene sceneID="Xzr-H3-yjN">
             <objects>
                 <viewController id="sHv-AF-uZY" customClass="ConfigViewController" sceneMemberID="viewController">
@@ -2049,7 +2049,7 @@
             </objects>
             <point key="canvasLocation" x="110" y="180"/>
         </scene>
-        <!--Batting Analysis Controller - 打撃分析-->
+        <!--打撃分析-->
         <scene sceneID="R87-Ob-lwK">
             <objects>
                 <viewController id="m1s-Pa-ZZL" customClass="BattingAnalysisController" sceneMemberID="viewController">

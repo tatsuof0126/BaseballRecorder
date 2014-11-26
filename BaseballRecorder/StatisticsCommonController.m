@@ -12,6 +12,7 @@
 #import "GameResultManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "TrackingManager.h"
 
 @interface StatisticsCommonController ()
 
@@ -308,6 +309,8 @@
 }
 
 - (void)postToTwitter {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Twitterシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_TWITTER];
@@ -344,6 +347,8 @@
 }
 
 - (void)postToFacebook {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_FACEBOOK];

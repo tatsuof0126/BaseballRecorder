@@ -11,6 +11,7 @@
 #import "GameResult.h"
 #import "GameResultManager.h"
 #import "CheckBoxButton.h"
+#import "AppDelegate.h"
 #import "Utility.h"
 #import "TrackingManager.h"
 
@@ -31,7 +32,9 @@
 @synthesize scrollView;
 @synthesize saveButton;
 @synthesize inningButton;
+@synthesize changeInningButton;
 @synthesize sekininButton;
+@synthesize changeSekininButton;
 @synthesize pickerBaseView;
 @synthesize pickerToolbar;
 @synthesize selectPicker;
@@ -57,24 +60,24 @@
 }
 
 - (void)showPitchingResult {
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
     
-    InputViewController* controller = (InputViewController*)self.presentingViewController;
-    _inning = controller.gameResult.inning;
-    _inning2 = controller.gameResult.inning2;
-    _hianda.text = [NSString stringWithFormat:@"%d",controller.gameResult.hianda];
-    _hihomerun.text = [NSString stringWithFormat:@"%d",controller.gameResult.hihomerun];
-    _dassanshin.text = [NSString stringWithFormat:@"%d",controller.gameResult.dassanshin];
-    _yoshikyu.text = [NSString stringWithFormat:@"%d",controller.gameResult.yoshikyu];
-    _yoshikyu2.text = [NSString stringWithFormat:@"%d",controller.gameResult.yoshikyu2];
-    _shitten.text = [NSString stringWithFormat:@"%d",controller.gameResult.shitten];
-    _jisekiten.text = [NSString stringWithFormat:@"%d",controller.gameResult.jisekiten];
-    _kanto.checkBoxSelected = controller.gameResult.kanto;
-    _sekinin = controller.gameResult.sekinin;
+    _inning = gameResult.inning;
+    _inning2 = gameResult.inning2;
+    _hianda.text = [NSString stringWithFormat:@"%d",gameResult.hianda];
+    _hihomerun.text = [NSString stringWithFormat:@"%d",gameResult.hihomerun];
+    _dassanshin.text = [NSString stringWithFormat:@"%d",gameResult.dassanshin];
+    _yoshikyu.text = [NSString stringWithFormat:@"%d",gameResult.yoshikyu];
+    _yoshikyu2.text = [NSString stringWithFormat:@"%d",gameResult.yoshikyu2];
+    _shitten.text = [NSString stringWithFormat:@"%d",gameResult.shitten];
+    _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
+    _kanto.checkBoxSelected = gameResult.kanto;
+    _sekinin = gameResult.sekinin;
     
     [self showInning];
     [self showSekinin];
     [_kanto setState];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,9 +95,8 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    CGSize size = CGSizeMake(320, 500);
-    scrollView.contentSize = size;
-    [scrollView setContentOffset:CGPointMake(0.0f, 85.0f) animated:YES];
+    scrollView.contentSize = CGSizeMake(320, [UIScreen mainScreen].bounds.size.height+90);
+    [scrollView setContentOffset:CGPointMake(0.0f, 40.0f) animated:YES];
     
     [self showDoneButton];
     
@@ -129,8 +131,7 @@
     [_shitten endEditing:YES];
     [_jisekiten endEditing:YES];
     
-    CGSize size = CGSizeMake(320, 280);
-    scrollView.contentSize = size;
+    scrollView.contentSize = CGSizeMake(320, 280);
 }
 
 - (IBAction)inputInning:(id)sender {
@@ -139,7 +140,19 @@
     }
 }
 
+- (IBAction)changeInning:(id)sender {
+    if(selectPicker == nil){
+        [self makeSelectPicker:PICKER_INNING];
+    }
+}
+
 - (IBAction)inputResult:(id)sender {
+    if(selectPicker == nil){
+        [self makeSelectPicker:PICKER_SEKININ];
+    }
+}
+
+- (IBAction)changeResult:(id)sender {
     if(selectPicker == nil){
         [self makeSelectPicker:PICKER_SEKININ];
     }
@@ -296,18 +309,12 @@
 - (void)showInning {
     if(_inning == 0 && _inning2 == 0){
         _inningLabel.text = @"";
-        [inningButton setTitle:@"入力" forState:UIControlStateNormal];
-        [inningButton setTitle:@"入力" forState:UIControlStateHighlighted];
-        inningButton.frame = CGRectMake(100,51,60,30);
+        inningButton.hidden = NO;
+        changeInningButton.hidden = YES;
     } else {
         _inningLabel.text = [GameResult getInningString:_inning inning2:_inning2];
-        [inningButton setTitle:@"変更" forState:UIControlStateNormal];
-        [inningButton setTitle:@"変更" forState:UIControlStateHighlighted];
-        if(_inning == 0 || _inning2 == 0){
-            inningButton.frame = CGRectMake(155,51,60,30);
-        } else {
-            inningButton.frame = CGRectMake(180,51,60,30);
-        }
+        inningButton.hidden = YES;
+        changeInningButton.hidden = NO;
     }
     
 }
@@ -315,17 +322,14 @@
 - (void)showSekinin {
     if(_sekinin == 0){
         _sekininLabel.text = @"";
-        [sekininButton setTitle:@"入力" forState:UIControlStateNormal];
-        [sekininButton setTitle:@"入力" forState:UIControlStateHighlighted];
-        sekininButton.frame = CGRectMake(100,246,60,30);
+        sekininButton.hidden = NO;
+        changeSekininButton.hidden = YES;
     } else {
         NSArray* array = [GameResult getSekininPickerArray];
         _sekininLabel.text = [array objectAtIndex:_sekinin];
-        [sekininButton setTitle:@"変更" forState:UIControlStateNormal];
-        [sekininButton setTitle:@"変更" forState:UIControlStateHighlighted];
-        sekininButton.frame = CGRectMake(180,246,60,30);
+        sekininButton.hidden = YES;
+        changeSekininButton.hidden = NO;
     }
-    
 }
 
 - (IBAction)backToBatting:(id)sender {
@@ -377,34 +381,41 @@
 
 - (void)updateGameResult {
     // 入力内容をGameResultオブジェクトに保存
-    InputViewController* controller = (InputViewController*)self.presentingViewController;
-    controller.gameResult.inning     = _inning;
-    controller.gameResult.inning2    = _inning2;
-    controller.gameResult.hianda     = [_hianda.text intValue];
-    controller.gameResult.hihomerun  = [_hihomerun.text intValue];
-    controller.gameResult.dassanshin = [_dassanshin.text intValue];
-    controller.gameResult.yoshikyu   = [_yoshikyu.text intValue];
-    controller.gameResult.yoshikyu2  = [_yoshikyu2.text intValue];
-    controller.gameResult.shitten    = [_shitten.text intValue];
-    controller.gameResult.jisekiten  = [_jisekiten.text intValue];
-    controller.gameResult.kanto      = [_kanto checkBoxSelected];
-    controller.gameResult.sekinin    = _sekinin;
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
+    
+    gameResult.inning     = _inning;
+    gameResult.inning2    = _inning2;
+    gameResult.hianda     = [_hianda.text intValue];
+    gameResult.hihomerun  = [_hihomerun.text intValue];
+    gameResult.dassanshin = [_dassanshin.text intValue];
+    gameResult.yoshikyu   = [_yoshikyu.text intValue];
+    gameResult.yoshikyu2  = [_yoshikyu2.text intValue];
+    gameResult.shitten    = [_shitten.text intValue];
+    gameResult.jisekiten  = [_jisekiten.text intValue];
+    gameResult.kanto      = [_kanto checkBoxSelected];
+    gameResult.sekinin    = _sekinin;
+    
+    [self showPitchingResult];
+    
 }
 
 - (void)clearGameResult {
     // GameResultオブジェクトの投手成績部分を初期化
-    InputViewController* controller = (InputViewController*)self.presentingViewController;
-    controller.gameResult.inning     = 0;
-    controller.gameResult.inning2    = 0;
-    controller.gameResult.hianda     = 0;
-    controller.gameResult.hihomerun  = 0;
-    controller.gameResult.dassanshin = 0;
-    controller.gameResult.yoshikyu   = 0;
-    controller.gameResult.yoshikyu2  = 0;
-    controller.gameResult.shitten    = 0;
-    controller.gameResult.jisekiten  = 0;
-    controller.gameResult.kanto      = NO;
-    controller.gameResult.sekinin    = 0;
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    GameResult* gameResult = appDelegate.targetGameResult;
+    
+    gameResult.inning     = 0;
+    gameResult.inning2    = 0;
+    gameResult.hianda     = 0;
+    gameResult.hihomerun  = 0;
+    gameResult.dassanshin = 0;
+    gameResult.yoshikyu   = 0;
+    gameResult.yoshikyu2  = 0;
+    gameResult.shitten    = 0;
+    gameResult.jisekiten  = 0;
+    gameResult.kanto      = NO;
+    gameResult.sekinin    = 0;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -425,8 +436,8 @@
                 [self updateGameResult];
                 
                 // ファイルに保存
-                InputViewController* controller = (InputViewController*)self.presentingViewController;
-                [GameResultManager saveGameResult:controller.gameResult];
+                AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
                 // 一覧画面に戻る
                 self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -439,9 +450,10 @@
                 // 投手成績の入力内容をGameResultオブジェクトから削除
                 [self clearGameResult];
                 
+                
                 // ファイルに保存
-                InputViewController* controller = (InputViewController*)self.presentingViewController;
-                [GameResultManager saveGameResult:controller.gameResult];
+                AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
                 // 一覧画面に戻る
                 self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

@@ -61,6 +61,8 @@
 
 - (NSString*)getGameResultString;
 
+- (NSString*)getGameResultStringWithTeam;
+
 - (NSData*)getGameResultNSData;
 
 - (NSString*)getInningString;

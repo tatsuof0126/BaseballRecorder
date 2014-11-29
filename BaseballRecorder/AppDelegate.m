@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "GAI.h"
 #import "NADInterstitial.h"
+#import "GameResultManager.h"
+
+#define MAKE_SAMPLE_DATA 0
 
 @implementation AppDelegate
 
@@ -24,6 +27,11 @@
     // AppBankNetworkのインタースティシャル広告の初期化
     [[NADInterstitial sharedInstance] loadAdWithApiKey:@"ced5049f9d729e1847dbfa8b0d188218a720f20e"
                                                 spotId:@"271381"];
+    
+    // サンプルデータを作る
+    if(MAKE_SAMPLE_DATA == 1){
+        [GameResultManager makeSampleData];
+    }
     
     return YES;
 }

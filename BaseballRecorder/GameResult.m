@@ -103,6 +103,10 @@
     return [NSString stringWithFormat:@"%d - %d",myscore,otherscore];
 }
 
+- (NSString*)getGameResultStringWithTeam {
+    return [NSString stringWithFormat:@"%@ %d - %d %@",myteam,myscore,otherscore,otherteam];
+}
+
 - (NSString*)getMailSubject {
     return [NSString stringWithFormat:@"【ベボレコ】%d年%d月%d日 %@ %d-%d %@ @ベボレコ"
             ,year,month,day,myteam,myscore,otherscore,otherteam];
@@ -112,7 +116,9 @@
     NSMutableString* bodyString = [NSMutableString string];
     
     [bodyString appendString:[NSString stringWithFormat:@"%d年%d月%d日 %@\n",year,month,day,place]];
-    [bodyString appendString:[NSString stringWithFormat:@"%@ %d-%d %@\n",myteam,myscore,otherscore,otherteam]];
+    [bodyString appendString:[NSString stringWithFormat:@"%@\n",[self getGameResultStringWithTeam]]];
+    
+//    [bodyString appendString:[NSString stringWithFormat:@"%@ %d-%d %@\n",myteam,myscore,otherscore,otherteam]];
     
     // 打撃成績
     if( (battingResultArray != nil && battingResultArray.count >= 1) ||
@@ -142,15 +148,16 @@
                                   @"失点：%d　自責点：%d\n",shitten,jisekiten]];
     }
     
-    // メモ
-    if([@"" isEqualToString:memo] == NO){
-        [bodyString appendString:[NSString stringWithFormat:@"\nメモ\n"]];
-        [bodyString appendString:[NSString stringWithFormat:@"%@\n",memo]];
+    // タグ
+    if([@"" isEqualToString:tagtext] == NO){
+        [bodyString appendString:[NSString stringWithFormat:@"\nタグ：%@\n",tagtext]];
     }
     
-    // TODO
-    // タグ
-    
+    // メモ
+    if([@"" isEqualToString:memo] == NO){
+        [bodyString appendString:[NSString stringWithFormat:@"\nメモ：\n"]];
+        [bodyString appendString:[NSString stringWithFormat:@"%@\n",memo]];
+    }
     
     return bodyString;
 }

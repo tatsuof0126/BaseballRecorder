@@ -63,6 +63,7 @@
 
     if(gameResult == nil){
         gameResult = [[GameResult alloc] init];
+        appDelegate.targetGameResult = gameResult;
         
         // 日付を今日に初期設定
 //        NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -790,6 +791,15 @@
     
     // 末尾の空白・改行はカット
     gameResult.memo = [[self escapeString:_memo.text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    
+    
+    
+    // ★テストコード★
+    gameResult.tagtext = gameResult.memo;
+    
+    
+    
 }
 
 - (NSString*)escapeString:(NSString*)sourceString {

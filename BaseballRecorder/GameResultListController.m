@@ -268,7 +268,6 @@
         NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];
         GameResult* result = [array objectAtIndex:indexPath.row];
 
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         appDelegate.targetGameResult = result;
     }
 }

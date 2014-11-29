@@ -44,61 +44,6 @@
     // 画面が開かれたときのトラッキング情報を送る
     [TrackingManager sendScreenTracking:@"試合結果参照画面"];
     
-    // ←→ボタンを動作させるための初期設定
-    _arrowleft.userInteractionEnabled = YES;
-    _arrowright.userInteractionEnabled = YES;
-    [_arrowleft addGestureRecognizer:[[UITapGestureRecognizer alloc]
-                                      initWithTarget:self action:@selector(arrowButton:)]];
-    [_arrowright addGestureRecognizer:[[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(arrowButton:)]];
-    
-    // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
-    NSArray* gameResultList = [GameResultManager loadGameResultList];
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    GameResult* gameResult = appDelegate.targetGameResult;
-    
-    BOOL leftMoveFlg = NO;
-    BOOL rightMoveFlg = NO;
-    
-    int nowIndex = -999;
-    for (int i=0;i<gameResultList.count;i++){
-        GameResult* tmpResult = [gameResultList objectAtIndex:i];
-        if(gameResult.resultid == tmpResult.resultid){
-            nowIndex = i;
-            break;
-        }
-    }
-
-    if(nowIndex+1 < gameResultList.count){
-        rightMoveFlg = YES;
-    }
-    if(nowIndex > 0){
-        leftMoveFlg = YES;
-    }
-    
-    if(rightMoveFlg == NO && leftMoveFlg == NO){
-        _arrowleft.hidden = YES;
-        _arrowright.hidden = YES;
-        _noneleft.hidden = YES;
-        _noneright.hidden = YES;
-    } else if (rightMoveFlg == NO) {
-        _arrowleft.hidden = NO;
-        _arrowright.hidden = YES;
-        _noneleft.hidden = YES;
-        _noneright.hidden = NO;
-    } else if (leftMoveFlg == NO) {
-        _arrowleft.hidden = YES;
-        _arrowright.hidden = NO;
-        _noneleft.hidden = NO;
-        _noneright.hidden = YES;
-    } else {
-        _arrowleft.hidden = NO;
-        _arrowright.hidden = NO;
-        _noneleft.hidden = YES;
-        _noneright.hidden = YES;
-    }
-    
-    
     // ScrollViewの高さを定義＆iPhone5対応
     _scrollview.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:_scrollview];
@@ -140,41 +85,24 @@
 }
 
 - (void)showGameResult {
-    
+    // AppDelegateからresultidを取得して読み込み直し
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    GameResult* gameResult = appDelegate.targetGameResult;
+    int resultid = appDelegate.targetGameResult.resultid;
+    
+    GameResult* gameResult = [GameResultManager loadGameResult:resultid];
+    appDelegate.targetGameResult = gameResult;
     
     // 矢印の表示有無を決定
     [self setArrowImage];
     
-//    NSLog(@"targetResultid : %d",gameResult.resultid);
-    
+    // 試合成績
     _date.text = [gameResult getDateString];
     _place.text = gameResult.place;
-    _myteam.text = gameResult.myteam;
-    _otherteam.text = gameResult.otherteam;
-    _result.text = [gameResult getGameResultString];
+    _result.text = [gameResult getGameResultStringWithTeam];
     _tagText.text = gameResult.tagtext;
     
-    // タグが空なら非表示
-    int tagAdjust = 0;
-    if ([gameResult.tagtext isEqualToString:@""] == YES){
-        _tagText.hidden = YES;
-        _tagTextLabel.hidden = YES;
-    } else {
-        _tagText.hidden = NO;
-        _tagTextLabel.hidden = NO;
-        tagAdjust = 35;
-    }
-    
-    // タグが長い場合は少し左に寄せる
-    if ([gameResult.tagtext lengthOfBytesUsingEncoding:NSShiftJISStringEncoding] >= 23){
-        _tagText.frame = CGRectMake(70, 160, 240, 21);
-    } else {
-        _tagText.frame = CGRectMake(100, 160, 210, 21);
-    }
-    
     // 打撃成績
+    int baseAdjust = 90;
     BOOL battingResultFlg = NO;
     if( (gameResult.battingResultArray != nil && gameResult.battingResultArray.count >= 1) ||
        gameResult.daten >= 1 || gameResult.tokuten >= 1 || gameResult.steal >= 1){
@@ -192,11 +120,11 @@
     for(int i=0;i<gameResult.battingResultArray.count;i++){
         BattingResult* battingResult = [gameResult.battingResultArray objectAtIndex:i];
         
-        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,225+tagAdjust+i*30,90,30)];
+        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,baseAdjust+65+i*30,90,30)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         titlelabel.tag = 1;
         
-        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,225+tagAdjust+i*30,200,30)];
+        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,baseAdjust+65+i*30,200,30)];
         resultlabel.text = [battingResult getResultSemiLongString];
         resultlabel.tag = 1;
         resultlabel.textColor = [battingResult getResultColor];
@@ -260,6 +188,25 @@
         _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
     }
     
+    // タグが空なら非表示
+    int tagAdjust = 0;
+    if ([gameResult.tagtext isEqualToString:@""] == YES){
+        _tagText.hidden = YES;
+        _tagTextLabel.hidden = YES;
+    } else {
+        _tagText.hidden = NO;
+        _tagTextLabel.hidden = NO;
+        tagAdjust = 35;
+    }
+    
+    // タグが長い場合は少し左に寄せる
+    if ([gameResult.tagtext lengthOfBytesUsingEncoding:NSShiftJISStringEncoding] >= 23){
+        [self setFrameOriginX:_tagText originX:80];
+    } else {
+        [self setFrameOriginX:_tagText originX:90];
+    }
+    
+    // メモ欄
     BOOL memoFlg = ![@"" isEqualToString:gameResult.memo];
     _memoLabel.hidden = !memoFlg;
     _memo.hidden = !memoFlg;
@@ -278,25 +225,20 @@
         _memo.frame = f;
     }
     
-//    int battingAdjust = 230+gameResult.battingResultArray.count*30;
-//    if(battingResultFlg == NO){
-//        battingAdjust -= 70;
-//    }
-    
     // 表示の高さを調整
-    int baseAdjust = 160;
     int battingAdjust = battingResultFlg ? 70+[Utility convert2int:gameResult.battingResultArray.count]*30 : 0;
     int pitchingAdjust = pitchingResultFlg ? 160 : 0;
     int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     
-    int adjust1 = baseAdjust+tagAdjust;
-    int adjust2 = baseAdjust+tagAdjust+battingAdjust;
+    int adjust1 = baseAdjust;
+    int adjust2 = baseAdjust+battingAdjust;
     int adjust3 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust;
     int adjust4 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+memoAdjust;
     
-    [self setFrameOriginY:_resultLabel originY:adjust1];
-    [self setFrameOriginY:_result originY:adjust1];
-    [self setFrameOriginY:_tweetButton originY:adjust1-5];
+//    [self setFrameOriginY:_resultLabel originY:adjust1];
+//    [self setFrameOriginY:_result originY:adjust1];
+    [self setFrameOriginX:_tweetButton originX:adjust4 == baseAdjust ? 120 : 150];
+    [self setFrameOriginY:_tweetButton originY:adjust1+35];
     [self setFrameOriginY:_battingResultLabel originY:adjust1+40];
     
     [self setFrameOriginY:_datenLabel originY:adjust2];
@@ -324,14 +266,19 @@
     [self setFrameOriginY:_shitten originY:adjust2+160];
     [self setFrameOriginY:_jisekitenLabel originY:adjust2+160];
     [self setFrameOriginY:_jisekiten originY:adjust2+160];
+
+    [self setFrameOriginY:_tagTextLabel originY:adjust3+5];
+    [self setFrameOriginY:_tagText originY:adjust3+5];
     
     [self setFrameOriginY:_memoLabel originY:adjust3+40];
-    [self setFrameOriginY:_memo originY:adjust3+70];
+    [self setFrameOriginY:_memo originY:adjust3+67];
     
-//    [self setFrameOriginY:_tweetButton originY:adjust4+50];
-//    [self setFrameOriginY:_mailButton originY:adjust4+115];
-    [self setFrameOriginY:_mailButton originY:adjust4+50];
+    [self setFrameOriginY:_mailButton originY:adjust4 == baseAdjust ? adjust4+75 : adjust4+45];
     _scrollview.contentSize = CGSizeMake(320, adjust4+310);
+}
+
+- (void)setFrameOriginX:(UIView*)view originX:(int)originX {
+    view.frame = CGRectMake(originX, view.frame.origin.y, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
@@ -339,7 +286,7 @@
 }
 
 - (void)setArrowImage {
-    // ←→ボタンが押せないときは空の四角にする。（両方押せないときはそもそも出さない）
+    // 「←」「→」ボタンを出すかの判定
     NSArray* gameResultList = [GameResultManager loadGameResultList];
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     GameResult* gameResult = appDelegate.targetGameResult;
@@ -363,27 +310,8 @@
         leftMoveFlg = YES;
     }
     
-    if(rightMoveFlg == NO && leftMoveFlg == NO){
-        _arrowleft.hidden = YES;
-        _arrowright.hidden = YES;
-        _noneleft.hidden = YES;
-        _noneright.hidden = YES;
-    } else if (rightMoveFlg == NO) {
-        _arrowleft.hidden = NO;
-        _arrowright.hidden = YES;
-        _noneleft.hidden = YES;
-        _noneright.hidden = NO;
-    } else if (leftMoveFlg == NO) {
-        _arrowleft.hidden = YES;
-        _arrowright.hidden = NO;
-        _noneleft.hidden = NO;
-        _noneright.hidden = YES;
-    } else {
-        _arrowleft.hidden = NO;
-        _arrowright.hidden = NO;
-        _noneleft.hidden = YES;
-        _noneright.hidden = YES;
-    }
+    _rightBtn.hidden = !rightMoveFlg;
+    _leftBtn.hidden = !leftMoveFlg;
 }
 
 - (IBAction)backButton:(id)sender {
@@ -394,11 +322,11 @@
 - (IBAction)editButton:(id)sender {
 }
 
-- (void)arrowButton:(UITapGestureRecognizer*)sender{
+- (IBAction)arrowButton:(id)sender {
     NSArray* gameResultList = [GameResultManager loadGameResultList];
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     GameResult* gameResult = appDelegate.targetGameResult;
-
+    
     int nowIndex = -999;
     int newIndex = -999;
     
@@ -410,11 +338,11 @@
         }
     }
     
-    if(sender.view == _arrowright){
+    if(sender == _rightBtn){
         if(nowIndex+1 < gameResultList.count){
             newIndex = nowIndex+1;
         }
-    } else if(sender.view == _arrowleft){
+    } else if(sender == _leftBtn){
         if(nowIndex > 0){
             newIndex = nowIndex-1;
         }
@@ -647,8 +575,6 @@
 - (void)viewDidUnload {
     [self setDate:nil];
     [self setPlace:nil];
-    [self setMyteam:nil];
-    [self setOtherteam:nil];
     [self setResult:nil];
     [self setScrollview:nil];
     [self setDatenLabel:nil];
@@ -679,8 +605,6 @@
     [self setBattingResultLabel:nil];
     [self setMemoLabel:nil];
     [self setMemo:nil];
-    [self setArrowleft:nil];
-    [self setArrowright:nil];
     [self setTweetButton:nil];
     [super viewDidUnload];
 }

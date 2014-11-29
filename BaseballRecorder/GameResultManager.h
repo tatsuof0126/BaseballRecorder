@@ -19,4 +19,6 @@
 
 + (NSArray*)loadGameResultList;
 
++ (void)makeSampleData;
+
 @end

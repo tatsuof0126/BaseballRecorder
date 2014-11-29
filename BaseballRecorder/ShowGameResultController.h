@@ -20,11 +20,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;
-@property (weak, nonatomic) IBOutlet UILabel *myteam;
-@property (weak, nonatomic) IBOutlet UILabel *otherteam;
+// @property (weak, nonatomic) IBOutlet UILabel *myteam;
+// @property (weak, nonatomic) IBOutlet UILabel *otherteam;
 @property (strong, nonatomic) IBOutlet UILabel *tagTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tagText;
-@property (strong, nonatomic) IBOutlet UILabel *resultLabel;
+// @property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *result;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
@@ -54,20 +54,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *shitten;
 @property (weak, nonatomic) IBOutlet UILabel *jisekitenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jisekiten;
-@property (strong, nonatomic) IBOutlet UIImageView *arrowleft;
-@property (strong, nonatomic) IBOutlet UIImageView *arrowright;
-@property (strong, nonatomic) IBOutlet UIImageView *noneleft;
-@property (strong, nonatomic) IBOutlet UIImageView *noneright;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UITextView *memo;
 
+@property (strong, nonatomic) IBOutlet UIButton *leftBtn;
+@property (strong, nonatomic) IBOutlet UIButton *rightBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *tweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
 
 @property BOOL posted;
 // @property BOOL tweeted;
+
+- (IBAction)arrowButton:(id)sender;
 
 - (IBAction)tweetButton:(id)sender;
 

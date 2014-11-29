@@ -34,14 +34,20 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *inningButton;
+@property (strong, nonatomic) IBOutlet UIButton *changeInningButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *sekininButton;
+@property (strong, nonatomic) IBOutlet UIButton *changeSekininButton;
 
 @property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *pickerToolbar;
 @property (strong, nonatomic) UIPickerView *selectPicker;
 
 - (IBAction)inputInning:(id)sender;
+- (IBAction)changeInning:(id)sender;
+
 - (IBAction)inputResult:(id)sender;
+- (IBAction)changeResult:(id)sender;
 
 - (IBAction)toBattingButton:(id)sender;
 - (IBAction)saveButton:(id)sender;

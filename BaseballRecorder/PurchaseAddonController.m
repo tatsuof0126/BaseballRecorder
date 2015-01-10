@@ -93,8 +93,12 @@
 //    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
     
     if(indexPath.section == 0){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―広告削除" value:nil screen:@"アドオン購入画面"];
+        
         [self requestAddon:@"com.tatsuo.baseballrecorder.removeads"];
     } else if(indexPath.section == 1){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―リストア" value:nil screen:@"アドオン購入画面"];
+        
         [self restoreAddon];
     }
 }

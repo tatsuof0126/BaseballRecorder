@@ -424,6 +424,7 @@
                         <outlet property="tokutenLabel" destination="CIP-pc-Rsc" id="2X4-aW-0W3"/>
                         <outlet property="year" destination="qAH-4u-0GX" id="Y6h-Xs-Ejt"/>
                         <segue destination="sOh-sz-83Q" kind="modal" identifier="toPitching" modalTransitionStyle="flipHorizontal" id="rVz-Ef-PR0"/>
+                        <segue destination="5rJ-uI-mNK" kind="modal" identifier="registsegue" modalTransitionStyle="crossDissolve" id="f1a-pn-9eD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5X-IS-4Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -759,6 +760,7 @@
                         <outlet property="shitten" destination="fTI-im-ybi" id="6CJ-T6-Zfd"/>
                         <outlet property="yoshikyu" destination="oCe-zF-o9I" id="Tmb-6B-yad"/>
                         <outlet property="yoshikyu2" destination="h6r-hM-SfO" id="FNB-XZ-ELJ"/>
+                        <segue destination="5rJ-uI-mNK" kind="modal" identifier="registsegue" modalTransitionStyle="crossDissolve" id="TXb-6e-0gl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIu-QM-3Vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1009,7 +1011,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QFa-fM-5jq">
-                                        <rect key="frame" x="115" y="156" width="80" height="31"/>
+                                        <rect key="frame" x="110" y="156" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="　シェア　">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1028,6 +1030,16 @@
                                             <segue destination="aaE-uE-iRN" kind="modal" modalTransitionStyle="crossDissolve" id="WU2-Ma-1Ex"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JjP-0i-nOo">
+                                        <rect key="frame" x="200" y="156" width="100" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <state key="normal" title="画像でシェア">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="imageShareButton:" destination="3" eventType="touchUpInside" id="vxP-7w-vXC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -1039,11 +1051,15 @@
                         <outlet property="battingresult" destination="omK-t0-btv" id="laI-9O-YXJ"/>
                         <outlet property="battingstat" destination="BFW-xk-lX8" id="2G0-Mu-g50"/>
                         <outlet property="battingstat2" destination="XfR-53-tKv" id="zfT-x7-d80"/>
+                        <outlet property="changeBtn" destination="Eko-F1-NAj" id="THw-Yf-kt9"/>
                         <outlet property="daten" destination="Uj8-y3-BfI" id="xfr-3R-aUX"/>
                         <outlet property="doubles" destination="NFD-Fx-qgC" id="PzR-k3-lob"/>
                         <outlet property="homeruns" destination="XWT-jS-OU6" id="Q0f-zn-ACL"/>
+                        <outlet property="imageShareBtn" destination="JjP-0i-nOo" id="xVK-oU-i95"/>
+                        <outlet property="mailBtn" destination="aTi-Nb-YJl" id="IlP-o8-dYl"/>
                         <outlet property="sacrifices" destination="sB3-Wk-Xv8" id="hjY-sd-7eG"/>
                         <outlet property="scrollView" destination="8Lq-Z0-qel" id="2kx-Qu-Qof"/>
+                        <outlet property="shareBtn" destination="QFa-fM-5jq" id="vHm-n5-MGO"/>
                         <outlet property="steal" destination="izK-2G-ck1" id="lLW-IL-0WM"/>
                         <outlet property="strikeouts" destination="Jne-FM-mXc" id="VT4-1m-KEo"/>
                         <outlet property="team" destination="lVz-3r-PKd" id="RPO-1R-WA8"/>
@@ -1323,13 +1339,23 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KgJ-K6-JcA">
-                                        <rect key="frame" x="117" y="121" width="80" height="31"/>
+                                        <rect key="frame" x="110" y="121" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="tweetButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="emg-3M-9Ll"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cFc-y6-8QP">
+                                        <rect key="frame" x="200" y="121" width="100" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <state key="normal" title="画像でシェア">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="imageShareButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="4Ki-j5-D0X"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1348,16 +1374,20 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="投手成績" image="baseball.png" id="Zzi-29-sld"/>
                     <connections>
+                        <outlet property="changeBtn" destination="1fV-QY-RDu" id="96X-CV-dzi"/>
                         <outlet property="dassanshin" destination="0aZ-Iw-uuZ" id="hKl-q5-jiJ"/>
                         <outlet property="era" destination="H0D-hS-QBt" id="imK-2R-1Li"/>
                         <outlet property="hianda" destination="dN9-PH-k8K" id="6G7-xE-9d1"/>
                         <outlet property="hihomerun" destination="3HL-j7-YH1" id="FEm-Yk-gJm"/>
+                        <outlet property="imageShareBtn" destination="cFc-y6-8QP" id="euP-4b-CdD"/>
                         <outlet property="inning" destination="CrK-lu-cnc" id="SYS-U8-XwN"/>
                         <outlet property="jisekiten" destination="B1i-T9-XiV" id="D1G-Nm-obE"/>
                         <outlet property="k9" destination="YRm-rZ-vNT" id="kj1-WL-GiG"/>
                         <outlet property="kanto" destination="qfv-cB-Lie" id="TJa-wA-EuA"/>
+                        <outlet property="mailBtn" destination="gh3-Yq-ccR" id="gpx-Ql-sAr"/>
                         <outlet property="pitchingresult" destination="UAw-ra-HIm" id="k2X-aS-VNe"/>
                         <outlet property="scrollView" destination="WcK-7X-JDS" id="Uad-uQ-bTW"/>
+                        <outlet property="shareBtn" destination="KgJ-K6-JcA" id="caS-V4-WTD"/>
                         <outlet property="shitten" destination="eHp-L6-BS0" id="7kf-UW-SVl"/>
                         <outlet property="shoritsu" destination="xfl-nb-yAI" id="HMd-XJ-7Mx"/>
                         <outlet property="team" destination="S8m-FO-JMB" id="3wj-aA-a8h"/>
@@ -1385,7 +1415,7 @@
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
                                     <navigationItem title="試合結果" id="6BK-rF-IqO">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="MmO-X1-Zmj">
+                                        <barButtonItem key="leftBarButtonItem" title="一覧へ" id="MmO-X1-Zmj">
                                             <connections>
                                                 <action selector="backButton:" destination="5rJ-uI-mNK" id="S37-iX-AV8"/>
                                             </connections>
@@ -1393,7 +1423,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="編集" id="8ad-A5-Hko">
                                             <connections>
                                                 <action selector="editButton:" destination="5rJ-uI-mNK" id="5UA-UN-KH3"/>
-                                                <segue destination="CYm-Gx-IRt" kind="modal" modalTransitionStyle="crossDissolve" id="7pF-G3-Z3a"/>
+                                                <segue destination="CYm-Gx-IRt" kind="modal" identifier="updatesegue" modalTransitionStyle="crossDissolve" id="7pF-G3-Z3a"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1712,9 +1742,11 @@
                         <outlet property="yoshikyu2" destination="dad-MW-6Qi" id="7JI-Sf-hkE"/>
                         <outlet property="yoshikyu2Label" destination="GrA-zJ-IAT" id="CDs-OF-M6z"/>
                         <outlet property="yoshikyuLabel" destination="Rpm-Ne-9S7" id="dCF-qF-JKB"/>
+                        <segue destination="XSz-b5-Ess" kind="unwind" identifier="togameresultlist" unwindAction="gameResultListReturnActionForSegue:" id="3zR-2t-ard"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gH8-W5-TYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XSz-b5-Ess" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1057" y="269"/>
         </scene>
@@ -1839,14 +1871,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="versionx.x" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FtC-ue-9t7">
-                                        <rect key="frame" x="195" y="302" width="84" height="21"/>
+                                        <rect key="frame" x="195" y="302" width="117" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="left" text="レビューを書く" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e1R-b0-IWY">
-                                        <rect key="frame" x="216" y="325" width="84" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="left" text="他のアプリを見る" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WP0-Qw-goz">
+                                        <rect key="frame" x="200" y="325" width="100" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1875,6 +1907,13 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="left" text="レビューを書く" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e1R-b0-IWY">
+                                        <rect key="frame" x="95" y="325" width="95" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="11"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -1889,6 +1928,7 @@
                         <outlet property="calcInning7" destination="Jey-je-fi3" id="A93-2k-kun"/>
                         <outlet property="inputNavi" destination="ZbE-bK-WAj" id="6a2-6J-v0f"/>
                         <outlet property="myteam" destination="5EK-Py-si8" id="07Y-Fb-vWy"/>
+                        <outlet property="otherappLabel" destination="WP0-Qw-goz" id="Y84-22-Md2"/>
                         <outlet property="place" destination="aIl-ze-lmZ" id="oRq-bt-Oqf"/>
                         <outlet property="removeadsButton" destination="ueX-kT-PhL" id="52q-WL-dH6"/>
                         <outlet property="scrollView" destination="4ls-Ts-JGU" id="Fs8-p9-d06"/>
@@ -2181,6 +2221,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="7pF-G3-Z3a"/>
+        <segue reference="TXb-6e-0gl"/>
         <segue reference="PO9-Hz-laC"/>
     </inferredMetricsTieBreakers>
 </document>

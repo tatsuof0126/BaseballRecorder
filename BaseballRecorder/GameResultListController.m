@@ -9,6 +9,7 @@
 #import "GameResultListController.h"
 #import "AppDelegate.h"
 #import "GameResultManager.h"
+#import "InputViewController.h"
 #import "ConfigManager.h"
 #import "TrackingManager.h"
 #import "Utility.h"
@@ -258,6 +259,10 @@
     if(tag == 1){
         // 追加ボタン
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―追加" value:nil screen:@"試合結果一覧画面"];
+        
+        InputViewController* controller = [segue destinationViewController];
+        controller.inputtype = INPUT_TYPE_NEW;
+        
         appDelegate.targetGameResult = nil;
     } else {
         // 個別の試合結果を選択
@@ -270,6 +275,9 @@
 
         appDelegate.targetGameResult = result;
     }
+}
+
+- (IBAction)gameResultListReturnActionForSegue:(UIStoryboardSegue *)segue{
 }
 
 - (void) viewWillAppear:(BOOL)animated {

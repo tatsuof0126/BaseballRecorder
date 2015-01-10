@@ -21,6 +21,7 @@
 @synthesize scrollView;
 @synthesize removeadsButton;
 @synthesize appstoreLabel;
+@synthesize otherappLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,12 +60,14 @@
     // AppStoreへリンクのタップを受け取るため
     appstoreLabel.userInteractionEnabled = YES;
     [appstoreLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
+    otherappLabel.userInteractionEnabled = YES;
+    [otherappLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
     
     // iPhone5対応
     [AppDelegate adjustOriginForiPhone5:_apptitle];
-    [AppDelegate adjustOriginForiPhone5:_appsubtitle];
     [AppDelegate adjustOriginForiPhone5:_versionName];
     [AppDelegate adjustOriginForiPhone5:appstoreLabel];
+    [AppDelegate adjustOriginForiPhone5:otherappLabel];
     
     // すでに広告が非表示ならボタンを消す
     if([ConfigManager isRemoveAdsFlg] == YES){
@@ -85,8 +88,8 @@
     [self setSendto:nil];
     [self setScrollView:nil];
     [self setAppstoreLabel:nil];
+    [self setOtherappLabel:nil];
     [self setApptitle:nil];
-    [self setAppsubtitle:nil];
     [self setRemoveadsButton:nil];
     [self setCalcInning7:nil];
     [super viewDidUnload];
@@ -142,11 +145,15 @@
 }
 
 - (IBAction)placeEdited:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―場所設定" value:nil screen:@"設定画面"];
+    
     UITextField* place = sender;
     [ConfigManager setDefaultPlace:place.text];
 }
 
 - (IBAction)myteamEdited:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―チーム設定" value:nil screen:@"設定画面"];
+    
     UITextField* myteam = sender;
     [ConfigManager setDefaultMyTeam:myteam.text];
 }
@@ -156,15 +163,21 @@
 }
 
 - (void)saveDefaultSendto {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―メールアドレス設定" value:nil screen:@"設定画面"];
+    
     NSString* email = _sendto.text;
     [ConfigManager setDefaultSendTo:email];
 }
 
 - (void)checkBoxSelected:(UITapGestureRecognizer*)sender {
     if(sender.view == _calcInning7){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―７回計算" value:nil screen:@"設定画面"];
+        
         [_calcInning7 checkboxPush:_calcInning7];
         [ConfigManager setCalcInning7Flg:_calcInning7.selected];
     } else if(sender.view == _showMyteam){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―自チーム名表示" value:nil screen:@"設定画面"];
+        
         [_showMyteam checkboxPush:_showMyteam];
         [ConfigManager setShowMyteamFlg:_showMyteam.selected];
     }
@@ -194,9 +207,6 @@
     picker.peoplePickerDelegate = self;
     [self presentViewController:picker animated:YES completion:nil];
 //    [self presentModalViewController:picker animated:YES];
-}
-
-- (IBAction)removeadsButton:(id)sender {
 }
 
 - (void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
@@ -239,9 +249,16 @@
 - (void)tapAction:(UITapGestureRecognizer*)sender{
     if(sender.view == appstoreLabel){
 //        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―レビューを書く" value:nil screen:@"設定画面"];
         
         NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
 
+        [[UIApplication sharedApplication] openURL:url];
+    } else if(sender.view == otherappLabel){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―他のアプリを見る" value:nil screen:@"設定画面"];
+        
+        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.com/apps/TatsuoFujiwara"];
+        
         [[UIApplication sharedApplication] openURL:url];
     }
 }

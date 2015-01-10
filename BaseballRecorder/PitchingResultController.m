@@ -8,6 +8,7 @@
 
 #import "PitchingResultController.h"
 #import "InputViewController.h"
+#import "ShowGameResultController.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
 #import "CheckBoxButton.h"
@@ -439,30 +440,46 @@
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
-                // 一覧画面に戻る
-                self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                // 試合結果参照画面へ
+                [self moveNextView];
             }
             break;
         case ALERT_SAVE_ONLY_BATTING:
             if(buttonIndex == 1){
+                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
+                
                 // 投手成績の入力内容をGameResultオブジェクトから削除
                 [self clearGameResult];
-                
                 
                 // ファイルに保存
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
-                // 一覧画面に戻る
-                self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//                [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                // 試合結果参照画面へ
+                [self moveNextView];
             }
             break;
         default:
             break;
+    }
+}
+
+- (void)moveNextView {
+    InputViewController* controller = (InputViewController*)self.presentingViewController;
+    if(controller.inputtype == INPUT_TYPE_NEW){
+        // 試合結果参照画面へ進む
+        [self performSegueWithIdentifier:@"registsegue" sender:self];
+    } else if(controller.inputtype == INPUT_TYPE_UPDATE){
+        // 試合結果参照画面へ戻る
+        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
+    NSString* segueStr = [segue identifier];
+    if ([segueStr isEqualToString:@"registsegue"] == YES) {
+        // とりあえず何もなし
     }
 }
 
@@ -522,6 +539,8 @@
 }
 
 - (IBAction)toBattingButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―打撃成績へ" value:nil screen:@"投手成績入力画面"];
+    
     // 入力中状態を解除
     [self doneButton];
     

@@ -12,6 +12,7 @@
 #import "GameResult.h"
 #import "BattingResult.h"
 #import "BattingStatistics.h"
+#import "InputViewController.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
@@ -25,7 +26,6 @@
 
 @synthesize nadView;
 @synthesize posted;
-// @synthesize tweeted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -315,8 +315,21 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-//    [self dismissModalViewControllerAnimated:YES];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―戻る" value:nil screen:@"試合結果参照画面"];
+    
+    [self performSegueWithIdentifier:@"togameresultlist" sender:self];
+    
+/*
+    NSLog(@"segue : %d", seguetype);
+    if(seguetype == SEGUE_NEW_INPUT){
+        [self performSegueWithIdentifier:@"togameresultlist" sender:self];
+        
+//        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+ */
+    
 }
 
 - (IBAction)editButton:(id)sender {
@@ -380,7 +393,7 @@
     
     posted = NO;
     
-    NSString* shareString = [self makeShareString];
+    NSString* shareString = [self makeShareString:POST_TWITTER];
     
     SLComposeViewController* vc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     [vc setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -410,7 +423,7 @@
     
     posted = NO;
     
-    NSString* shareString = [self makeShareString];
+    NSString* shareString = [self makeShareString:POST_FACEBOOK];
     
     SLComposeViewController *vc = [SLComposeViewController
                                    composeViewControllerForServiceType:SLServiceTypeFacebook];
@@ -435,7 +448,7 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (NSString*)makeShareString {
+- (NSString*)makeShareString:(int)type {
     // 試合結果の文言を作る
     NSMutableString* tweetString = [NSMutableString string];
     
@@ -520,6 +533,10 @@
     
     [tweetString appendString:@" #ベボレコ"];
     
+    if(type == POST_FACEBOOK){
+        [tweetString appendString:@" https://itunes.apple.com/jp/app/id578136103"];
+    }
+    
     return tweetString;
 }
 
@@ -570,6 +587,15 @@
             break;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
+    NSString* segueStr = [segue identifier];
+    
+    if ([segueStr isEqualToString:@"updatesegue"] == YES) {
+        InputViewController* controller = [segue destinationViewController];
+        controller.inputtype = INPUT_TYPE_UPDATE;
+    }
 }
 
 - (void)viewDidUnload {

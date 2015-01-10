@@ -13,6 +13,9 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "NADView.h"
 
+#define POST_TWITTER 1
+#define POST_FACEBOOK 2
+
 @interface ShowGameResultController : UIViewController
     <MFMailComposeViewControllerDelegate, NADViewDelegate, UIActionSheetDelegate>
 

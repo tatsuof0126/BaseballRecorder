@@ -11,8 +11,6 @@
 #import "NADInterstitial.h"
 #import "GameResultManager.h"
 
-#define MAKE_SAMPLE_DATA 0
-
 @implementation AppDelegate
 
 @synthesize purchaseManager;

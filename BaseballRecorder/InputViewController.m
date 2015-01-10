@@ -12,6 +12,7 @@
 #import "Utility.h"
 #import "ConfigManager.h"
 #import "GameResultManager.h"
+#import "ShowGameResultController.h"
 #import "ResultPickerViewController.h"
 #import "SelectInputViewController.h"
 #import "NADInterstitial.h"
@@ -34,6 +35,7 @@
 @synthesize resultPicker;
 @synthesize resultToolbar;
 @synthesize rectView;
+@synthesize inputtype;
 @synthesize edited;
 @synthesize toPitchingButton;
 @synthesize saveButton;
@@ -357,7 +359,6 @@
     _memo.frame = f;
 }
 
-
 - (void)inputResult:(UIButton*)button{
     if(resultPicker == nil){
         [self makeResultPicker:NEW_INPUT animated:YES];
@@ -556,6 +557,8 @@
 }
 
 - (IBAction)backButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―戻る" value:nil screen:@"打撃成績入力画面"];
+    
     if(edited == YES){
         // 入力・編集していたら警告ダイアログを出す
         NSString* messageStr = nil;
@@ -585,6 +588,8 @@
 }
 
 - (IBAction)toPitchingButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―投手成績へ" value:nil screen:@"打撃成績入力画面"];
+    
     // 入力中状態を解除
     [self endTextEdit];
     [self closeResultPicker];
@@ -697,8 +702,9 @@
                 }
                 */
                 
-                [self dismissViewControllerAnimated:YES completion:nil];
-//                [self dismissModalViewControllerAnimated:YES];
+                [self moveNextView];
+                
+                // [self dismissViewControllerAnimated:YES completion:nil];
             }
             break;
             
@@ -796,7 +802,7 @@
     
     
     // ★テストコード★
-    gameResult.tagtext = gameResult.memo;
+//    gameResult.tagtext = gameResult.memo;
     
     
     
@@ -807,23 +813,42 @@
     return [sourceString stringByReplacingOccurrencesOfString:@"," withString:@"."];
 }
 
+- (void)moveNextView {
+    if(inputtype == INPUT_TYPE_NEW){
+        // 試合結果参照画面へ進む
+        [self performSegueWithIdentifier:@"registsegue" sender:self];
+    } else if(inputtype == INPUT_TYPE_UPDATE){
+        // 試合結果参照画面へ戻る
+//        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     NSString* segueStr = [segue identifier];
     
-    SelectInputViewController *viewController = [segue destinationViewController];
-    if ([segueStr isEqualToString:@"place"] == YES) {
-        viewController.selecttype = PLACE;
-        viewController.targetField = _place;
+    NSString* labelStr = [NSString stringWithFormat:@"打撃成績入力画面―%@",segueStr];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:labelStr value:nil screen:@"打撃成績入力画面"];
+    
+    if ([segueStr isEqualToString:@"registsegue"] == YES) {
+        // とりあえず何もなし
+    } else if ([segueStr isEqualToString:@"place"] == YES) {
+        SelectInputViewController* controller = [segue destinationViewController];
+        controller.selecttype = PLACE;
+        controller.targetField = _place;
     } else if ([segueStr isEqualToString:@"myteam"] == YES) {
-        viewController.selecttype = MYTEAM;
-        viewController.targetField = _myteam;
+        SelectInputViewController* controller = [segue destinationViewController];
+        controller.selecttype = MYTEAM;
+        controller.targetField = _myteam;
     } else if ([segueStr isEqualToString:@"otherteam"] == YES) {
-        viewController.selecttype = OTHERTEAM;
-        viewController.targetField = _otherteam;
+        SelectInputViewController* controller = [segue destinationViewController];
+        controller.selecttype = OTHERTEAM;
+        controller.targetField = _otherteam;
     } else if ([segueStr isEqualToString:@"tagtext"] == YES) {
+        SelectInputViewController* controller = [segue destinationViewController];
         _tagtext.text = [GameResult adjustTagText:_tagtext.text];
-        viewController.selecttype = TAGTEXT;
-        viewController.targetField = _tagtext;
+        controller.selecttype = TAGTEXT;
+        controller.targetField = _tagtext;
     }
     
     edited = YES;

@@ -148,15 +148,26 @@
 }
 
 - (IBAction)changeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―変更" value:nil screen:@"打撃成績画面"];
+    
     [self makeResultPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―シェア" value:nil screen:@"打撃成績画面"];
+    
     // 親クラスのメソッドを呼び出してシェア
-    [super shareStatistics];
+    [super shareStatistics:SHARE_TYPE_TEXT];
 }
 
-- (NSString*)makeShareString:(int)type {
+- (IBAction)imageShareButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―画像でシェア" value:nil screen:@"打撃成績画面"];
+    
+    // 親クラスのメソッドを呼び出してシェア
+    [super shareStatistics:SHARE_TYPE_IMAGE];
+}
+
+- (NSString*)makeShareString:(int)type shareType:(int)shareType {
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
@@ -176,53 +187,135 @@
         [shareString appendString:@"での"];
     }
     
-    [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
+    if(shareType == SHARE_TYPE_TEXT){
+        [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
+        
+        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
+         ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
+         ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
     
-    [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
-     ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
-     ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
-     ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
-     ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
-     ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
-    
-    if(battingStatistics.doubles != 0){
-        [shareString appendFormat:@"二塁打%d ", battingStatistics.doubles];
+        if(battingStatistics.doubles != 0){
+            [shareString appendFormat:@"二塁打%d ", battingStatistics.doubles];
+        }
+        if(battingStatistics.triples != 0){
+            [shareString appendFormat:@"三塁打%d ", battingStatistics.triples];
+        }
+        if(battingStatistics.homeruns != 0){
+            [shareString appendFormat:@"本塁打%d ", battingStatistics.homeruns];
+        }
+        if(battingStatistics.strikeouts != 0){
+            [shareString appendFormat:@"三振%d ", battingStatistics.strikeouts];
+        }
+        if(battingStatistics.walks != 0){
+            [shareString appendFormat:@"四死球%d ", battingStatistics.walks];
+        }
+        if(battingStatistics.sacrifices != 0){
+            [shareString appendFormat:@"犠打%d ", battingStatistics.sacrifices];
+        }
+        if(battingStatistics.daten != 0){
+            [shareString appendFormat:@"打点%d ", battingStatistics.daten];
+        }
+        if(battingStatistics.tokuten != 0){
+            [shareString appendFormat:@"得点%d ", battingStatistics.tokuten];
+        }
+        if(battingStatistics.steal != 0){
+            [shareString appendFormat:@"盗塁%d ", battingStatistics.steal];
+        }
+        [shareString appendString:@"です。 #ベボレコ"];
+    } else if(shareType == SHARE_TYPE_IMAGE){
+        [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
+        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ です。 #ベボレコ"
+         ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
+         ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
     }
-    if(battingStatistics.triples != 0){
-        [shareString appendFormat:@"三塁打%d ", battingStatistics.triples];
-    }
-    if(battingStatistics.homeruns != 0){
-        [shareString appendFormat:@"本塁打%d ", battingStatistics.homeruns];
-    }
-    if(battingStatistics.strikeouts != 0){
-        [shareString appendFormat:@"三振%d ", battingStatistics.strikeouts];
-    }
-    if(battingStatistics.walks != 0){
-        [shareString appendFormat:@"四死球%d ", battingStatistics.walks];
-    }
-    if(battingStatistics.sacrifices != 0){
-        [shareString appendFormat:@"犠打%d ", battingStatistics.sacrifices];
-    }
-    if(battingStatistics.daten != 0){
-        [shareString appendFormat:@"打点%d ", battingStatistics.daten];
-    }
-    if(battingStatistics.tokuten != 0){
-        [shareString appendFormat:@"得点%d ", battingStatistics.tokuten];
-    }
-    if(battingStatistics.steal != 0){
-        [shareString appendFormat:@"盗塁%d ", battingStatistics.steal];
-    }
-    
-    [shareString appendString:@"です。 #ベボレコ"];
     
     return shareString;
 }
 
-- (NSString*)getShareURLString:(int)type {
+- (NSString*)getShareURLString:(int)type shareType:(int)shareType {
     if (type == POST_FACEBOOK){
         return @"https://itunes.apple.com/jp/app/id578136103";
     }
     return nil;
+}
+
+- (UIImage*)getShareImage:(int)type shareType:(int)shareType {
+    if (shareType == SHARE_TYPE_IMAGE){
+        return [self getScreenImage];
+    }
+    return nil;
+}
+
+- (UIImage*)getScreenImage {
+    // 投稿用にScrollViewの大きさを調整・スクロールを戻す、項目を少し下に下げる、ボタンを消す
+    CGRect scrollOldRect = scrollView.frame;
+    scrollView.frame = CGRectMake(0, 64, 320, 480);
+    [scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+    
+    for (UIView* view in scrollView.subviews){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y+45,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+    
+    _changeBtn.hidden = YES;
+    _shareBtn.hidden = YES;
+    _imageShareBtn.hidden = YES;
+    _mailBtn.hidden = YES;
+    
+    // 一時的にScrollViewにタイトルバーを配置
+    UILabel* tmpbar = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,40)];
+    tmpbar.backgroundColor = [UIColor darkGrayColor];
+    tmpbar.textColor = [UIColor whiteColor];
+    tmpbar.textAlignment = NSTextAlignmentCenter;
+    tmpbar.font = [UIFont boldSystemFontOfSize:17];
+    tmpbar.text = @"打撃成績";
+    [scrollView addSubview:tmpbar];
+    
+    // 一時的にラベルを貼る
+    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(190,445,120,20)];
+    tmplabel.adjustsFontSizeToFitWidth = YES;
+    tmplabel.text = @"草野球日記 ベボレコ";
+    [scrollView addSubview:tmplabel];
+    
+    // ScrollViewの内容をContextに書き出し
+    CGRect rect = scrollView.bounds;
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [[UIColor whiteColor] set];
+    CGContextFillRect(context, rect);
+    [scrollView.layer renderInContext:context];
+    
+    // Contextに書き出した内容をUIImageとして受け取る
+    UIImage* capturedUIImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // 一時的なタイトルバー・ラベルを削除
+    [tmpbar removeFromSuperview];
+    [tmplabel removeFromSuperview];
+    
+    // ScrollViewの大きさを元に戻す、ボタンを出す、項目の場所を戻す
+    scrollView.frame = scrollOldRect;
+    _changeBtn.hidden = NO;
+    _shareBtn.hidden = NO;
+    _imageShareBtn.hidden = NO;
+    _mailBtn.hidden = NO;
+    
+    for (UIView* view in scrollView.subviews){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y-45,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+    
+    return capturedUIImage;
 }
 
 - (IBAction)mailButton:(id)sender {

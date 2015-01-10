@@ -287,9 +287,10 @@
     pickerBaseView = nil;
 }
 
-- (void)shareStatistics {
+- (void)shareStatistics:(int)shareType {
     UIActionSheet* actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
+    actionSheet.tag = shareType;
     [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
     [actionSheet addButtonWithTitle:@"Facebookに投稿"];
     [actionSheet addButtonWithTitle:@"キャンセル"];
@@ -300,22 +301,22 @@
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
-            [self postToTwitter];
+            [self postToTwitter:(int)actionSheet.tag];
             break;
         case 1:
-            [self postToFacebook];
+            [self postToFacebook:(int)actionSheet.tag];
             break;
     }
 }
 
-- (void)postToTwitter {
+- (void)postToTwitter:(int)shareType{
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Twitterシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     posted = NO;
     
-    NSString* shareString = [self makeShareString:POST_TWITTER];
-    NSString* shareURLString = [self getShareURLString:POST_TWITTER];
-    UIImage* shareImage = [self getShareImage:POST_TWITTER];
+    NSString* shareString = [self makeShareString:POST_TWITTER shareType:(int)shareType];
+    NSString* shareURLString = [self getShareURLString:POST_TWITTER shareType:(int)shareType];
+    UIImage* shareImage = [self getShareImage:POST_TWITTER shareType:(int)shareType];
     
     SLComposeViewController* vc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     [vc setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -346,14 +347,14 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)postToFacebook {
+- (void)postToFacebook:(int)shareType{
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     posted = NO;
     
-    NSString* shareString = [self makeShareString:POST_FACEBOOK];
-    NSString* shareURLString = [self getShareURLString:POST_FACEBOOK];
-    UIImage* shareImage = [self getShareImage:POST_FACEBOOK];
+    NSString* shareString = [self makeShareString:POST_FACEBOOK shareType:(int)shareType];
+    NSString* shareURLString = [self getShareURLString:POST_FACEBOOK shareType:(int)shareType];
+    UIImage* shareImage = [self getShareImage:POST_FACEBOOK shareType:(int)shareType];
     
     SLComposeViewController *vc = [SLComposeViewController
                                    composeViewControllerForServiceType:SLServiceTypeFacebook];
@@ -384,17 +385,17 @@
 }
 
 
-- (NSString*)makeShareString:(int)type {
+- (NSString*)makeShareString:(int)type shareType:(int)shareType {
     // 子クラスでオーバーライドする前提
     return nil;
 }
 
-- (NSString*)getShareURLString:(int)type {
+- (NSString*)getShareURLString:(int)type shareType:(int)shareType {
     // 子クラスでオーバーライドする前提
     return nil;
 }
 
-- (UIImage*)getShareImage:(int)type {
+- (UIImage*)getShareImage:(int)type shareType:(int)shareType {
     // 子クラスでオーバーライドする前提
     return nil;
 }

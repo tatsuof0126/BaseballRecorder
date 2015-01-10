@@ -83,6 +83,8 @@
 }
 
 - (IBAction)changeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―変更" value:nil screen:@"打撃分析画面"];
+    
     [self makeResultPicker];
 }
 
@@ -117,19 +119,21 @@
 }
 
 - (IBAction)shareAnalysis:(id)sender {
-    [super shareStatistics];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―シェア" value:nil screen:@"打撃分析画面"];
+    
+    [super shareStatistics:SHARE_TYPE_IMAGE];
 }
 
-- (NSString*)makeShareString:(int)type {
+- (NSString*)makeShareString:(int)type shareType:(int)shareType {
     return @"「草野球日記ベボレコ」で打撃分析を行いました。 #ベボレコ";
 }
 
-- (NSString*)getShareURLString:(int)type {
+- (NSString*)getShareURLString:(int)type shareType:(int)shareType {
     // 打撃傾向分析の場合はTwitter・Facebookの両方でアプリのURLをシェア
     return @"https://itunes.apple.com/jp/app/id578136103";
 }
 
-- (UIImage*)getShareImage:(int)type {
+- (UIImage*)getShareImage:(int)type shareType:(int)shareType {
     return [self getBattingAnalysisImage];
 }
 

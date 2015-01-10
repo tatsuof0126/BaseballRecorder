@@ -107,15 +107,26 @@
 }
 
 - (IBAction)changeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―変更" value:nil screen:@"投手成績画面"];
+    
     [self makeResultPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―シェア" value:nil screen:@"投手成績画面"];
+    
     // 親クラスのメソッドを呼び出してシェア
-    [super shareStatistics];
+    [super shareStatistics:SHARE_TYPE_TEXT];
 }
- 
-- (NSString*)makeShareString:(int)type {
+
+- (IBAction)imageShareButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―画像でシェア" value:nil screen:@"投手成績画面"];
+    
+    // 親クラスのメソッドを呼び出してシェア
+    [super shareStatistics:SHARE_TYPE_IMAGE];
+}
+
+- (NSString*)makeShareString:(int)type shareType:(int)shareType {
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
@@ -135,47 +146,133 @@
         [shareString appendString:@"での"];
     }
     
-    [shareString appendFormat:@"%@投手成績は、",tsusanStr];
     
-    [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ 投球回%@ "
-     ,pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose
-     ,pitchingStatistics.save, pitchingStatistics.hold
-     ,[Utility getFloatStr2:pitchingStatistics.era]
-     ,[Utility getFloatStr:(float)(pitchingStatistics.win) / (float)(pitchingStatistics.win+pitchingStatistics.lose) appendBlank:NO]
-     ,[pitchingStatistics getInningString]];
+    if(shareType == SHARE_TYPE_TEXT){
+        [shareString appendFormat:@"%@投手成績は、",tsusanStr];
     
-    if(pitchingStatistics.hianda != 0){
-        [shareString appendFormat:@"被安打%d ", pitchingStatistics.hianda];
-    }
-    if(pitchingStatistics.hihomerun != 0){
-        [shareString appendFormat:@"被本塁打%d ", pitchingStatistics.hihomerun];
-    }
-    if(pitchingStatistics.dassanshin != 0){
-        [shareString appendFormat:@"奪三振%d ", pitchingStatistics.dassanshin];
-    }
-    if(pitchingStatistics.yoshikyu != 0){
-        [shareString appendFormat:@"与四球%d ", pitchingStatistics.yoshikyu];
-    }
-    if(pitchingStatistics.yoshikyu2 != 0){
-        [shareString appendFormat:@"与死球%d ", pitchingStatistics.yoshikyu2];
-    }
+        [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ 投球回%@ "
+         ,pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose
+         ,pitchingStatistics.save, pitchingStatistics.hold
+         ,[Utility getFloatStr2:pitchingStatistics.era]
+         ,[Utility getFloatStr:(float)(pitchingStatistics.win) / (float)(pitchingStatistics.win+pitchingStatistics.lose) appendBlank:NO]
+         ,[pitchingStatistics getInningString]];
+        
+        if(pitchingStatistics.hianda != 0){
+            [shareString appendFormat:@"被安打%d ", pitchingStatistics.hianda];
+        }
+        if(pitchingStatistics.hihomerun != 0){
+            [shareString appendFormat:@"被本塁打%d ", pitchingStatistics.hihomerun];
+        }
+        if(pitchingStatistics.dassanshin != 0){
+            [shareString appendFormat:@"奪三振%d ", pitchingStatistics.dassanshin];
+        }
+        if(pitchingStatistics.yoshikyu != 0){
+            [shareString appendFormat:@"与四球%d ", pitchingStatistics.yoshikyu];
+        }
+        if(pitchingStatistics.yoshikyu2 != 0){
+            [shareString appendFormat:@"与死球%d ", pitchingStatistics.yoshikyu2];
+        }
     
-    [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ "
-     ,pitchingStatistics.shitten, pitchingStatistics.jisekiten, pitchingStatistics.kanto
-     ,[Utility getFloatStr2:pitchingStatistics.whip]
-     ,[Utility getFloatStr2:pitchingStatistics.k9]];
+        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ "
+         ,pitchingStatistics.shitten, pitchingStatistics.jisekiten, pitchingStatistics.kanto
+         ,[Utility getFloatStr2:pitchingStatistics.whip]
+         ,[Utility getFloatStr2:pitchingStatistics.k9]];
     
-    [shareString appendString:@"です。 #ベボレコ"];
+        [shareString appendString:@"です。 #ベボレコ"];
+    } else if(shareType == SHARE_TYPE_IMAGE){
+        [shareString appendFormat:@"%@投手成績は、",tsusanStr];
+
+        [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ "
+         ,pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose
+         ,pitchingStatistics.save, pitchingStatistics.hold
+         ,[Utility getFloatStr2:pitchingStatistics.era]
+         ,[Utility getFloatStr:(float)(pitchingStatistics.win) / (float)(pitchingStatistics.win+pitchingStatistics.lose) appendBlank:NO]];
+
+        [shareString appendString:@"です。 #ベボレコ"];
+    }
     
     return shareString;
 }
 
-- (NSString*)getShareURLString:(int)type {
+- (NSString*)getShareURLString:(int)type  shareType:(int)shareType {
     if (type == POST_FACEBOOK){
         return @"https://itunes.apple.com/jp/app/id578136103";
 //        return @"https://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103";
     }
     return nil;
+}
+
+- (UIImage*)getShareImage:(int)type shareType:(int)shareType {
+    if (shareType == SHARE_TYPE_IMAGE){
+        return [self getScreenImage];
+    }
+    return nil;
+}
+
+- (UIImage*)getScreenImage {
+    // 投稿用にScrollViewの大きさを調整・スクロールを戻す、項目を少し下に下げる、ボタンを消す
+    CGRect scrollOldRect = scrollView.frame;
+    scrollView.frame = CGRectMake(0, 64, 320, 480);
+    [scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+    
+    for (UIView* view in scrollView.subviews){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y+45,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+    
+    _changeBtn.hidden = YES;
+    _shareBtn.hidden = YES;
+    _imageShareBtn.hidden = YES;
+    _mailBtn.hidden = YES;
+    
+    // 一時的にScrollViewにタイトルバーを配置
+    UILabel* tmpbar = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,40)];
+    tmpbar.backgroundColor = [UIColor darkGrayColor];
+    tmpbar.textColor = [UIColor whiteColor];
+    tmpbar.textAlignment = NSTextAlignmentCenter;
+    tmpbar.font = [UIFont boldSystemFontOfSize:17];
+    tmpbar.text = @"投手成績";
+    [scrollView addSubview:tmpbar];
+    
+    // 一時的にラベルを貼る
+    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(190,445,120,20)];
+    tmplabel.adjustsFontSizeToFitWidth = YES;
+    tmplabel.text = @"草野球日記 ベボレコ";
+    [scrollView addSubview:tmplabel];
+    
+    // ScrollViewの内容をContextに書き出し
+    CGRect rect = scrollView.bounds;
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [[UIColor whiteColor] set];
+    CGContextFillRect(context, rect);
+    [scrollView.layer renderInContext:context];
+    
+    // Contextに書き出した内容をUIImageとして受け取る
+    UIImage* capturedUIImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // 一時的なタイトルバー・ラベルを削除
+    [tmpbar removeFromSuperview];
+    [tmplabel removeFromSuperview];
+    
+    // ScrollViewの大きさを元に戻す、ボタンを出す、項目の場所を戻す
+    scrollView.frame = scrollOldRect;
+    _changeBtn.hidden = NO;
+    _shareBtn.hidden = NO;
+    _imageShareBtn.hidden = NO;
+    _mailBtn.hidden = NO;
+    
+    for (UIView* view in scrollView.subviews){
+        CGRect oldRect = view.frame;
+        CGRect newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y-45,
+                                    oldRect.size.width, oldRect.size.height);
+        view.frame = newRect;
+    }
+    
+    return capturedUIImage;
 }
 
 - (IBAction)mailButton:(id)sender {

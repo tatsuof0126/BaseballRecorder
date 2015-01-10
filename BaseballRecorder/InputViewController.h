@@ -12,6 +12,9 @@
 #import "UIPlaceHolderTextView.h"
 #import "RectView.h"
 
+#define INPUT_TYPE_NEW 1
+#define INPUT_TYPE_UPDATE 2
+
 @interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *year;
@@ -47,6 +50,7 @@
 @property (strong, nonatomic) UIPickerView *resultPicker;
 @property (strong, nonatomic) RectView *rectView;
 
+@property int inputtype;
 @property BOOL edited;
 
 @property (weak, nonatomic) IBOutlet UIButton *toPitchingButton;

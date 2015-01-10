@@ -41,8 +41,14 @@
 @property (strong, nonatomic) TeamStatistics* teamStatistics;
 @property (strong, nonatomic) BattingStatistics* battingStatistics;
 
+@property (strong, nonatomic) IBOutlet UIButton *changeBtn;
+@property (strong, nonatomic) IBOutlet UIButton *shareBtn;
+@property (strong, nonatomic) IBOutlet UIButton *imageShareBtn;
+@property (strong, nonatomic) IBOutlet UIButton *mailBtn;
+
 - (IBAction)changeButton:(id)sender;
 - (IBAction)tweetButton:(id)sender;
+- (IBAction)imageShareButton:(id)sender;
 - (IBAction)mailButton:(id)sender;
 
 @end

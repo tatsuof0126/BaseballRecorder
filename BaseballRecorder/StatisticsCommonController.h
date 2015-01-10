@@ -16,6 +16,9 @@
 #define BATTING_RESULT  1
 #define PITCHING_RESULT 2
 
+#define SHARE_TYPE_TEXT 0
+#define SHARE_TYPE_IMAGE 1
+
 #define POST_TWITTER 1
 #define POST_FACEBOOK 2
 
@@ -48,9 +51,11 @@
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team;
 
-- (void)shareStatistics;
+//- (void)shareStatistics;
 
-- (NSString*)makeShareString:(int)type;
+- (void)shareStatistics:(int)shareType;
+
+// - (NSString*)makeShareString:(int)type;
 
 - (NSString*)getMailTitle:(int)type;
 

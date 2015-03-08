@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "GAI.h"
 #import "NADInterstitial.h"
+#import "ConfigManager.h"
 #import "GameResultManager.h"
 
 @implementation AppDelegate
@@ -30,6 +31,9 @@
     if(MAKE_SAMPLE_DATA == 1){
         [GameResultManager makeSampleData];
     }
+    
+    // 設定ファイルを初期化（必要な場合のみ）
+    [ConfigManager initConfig];
     
     return YES;
 }

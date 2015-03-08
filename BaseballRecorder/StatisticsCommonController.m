@@ -10,6 +10,7 @@
 #import "ConfigManager.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
+#import "TargetTerm.h"
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "TrackingManager.h"
@@ -20,12 +21,13 @@
 
 @implementation StatisticsCommonController
 
-@synthesize gameResultList;
-@synthesize gameResultListOfYear;
-@synthesize yearList;
+//@synthesize gameResultList;
+//@synthesize gameResultListOfYear;
+//@synthesize yearList;
 @synthesize teamList;
-@synthesize targetyear;
-@synthesize targetteam;
+@synthesize termList;
+//@synthesize targetyear;
+//@synthesize targetteam;
 @synthesize pickerBaseView;
 @synthesize targetPicker;
 @synthesize targetToolbar;
@@ -60,14 +62,15 @@
 }
 
 - (void)updateStatistics {
-    [self loadGameResult];
-    [self setCalcTarget];
+//    [self loadGameResult];
+//    [self setCalcTarget];
     NSArray* gameResultListForCalc = [self getGameResultListForCalc];
     [self showStatistics:gameResultListForCalc];
 }
 
+/*
 - (void)loadGameResult {
-    gameResultList = [GameResultManager loadGameResultList];
+//    gameResultList = [GameResultManager loadGameResultList];
     
     yearList = [NSMutableArray array];
     teamList = [NSMutableArray array];
@@ -103,9 +106,11 @@
         if ([teamList containsObject:team] == NO){
             [teamList addObject:team];
         }
-    }    
+    }
 }
+*/
 
+/*
 - (void)setCalcTarget {
     NSString* targetYearStr = [ConfigManager getCalcTargetYear];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
@@ -139,10 +144,20 @@
         [ConfigManager setCalcTargetTeam:@"すべて"];
     }
 }
+ */
 
 - (NSArray*)getGameResultListForCalc {
-    NSMutableArray* gameResultListForCalc = nil;
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    NSString* targetTeam = [ConfigManager getCalcTargetTeam];
     
+    if ([targetTeam isEqualToString:@"すべて"]) {
+        targetTeam = @"";
+    }
+    
+    NSMutableArray* gameResultListForCalc = [NSMutableArray arrayWithArray:
+        [GameResultManager loadGameResultList:targetTerm targetTeam:targetTeam]];
+    
+/*
     NSArray* listOfYear = [gameResultListOfYear objectAtIndex:targetyear];
     NSString* targetTeamname = [teamList objectAtIndex:targetteam];
     
@@ -158,9 +173,10 @@
             }
         }
     }
+*/
     
     // 「最近５試合」の場合は直近の５件に絞る
-    if (targetyear == RECENT5_TARGET) {
+    if (targetTerm.type == TERM_TYPE_RECENT5) {
         [self adjustGameResultListForRecent5:gameResultListForCalc];
     }
     
@@ -177,11 +193,16 @@
 
 }
 
+/*
 - (void)showTarget:(UILabel*)year team:(UILabel*)team {
 //    NSString* oldyear = year.text;
 //    NSString* oldteam = team.text;
-    year.text = [yearList objectAtIndex:targetyear];
-    team.text = [teamList objectAtIndex:targetteam];
+//    year.text = [yearList objectAtIndex:targetyear];
+//    team.text = [teamList objectAtIndex:targetteam];
+    
+    year.text = [[ConfigManager getCalcTargetTerm] getTermString];
+    team.text = [ConfigManager getCalcTargetTeam];
+    
     
     // 変更していなければNOを返す
 //    if([oldyear isEqualToString:year.text] && [oldteam isEqualToString:team.text]){
@@ -189,11 +210,138 @@
 //    }
 //    return YES;
 }
+*/
+
+- (void)showTarget:(UILabel*)year team:(UILabel*)team leftBtn:(UIButton*)leftBtn rightBtn:(UIButton*)rightBtn {
+    
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    
+    year.text = [targetTerm getTermString];
+    team.text = [ConfigManager getCalcTargetTeam];
+    
+    // 左右の矢印を出すかどうかを判定
+    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    TargetTerm* firstTerm = [targetTermList firstObject];
+    TargetTerm* lastTerm = [targetTermList lastObject];
+    
+    leftBtn.hidden = YES;
+    rightBtn.hidden = YES;
+    
+    switch (targetTerm.type) {
+        case TERM_TYPE_ALL:
+            break;
+        case TERM_TYPE_RECENT5:
+            break;
+        case TERM_TYPE_YEAR:{
+            if(firstTerm != nil && firstTerm.year > targetTerm.year){
+                leftBtn.hidden = NO;
+            }
+            if(lastTerm != nil && targetTerm.year > lastTerm.year){
+                rightBtn.hidden = NO;
+            }
+            break;
+        }
+        case TERM_TYPE_MONTH:{
+            if(firstTerm != nil &&
+               (firstTerm.year > targetTerm.year ||
+                (firstTerm.year == targetTerm.year && firstTerm.month > targetTerm.month))){
+                leftBtn.hidden = NO;
+            }
+            if(lastTerm != nil &&
+               (targetTerm.year > lastTerm.year ||
+                (targetTerm.year == lastTerm.year && targetTerm.month > lastTerm.month))){
+                rightBtn.hidden = NO;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)moveLeftTargetTerm {
+    // Picker起動時は無視
+    if( targetPicker != nil ){
+        return;
+    }
+    
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    
+    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    
+    TargetTerm* newTargetTerm = targetTermList.firstObject;
+    for (TargetTerm* compTerm in targetTermList){
+        if(targetTerm.type == TERM_TYPE_YEAR &&
+           (targetTerm.year >= compTerm.year)){
+            break;
+        }
+        if(targetTerm.type == TERM_TYPE_MONTH &&
+           (targetTerm.year > compTerm.year ||
+            (targetTerm.year == compTerm.year && targetTerm.month >= compTerm.month))){
+            break;
+        }
+        newTargetTerm = compTerm;
+    }
+    
+    if(newTargetTerm != nil){
+        [ConfigManager setCalcTargetTerm:newTargetTerm];
+    }
+    
+    [self updateStatistics];
+
+}
+
+- (void)moveRightTargetTerm {
+    // Picker起動時は無視
+    if( targetPicker != nil ){
+        return;
+    }
+    
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    
+    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    
+    TargetTerm* newTargetTerm = targetTerm;
+    for (TargetTerm* compTerm in targetTermList){
+        if(targetTerm.type == TERM_TYPE_YEAR &&
+           (targetTerm.year > compTerm.year)){
+            newTargetTerm = compTerm;
+            break;
+        }
+        if(targetTerm.type == TERM_TYPE_MONTH &&
+           (targetTerm.year > compTerm.year ||
+            (targetTerm.year == compTerm.year && targetTerm.month > compTerm.month))){
+               newTargetTerm = compTerm;
+               break;
+           }
+    }
+    
+    if(newTargetTerm != nil){
+        [ConfigManager setCalcTargetTerm:newTargetTerm];
+    }
+    
+    [self updateStatistics];
+    
+}
 
 - (void)makeResultPicker {
     // すでにPickerが立ち上がっていたら無視
     if( targetPicker != nil ){
         return;
+    }
+    
+    // termListを最新化
+    NSArray* resultList = [GameResultManager loadGameResultList];
+    termList = [TargetTerm getTargetTermListForPicker:resultList];
+    
+    // teamListを最新化
+    teamList = [NSMutableArray array];
+    [teamList addObject:@"すべて"];
+    for(GameResult* result in resultList){
+        NSString* team = result.myteam;
+        if ([teamList containsObject:team] == NO){
+            [teamList addObject:team];
+        }
     }
     
     CGRect rect = [[UIScreen mainScreen] bounds];
@@ -212,8 +360,28 @@
     targetPicker.showsSelectionIndicator = YES;
     targetPicker.backgroundColor = [UIColor whiteColor];
     
-    [targetPicker selectRow:targetyear inComponent:0 animated:NO];
-    [targetPicker selectRow:targetteam inComponent:1 animated:NO];
+    // Pickerのデフォルトを設定
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    NSString* calcTargetTeam = [ConfigManager getCalcTargetTeam];
+    
+    for (int i=0;i<termList.count;i++){
+        TargetTerm* term = [termList objectAtIndex:i];
+        if([[term getTermString] isEqualToString:[targetTerm getTermString]]){
+            [targetPicker selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
+    
+    for (int i=0;i<teamList.count;i++){
+        NSString* team = [teamList objectAtIndex:i];
+        if([team isEqualToString:calcTargetTeam]){
+            [targetPicker selectRow:i inComponent:1 animated:NO];
+            break;
+        }
+    }
+    
+//    [targetPicker selectRow:targetyear inComponent:0 animated:NO];
+//    [targetPicker selectRow:targetteam inComponent:1 animated:NO];
     
     targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     targetToolbar.barStyle = UIBarStyleBlack;
@@ -251,12 +419,12 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return component == 0 ? yearList.count : teamList.count;
+    return component == 0 ? termList.count : teamList.count;
 }
 
 -(NSString*)pickerView:(UIPickerView*)pickerView
            titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return component == 0 ? [yearList objectAtIndex:row] : [teamList objectAtIndex:row];
+    return component == 0 ? [[termList objectAtIndex:row] getTermString] : [teamList objectAtIndex:row];
 }
 
 - (void)toolbarBackButton:(UIBarButtonItem*)sender {
@@ -270,11 +438,13 @@
 }
 
 - (void)toolbarDoneButton:(id)sender {
-    targetyear = [Utility convert2int:[targetPicker selectedRowInComponent:0]];
-    targetteam = [Utility convert2int:[targetPicker selectedRowInComponent:1]];
+//    targetyear = [Utility convert2int:[targetPicker selectedRowInComponent:0]];
+//    targetteam = [Utility convert2int:[targetPicker selectedRowInComponent:1]];
     
-    [ConfigManager setCalcTargetYear:[yearList objectAtIndex:targetyear]];
-    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:targetteam]];
+//    [ConfigManager setCalcTargetYear:[yearList objectAtIndex:targetyear]];
+    
+    [ConfigManager setCalcTargetTerm:[termList objectAtIndex:[targetPicker selectedRowInComponent:0]]];
+    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:[targetPicker selectedRowInComponent:1]]];
     
     [self updateStatistics];
     
@@ -293,8 +463,9 @@
     actionSheet.tag = shareType;
     [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
     [actionSheet addButtonWithTitle:@"Facebookに投稿"];
+    [actionSheet addButtonWithTitle:@"Lineに送る"];
     [actionSheet addButtonWithTitle:@"キャンセル"];
-    actionSheet.cancelButtonIndex = 2;
+    actionSheet.cancelButtonIndex = 3;
     [actionSheet showInView:self.view.window];
 }
 
@@ -305,6 +476,9 @@
             break;
         case 1:
             [self postToFacebook:(int)actionSheet.tag];
+            break;
+        case 2:
+            [self postToLine:(int)actionSheet.tag];
             break;
     }
 }
@@ -384,6 +558,42 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (void)postToLine:(int)shareType{
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Lineシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
+        [Utility showAlert:@"Lineがインストールされていません。"];
+    }
+    
+    posted = NO;
+    
+    if(shareType == SHARE_TYPE_TEXT){
+        NSString* shareString = [self makeShareString:POST_LINE shareType:(int)shareType];
+        NSString* shareURLString = [self getShareURLString:POST_LINE shareType:(int)shareType];
+        
+        NSString* encodedString = [[NSString stringWithFormat:@"%@ %@",shareString, shareURLString]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/text/%@", encodedString];
+    
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
+    } else if(shareType == SHARE_TYPE_IMAGE){
+        UIImage* shareImage = [self getShareImage:POST_LINE shareType:(int)shareType];
+        
+        UIPasteboard *pasteboard = nil;
+
+        //iOS7.0以降では共有のクリップボードしか使えない。その際クリップボードが上書きされてしまうので注意。
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
+            pasteboard = [UIPasteboard generalPasteboard];
+        } else {
+            pasteboard = [UIPasteboard pasteboardWithUniqueName];
+        }
+        
+        [pasteboard setData:UIImagePNGRepresentation(shareImage) forPasteboardType:@"public.png"];
+        NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name];
+
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
+    }
+}
 
 - (NSString*)makeShareString:(int)type shareType:(int)shareType {
     // 子クラスでオーバーライドする前提
@@ -401,7 +611,7 @@
 }
 
 - (NSString*)getMailTitle:(int)type {
-    NSString* year = @"";
+    NSString* term = @"";
     NSString* team = @"";
     NSString* tsusan = @"";
     NSString* today = @"";
@@ -414,32 +624,37 @@
     
     today = [NSString stringWithFormat:@"（%zd年%zd月%zd日現在）",dateComps.year,dateComps.month,dateComps.day];
     
-    if(targetyear == 0){
-        // targetyearが0（すべて）なら通算成績
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    NSString* targetTeam = [ConfigManager getCalcTargetTeam];
+    
+    if(targetTerm.type == TERM_TYPE_ALL){
         tsusan = @"通算";
-    } else if(targetyear == 1){
-        // targetyearが1（最近５試合）なら最近５試合の成績
+    } else if(targetTerm.type == TERM_TYPE_RECENT5){
         tsusan = @"最近5試合の";
-    } else {
-        year = [yearList objectAtIndex:targetyear];
-        
-        // 今日の年を取得する
-        NSString* todayYear = [NSString stringWithFormat:@"%zd年",dateComps.year];
-        if([year isEqualToString:todayYear] == NO){
-            // 年指定かつ去年以前の年なら「◯日現在」の文言は追加しない
+        today = @""; // 最近５試合の場合は◯◯現在という言葉は入れない
+    } else if(targetTerm.type == TERM_TYPE_YEAR){
+        term = [targetTerm getTermString];
+        if(targetTerm.year != dateComps.year){
+            // 当年以外なら◯◯現在という言葉は入れない
+            today = @"";
+        }
+    } else if(targetTerm.type == TERM_TYPE_MONTH){
+        term = [targetTerm getTermString];
+        if(targetTerm.year != dateComps.year || targetTerm.month != dateComps.month){
+            // 当年当月以外なら◯◯現在という言葉は入れない
             today = @"";
         }
     }
     
-    if(targetteam != 0){
-        team = [teamList objectAtIndex:targetteam];
+    if([targetTeam isEqualToString:@"すべて"] == NO){
+        team = targetTeam;
     }
     
     // MailTitleを返す（例．2013年バットマンズ打撃成績、通算打撃成績（2013年3月27日現在））
     if (type == BATTING_RESULT) {
-        return [NSString stringWithFormat:@"%@%@%@打撃成績%@",year,team,tsusan,today];
+        return [NSString stringWithFormat:@"%@%@%@打撃成績%@",term,team,tsusan,today];
     } else {
-        return [NSString stringWithFormat:@"%@%@%@投手成績%@",year,team,tsusan,today];
+        return [NSString stringWithFormat:@"%@%@%@投手成績%@",term,team,tsusan,today];
     }
 }
 

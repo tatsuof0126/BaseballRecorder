@@ -10,8 +10,8 @@
 #import <Social/Social.h>
 #import "NADView.h"
 
-#define ALL_TARGET 0
-#define RECENT5_TARGET 1
+// #define ALL_TARGET 0
+// #define RECENT5_TARGET 1
 
 #define BATTING_RESULT  1
 #define PITCHING_RESULT 2
@@ -21,23 +21,26 @@
 
 #define POST_TWITTER 1
 #define POST_FACEBOOK 2
+#define POST_LINE 3
 
 @interface StatisticsCommonController : UIViewController
     <UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, NADViewDelegate>
 
 @property (nonatomic, retain) NADView* nadView;
 
-@property int targetyear;
-@property int targetteam;
+//@property int targetyear;
+//@property int targetteam;
 
 @property (strong, nonatomic) UIView *pickerBaseView;
 @property (strong, nonatomic) UIToolbar *targetToolbar;
 @property (strong, nonatomic) UIPickerView *targetPicker;
 
-@property (strong, nonatomic) NSArray *gameResultList;
+// @property (strong, nonatomic) NSArray *gameResultList;
 
-@property (strong, nonatomic) NSMutableArray *yearList;
-@property (strong, nonatomic) NSMutableArray *gameResultListOfYear;
+// @property (strong, nonatomic) NSMutableArray *yearList;
+// @property (strong, nonatomic) NSMutableArray *gameResultListOfYear;
+
+@property (strong, nonatomic) NSArray *termList;
 
 @property (strong, nonatomic) NSMutableArray *teamList;
 
@@ -49,7 +52,13 @@
 
 - (void)makeResultPicker;
 
-- (void)showTarget:(UILabel*)year team:(UILabel*)team;
+// - (void)showTarget:(UILabel*)year team:(UILabel*)team;
+
+- (void)showTarget:(UILabel*)year team:(UILabel*)team leftBtn:(UIButton*)leftBtn rightBtn:(UIButton*)rightBtn;
+
+- (void)moveLeftTargetTerm;
+
+- (void)moveRightTargetTerm;
 
 //- (void)shareStatistics;
 

@@ -7,7 +7,6 @@
 //
 
 #import "BattingStatisticsViewController.h"
-#import "GameResultManager.h"
 #import "GameResult.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
@@ -80,8 +79,10 @@
 }
 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
-    [self showTarget:_year team:_team];
+//    [self showTarget:_year team:_team];
+    [self showTarget:_year team:_team leftBtn:_leftBtn rightBtn:_rightBtn];
     
+    // 試合成績
     teamStatistics = [TeamStatistics calculateTeamStatistics:gameResultListForCalc];
     
     // 「99勝 99敗 99分  勝率 9.999」という文字列を作る
@@ -103,6 +104,7 @@
     
     _teamresult.text = teamresultStr;
     
+    // 打撃成績
     battingStatistics = [BattingStatistics calculateBattingStatistics:gameResultListForCalc];
     
     _battingresult.text = [NSString stringWithFormat:@"%d打席  %d打数  %d安打",
@@ -147,21 +149,29 @@
     [super viewDidUnload];
 }
 
+- (IBAction)leftButton:(id)sender {
+    [self moveLeftTargetTerm];
+}
+
+- (IBAction)rightButton:(id)sender {
+    [self moveRightTargetTerm];
+}
+
 - (IBAction)changeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―変更" value:nil screen:@"打撃成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―変更" value:nil screen:@"打撃成績参照画面"];
     
     [self makeResultPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―シェア" value:nil screen:@"打撃成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―シェア" value:nil screen:@"打撃成績参照画面"];
     
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_TEXT];
 }
 
 - (IBAction)imageShareButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績画面―画像でシェア" value:nil screen:@"打撃成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―画像でシェア" value:nil screen:@"打撃成績参照画面"];
     
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_IMAGE];
@@ -239,7 +249,7 @@
 }
 
 - (NSString*)getShareURLString:(int)type shareType:(int)shareType {
-    if (type == POST_FACEBOOK){
+    if (type == POST_FACEBOOK || type == POST_LINE){
         return @"https://itunes.apple.com/jp/app/id578136103";
     }
     return nil;

@@ -20,6 +20,7 @@
 
 @implementation GameResultListController
 
+@synthesize adg = adg_;
 @synthesize nadView;
 @synthesize gameResultYearList;
 @synthesize gameResultListOfYear;
@@ -38,6 +39,16 @@
     [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
+            @"originx" : @(0), @"originy" : @(581), @"w" : @(320), @"h" : @(50)};
+        ADGManagerViewController *adgvc = [[ADGManagerViewController alloc]initWithAdParams :adgparam :self.view];
+        self.adg = adgvc;
+        adg_.delegate = self;
+        [adg_ loadRequest];
+    }
+    
+    if(NO){
+//    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // NADViewの作成（表示はこの時点ではしない）
         nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 381, 320, 50)];
         [AppDelegate adjustOriginForiPhone5:nadView];
@@ -50,6 +61,18 @@
         // NADViewの中身（広告）を読み込み
         [nadView load];
     }
+}
+
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
+    // 読み込みに成功したら広告を見える場所に移動
+    self.adg.view.frame = CGRectMake(0, 381, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
+    
+    // TableViewの大きさ定義＆iPhone5対応
+    gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
+    [AppDelegate adjustForiPhone5:gameResultListTableView];
+    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
 }
 
 -(void)nadViewDidFinishLoad:(NADView *)adView {
@@ -283,6 +306,10 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if(adg_){
+        [adg_ resumeRefresh];
+    }
+    
     [nadView resume];
     
     [gameResultListTableView deselectRowAtIndexPath:
@@ -301,6 +328,9 @@
 - (void)dealloc {
     [nadView setDelegate:nil];
     nadView = nil;
+    
+    adg_.delegate = nil;
+    adg_ = nil;
 }
 
 @end

@@ -18,11 +18,20 @@
 @property (strong, nonatomic) IBOutlet UILabel *year;
 @property (strong, nonatomic) IBOutlet UILabel *team;
 
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+
 @property (strong, nonatomic) IBOutlet UIButton *changeBtn;
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indView;
+
 @property BOOL posted;
+
+- (IBAction)leftButton:(id)sender;
+
+- (IBAction)rightButton:(id)sender;
 
 - (IBAction)changeButton:(id)sender;
 

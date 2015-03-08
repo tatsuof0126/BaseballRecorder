@@ -35,7 +35,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *year;
 @property (strong, nonatomic) IBOutlet UILabel *team;
 
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+
 @property (strong, nonatomic) PitchingStatistics* pitchingStatistics;
+
+- (IBAction)leftButton:(id)sender;
+- (IBAction)rightButton:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIButton *changeBtn;
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;

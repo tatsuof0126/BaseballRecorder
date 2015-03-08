@@ -34,6 +34,10 @@
 		0B20309D18BA566200B94D8C /* BattingAnalysisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B20309C18BA566200B94D8C /* BattingAnalysisView.m */; };
 		0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */; };
 		0B21C2FD16CD3385005FF0C5 /* PitchingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */; };
+		0B2271881AAC9CC300B29E37 /* ADG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2271871AAC9CC300B29E37 /* ADG.framework */; };
+		0B22718A1AAC9D0800B29E37 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */; };
+		0B22718C1AAC9D1400B29E37 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */; };
+		0B22718E1AAC9D2F00B29E37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */; };
 		0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D1FC616402BAF00330699 /* ShowGameResultController.m */; };
 		0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C77C2164952ED00A214EC /* ConfigManager.m */; };
 		0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B40E42A16C12AA300E0E95D /* PitchingResultController.m */; };
@@ -101,6 +105,7 @@
 		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
 		0BE4C4A516FF406D00DAD11F /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A416FF406C00DAD11F /* Utility.m */; };
+		0BE78EF31AA4DEE7003AAE8D /* TargetTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +169,10 @@
 		0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCommonController.m; sourceTree = "<group>"; };
 		0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchingStatistics.h; sourceTree = "<group>"; };
 		0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatistics.m; sourceTree = "<group>"; };
+		0B2271871AAC9CC300B29E37 /* ADG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADG.framework; sourceTree = "<group>"; };
+		0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0B2D1FC516402BAF00330699 /* ShowGameResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowGameResultController.h; sourceTree = "<group>"; };
 		0B2D1FC616402BAF00330699 /* ShowGameResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowGameResultController.m; sourceTree = "<group>"; };
 		0B3C77C1164952ED00A214EC /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
@@ -258,6 +267,8 @@
 		0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		0BE4C4A316FF406C00DAD11F /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		0BE4C4A416FF406C00DAD11F /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetTerm.m; sourceTree = "<group>"; };
+		0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TargetTerm.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,8 +276,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */,
+				0B22718E1AAC9D2F00B29E37 /* QuartzCore.framework in Frameworks */,
+				0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */,
+				0B22718C1AAC9D1400B29E37 /* MediaPlayer.framework in Frameworks */,
+				0B22718A1AAC9D0800B29E37 /* CoreTelephony.framework in Frameworks */,
 				0B166C241A2377D300682DBC /* SystemConfiguration.framework in Frameworks */,
+				0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */,
 				0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */,
 				0B166C2D1A237C7B00682DBC /* libAdIdAccess.a in Frameworks */,
 				0B166C261A2377E300682DBC /* libz.dylib in Frameworks */,
@@ -275,13 +290,13 @@
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
 				0B166C101A236BC000682DBC /* libNendAd.a in Frameworks */,
-				0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
 				0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */,
 				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
+				0B2271881AAC9CC300B29E37 /* ADG.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +387,14 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		0B2271861AAC9CC300B29E37 /* ADG_iOSSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0B2271871AAC9CC300B29E37 /* ADG.framework */,
+			);
+			path = ADG_iOSSDK;
+			sourceTree = "<group>";
+		};
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +403,7 @@
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
 				0B166C141A23773100682DBC /* GoogleAnalyticsLibrary */,
+				0B2271861AAC9CC300B29E37 /* ADG_iOSSDK */,
 				0B16F89C19338AAF00C82E16 /* NendAd */,
 			);
 			sourceTree = "<group>";
@@ -396,6 +420,9 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */,
+				0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */,
+				0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */,
 				0B166C251A2377E300682DBC /* libz.dylib */,
 				0B166C231A2377D300682DBC /* SystemConfiguration.framework */,
 				0B166C211A2377C600682DBC /* CoreData.framework */,
@@ -482,6 +509,8 @@
 				0B166C291A23798A00682DBC /* TrackingManager.h */,
 				0B166C2A1A23798A00682DBC /* TrackingManager.m */,
 				0BB960EB1A5996840062EA3F /* Images-2.xcassets */,
+				0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */,
+				0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -688,6 +717,7 @@
 				0B949A0716335C8B007F574D /* BattingResult.m in Sources */,
 				0B5EEE82163AE4C20038980D /* GameResultManager.m in Sources */,
 				0B1AA348163D59F800535116 /* BaseballRecorderUIApplication.m in Sources */,
+				0BE78EF31AA4DEE7003AAE8D /* TargetTerm.m in Sources */,
 				0B2D1FC716402BAF00330699 /* ShowGameResultController.m in Sources */,
 				0B4E8D6F1944BB80007D7F71 /* CustomSummaryController.m in Sources */,
 				0B683700164277220086E198 /* BattingStatisticsViewController.m in Sources */,
@@ -812,6 +842,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ADG_iOSSDK",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -831,7 +865,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1BD80CE-7FFD-4AD0-B59F-A0C581D877F4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2bfc1757-dda6-4c31-9dfc-36a59989742c";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -844,6 +878,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ADG_iOSSDK",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
@@ -856,7 +894,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E4A7227-D77E-4AB0-B08C-8C6A4D66844C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bb4e66de-a4b9-4c83-bf45-2683284ae3b8";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};

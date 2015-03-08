@@ -82,6 +82,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)leftButton:(id)sender {
+    [self moveLeftTargetTerm];
+}
+
+- (IBAction)rightButton:(id)sender {
+    [self moveRightTargetTerm];
+}
+
 - (IBAction)changeButton:(id)sender {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―変更" value:nil screen:@"打撃分析画面"];
     
@@ -89,7 +97,9 @@
 }
 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
-    [self showTarget:year team:team];
+//    [self showTarget:year team:team];
+    [self showTarget:year team:team leftBtn:_leftBtn rightBtn:_rightBtn];
+    
     analysysView.gameResultListForAnalysis = gameResultListForCalc;
     [analysysView setNeedsDisplay];
 }
@@ -97,6 +107,12 @@
 - (IBAction)saveAnalysis:(id)sender {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―保存" value:nil screen:@"打撃分析画面"];
     
+    [_indView startAnimating];
+    
+    [NSThread detachNewThreadSelector:@selector(saveCapturedImage:) toTarget:self withObject:_indView];
+}
+
+- (void)saveCapturedImage:(id)obj {
     // UIImageでキャプチャを取得
     UIImage* capturedUIImage = [self getBattingAnalysisImage];
     
@@ -109,6 +125,7 @@
 }
 
 - (void)completeCapture:(UIImage *)screenImage didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    [_indView stopAnimating];
     NSString* message = @"カメラロールに保存しました";
     if(error){
         message = @"保存に失敗しました";
@@ -147,6 +164,13 @@
     _saveBtn.hidden = YES;
     _shareBtn.hidden = YES;
     
+    BOOL indBool = _indView.hidden;
+    BOOL leftBool = _leftBtn.hidden;
+    BOOL rightBool = _rightBtn.hidden;
+    _indView.hidden = YES;
+    _leftBtn.hidden = YES;
+    _rightBtn.hidden = YES;
+    
     // 一時的にラベルを貼る
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(190,445,120,20)];
     label.adjustsFontSizeToFitWidth = YES;
@@ -172,6 +196,9 @@
     _changeBtn.hidden = NO;
     _saveBtn.hidden = NO;
     _shareBtn.hidden = NO;
+    _indView.hidden = indBool;
+    _leftBtn.hidden = leftBool;
+    _rightBtn.hidden = rightBool;
     
     // ラベルも削除
     [label removeFromSuperview];

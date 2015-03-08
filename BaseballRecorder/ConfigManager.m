@@ -11,6 +11,18 @@
 
 @implementation ConfigManager
 
++ (void)initConfig {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary* defaultDic = [NSMutableDictionary dictionary];
+    [defaultDic setObject:@"" forKey:@"PLACE"];
+    [defaultDic setObject:@"" forKey:@"MYTEAM"];
+    [defaultDic setObject:@"" forKey:@"SENDTO"];
+    [defaultDic setObject:@"すべて" forKey:@"TARGETTEAM"];
+    [defaultDic setObject:@"すべて" forKey:@"TARGETYEAR"];
+    [defaultDic setObject:[TargetTerm getDefaultTermStringForConfig] forKey:@"TARGETTERM"];
+    [defaults registerDefaults:defaultDic];
+}
+
 + (NSString*)getDefaultPlace {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"PLACE"];
@@ -85,6 +97,17 @@
 + (void)setCalcTargetYear:(NSString*)targetYear {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:targetYear forKey:@"TARGETYEAR"];
+    [defaults synchronize];
+}
+
++ (TargetTerm*)getCalcTargetTerm {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [TargetTerm makeTargetTerm:[defaults stringForKey:@"TARGETTERM"]];
+}
+
++ (void)setCalcTargetTerm:(TargetTerm*)targetTerm {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[targetTerm getTermStringForConfig] forKey:@"TARGETTERM"];
     [defaults synchronize];
 }
 

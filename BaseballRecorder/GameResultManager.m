@@ -7,7 +7,6 @@
 //
 
 #import "GameResultManager.h"
-#import "GameResult.h"
 
 @implementation GameResultManager
 
@@ -82,6 +81,21 @@
     NSArray* returnArray = [resultList sortedArrayUsingSelector:@selector(compareDate:)];
     
     return returnArray;
+}
+
++ (NSArray*)loadGameResultList:(TargetTerm*)targetTerm targetTeam:(NSString*)targetTeam {
+    NSArray* allGameResultList = [GameResultManager loadGameResultList];
+
+    NSMutableArray* resultList = [NSMutableArray array];
+    for(GameResult* gameResult in allGameResultList){
+        if([targetTerm isInTargetTeam:gameResult] &&
+            ([targetTeam isEqualToString:@""] || [targetTeam isEqualToString:gameResult.myteam])){
+            // 期間が範囲内でチーム名が一致していればリストに加える
+            [resultList addObject:gameResult];
+        }
+    }
+    
+    return resultList;
 }
 
 + (int)getNewResultCount {

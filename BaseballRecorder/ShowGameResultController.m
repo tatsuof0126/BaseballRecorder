@@ -372,8 +372,9 @@
     actionSheet.delegate = self;
     [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
     [actionSheet addButtonWithTitle:@"Facebookに投稿"];
+    [actionSheet addButtonWithTitle:@"Lineに送る"];
     [actionSheet addButtonWithTitle:@"キャンセル"];
-    actionSheet.cancelButtonIndex = 2;
+    actionSheet.cancelButtonIndex = 3;
     [actionSheet showInView:self.view.window];
 }
 
@@ -384,6 +385,9 @@
             break;
         case 1:
             [self postToFacebook];
+            break;
+        case 2:
+            [self postToLine];
             break;
     }
 }
@@ -446,6 +450,22 @@
     [vc addURL:[NSURL URLWithString:@"https://itunes.apple.com/jp/app/id578136103"]];
     
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)postToLine {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Lineシェア" value:nil screen:@"試合結果参照画面"];
+    
+    posted = NO;
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
+        [Utility showAlert:@"Lineがインストールされていません。"];
+    }
+    
+    NSString* shareString = [self makeShareString:POST_LINE];
+    NSString* encodedString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/text/%@", encodedString];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
 }
 
 - (NSString*)makeShareString:(int)type {
@@ -533,7 +553,7 @@
     
     [tweetString appendString:@" #ベボレコ"];
     
-    if(type == POST_FACEBOOK){
+    if(type == POST_FACEBOOK || type == POST_LINE){
         [tweetString appendString:@" https://itunes.apple.com/jp/app/id578136103"];
     }
     

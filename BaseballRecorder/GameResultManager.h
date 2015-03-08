@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GameResult.h"
+#import "TargetTerm.h"
 
 @interface GameResultManager : NSObject
 
@@ -18,6 +19,8 @@
 + (void)removeGameResult:(int)resultid;
 
 + (NSArray*)loadGameResultList;
+
++ (NSArray*)loadGameResultList:(TargetTerm*)targetTerm targetTeam:(NSString*)targetTeam;
 
 + (void)makeSampleData;
 

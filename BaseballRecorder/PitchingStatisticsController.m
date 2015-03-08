@@ -7,7 +7,6 @@
 //
 
 #import "PitchingStatisticsController.h"
-#import "GameResultManager.h"
 #import "GameResult.h"
 #import "ConfigManager.h"
 #import "TeamStatistics.h"
@@ -75,10 +74,13 @@
 }
 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {
-    [self showTarget:_year team:_team];
+//    [self showTarget:_year team:_team];
+    [self showTarget:_year team:_team leftBtn:_leftBtn rightBtn:_rightBtn];
     
+    // 投手成績
     pitchingStatistics
         = [PitchingStatistics calculatePitchingStatistics:gameResultListForCalc];
+    
     _pitchingresult.text = [NSString stringWithFormat:@"%d試合 %d勝 %d敗 %dセーブ %dホールド",
                        pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose,
                        pitchingStatistics.save, pitchingStatistics.hold];
@@ -107,20 +109,20 @@
 }
 
 - (IBAction)changeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―変更" value:nil screen:@"投手成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―変更" value:nil screen:@"投手成績参照画面"];
     
     [self makeResultPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―シェア" value:nil screen:@"投手成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―シェア" value:nil screen:@"投手成績参照画面"];
     
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_TEXT];
 }
 
 - (IBAction)imageShareButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績画面―画像でシェア" value:nil screen:@"投手成績画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―画像でシェア" value:nil screen:@"投手成績参照画面"];
     
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_IMAGE];
@@ -195,7 +197,7 @@
 }
 
 - (NSString*)getShareURLString:(int)type  shareType:(int)shareType {
-    if (type == POST_FACEBOOK){
+    if (type == POST_FACEBOOK || type == POST_LINE){
         return @"https://itunes.apple.com/jp/app/id578136103";
 //        return @"https://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103";
     }
@@ -399,6 +401,14 @@
 - (void)dealloc {
     [nadView setDelegate:nil];
     nadView = nil;
+}
+
+- (IBAction)leftButton:(id)sender {
+    [self moveLeftTargetTerm];
+}
+
+- (IBAction)rightButton:(id)sender {
+    [self moveRightTargetTerm];
 }
 
 @end

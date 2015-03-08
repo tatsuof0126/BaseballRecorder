@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TargetTerm.h"
 
 @interface ConfigManager : NSObject
+
++ (void)initConfig;
 
 + (NSString*)getDefaultPlace;
 
@@ -37,6 +40,10 @@
 + (NSString*)getCalcTargetYear;
 
 + (void)setCalcTargetYear:(NSString*)targetYear;
+
++ (TargetTerm*)getCalcTargetTerm;
+
++ (void)setCalcTargetTerm:(TargetTerm*)targetTerm;
 
 + (BOOL)isRemoveAdsFlg;
 

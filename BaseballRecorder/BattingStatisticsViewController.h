@@ -37,6 +37,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *team;
 @property (weak, nonatomic) IBOutlet UILabel *year;
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 
 @property (strong, nonatomic) TeamStatistics* teamStatistics;
 @property (strong, nonatomic) BattingStatistics* battingStatistics;
@@ -45,6 +47,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *imageShareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *mailBtn;
+
+- (IBAction)leftButton:(id)sender;
+- (IBAction)rightButton:(id)sender;
 
 - (IBAction)changeButton:(id)sender;
 - (IBAction)tweetButton:(id)sender;

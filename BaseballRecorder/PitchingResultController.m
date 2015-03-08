@@ -169,7 +169,7 @@
     
     // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
     pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
-    pickerBaseView.backgroundColor = [UIColor clearColor];
+    pickerBaseView.backgroundColor = [UIColor whiteColor];
     
     // PickerView
     selectPicker = [[UIPickerView alloc] init];

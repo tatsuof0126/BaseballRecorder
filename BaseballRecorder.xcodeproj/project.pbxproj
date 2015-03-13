@@ -892,6 +892,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "bb4e66de-a4b9-4c83-bf45-2683284ae3b8";

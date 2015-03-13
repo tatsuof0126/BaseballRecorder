@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
-#import "NADView.h"
+#import <ADG/ADGManagerViewController.h>
 
 // #define ALL_TARGET 0
 // #define RECENT5_TARGET 1
@@ -24,9 +24,11 @@
 #define POST_LINE 3
 
 @interface StatisticsCommonController : UIViewController
-    <UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, NADViewDelegate>
+<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, ADGManagerViewControllerDelegate> {
+    ADGManagerViewController *adg_;
+}
 
-@property (nonatomic, retain) NADView* nadView;
+@property (nonatomic, retain) ADGManagerViewController *adg;
 
 //@property int targetyear;
 //@property int targetteam;

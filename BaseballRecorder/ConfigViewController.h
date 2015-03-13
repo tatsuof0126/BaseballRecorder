@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <ADG/ADGManagerViewController.h>
 #import "CheckBoxButton.h"
 
-@interface ConfigViewController : UIViewController <ABPeoplePickerNavigationControllerDelegate>
+@interface ConfigViewController : UIViewController <ABPeoplePickerNavigationControllerDelegate, ADGManagerViewControllerDelegate> {
+    ADGManagerViewController *adg_;
+}
+
+@property (nonatomic, retain) ADGManagerViewController *adg;
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *inputNavi;
 

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ADG/ADGManagerViewController.h>
 #import "CheckBoxButton.h"
 
-@interface PitchingResultController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface PitchingResultController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, ADGManagerViewControllerDelegate> {
+    ADGManagerViewController *adg_;
+}
+
+@property (nonatomic, retain) ADGManagerViewController *adg;
 
 @property (weak, nonatomic) IBOutlet UITextField *hianda;
 @property (weak, nonatomic) IBOutlet UITextField *hihomerun;

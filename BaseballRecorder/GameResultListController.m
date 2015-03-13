@@ -21,7 +21,6 @@
 @implementation GameResultListController
 
 @synthesize adg = adg_;
-@synthesize nadView;
 @synthesize gameResultYearList;
 @synthesize gameResultListOfYear;
 @synthesize gameResultListTableView;
@@ -46,21 +45,6 @@
         adg_.delegate = self;
         [adg_ loadRequest];
     }
-    
-    if(NO){
-//    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        // NADViewの作成（表示はこの時点ではしない）
-        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 381, 320, 50)];
-        [AppDelegate adjustOriginForiPhone5:nadView];
-        [AppDelegate adjustOriginForBeforeiOS6:nadView];
-        
-        [nadView setIsOutputLog:NO];
-        [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
-        [nadView setDelegate:self];
-    
-        // NADViewの中身（広告）を読み込み
-        [nadView load];
-    }
 }
 
 - (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
@@ -73,17 +57,6 @@
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
     [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
-}
-
--(void)nadViewDidFinishLoad:(NADView *)adView {
-    // NADViewの中身（広告）の読み込みに成功した場合
-    // TableViewの大きさ定義＆iPhone5対応
-    gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
-    [AppDelegate adjustForiPhone5:gameResultListTableView];
-    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
-    
-    // NADViewを表示
-    [self.view addSubview:nadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -300,17 +273,12 @@
     }
 }
 
-- (IBAction)gameResultListReturnActionForSegue:(UIStoryboardSegue *)segue{
-}
-
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if(adg_){
         [adg_ resumeRefresh];
     }
-    
-    [nadView resume];
     
     [gameResultListTableView deselectRowAtIndexPath:
         [gameResultListTableView indexPathForSelectedRow] animated:NO];
@@ -322,13 +290,12 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [nadView pause];
+    if(adg_){
+        [adg_ pauseRefresh];
+    }
 }
 
 - (void)dealloc {
-    [nadView setDelegate:nil];
-    nadView = nil;
-    
     adg_.delegate = nil;
     adg_ = nil;
 }

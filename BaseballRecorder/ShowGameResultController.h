@@ -11,16 +11,21 @@
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "NADView.h"
+#import <ADG/ADGManagerViewController.h>
+// #import "NADView.h"
 
 #define POST_TWITTER  1
 #define POST_FACEBOOK 2
 #define POST_LINE     3
 
 @interface ShowGameResultController : UIViewController
-    <MFMailComposeViewControllerDelegate, NADViewDelegate, UIActionSheetDelegate>
+        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate>  {
+    ADGManagerViewController *adg_;
+}
 
-@property (nonatomic, retain) NADView* nadView;
+@property (nonatomic, retain) ADGManagerViewController *adg;
+
+// @property (nonatomic, retain) NADView* nadView;
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;

@@ -32,6 +32,7 @@
 @synthesize targetPicker;
 @synthesize targetToolbar;
 @synthesize posted;
+@synthesize adg = adg_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,10 +50,9 @@
     // 子クラスでオーバーライドする前提
 }
 
-
--(void)nadViewDidFinishLoad:(NADView *)adView {
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
     // 子クラスでオーバーライドする前提
-    
+
 }
 
 - (void)didReceiveMemoryWarning

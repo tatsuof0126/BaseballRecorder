@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ShowGameResultController.h"
+#import "GameResultListController.h"
 #import "GameResultManager.h"
 #import "GameResult.h"
 #import "BattingResult.h"
@@ -24,7 +25,7 @@
 
 @implementation ShowGameResultController
 
-@synthesize nadView;
+@synthesize adg = adg_;
 @synthesize posted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,32 +51,27 @@
     [AppDelegate adjustOriginForBeforeiOS6:_scrollview];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        // NADViewの作成（表示はこの時点ではしない）
-        nadView = [[NADView alloc] initWithFrame:CGRectMake(0, 430, 320, 50)];
-        [AppDelegate adjustOriginForiPhone5:nadView];
-        [AppDelegate adjustOriginForBeforeiOS6:nadView];
-        
-        [nadView setIsOutputLog:NO];
-        [nadView setNendID:@"68035dec173da73f2cf1feb0e4e5863162af14c4" spotID:@"81174"];
-        // [nadView setNendID:@"a6eca9dd074372c898dd1df549301f277c53f2b9" spotID:@"3172"]; // テスト用
-        [nadView setDelegate:self];
-        
-        // NADViewの中身（広告）を読み込み
-        [nadView load];
+        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
+                                   @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
+        ADGManagerViewController *adgvc = [[ADGManagerViewController alloc]initWithAdParams :adgparam :self.view];
+        self.adg = adgvc;
+        adg_.delegate = self;
+        [adg_ loadRequest];
     }
     
     [self showGameResult];    
 }
 
--(void)nadViewDidFinishLoad:(NADView *)adView {
-    // NADViewの中身（広告）の読み込みに成功した場合
-    // ScrollViewの高さを調整＆iPhone5対応
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
+    // 読み込みに成功したら広告を見える場所に移動
+    self.adg.view.frame = CGRectMake(0, 430, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
+    
+    // Scrollviewの大きさ定義＆iPhone5対応
     _scrollview.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:_scrollview];
     [AppDelegate adjustOriginForBeforeiOS6:_scrollview];
-    
-    // NADViewを表示
-    [self.view addSubview:nadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -315,9 +311,21 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―戻る" value:nil screen:@"試合結果参照画面"];
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―一覧へ" value:nil screen:@"試合結果参照画面"];
     
-    [self performSegueWithIdentifier:@"togameresultlist" sender:self];
+    UIViewController* controller = self;
+    while (true){
+//        NSLog(@"Class : %@", NSStringFromClass([controller.presentingViewController class]));
+        if([controller.presentingViewController isKindOfClass:[UITabBarController class]]){
+            [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            break;
+        }
+        controller = controller.presentingViewController;
+    }
+    
+    
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self performSegueWithIdentifier:@"togameresultlist" sender:self];
     
 /*
     NSLog(@"segue : %d", seguetype);
@@ -658,18 +666,22 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [nadView resume];
-    
+    if(adg_){
+        [adg_ resumeRefresh];
+    }
+        
     [self showGameResult];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [nadView pause];
+    if(adg_){
+        [adg_ pauseRefresh];
+    }
 }
 
 - (void) dealloc {
-    [nadView setDelegate:nil];
-    nadView = nil;
+    adg_.delegate = nil;
+    adg_ = nil;
 }
 
 @end

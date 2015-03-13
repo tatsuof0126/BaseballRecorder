@@ -28,6 +28,7 @@
 
 @implementation InputViewController
 
+@synthesize adg = adg_;
 @synthesize gameResult;
 @synthesize battingResultViewArray;
 @synthesize scrollView;
@@ -145,10 +146,34 @@
     // 打撃成績の部分を作る
     [self makeBattingResult];
     
-    // iPhone5対応
+    // ScrollViewの高さを定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
+    
+    // 広告を表示
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
+                                   @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
+        ADGManagerViewController *adgvc = [[ADGManagerViewController alloc]initWithAdParams :adgparam :self.view];
+        self.adg = adgvc;
+        adg_.delegate = self;
+        [adg_ loadRequest];
+    }
     
     edited = NO;
+}
+
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
+    // 読み込みに成功したら広告を見える場所に移動
+    self.adg.view.frame = CGRectMake(0, 430, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
+    
+    // Scrollviewの大きさ定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 366);
+    [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -870,6 +895,27 @@
     return date;
 }
 
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(adg_){
+        [adg_ resumeRefresh];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(adg_){
+        [adg_ pauseRefresh];
+    }
+}
+
+- (void)dealloc {
+    adg_.delegate = nil;
+    adg_ = nil;
+}
 
 - (void)viewDidUnload {
     [self setGameResult:nil];

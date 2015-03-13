@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ADG/ADGManagerViewController.h>
 #import "GameResult.h"
 #import "BattingResult.h"
 #import "UIPlaceHolderTextView.h"
@@ -15,7 +16,11 @@
 #define INPUT_TYPE_NEW 1
 #define INPUT_TYPE_UPDATE 2
 
-@interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, ADGManagerViewControllerDelegate> {
+    ADGManagerViewController *adg_;
+}
+
+@property (nonatomic, retain) ADGManagerViewController *adg;
 
 @property (weak, nonatomic) IBOutlet UITextField *year;
 @property (weak, nonatomic) IBOutlet UITextField *month;

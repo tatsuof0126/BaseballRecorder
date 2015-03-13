@@ -7,17 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
 #import <ADG/ADGManagerViewController.h>
-#import "NADView.h"
 
-@interface GameResultListController : UIViewController <NADViewDelegate, ADGManagerViewControllerDelegate> {
+@interface GameResultListController : UIViewController <ADGManagerViewControllerDelegate> {
     ADGManagerViewController *adg_;
 }
 
 @property (nonatomic, retain) ADGManagerViewController *adg;
-
-@property (nonatomic, retain) NADView* nadView;
 
 @property (weak, nonatomic) IBOutlet UITableView *gameResultListTableView;
 

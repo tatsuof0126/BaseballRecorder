@@ -17,6 +17,7 @@
 
 @implementation ConfigViewController
 
+@synthesize adg = adg_;
 @synthesize inputNavi;
 @synthesize scrollView;
 @synthesize removeadsButton;
@@ -73,6 +74,45 @@
     if([ConfigManager isRemoveAdsFlg] == YES){
         inputNavi.rightBarButtonItem = nil;
     }
+    
+    // ScrollViewの大きさ定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 366);
+    scrollView.contentSize = CGSizeMake(320, 580);
+    [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
+    
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
+                                   @"originx" : @(0), @"originy" : @(581), @"w" : @(320), @"h" : @(50)};
+        ADGManagerViewController *adgvc = [[ADGManagerViewController alloc]initWithAdParams :adgparam :self.view];
+        self.adg = adgvc;
+        adg_.delegate = self;
+        [adg_ loadRequest];
+    }
+}
+
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
+    // 読み込みに成功したら広告を見える場所に移動
+    self.adg.view.frame = CGRectMake(0, 381, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
+    
+    // ScrollViewの大きさ定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 316);
+    [AppDelegate adjustForiPhone5:scrollView];
+    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
+    
+    if([UIScreen mainScreen].bounds.size.height == 568){
+        // iPhone5対応
+        [self setFrameOriginY:_apptitle originY:340];
+        [self setFrameOriginY:_versionName originY:340];
+        [self setFrameOriginY:appstoreLabel originY:363];
+        [self setFrameOriginY:otherappLabel originY:363];
+    }
+}
+
+- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
+    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +138,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [self showDoneButton];
     
+    /*
     // ScrollViewを大きくしてスクロールできるようにする
     CGSize size;
     // iPhone5対応
@@ -107,7 +148,8 @@
         size = CGSizeMake(320, 660);
     }
     scrollView.contentSize = size;
-    
+    */
+     
     // ちょうどいいところにスクロール
     if (textField == _sendto && scrollView.contentOffset.y < 130.0f){
         [scrollView setContentOffset:CGPointMake(0.0f, 130.0f) animated:YES];
@@ -136,8 +178,8 @@
 
 - (void)doneButton {
     // ScrollViewのサイズを戻す
-    CGSize size = CGSizeMake(320, 455);
-    scrollView.contentSize = size;
+//    CGSize size = CGSizeMake(320, 455);
+//    scrollView.contentSize = size;
 
     [_place endEditing:YES];
     [_myteam endEditing:YES];
@@ -261,6 +303,27 @@
         
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(adg_){
+        [adg_ resumeRefresh];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(adg_){
+        [adg_ pauseRefresh];
+    }
+}
+
+- (void)dealloc {
+    adg_.delegate = nil;
+    adg_ = nil;
 }
 
 @end

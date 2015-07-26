@@ -89,6 +89,7 @@
     [defaults synchronize];
 }
 
+/*
 + (NSString*)getCalcTargetYear {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"TARGETYEAR"];
@@ -99,6 +100,7 @@
     [defaults setObject:targetYear forKey:@"TARGETYEAR"];
     [defaults synchronize];
 }
+*/
 
 + (TargetTerm*)getCalcTargetTerm {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];

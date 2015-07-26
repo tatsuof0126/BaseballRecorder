@@ -63,6 +63,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *shitten;
 @property (weak, nonatomic) IBOutlet UILabel *jisekitenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jisekiten;
+@property (weak, nonatomic) IBOutlet UILabel *tamakazuLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tamakazu;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UITextView *memo;
@@ -72,6 +74,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *tweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property BOOL posted;
 // @property BOOL tweeted;
@@ -81,6 +84,8 @@
 - (IBAction)tweetButton:(id)sender;
 
 - (IBAction)mailButton:(id)sender;
+
+- (IBAction)deleteButton:(id)sender;
 
 - (IBAction)backButton:(id)sender;
 

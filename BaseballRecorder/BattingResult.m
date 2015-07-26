@@ -24,14 +24,14 @@ static NSArray* battingStatisticsArray;
         battingPositionStringArray
             = [NSArray arrayWithObjects:
                // 打撃成績入力Picker用
-               [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",
-                @"サード",@"ショート",@"レフト",@"センター",@"ライト",@"左中間",@"右中間",nil],
+               [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",
+                    @"ショート",@"レフト",@"センター",@"ライト",@"左中間",@"右中間",@"レフト線",@"ライト線",nil],
                // 表示用（短縮）
-               [NSArray arrayWithObjects:@"",@"投",@"捕",@"一",@"二",
-                @"三",@"遊",@"左",@"中",@"右",@"左中",@"右中",nil],
+               [NSArray arrayWithObjects:@"",@"投",@"捕",@"一",@"二",@"三",
+                    @"遊",@"左",@"中",@"右",@"左中",@"右中",@"左線",@"右線",nil],
                // 表示用（正式名称）
-               [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",
-                @"サード",@"ショート",@"レフト",@"センター",@"ライト",@"左中間",@"右中間",nil],
+               [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",
+                    @"ショート",@"レフト",@"センター",@"ライト",@"左中間",@"右中間",@"レフト線",@"ライト線",nil],
                nil];
     }
     
@@ -199,7 +199,8 @@ static NSArray* battingStatisticsArray;
         // 犠飛だけ飛んだ方向を判断する
         // 犠打のうち、飛んだ方向がレフト・センター・ライト・左中間・右中間の場合は犠飛として返す
         if (result == 11 &&
-            (position == 7 || position == 8 || position == 9 || position == 10 || position == 11)){
+            (position == 7 || position == 8 || position == 9 || position == 10 ||
+             position == 11 || position == 12 || position ==13)){
             return 1;
         }
         

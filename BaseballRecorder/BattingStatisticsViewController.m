@@ -176,7 +176,7 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
+    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermString];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";

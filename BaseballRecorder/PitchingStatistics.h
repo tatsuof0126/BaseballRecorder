@@ -29,6 +29,7 @@
 @property float era;
 @property float whip;
 @property float k9;
+@property float kbb;
 
 + (PitchingStatistics*)calculatePitchingStatistics:(NSArray*)gameResultList;
 

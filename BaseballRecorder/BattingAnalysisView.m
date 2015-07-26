@@ -36,15 +36,23 @@
         CGPointMake(225.0, 103.0),
         CGPointMake(85.0,  83.0),
         CGPointMake(195.0, 83.0),
-        CGPointMake(25.0,  48.0), // レフトホームラン
-        CGPointMake(140.0, 0.0), // センターホームラン
-        CGPointMake(255.0, 48.0), // ライトホームラン
-        CGPointMake(65.0,  18.0), // 左中間ホームラン
-        CGPointMake(215.0, 18.0), // 右中間ホームラン
+        CGPointMake(27.0,  145.0),
+        CGPointMake(253.0, 145.0)
+    };
+    
+    CGPoint targetBasePointsHomerun[] = {
+        CGPointMake(25.0,  48.0),  // レフトホームラン
+        CGPointMake(140.0, 0.0),   // センターホームラン
+        CGPointMake(255.0, 48.0),  // ライトホームラン
+        CGPointMake(65.0,  18.0),  // 左中間ホームラン
+        CGPointMake(215.0, 18.0),  // 右中間ホームラン
+        CGPointMake(0.0,   122.0), // レフト線ホームラン
+        CGPointMake(280.0, 122.0)  // ライト線ホームラン
     };
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
+    // 凡例の線を描画
     CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
     CGContextMoveToPoint(context, 0.0, 248.0);
     CGContextAddLineToPoint(context, 30.0, 248.0);
@@ -71,13 +79,14 @@
                                                  [battingResult getResultColorForAnalysisView].CGColor);
                 
                 CGPoint targetBasePoint = targetBasePoints[battingResult.position];
-                if (battingResult.result == R_HOMERUN && battingResult.position >=7 && battingResult.position <= 11) {
-                    // ホームランの場合は場所を変える（レフト・センター・ライト・左中間・右中間の場合のみ）
-                    targetBasePoint = targetBasePoints[battingResult.position+5];
+                if (battingResult.result == R_HOMERUN &&
+                    battingResult.position >=7 && battingResult.position <= 13) {
+                    // ホームランの場合は場所を変える（レフト・センター・ライト・左中間・右中間・レフト線・ライト線のみ）
+                    targetBasePoint = targetBasePointsHomerun[battingResult.position-7];
                 }
                 
-                float x = arc4random()/(float)UINT_MAX*10.0;
-                float y = arc4random()/(float)UINT_MAX*10.0;
+                float x = arc4random()/(float)UINT_MAX*10.0-5;
+                float y = arc4random()/(float)UINT_MAX*10.0-5;
                 if(targetBasePoint.y+y <= 2.0f){
                     y = 2.0f-targetBasePoint.y; // 上すぎる場合は調節
                 }

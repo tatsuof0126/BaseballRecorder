@@ -65,6 +65,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    NSLog(@"URL : %@",[url absoluteString]);
+//    NSLog(@"Schame : %@",[url scheme]);
+//    NSLog(@"Query : %@",[url query]);
+    
+    return YES;
+}
+
 - (InAppPurchaseManager*)getInAppPurchaseManager {
     if(purchaseManager == nil){
         purchaseManager = [[InAppPurchaseManager alloc] init];

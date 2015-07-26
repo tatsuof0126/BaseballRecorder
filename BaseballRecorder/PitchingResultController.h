@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *shitten;
 @property (weak, nonatomic) IBOutlet UITextField *jisekiten;
 @property (weak, nonatomic) IBOutlet CheckBoxButton *kanto;
-
+@property (weak, nonatomic) IBOutlet UITextField *tamakazu;
 
 @property (weak, nonatomic) IBOutlet UILabel *inningLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sekininLabel;

@@ -98,6 +98,7 @@
 		0BB961081A5997530062EA3F /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960F91A5997530062EA3F /* icon-72@2x.png */; };
 		0BB961091A5997530062EA3F /* icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960FA1A5997530062EA3F /* icon-76.png */; };
 		0BB9610A1A5997530062EA3F /* icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960FB1A5997530062EA3F /* icon-76@2x.png */; };
+		0BC1B1121B36929D004E3059 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC1B1111B36929D004E3059 /* HelpViewController.m */; };
 		0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC4265417C663A500AB95D0 /* Twitter.framework */; };
 		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
@@ -106,6 +107,7 @@
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
 		0BE4C4A516FF406D00DAD11F /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A416FF406C00DAD11F /* Utility.m */; };
 		0BE78EF31AA4DEE7003AAE8D /* TargetTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */; };
+		0BF3AB6B1B525DE10029DC13 /* Help2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +258,8 @@
 		0BB960F91A5997530062EA3F /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-72@2x.png"; path = "BaseballRecorder/images/icon-72@2x.png"; sourceTree = SOURCE_ROOT; };
 		0BB960FA1A5997530062EA3F /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-76.png"; path = "BaseballRecorder/images/icon-76.png"; sourceTree = SOURCE_ROOT; };
 		0BB960FB1A5997530062EA3F /* icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-76@2x.png"; path = "BaseballRecorder/images/icon-76@2x.png"; sourceTree = SOURCE_ROOT; };
+		0BC1B1111B36929D004E3059 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		0BC1B1131B3692C5004E3059 /* HelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		0BC4265417C663A500AB95D0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0BC5F7F917C26D5400C755A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -269,6 +273,8 @@
 		0BE4C4A416FF406C00DAD11F /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetTerm.m; sourceTree = "<group>"; };
 		0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TargetTerm.h; sourceTree = "<group>"; };
+		0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Help2ViewController.m; sourceTree = "<group>"; };
+		0BF3AB6C1B525E020029DC13 /* Help2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Help2ViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,6 +483,10 @@
 				0B2D1FC616402BAF00330699 /* ShowGameResultController.m */,
 				0B4E8D6D1944BB80007D7F71 /* CustomSummaryController.h */,
 				0B4E8D6E1944BB80007D7F71 /* CustomSummaryController.m */,
+				0BC1B1131B3692C5004E3059 /* HelpViewController.h */,
+				0BC1B1111B36929D004E3059 /* HelpViewController.m */,
+				0BF3AB6C1B525E020029DC13 /* Help2ViewController.h */,
+				0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */,
 				0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */,
 				0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */,
 				0B20309B18BA566200B94D8C /* BattingAnalysisView.h */,
@@ -508,9 +518,9 @@
 				0BE4C4A416FF406C00DAD11F /* Utility.m */,
 				0B166C291A23798A00682DBC /* TrackingManager.h */,
 				0B166C2A1A23798A00682DBC /* TrackingManager.m */,
-				0BB960EB1A5996840062EA3F /* Images-2.xcassets */,
 				0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */,
 				0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */,
+				0BB960EB1A5996840062EA3F /* Images-2.xcassets */,
 			);
 			path = BaseballRecorder;
 			sourceTree = "<group>";
@@ -724,10 +734,12 @@
 				0B683703164279C50086E198 /* TeamStatistics.m in Sources */,
 				0B683706164279E00086E198 /* BattingStatistics.m in Sources */,
 				0B3C77C3164952ED00A214EC /* ConfigManager.m in Sources */,
+				0BF3AB6B1B525DE10029DC13 /* Help2ViewController.m in Sources */,
 				0B16F8BF19339BFA00C82E16 /* UIPlaceHolderTextView.m in Sources */,
 				0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */,
 				0B1092E2193A4C620097C938 /* RectView.m in Sources */,
 				0B40E42B16C12AA300E0E95D /* PitchingResultController.m in Sources */,
+				0BC1B1121B36929D004E3059 /* HelpViewController.m in Sources */,
 				0B20309A18BA54DA00B94D8C /* BattingAnalysisController.m in Sources */,
 				0B40E42E16C3EEE800E0E95D /* CheckBoxButton.m in Sources */,
 				0B40E43D16CAB08C00E0E95D /* PitchingStatisticsController.m in Sources */,

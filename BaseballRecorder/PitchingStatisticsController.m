@@ -95,6 +95,7 @@
     _kanto.text = [NSString stringWithFormat:@"%d",pitchingStatistics.kanto];
     _whip.text = [Utility getFloatStr2:pitchingStatistics.whip];
     _k9.text = [Utility getFloatStr2:pitchingStatistics.k9];
+    _kbb.text = [Utility getFloatStr2:pitchingStatistics.kbb];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,7 +128,7 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
+    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermString];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";
@@ -170,10 +171,11 @@
             [shareString appendFormat:@"与死球%d ", pitchingStatistics.yoshikyu2];
         }
     
-        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ "
+        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ K/BB%@ "
          ,pitchingStatistics.shitten, pitchingStatistics.jisekiten, pitchingStatistics.kanto
          ,[Utility getFloatStr2:pitchingStatistics.whip]
-         ,[Utility getFloatStr2:pitchingStatistics.k9]];
+         ,[Utility getFloatStr2:pitchingStatistics.k9]
+         ,[Utility getFloatStr2:pitchingStatistics.kbb]];
     
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
@@ -352,6 +354,7 @@
     [self setKanto:nil];
     [self setWhip:nil];
     [self setK9:nil];
+    [self setKbb:nil];
     [self setScrollView:nil];
     [self setShoritsu:nil];
     [super viewDidUnload];

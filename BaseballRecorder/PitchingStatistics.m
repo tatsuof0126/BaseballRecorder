@@ -32,6 +32,7 @@
 @synthesize era;
 @synthesize whip;
 @synthesize k9;
+@synthesize kbb;
 
 + (PitchingStatistics*)calculatePitchingStatistics:(NSArray*)gameResultList {
     PitchingStatistics* pitchingStatistics = [[PitchingStatistics alloc] init];
@@ -112,6 +113,9 @@
 
     // 奪三振率＝奪三振／投球回数×９or７
     k9 = (float)dassanshin / realinning * gameinning;
+    
+    // K/BB＝奪三振／与四球
+    kbb = (float)dassanshin / yoshikyu;
 }
 
 - (NSString*)getInningString {
@@ -136,8 +140,8 @@
     [bodyString appendString:[NSString stringWithFormat:@"被安打：%d　被本塁打：%d\n",hianda, hihomerun]];
     [bodyString appendString:[NSString stringWithFormat:@"奪三振：%d　与四球：%d　与死球：%d\n",dassanshin, yoshikyu, yoshikyu2]];
     [bodyString appendString:[NSString stringWithFormat:@"失点：%d　自責点：%d　完投：%d\n",shitten, jisekiten, kanto]];
-    [bodyString appendString:[NSString stringWithFormat:@"WHIP：%@　奪三振率：%@\n",
-                              [Utility getFloatStr2:whip],[Utility getFloatStr2:k9]]];
+    [bodyString appendString:[NSString stringWithFormat:@"WHIP：%@　奪三振率：%@　K/BB：%@\n",
+                              [Utility getFloatStr2:whip],[Utility getFloatStr2:k9],[Utility getFloatStr2:kbb]]];
     
     return bodyString;
 }

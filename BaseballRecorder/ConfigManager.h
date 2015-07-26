@@ -37,9 +37,9 @@
 
 + (void)setCalcTargetTeam:(NSString*)targetTeam;
 
-+ (NSString*)getCalcTargetYear;
+//+ (NSString*)getCalcTargetYear;
 
-+ (void)setCalcTargetYear:(NSString*)targetYear;
+//+ (void)setCalcTargetYear:(NSString*)targetYear;
 
 + (TargetTerm*)getCalcTargetTerm;
 

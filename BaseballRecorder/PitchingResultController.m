@@ -104,6 +104,11 @@
     _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
     _kanto.checkBoxSelected = gameResult.kanto;
     _sekinin = gameResult.sekinin;
+    if(gameResult.tamakazu == TAMAKAZU_NONE){
+        _tamakazu.text = @"---";
+    } else {
+        _tamakazu.text = [NSString stringWithFormat:@"%d",gameResult.tamakazu];
+    }
     
     [self showInning];
     [self showSekinin];
@@ -117,16 +122,22 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    // 数値入力項目で「0」の場合は入力時に「0」を消す
-    if(textField.tag == 1 && [textField.text isEqualToString:@"0"]){
+    // 投球数が「---」の場合は入力時に消す
+    if(textField == _tamakazu && [textField.text isEqualToString:@"---"]){
         textField.text = @"";
     }
+    
+    // 投球数以外の数値入力項目で「0」の場合は入力時に消す
+    if(textField.tag == 1 && textField != _tamakazu && [textField.text isEqualToString:@"0"]){
+        textField.text = @"";
+    }
+    
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     scrollView.contentSize = CGSizeMake(320, [UIScreen mainScreen].bounds.size.height+90);
-    [scrollView setContentOffset:CGPointMake(0.0f, 40.0f) animated:YES];
+    [scrollView setContentOffset:CGPointMake(0.0f, 85.0f) animated:YES];
     
     [self showDoneButton];
     
@@ -134,10 +145,16 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    // 数値入力項目で空の場合は「0」を設定
-    if(textField.tag == 1 && [textField.text isEqualToString:@""]){
+    // 投球数が空の場合は「---」を設定
+    if(textField == _tamakazu && [textField.text isEqualToString:@""]){
+        textField.text = @"---";
+    }
+    
+    // 投球数以外の数値入力項目で空の場合は「0」を設定
+    if(textField.tag == 1 && textField != _tamakazu && [textField.text isEqualToString:@""]){
         textField.text = @"0";
     }
+    
     [self hiddenDoneButton];
     return YES;
 }
@@ -160,6 +177,7 @@
     [_yoshikyu2 endEditing:YES];
     [_shitten endEditing:YES];
     [_jisekiten endEditing:YES];
+    [_tamakazu endEditing:YES];
     
     scrollView.contentSize = CGSizeMake(320, 280);
 }
@@ -362,6 +380,7 @@
     }
 }
 
+/*
 - (IBAction)backToBatting:(id)sender {
     NSArray* errorArray = [self inputCheck];
     
@@ -391,6 +410,7 @@
         [_yoshikyu2.text isEqualToString:@"0"] == NO ||
         [_shitten.text isEqualToString:@"0"] == NO ||
         [_jisekiten.text isEqualToString:@"0"] == NO ||
+        [_tamakazu.text isEqualToString:@"---"] == NO ||
         _kanto.checkBoxSelected == YES ||
         _sekinin != 0)){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果入力"
@@ -402,6 +422,7 @@
         [self backToBattingView];
     }
 }
+*/
 
 - (void)backToBattingView {
     [self updateGameResult];
@@ -425,6 +446,11 @@
     gameResult.jisekiten  = [_jisekiten.text intValue];
     gameResult.kanto      = [_kanto checkBoxSelected];
     gameResult.sekinin    = _sekinin;
+    if([_tamakazu.text isEqualToString:@"---"]){
+        gameResult.tamakazu    = TAMAKAZU_NONE;
+    } else {
+        gameResult.tamakazu    = [_tamakazu.text intValue];
+    }
     
     [self showPitchingResult];
     
@@ -446,6 +472,7 @@
     gameResult.jisekiten  = 0;
     gameResult.kanto      = NO;
     gameResult.sekinin    = 0;
+    gameResult.tamakazu   = TAMAKAZU_NONE;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -519,7 +546,7 @@
     
     if(_hianda.text.length == 0 || _hihomerun.text.length == 0 ||
        _dassanshin.text.length == 0 || _yoshikyu.text.length == 0 || _yoshikyu2.text.length == 0 ||
-       _shitten.text.length == 0 || _jisekiten.text.length == 0){
+       _shitten.text.length == 0 || _jisekiten.text.length == 0 || _tamakazu.text.length == 0){
         blankFlg = YES;
     }
     
@@ -530,14 +557,16 @@
     int yoshikyu = [_yoshikyu.text intValue];
     int yoshikyu2 = [_yoshikyu2.text intValue];
     int shitten = [_shitten.text intValue];
-    int jisekiten = [_jisekiten.text intValue];    
+    int jisekiten = [_jisekiten.text intValue];
+    int tamakazu = [_tamakazu.text intValue];
     if((hianda == 0 && [_hianda.text isEqualToString:@"0"] == NO) ||
        (hihomerun == 0 && [_hihomerun.text isEqualToString:@"0"] == NO) ||
        (dassanshin == 0 && [_dassanshin.text isEqualToString:@"0"] == NO) ||
        (yoshikyu == 0 && [_yoshikyu.text isEqualToString:@"0"] == NO) ||
        (yoshikyu2 == 0 && [_yoshikyu2.text isEqualToString:@"0"] == NO) ||
        (shitten == 0 && [_shitten.text isEqualToString:@"0"] == NO) ||
-       (jisekiten == 0 && [_jisekiten.text isEqualToString:@"0"] == NO) ){
+       (jisekiten == 0 && [_jisekiten.text isEqualToString:@"0"] == NO) ||
+       (tamakazu == 0 && [_tamakazu.text isEqualToString:@"0"] == NO && [_tamakazu.text isEqualToString:@"---"] == NO)){
         [errorArray addObject:@"入力が正しくありません"];
     }
     
@@ -564,6 +593,7 @@
     [self setInningButton:nil];
     [self setSekininButton:nil];
     [self setSaveButton:nil];
+    [self setTamakazu:nil];
     [super viewDidUnload];
 }
 
@@ -601,6 +631,7 @@
         [_yoshikyu2.text isEqualToString:@"0"] == NO ||
         [_shitten.text isEqualToString:@"0"] == NO ||
         [_jisekiten.text isEqualToString:@"0"] == NO ||
+        [_tamakazu.text isEqualToString:@"---"] == NO ||
         _kanto.checkBoxSelected == YES ||
         _sekinin != 0)){
            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
@@ -643,6 +674,7 @@
              [_yoshikyu2.text isEqualToString:@"0"] == NO ||
              [_shitten.text isEqualToString:@"0"] == NO ||
              [_jisekiten.text isEqualToString:@"0"] == NO ||
+             [_tamakazu.text isEqualToString:@"---"] == NO ||
              _kanto.checkBoxSelected == YES || _sekinin != 0)){
         // 投球回が０で何らかの入力がある場合は、投手成績の入力内容が消える旨のダイアログを表示
         alert = [[UIAlertView alloc] initWithTitle:@"試合結果の保存"

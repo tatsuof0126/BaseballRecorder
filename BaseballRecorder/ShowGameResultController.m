@@ -17,7 +17,10 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "NADInterstitial.h"
 #import "TrackingManager.h"
+
+#define ALERT_DELETE 1
 
 @interface ShowGameResultController ()
 
@@ -149,6 +152,12 @@
         pitchingResultFlg = YES;
     }
     
+    // 投球数
+    BOOL tamakazuFlg = NO;
+    if(gameResult.tamakazu != TAMAKAZU_NONE){
+        tamakazuFlg = YES;
+    }
+    
     _pitchingResultLabel.hidden = !pitchingResultFlg;
     _inningLabel.hidden = !pitchingResultFlg;
     _inning.hidden = !pitchingResultFlg;
@@ -168,6 +177,9 @@
     _jisekitenLabel.hidden = !pitchingResultFlg;
     _jisekiten.hidden = !pitchingResultFlg;
 
+    _tamakazuLabel.hidden = !tamakazuFlg;
+    _tamakazu.hidden = !tamakazuFlg;
+    
     if(pitchingResultFlg == YES){
         _inning.text = [NSString stringWithFormat:@"%@%@",[gameResult getInningString],gameResult.kanto ? @" (完投)" : @""];
         NSAttributedString *sekininText = [[NSAttributedString alloc]
@@ -182,6 +194,7 @@
         _yoshikyu2.text = [NSString stringWithFormat:@"%d",gameResult.yoshikyu2];
         _shitten.text = [NSString stringWithFormat:@"%d",gameResult.shitten];
         _jisekiten.text = [NSString stringWithFormat:@"%d",gameResult.jisekiten];
+        _tamakazu.text = [NSString stringWithFormat:@"%d",gameResult.tamakazu];
     }
     
     // タグが空なら非表示
@@ -224,12 +237,13 @@
     // 表示の高さを調整
     int battingAdjust = battingResultFlg ? 70+[Utility convert2int:gameResult.battingResultArray.count]*30 : 0;
     int pitchingAdjust = pitchingResultFlg ? 160 : 0;
+    int tamakazuAdjust = tamakazuFlg ? 30 : 0;
     int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     
     int adjust1 = baseAdjust;
     int adjust2 = baseAdjust+battingAdjust;
-    int adjust3 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust;
-    int adjust4 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+memoAdjust;
+    int adjust3 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+tamakazuAdjust;
+    int adjust4 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+tamakazuAdjust+memoAdjust;
     
 //    [self setFrameOriginY:_resultLabel originY:adjust1];
 //    [self setFrameOriginY:_result originY:adjust1];
@@ -262,7 +276,9 @@
     [self setFrameOriginY:_shitten originY:adjust2+160];
     [self setFrameOriginY:_jisekitenLabel originY:adjust2+160];
     [self setFrameOriginY:_jisekiten originY:adjust2+160];
-
+    [self setFrameOriginY:_tamakazuLabel originY:adjust2+190];
+    [self setFrameOriginY:_tamakazu originY:adjust2+190];
+    
     [self setFrameOriginY:_tagTextLabel originY:adjust3+5];
     [self setFrameOriginY:_tagText originY:adjust3+5];
     
@@ -270,6 +286,7 @@
     [self setFrameOriginY:_memo originY:adjust3+67];
     
     [self setFrameOriginY:_mailButton originY:adjust4 == baseAdjust ? adjust4+75 : adjust4+45];
+    [self setFrameOriginY:_deleteButton originY:adjust4 == baseAdjust ? adjust4+130 : adjust4+100];
     _scrollview.contentSize = CGSizeMake(320, adjust4+310);
 }
 
@@ -313,31 +330,19 @@
 - (IBAction)backButton:(id)sender {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―一覧へ" value:nil screen:@"試合結果参照画面"];
     
+    [self backToResultList];
+}
+
+- (void)backToResultList {
     UIViewController* controller = self;
     while (true){
-//        NSLog(@"Class : %@", NSStringFromClass([controller.presentingViewController class]));
+        //        NSLog(@"Class : %@", NSStringFromClass([controller.presentingViewController class]));
         if([controller.presentingViewController isKindOfClass:[UITabBarController class]]){
             [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             break;
         }
         controller = controller.presentingViewController;
     }
-    
-    
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//    [self performSegueWithIdentifier:@"togameresultlist" sender:self];
-    
-/*
-    NSLog(@"segue : %d", seguetype);
-    if(seguetype == SEGUE_NEW_INPUT){
-        [self performSegueWithIdentifier:@"togameresultlist" sender:self];
-        
-//        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
- */
-    
 }
 
 - (IBAction)editButton:(id)sender {
@@ -419,7 +424,7 @@
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    message:@"つぶやきました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
             }
         }];
@@ -449,7 +454,7 @@
         }
         if(posted == YES){
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                message:@"投稿しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                message:@"投稿しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
     }];
@@ -617,6 +622,35 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)deleteButton:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の削除"
+                                                    message:@"削除してよろしいですか？" delegate:self
+                                          cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
+    alert.tag = ALERT_DELETE;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // 削除ボタンでOKを押した場合
+    if(buttonIndex == 1){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―削除" value:nil screen:@"試合結果参照画面"];
+        
+        // AppDelegateからresultidを取得して削除
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        int resultid = appDelegate.targetGameResult.resultid;
+        
+        [GameResultManager removeGameResult:resultid];
+        
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            // インタースティシャル広告を表示
+            [[NADInterstitial sharedInstance] showAd];
+        }
+        
+        // 一覧画面に戻る
+        [self backToResultList];
+    }
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     NSString* segueStr = [segue identifier];
     
@@ -656,6 +690,8 @@
     [self setShitten:nil];
     [self setJisekitenLabel:nil];
     [self setJisekiten:nil];
+    [self setTamakazuLabel:nil];
+    [self setTamakazu:nil];
     [self setBattingResultLabel:nil];
     [self setMemoLabel:nil];
     [self setMemo:nil];

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "BattingResult.h"
 
+#define TAMAKAZU_NONE -999
+
 @interface GameResult : NSObject
 
 @property (strong, nonatomic, readwrite) NSString *UUID;
@@ -44,6 +46,7 @@
 @property int jisekiten;
 @property BOOL kanto;
 @property int sekinin;
+@property int tamakazu;
 
 - (BattingResult*)getBattingResult:(NSInteger)resultno;
 

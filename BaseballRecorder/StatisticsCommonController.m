@@ -25,6 +25,8 @@
 //@synthesize gameResultListOfYear;
 //@synthesize yearList;
 @synthesize teamList;
+@synthesize termBeginList;
+@synthesize termEndList;
 @synthesize termList;
 //@synthesize targetyear;
 //@synthesize targetteam;
@@ -68,84 +70,6 @@
     [self showStatistics:gameResultListForCalc];
 }
 
-/*
-- (void)loadGameResult {
-//    gameResultList = [GameResultManager loadGameResultList];
-    
-    yearList = [NSMutableArray array];
-    teamList = [NSMutableArray array];
-    gameResultListOfYear = [NSMutableArray array];
-    
-    [yearList addObject:@"すべて"];
-    [yearList addObject:@"最近5試合"];
-    [teamList addObject:@"すべて"];
-    [gameResultListOfYear addObject:gameResultList];
-    [gameResultListOfYear addObject:gameResultList]; // とりあえず全件を登録
-    
-    int listyear = -999;
-    NSMutableArray* resultArray = [NSMutableArray array];
-    for (int i=0; i<gameResultList.count; i++) {
-        GameResult* result = [gameResultList objectAtIndex:i];
-        
-        if(listyear != result.year){
-            [yearList addObject:[NSString stringWithFormat:@"%d年",result.year]];
-            listyear = result.year;
-            
-            resultArray = [NSMutableArray array];
-            [gameResultListOfYear addObject:resultArray];
-        }
-        
-        [resultArray addObject:result];        
-    }
-    
-    for (int i=0; i<gameResultList.count; i++) {
-        GameResult* result = [gameResultList objectAtIndex:i];
-        
-        NSString* team = result.myteam;
-        
-        if ([teamList containsObject:team] == NO){
-            [teamList addObject:team];
-        }
-    }
-}
-*/
-
-/*
-- (void)setCalcTarget {
-    NSString* targetYearStr = [ConfigManager getCalcTargetYear];
-    NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
-    
-    targetyear = ALL_TARGET;
-    targetteam = ALL_TARGET;
-    
-    BOOL yearFlg = NO;
-    BOOL teamFlg = NO;
-    
-    for(int i=0;i<yearList.count;i++){
-        if([targetYearStr isEqualToString:[yearList objectAtIndex:i]]){
-            targetyear = i;
-            yearFlg = YES;
-            break;
-        }
-    }
-    
-    for(int i=0;i<teamList.count;i++){
-        if([targetTeamStr isEqualToString:[teamList objectAtIndex:i]]){
-            targetteam = i;
-            teamFlg = YES;
-            break;
-        }
-    }
-    
-    if(yearFlg == NO){
-        [ConfigManager setCalcTargetYear:@"すべて"];
-    }
-    if(teamFlg == NO){
-        [ConfigManager setCalcTargetTeam:@"すべて"];
-    }
-}
- */
-
 - (NSArray*)getGameResultListForCalc {
     TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     NSString* targetTeam = [ConfigManager getCalcTargetTeam];
@@ -156,24 +80,6 @@
     
     NSMutableArray* gameResultListForCalc = [NSMutableArray arrayWithArray:
         [GameResultManager loadGameResultList:targetTerm targetTeam:targetTeam]];
-    
-/*
-    NSArray* listOfYear = [gameResultListOfYear objectAtIndex:targetyear];
-    NSString* targetTeamname = [teamList objectAtIndex:targetteam];
-    
-    if(targetteam == ALL_TARGET){
-        gameResultListForCalc = [NSMutableArray arrayWithArray:listOfYear];
-    } else {
-        gameResultListForCalc = [NSMutableArray array];
-        
-        for(int i=0;i<listOfYear.count;i++){
-            GameResult* result = [listOfYear objectAtIndex:i];
-            if([targetTeamname isEqualToString:result.myteam] == YES){
-                [gameResultListForCalc addObject:result];
-            }
-        }
-    }
-*/
     
     // 「最近５試合」の場合は直近の５件に絞る
     if (targetTerm.type == TERM_TYPE_RECENT5) {
@@ -192,25 +98,6 @@
     // 子クラスでオーバーライドする前提
 
 }
-
-/*
-- (void)showTarget:(UILabel*)year team:(UILabel*)team {
-//    NSString* oldyear = year.text;
-//    NSString* oldteam = team.text;
-//    year.text = [yearList objectAtIndex:targetyear];
-//    team.text = [teamList objectAtIndex:targetteam];
-    
-    year.text = [[ConfigManager getCalcTargetTerm] getTermString];
-    team.text = [ConfigManager getCalcTargetTeam];
-    
-    
-    // 変更していなければNOを返す
-//    if([oldyear isEqualToString:year.text] && [oldteam isEqualToString:team.text]){
-//        return NO;
-//    }
-//    return YES;
-}
-*/
 
 - (void)showTarget:(UILabel*)year team:(UILabel*)team leftBtn:(UIButton*)leftBtn rightBtn:(UIButton*)rightBtn {
     
@@ -233,27 +120,32 @@
         case TERM_TYPE_RECENT5:
             break;
         case TERM_TYPE_YEAR:{
-            if(firstTerm != nil && firstTerm.year > targetTerm.year){
-                leftBtn.hidden = NO;
-            }
-            if(lastTerm != nil && targetTerm.year > lastTerm.year){
+            if(firstTerm != nil && firstTerm.beginyear > targetTerm.beginyear){
                 rightBtn.hidden = NO;
+            }
+            if(lastTerm != nil && targetTerm.beginyear > lastTerm.beginyear){
+                leftBtn.hidden = NO;
             }
             break;
         }
         case TERM_TYPE_MONTH:{
             if(firstTerm != nil &&
-               (firstTerm.year > targetTerm.year ||
-                (firstTerm.year == targetTerm.year && firstTerm.month > targetTerm.month))){
-                leftBtn.hidden = NO;
+               (firstTerm.beginyear > targetTerm.beginyear ||
+                (firstTerm.beginyear == targetTerm.beginyear && firstTerm.beginmonth > targetTerm.beginmonth))){
+                rightBtn.hidden = NO;
             }
             if(lastTerm != nil &&
-               (targetTerm.year > lastTerm.year ||
-                (targetTerm.year == lastTerm.year && targetTerm.month > lastTerm.month))){
-                rightBtn.hidden = NO;
+               (targetTerm.beginyear > lastTerm.beginyear ||
+                (targetTerm.beginyear == lastTerm.beginyear && targetTerm.beginmonth > lastTerm.beginmonth))){
+                   
+                leftBtn.hidden = NO;
             }
             break;
         }
+        case TERM_TYPE_RANGE_YEAR:
+            break;
+        case TERM_TYPE_RANGE_MONTH:
+            break;
         default:
             break;
     }
@@ -269,18 +161,19 @@
     
     NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
     
-    TargetTerm* newTargetTerm = targetTermList.firstObject;
+    TargetTerm* newTargetTerm = targetTerm;
     for (TargetTerm* compTerm in targetTermList){
         if(targetTerm.type == TERM_TYPE_YEAR &&
-           (targetTerm.year >= compTerm.year)){
+           (targetTerm.beginyear > compTerm.beginyear)){
+            newTargetTerm = compTerm;
             break;
         }
         if(targetTerm.type == TERM_TYPE_MONTH &&
-           (targetTerm.year > compTerm.year ||
-            (targetTerm.year == compTerm.year && targetTerm.month >= compTerm.month))){
-            break;
-        }
-        newTargetTerm = compTerm;
+           (targetTerm.beginyear > compTerm.beginyear ||
+            (targetTerm.beginyear == compTerm.beginyear && targetTerm.beginmonth > compTerm.beginmonth))){
+               newTargetTerm = compTerm;
+               break;
+           }
     }
     
     if(newTargetTerm != nil){
@@ -301,19 +194,18 @@
     
     NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
     
-    TargetTerm* newTargetTerm = targetTerm;
+    TargetTerm* newTargetTerm = targetTermList.firstObject;
     for (TargetTerm* compTerm in targetTermList){
         if(targetTerm.type == TERM_TYPE_YEAR &&
-           (targetTerm.year > compTerm.year)){
-            newTargetTerm = compTerm;
+           (targetTerm.beginyear >= compTerm.beginyear)){
             break;
         }
         if(targetTerm.type == TERM_TYPE_MONTH &&
-           (targetTerm.year > compTerm.year ||
-            (targetTerm.year == compTerm.year && targetTerm.month > compTerm.month))){
-               newTargetTerm = compTerm;
+           (targetTerm.beginyear > compTerm.beginyear ||
+            (targetTerm.beginyear == compTerm.beginyear && targetTerm.beginmonth >= compTerm.beginmonth))){
                break;
            }
+        newTargetTerm = compTerm;
     }
     
     if(newTargetTerm != nil){
@@ -322,6 +214,230 @@
     
     [self updateStatistics];
     
+}
+
+- (void)makeTeamPicker {
+    // すでにPickerが立ち上がっていたら無視
+    if(targetPicker != nil){
+        return;
+    }
+    
+    // PickerViewを準備
+    [self preparePickerView];
+    
+    targetPicker.tag = PICKER_TEAM;
+    
+    // teamListを最新化
+    NSArray* resultList = [GameResultManager loadGameResultList];
+    teamList = [NSMutableArray array];
+    [teamList addObject:@"すべて"];
+    for(GameResult* result in resultList){
+        NSString* team = result.myteam;
+        if ([teamList containsObject:team] == NO){
+            [teamList addObject:team];
+        }
+    }
+    
+    // Pickerのデフォルトを設定
+    NSString* calcTargetTeam = [ConfigManager getCalcTargetTeam];
+    for (int i=0;i<teamList.count;i++){
+        NSString* team = [teamList objectAtIndex:i];
+        if([team isEqualToString:calcTargetTeam]){
+            [targetPicker selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
+    
+    [self showPicker];
+}
+
+- (void)makeTermPicker {
+    // すでにPickerが立ち上がっていたら無視
+    if(targetPicker != nil){
+        return;
+    }
+    
+    [self doMakeTermPicker:PICKER_TERM_RANGE];
+    
+    /*
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    if(targetTerm.type == TERM_TYPE_RANGE_YEAR || targetTerm.type == TERM_TYPE_RANGE_MONTH){
+        [self doMakeTermPicker:PICKER_TERM_RANGE];
+        // [self doMakeTermPicker:PICKER_TERM];
+    } else {
+        // [self doMakeTermPicker:PICKER_TERM_RANGE];
+        [self doMakeTermPicker:PICKER_TERM];
+    }
+     */
+}
+
+- (void)doMakeTermPicker:(int)type {
+    // PickerViewを準備
+    [self preparePickerView];
+    
+    // Pickerのデフォルトを設定
+    if(type == PICKER_TERM_RANGE){
+        targetPicker.tag = PICKER_TERM_RANGE;
+        
+        // termBeginList,termEndListを作る
+        termBeginList = [NSMutableArray array];
+        termEndList = [NSMutableArray array];
+        
+        // 現データの開始年と終了年を探る
+        NSArray* resultList = [GameResultManager loadGameResultList];
+        int beginYear = 9999;
+        int endYear = 0;
+        for(GameResult* result in resultList){
+            if(result.year < beginYear){
+                beginYear = result.year;
+            }
+            if(result.year > endYear){
+                endYear = result.year;
+            }
+        }
+        
+        // Pickerの中身を作る、合わせてデフォルトを探す
+        TargetTerm* allTerm = [[TargetTerm alloc] init];
+        allTerm.type = TERM_TYPE_ALL;
+        TargetTerm* recent5Term = [[TargetTerm alloc] init];
+        recent5Term.type = TERM_TYPE_RECENT5;
+        [termBeginList addObject:allTerm];
+        [termBeginList addObject:recent5Term];
+        [termEndList addObject:allTerm];
+        
+        TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+        int beginDefault = 0;
+        int endDefault = 0;
+        
+        if(targetTerm.type == TERM_TYPE_RECENT5){
+            beginDefault = 1;
+        }
+        
+        for (int i=beginYear; i<=endYear; i++) {
+            TargetTerm* yearTerm = [[TargetTerm alloc] init];
+            yearTerm.type = TERM_TYPE_YEAR;
+            yearTerm.beginyear = i;
+
+            [termBeginList addObject:yearTerm];
+            [termEndList addObject:yearTerm];
+            
+            if(targetTerm.type == TERM_TYPE_YEAR){
+                if(targetTerm.beginyear == i){
+                    beginDefault = (int)termBeginList.count-1;
+                    endDefault = (int)termEndList.count-1;
+                }
+            }
+            if(targetTerm.type == TERM_TYPE_RANGE_YEAR){
+                if(targetTerm.beginyear == i){
+                    beginDefault = (int)termBeginList.count-1;
+                }
+                if(targetTerm.endyear == i){
+                    endDefault = (int)termEndList.count-1;
+                }
+            }
+        }
+        
+        for (int i=beginYear; i<=endYear; i++) {
+            for(int j=1; j<=12; j++){
+                TargetTerm* monthTerm = [[TargetTerm alloc] init];
+                monthTerm.type = TERM_TYPE_MONTH;
+                monthTerm.beginyear = i;
+                monthTerm.beginmonth = j;
+                
+                [termBeginList addObject:monthTerm];
+                [termEndList addObject:monthTerm];
+                
+                
+                if(targetTerm.type == TERM_TYPE_MONTH){
+                    if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
+                        beginDefault = (int)termBeginList.count-1;
+                        endDefault = (int)termEndList.count-1;
+                    }
+                }
+                if(targetTerm.type == TERM_TYPE_RANGE_MONTH){
+                    if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
+                        beginDefault = (int)termBeginList.count-1;
+                    }
+                    if(targetTerm.endyear == i && targetTerm.endmonth == j){
+                        endDefault = (int)termEndList.count-1;
+                    }
+                }
+            }
+        }
+        
+        // Pickerのデフォルトを設定
+        [targetPicker selectRow:beginDefault inComponent:0 animated:NO];
+        [targetPicker selectRow:endDefault inComponent:1 animated:NO];
+    } else {
+        targetPicker.tag = PICKER_TERM;
+        // termListを最新化
+        NSArray* resultList = [GameResultManager loadGameResultList];
+        termList = [TargetTerm getTargetTermListForPicker:resultList];
+        
+        // Pickerのデフォルトを設定
+        TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+        for (int i=0;i<termList.count;i++){
+            TargetTerm* term = [termList objectAtIndex:i];
+            if([[term getTermString] isEqualToString:[targetTerm getTermString]]){
+                [targetPicker selectRow:i inComponent:0 animated:NO];
+                break;
+            }
+        }
+    }
+    
+    [self showPicker];
+}
+
+- (void)preparePickerView {
+    targetPicker = [[UIPickerView alloc] init];
+    targetPicker.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, 135);
+    targetPicker.delegate = self;
+    targetPicker.dataSource = self;
+    targetPicker.showsSelectionIndicator = YES;
+    targetPicker.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)showPicker {
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    
+    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
+    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
+    pickerBaseView.backgroundColor = [UIColor clearColor];
+    
+    targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    targetToolbar.barStyle = UIBarStyleBlack;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
+        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
+    NSString* changeStr = targetPicker.tag == PICKER_TERM ? @"範囲指定へ" : @"年月指定へ";
+    UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithTitle:changeStr
+        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarChangeButton:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"設定"
+        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    NSArray* items = nil;
+    if(targetPicker.tag == PICKER_TEAM){
+        items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
+    } else {
+        items = [NSArray arrayWithObjects:backButton, spacer, changeButton, spacer, doneButton, nil];
+    }
+    [targetToolbar setItems:items animated:YES];
+    
+    [pickerBaseView addSubview:targetPicker];
+    [pickerBaseView addSubview:targetToolbar];
+    
+    [self.view addSubview:pickerBaseView];
+    
+    //アニメーションの設定開始
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
+    [UIView setAnimationDuration:0.3];    // 時間の指定
+    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
+    
+    [UIView commitAnimations];
 }
 
 - (void)makeResultPicker {
@@ -414,20 +530,139 @@
     [UIView commitAnimations];
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
-    return 2;
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
+    if(pickerView.tag == PICKER_TERM){
+        return 1;
+    } else if(pickerView.tag == PICKER_TERM_RANGE){
+        return 2;
+    } else if(pickerView.tag == PICKER_TEAM){
+        return 1;
+    }
+    return 1;
 }
 
--(NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return component == 0 ? termList.count : teamList.count;
+- (NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if(pickerView.tag == PICKER_TERM){
+        return termList.count;
+    } else if(pickerView.tag == PICKER_TERM_RANGE){
+        return component == 0 ? termBeginList.count : termEndList.count;
+    } else if(pickerView.tag == PICKER_TEAM){
+        return teamList.count;
+    }
+    return 0;
 }
 
--(NSString*)pickerView:(UIPickerView*)pickerView
+- (NSString*)pickerView:(UIPickerView*)pickerView
            titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return component == 0 ? [[termList objectAtIndex:row] getTermString] : [teamList objectAtIndex:row];
+    if(pickerView.tag == PICKER_TERM){
+        return [[termList objectAtIndex:row] getTermString];
+    } else if(pickerView.tag == PICKER_TERM_RANGE){
+        return component == 0 ? [[termBeginList objectAtIndex:row] getTermString] : [[termEndList objectAtIndex:row] getTermString];
+    } else if(pickerView.tag == PICKER_TEAM){
+        return [teamList objectAtIndex:row];
+    }
+    return @"";
 }
 
 - (void)toolbarBackButton:(UIBarButtonItem*)sender {
+    [self closePicker];
+}
+
+- (void)toolbarChangeButton:(UIBarButtonItem*)sender {
+    if(targetPicker.tag == PICKER_TERM){
+        [self closePicker];
+        [self doMakeTermPicker:PICKER_TERM_RANGE];
+    } else {
+        [self closePicker];
+        [self doMakeTermPicker:PICKER_TERM];
+    }
+}
+
+- (void)toolbarDoneButton:(id)sender {
+    if(targetPicker.tag == PICKER_TERM){
+        TargetTerm* targetTerm = [termList objectAtIndex:[targetPicker selectedRowInComponent:0]];
+        [ConfigManager setCalcTargetTerm:targetTerm];
+        
+        [self updateStatistics];
+        [self closePicker];
+        return;
+    } else if(targetPicker.tag == PICKER_TERM_RANGE){
+        TargetTerm* beginTerm = [termBeginList objectAtIndex:[targetPicker selectedRowInComponent:0]];
+        TargetTerm* endTerm = [termEndList objectAtIndex:[targetPicker selectedRowInComponent:1]];
+        
+        // 入力チェック
+        if (beginTerm.type != TERM_TYPE_ALL && endTerm.type != TERM_TYPE_ALL) {
+            if(beginTerm.type == TERM_TYPE_MONTH && endTerm.type == TERM_TYPE_MONTH){
+                if(beginTerm.beginyear > endTerm.beginyear ||
+                   (beginTerm.beginyear == endTerm.beginyear && beginTerm.beginmonth > endTerm.beginmonth)){
+                    return;
+                }
+            } else {
+                if(beginTerm.beginyear > endTerm.beginyear){
+                    return;
+                }
+            }
+        }
+        
+        // 保存すべきTargetTermを作る
+        TargetTerm* targetTerm = [[TargetTerm alloc] init];
+        if(beginTerm.type == TERM_TYPE_ALL && endTerm.type == TERM_TYPE_ALL){
+            // すべて＋すべてならすべて
+            targetTerm.type = TERM_TYPE_ALL;
+        } else if(beginTerm.type == TERM_TYPE_RECENT5){
+            // 最近５試合＋なんでもなら最近５試合を優先
+            targetTerm.type = TERM_TYPE_RECENT5;
+        } else if(beginTerm.type == TERM_TYPE_YEAR && endTerm.type == TERM_TYPE_YEAR &&
+                  beginTerm.beginyear == endTerm.beginyear){
+            // 両方年指定で等しい場合は年指定扱い
+            targetTerm.type = TERM_TYPE_YEAR;
+            targetTerm.beginyear = beginTerm.beginyear;
+        } else if(beginTerm.type == TERM_TYPE_MONTH && endTerm.type == TERM_TYPE_MONTH &&
+                  beginTerm.beginyear == endTerm.beginyear && beginTerm.beginmonth == endTerm.beginmonth){
+            // 両方年月指定で等しい場合は年月指定扱い
+            targetTerm.type = TERM_TYPE_MONTH;
+            targetTerm.beginyear = beginTerm.beginyear;
+            targetTerm.beginmonth = beginTerm.beginmonth;
+        } else if((beginTerm.type == TERM_TYPE_ALL || beginTerm.type == TERM_TYPE_YEAR) &&
+           (endTerm.type == TERM_TYPE_ALL || endTerm.type == TERM_TYPE_YEAR)){
+            // 年＋年なら年の範囲指定
+            targetTerm.type = TERM_TYPE_RANGE_YEAR;
+            targetTerm.beginyear = beginTerm.beginyear;
+            targetTerm.endyear = endTerm.beginyear;
+        } else {
+            // 年月＋年月なら年月の範囲指定
+            targetTerm.type = TERM_TYPE_RANGE_MONTH;
+            targetTerm.beginyear = beginTerm.beginyear;
+            targetTerm.beginmonth = beginTerm.beginmonth == 0 ? 1 : beginTerm.beginmonth;
+            targetTerm.endyear = endTerm.beginyear;
+            targetTerm.endmonth = endTerm.beginmonth == 0 ? 12 : endTerm.beginmonth;
+            
+            if(targetTerm.beginyear == targetTerm.endyear &&
+               targetTerm.beginmonth == targetTerm.endmonth){
+                // 年指定の調整の結果、両方年月指定で等しくなった場合は年月指定扱い
+                targetTerm.type = TERM_TYPE_MONTH;
+                targetTerm.endyear = 0;
+                targetTerm.endmonth = 0;
+            }
+        }
+        
+        [ConfigManager setCalcTargetTerm:targetTerm];
+        
+        [self updateStatistics];
+        [self closePicker];
+        return;
+    } else if(targetPicker.tag == PICKER_TEAM){
+        [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:[targetPicker selectedRowInComponent:0]]];
+        [self updateStatistics];
+        [self closePicker];
+        return;
+    }
+    
+    [ConfigManager setCalcTargetTerm:[termList objectAtIndex:[targetPicker selectedRowInComponent:0]]];
+    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:[targetPicker selectedRowInComponent:1]]];
+    
+    [self updateStatistics];
+    
     [targetPicker removeFromSuperview];
     [targetToolbar removeFromSuperview];
     [pickerBaseView removeFromSuperview];
@@ -437,17 +672,7 @@
     pickerBaseView = nil;
 }
 
-- (void)toolbarDoneButton:(id)sender {
-//    targetyear = [Utility convert2int:[targetPicker selectedRowInComponent:0]];
-//    targetteam = [Utility convert2int:[targetPicker selectedRowInComponent:1]];
-    
-//    [ConfigManager setCalcTargetYear:[yearList objectAtIndex:targetyear]];
-    
-    [ConfigManager setCalcTargetTerm:[termList objectAtIndex:[targetPicker selectedRowInComponent:0]]];
-    [ConfigManager setCalcTargetTeam:[teamList objectAtIndex:[targetPicker selectedRowInComponent:1]]];
-    
-    [self updateStatistics];
-    
+- (void)closePicker {
     [targetPicker removeFromSuperview];
     [targetToolbar removeFromSuperview];
     [pickerBaseView removeFromSuperview];
@@ -634,13 +859,13 @@
         today = @""; // 最近５試合の場合は◯◯現在という言葉は入れない
     } else if(targetTerm.type == TERM_TYPE_YEAR){
         term = [targetTerm getTermString];
-        if(targetTerm.year != dateComps.year){
+        if(targetTerm.beginyear != dateComps.year){
             // 当年以外なら◯◯現在という言葉は入れない
             today = @"";
         }
     } else if(targetTerm.type == TERM_TYPE_MONTH){
         term = [targetTerm getTermString];
-        if(targetTerm.year != dateComps.year || targetTerm.month != dateComps.month){
+        if(targetTerm.beginyear != dateComps.year || targetTerm.beginmonth != dateComps.month){
             // 当年当月以外なら◯◯現在という言葉は入れない
             today = @"";
         }

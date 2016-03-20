@@ -15,10 +15,14 @@
 #define TERM_TYPE_RECENT5   2
 #define TERM_TYPE_YEAR      3
 #define TERM_TYPE_MONTH     4
+#define TERM_TYPE_RANGE_YEAR  5
+#define TERM_TYPE_RANGE_MONTH 6
 
 @property int type;
-@property int year;
-@property int month;
+@property int beginyear;
+@property int beginmonth;
+@property int endyear;
+@property int endmonth;
 
 - (NSString*)getTermString;
 

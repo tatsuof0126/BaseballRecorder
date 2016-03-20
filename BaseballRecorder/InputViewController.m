@@ -304,7 +304,6 @@
     for (int i=0; i<battingResultArray.count; i++) {
         BattingResult *battingResult = [battingResultArray objectAtIndex:i];
         
-        // タグを隠す対応で、305→265、300→260に変更
         UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+i*40,80,21)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         

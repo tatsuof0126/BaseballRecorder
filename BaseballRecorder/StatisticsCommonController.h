@@ -13,6 +13,10 @@
 // #define ALL_TARGET 0
 // #define RECENT5_TARGET 1
 
+#define PICKER_TERM 1
+#define PICKER_TERM_RANGE 2
+#define PICKER_TEAM 9
+
 #define BATTING_RESULT  1
 #define PITCHING_RESULT 2
 
@@ -44,6 +48,9 @@
 
 @property (strong, nonatomic) NSArray *termList;
 
+@property (strong, nonatomic) NSMutableArray *termBeginList;
+@property (strong, nonatomic) NSMutableArray *termEndList;
+
 @property (strong, nonatomic) NSMutableArray *teamList;
 
 @property BOOL posted;
@@ -53,6 +60,10 @@
 - (void)updateStatistics;
 
 - (void)makeResultPicker;
+
+- (void)makeTermPicker;
+
+- (void)makeTeamPicker;
 
 // - (void)showTarget:(UILabel*)year team:(UILabel*)team;
 

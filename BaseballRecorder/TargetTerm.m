@@ -12,8 +12,10 @@
 @implementation TargetTerm
 
 @synthesize type;
-@synthesize year;
-@synthesize month;
+@synthesize beginyear;
+@synthesize beginmonth;
+@synthesize endyear;
+@synthesize endmonth;
 
 - (NSString*)getTermString {
     switch (type) {
@@ -24,10 +26,28 @@
             return @"最近５試合";
             break;
         case TERM_TYPE_YEAR:
-            return [NSString stringWithFormat:@"%d年",year];
+            return [NSString stringWithFormat:@"%d年",beginyear];
             break;
         case TERM_TYPE_MONTH:
-            return [NSString stringWithFormat:@"%d年%d月",year,month];
+            return [NSString stringWithFormat:@"%d年%d月",beginyear,beginmonth];
+            break;
+        case TERM_TYPE_RANGE_YEAR:
+            if(beginyear == 0){
+                return [NSString stringWithFormat:@"〜 %d年",endyear];
+            } else if(endyear == 0){
+                return [NSString stringWithFormat:@"%d年 〜",beginyear];
+            } else {
+                return [NSString stringWithFormat:@"%d年 〜 %d年",beginyear,endyear];
+            }
+            break;
+        case TERM_TYPE_RANGE_MONTH:
+            if(beginyear == 0){
+                return [NSString stringWithFormat:@"〜 %d年%d月",endyear,endmonth];
+            } else if(endyear == 0){
+                return [NSString stringWithFormat:@"%d年%d月 〜",beginyear,beginmonth];
+            } else {
+                return [NSString stringWithFormat:@"%d年%d月 〜 %d年%d月",beginyear,beginmonth,endyear,endmonth];
+            }
             break;
         default:
             break;
@@ -36,7 +56,7 @@
 }
 
 - (NSString*)getTermStringForConfig {
-    return [NSString stringWithFormat:@"%d,%d,%d",type,year,month];
+    return [NSString stringWithFormat:@"%d,%d,%d,%d,%d",type,beginyear,beginmonth,endyear,endmonth];
 }
 
 - (BOOL)isInTargetTeam:(GameResult*)gameResult {
@@ -49,10 +69,45 @@
             return YES;
             break;
         case TERM_TYPE_YEAR:
-            return gameResult.year == year ? YES : NO;
+            return gameResult.year == beginyear ? YES : NO;
             break;
         case TERM_TYPE_MONTH:
-            return gameResult.year == year && gameResult.month == month ? YES : NO;
+            return gameResult.year == beginyear && gameResult.month == beginmonth ? YES : NO;
+            break;
+        case TERM_TYPE_RANGE_YEAR:
+            if(beginyear == 0){
+                return gameResult.year <= endyear ? YES : NO;
+            } else if(endyear == 0){
+                return gameResult.year >= beginyear ? YES : NO;
+            } else {
+                return gameResult.year >= beginyear && gameResult.year <= endyear ? YES : NO;
+            }
+            break;
+        case TERM_TYPE_RANGE_MONTH:
+            if(beginyear == 0){
+                if(gameResult.year < endyear ||
+                    (gameResult.year == endyear && gameResult.month <= endmonth)){
+                    return YES;
+                } else {
+                    return NO;
+                }
+            } else if(endyear == 0){
+                if(gameResult.year > beginyear ||
+                    (gameResult.year == beginyear && gameResult.month >= beginmonth)){
+                    return YES;
+                } else {
+                    return NO;
+                }
+            } else {
+                if((gameResult.year > beginyear ||
+                    (gameResult.year == beginyear && gameResult.month >= beginmonth)) &&
+                   (gameResult.year < endyear ||
+                    (gameResult.year == endyear && gameResult.month <= endmonth))){
+                    return YES;
+                } else {
+                    return NO;
+                }
+            }
             break;
         default:
             break;
@@ -61,7 +116,7 @@
 }
 
 + (NSString*)getDefaultTermStringForConfig {
-    return [NSString stringWithFormat:@"%d,0,0",TERM_TYPE_ALL];
+    return [NSString stringWithFormat:@"%d,0,0,0,0",TERM_TYPE_ALL];
 }
 
 + (TargetTerm*)makeTargetTerm:(NSString*)string {
@@ -69,8 +124,13 @@
     
     TargetTerm* targetTerm = [[TargetTerm alloc] init];
     targetTerm.type = [[strArray objectAtIndex:0] intValue];
-    targetTerm.year = [[strArray objectAtIndex:1] intValue];
-    targetTerm.month = [[strArray objectAtIndex:2] intValue];
+    targetTerm.beginyear = [[strArray objectAtIndex:1] intValue];
+    targetTerm.beginmonth = [[strArray objectAtIndex:2] intValue];
+    
+    if(strArray.count >= 4){
+        targetTerm.endyear = [[strArray objectAtIndex:3] intValue];
+        targetTerm.endmonth = [[strArray objectAtIndex:4] intValue];
+    }
     
     return targetTerm;
 }
@@ -96,7 +156,7 @@
         if(tempyear != gameResult.year){
             TargetTerm* yearTerm = [[TargetTerm alloc]init];
             yearTerm.type = TERM_TYPE_YEAR;
-            yearTerm.year = gameResult.year;
+            yearTerm.beginyear = gameResult.year;
             [targetTermList addObject:yearTerm];
             
 //            [targetTermList addObject:[NSString stringWithFormat:@"%d年", gameResult.year]];
@@ -111,11 +171,10 @@
         if(tempyear != gameResult.year || tempmonth != gameResult.month){
             TargetTerm* monthTerm = [[TargetTerm alloc]init];
             monthTerm.type = TERM_TYPE_MONTH;
-            monthTerm.year = gameResult.year;
-            monthTerm.month = gameResult.month;
+            monthTerm.beginyear = gameResult.year;
+            monthTerm.beginmonth = gameResult.month;
             [targetTermList addObject:monthTerm];
             
-//            [targetTermList addObject:[NSString stringWithFormat:@"%d年%d月", gameResult.year, gameResult.month]];
             tempyear = gameResult.year;
             tempmonth = gameResult.month;
         }
@@ -146,7 +205,7 @@
                 if(tempyear != gameResult.year){
                     TargetTerm* yearTerm = [[TargetTerm alloc]init];
                     yearTerm.type = TERM_TYPE_YEAR;
-                    yearTerm.year = gameResult.year;
+                    yearTerm.beginyear = gameResult.year;
                     [targetTermList addObject:yearTerm];
                     tempyear = gameResult.year;
                 }
@@ -160,8 +219,8 @@
                 if(tempyear != gameResult.year || tempmonth != gameResult.month){
                     TargetTerm* monthTerm = [[TargetTerm alloc]init];
                     monthTerm.type = TERM_TYPE_MONTH;
-                    monthTerm.year = gameResult.year;
-                    monthTerm.month = gameResult.month;
+                    monthTerm.beginyear = gameResult.year;
+                    monthTerm.beginmonth = gameResult.month;
                     [targetTermList addObject:monthTerm];
                     tempyear = gameResult.year;
                     tempmonth = gameResult.month;

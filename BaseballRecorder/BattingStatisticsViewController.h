@@ -51,6 +51,9 @@
 - (IBAction)leftButton:(id)sender;
 - (IBAction)rightButton:(id)sender;
 
+- (IBAction)termChangeButton:(id)sender;
+- (IBAction)teamChangeButton:(id)sender;
+
 - (IBAction)changeButton:(id)sender;
 - (IBAction)tweetButton:(id)sender;
 - (IBAction)imageShareButton:(id)sender;

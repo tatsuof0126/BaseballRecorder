@@ -152,6 +152,14 @@
     [self moveRightTargetTerm];
 }
 
+- (IBAction)termChangeButton:(id)sender {
+    [self makeTermPicker];
+}
+
+- (IBAction)teamChangeButton:(id)sender {
+    [self makeTeamPicker];
+}
+
 - (IBAction)changeButton:(id)sender {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―変更" value:nil screen:@"打撃成績参照画面"];
     

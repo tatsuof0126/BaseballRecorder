@@ -995,25 +995,15 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eko-F1-NAj">
-                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="変更">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changeButton:" destination="3" eventType="touchUpInside" id="qGR-kL-diA"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【集計範囲】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="epk-14-3Y0">
-                                        <rect key="frame" x="10" y="21" width="107" height="21"/>
+                                        <rect key="frame" x="10" y="16" width="107" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X1j-Uy-OlY">
-                                        <rect key="frame" x="95" y="56" width="210" height="21"/>
+                                        <rect key="frame" x="95" y="51" width="210" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1173,8 +1163,8 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　OPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BFW-xk-lX8">
-                                        <rect key="frame" x="30" y="311" width="280" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　OPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" id="BFW-xk-lX8">
+                                        <rect key="frame" x="30" y="311" width="285" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1200,7 +1190,8 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QFa-fM-5jq">
                                         <rect key="frame" x="110" y="156" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <state key="normal" title="　シェア　">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1218,8 +1209,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JjP-0i-nOo">
-                                        <rect key="frame" x="200" y="156" width="100" height="31"/>
+                                        <rect key="frame" x="200" y="156" width="110" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="画像でシェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1228,7 +1220,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dNV-Mw-eMb">
-                                        <rect key="frame" x="210" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="210" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1238,7 +1230,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tXj-NB-GPK">
-                                        <rect key="frame" x="265" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="265" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_right.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1259,7 +1251,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0in-Xr-nwp">
-                                        <rect key="frame" x="30" y="52" width="60" height="30"/>
+                                        <rect key="frame" x="30" y="47" width="60" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="期間">
@@ -1280,7 +1272,6 @@
                         <outlet property="battingresult" destination="omK-t0-btv" id="laI-9O-YXJ"/>
                         <outlet property="battingstat" destination="BFW-xk-lX8" id="2G0-Mu-g50"/>
                         <outlet property="battingstat2" destination="XfR-53-tKv" id="zfT-x7-d80"/>
-                        <outlet property="changeBtn" destination="Eko-F1-NAj" id="THw-Yf-kt9"/>
                         <outlet property="daten" destination="Uj8-y3-BfI" id="xfr-3R-aUX"/>
                         <outlet property="doubles" destination="NFD-Fx-qgC" id="PzR-k3-lob"/>
                         <outlet property="homeruns" destination="XWT-jS-OU6" id="Q0f-zn-ACL"/>
@@ -1408,51 +1399,13 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dh1-BO-Hol">
-                                        <rect key="frame" x="35" y="86" width="60" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S8m-FO-JMB">
-                                        <rect key="frame" x="100" y="86" width="210" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KYq-Ct-N99">
-                                        <rect key="frame" x="100" y="56" width="100" height="21"/>
+                                        <rect key="frame" x="95" y="51" width="210" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ErN-g9-feg">
-                                        <rect key="frame" x="35" y="56" width="60" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【集計範囲】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UiV-hP-fJg">
-                                        <rect key="frame" x="10" y="21" width="107" height="21"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1fV-QY-RDu">
-                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="変更">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changeButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="HaX-j9-8HW"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【投手成績】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybh-iz-8nD">
                                         <rect key="frame" x="10" y="126" width="102" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1585,6 +1538,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KgJ-K6-JcA">
                                         <rect key="frame" x="110" y="121" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1593,8 +1547,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cFc-y6-8QP">
-                                        <rect key="frame" x="200" y="121" width="100" height="31"/>
+                                        <rect key="frame" x="200" y="121" width="110" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="画像でシェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1603,7 +1558,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4sf-Uq-tjH">
-                                        <rect key="frame" x="210" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="210" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1613,7 +1568,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ME7-v8-8cc">
-                                        <rect key="frame" x="265" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="265" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_right.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1622,6 +1577,42 @@
                                             <action selector="rightButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="96l-6W-Fq5"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S8m-FO-JMB">
+                                        <rect key="frame" x="95" y="86" width="210" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="og3-1D-Nzz">
+                                        <rect key="frame" x="30" y="47" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="期間">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="termChangeButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="2KV-ig-HQT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W8m-IS-cG7">
+                                        <rect key="frame" x="30" y="82" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="チーム">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="teamChangeButton:" destination="roP-hv-BV2" eventType="touchUpInside" id="Vom-8h-6EL"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【集計範囲】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UiV-hP-fJg">
+                                        <rect key="frame" x="10" y="16" width="107" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -1644,7 +1635,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="投手成績" image="baseball.png" id="Zzi-29-sld"/>
                     <connections>
-                        <outlet property="changeBtn" destination="1fV-QY-RDu" id="96X-CV-dzi"/>
                         <outlet property="dassanshin" destination="0aZ-Iw-uuZ" id="hKl-q5-jiJ"/>
                         <outlet property="era" destination="H0D-hS-QBt" id="imK-2R-1Li"/>
                         <outlet property="hianda" destination="dN9-PH-k8K" id="6G7-xE-9d1"/>
@@ -1965,8 +1955,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kBP-3Z-Jx2">
-                                        <rect key="frame" x="150" y="125" width="80" height="31"/>
+                                        <rect key="frame" x="125" y="125" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2390,51 +2381,27 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pSB-Si-KHe">
-                                        <rect key="frame" x="35" y="86" width="60" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xd0-gd-GIC">
-                                        <rect key="frame" x="100" y="86" width="210" height="21"/>
+                                        <rect key="frame" x="95" y="86" width="210" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uye-4J-vnu">
-                                        <rect key="frame" x="100" y="56" width="100" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Bp-yZ-BfA">
-                                        <rect key="frame" x="35" y="56" width="60" height="21"/>
+                                        <rect key="frame" x="95" y="51" width="210" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="【集計範囲】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vif-0n-SLZ">
-                                        <rect key="frame" x="10" y="21" width="107" height="21"/>
+                                        <rect key="frame" x="10" y="16" width="107" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="to9-74-YKp">
-                                        <rect key="frame" x="120" y="16" width="60" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="変更">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changeButton:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="URd-lf-K2t"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" id="Uba-wM-tnx" customClass="BattingAnalysisView">
                                         <rect key="frame" x="20" y="151" width="280" height="296"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -2464,19 +2431,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rMc-YI-dMb">
-                                        <rect key="frame" x="120" y="121" width="60" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="保存">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="saveAnalysis:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="O1L-91-I70"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NJD-HC-evW">
-                                        <rect key="frame" x="220" y="121" width="60" height="31"/>
+                                        <rect key="frame" x="210" y="121" width="80" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="シェア">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2485,7 +2443,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pzi-gQ-dCL">
-                                        <rect key="frame" x="210" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="210" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_left.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2495,7 +2453,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ot2-b5-oFO">
-                                        <rect key="frame" x="265" y="51" width="40" height="32"/>
+                                        <rect key="frame" x="265" y="46" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="Button" image="arrow_right.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2508,6 +2466,39 @@
                                         <rect key="frame" x="150" y="217" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="auB-kW-L70">
+                                        <rect key="frame" x="30" y="82" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="チーム">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="teamChangeButton:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="uNg-u1-eqZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nXG-Gt-VT9">
+                                        <rect key="frame" x="30" y="47" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="期間">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="termChangeButton:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="Lu4-A2-8fK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rMc-YI-dMb">
+                                        <rect key="frame" x="120" y="121" width="70" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="保存">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveAnalysis:" destination="m1s-Pa-ZZL" eventType="touchUpInside" id="O1L-91-I70"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -2516,7 +2507,6 @@
                     <tabBarItem key="tabBarItem" title="打撃分析" image="browser_window.png" id="f0P-Wi-yS7"/>
                     <connections>
                         <outlet property="analysysView" destination="Uba-wM-tnx" id="IDK-F0-NGU"/>
-                        <outlet property="changeBtn" destination="to9-74-YKp" id="I9r-bK-DZh"/>
                         <outlet property="indView" destination="N7q-ww-BsJ" id="1Zb-JX-7CW"/>
                         <outlet property="leftBtn" destination="Pzi-gQ-dCL" id="cjt-Ge-Veb"/>
                         <outlet property="rightBtn" destination="ot2-b5-oFO" id="NcC-oQ-yPJ"/>
@@ -2547,8 +2537,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="beY-vE-fQn"/>
-        <segue reference="PO9-Hz-laC"/>
+        <segue reference="7pF-G3-Z3a"/>
         <segue reference="TXb-6e-0gl"/>
+        <segue reference="PO9-Hz-laC"/>
     </inferredMetricsTieBreakers>
 </document>

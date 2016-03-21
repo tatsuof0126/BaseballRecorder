@@ -103,11 +103,11 @@
     
     TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     
-    year.text = [targetTerm getTermString];
+    year.text = [targetTerm getTermStringForView];
     team.text = [ConfigManager getCalcTargetTeam];
     
     // 左右の矢印を出すかどうかを判定
-    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    NSArray* targetTermList = [TargetTerm getActiveTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
     TargetTerm* firstTerm = [targetTermList firstObject];
     TargetTerm* lastTerm = [targetTermList lastObject];
     
@@ -159,7 +159,7 @@
     
     TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     
-    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    NSArray* targetTermList = [TargetTerm getActiveTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
     
     TargetTerm* newTargetTerm = targetTerm;
     for (TargetTerm* compTerm in targetTermList){
@@ -192,7 +192,7 @@
     
     TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     
-    NSArray* targetTermList = [TargetTerm getTargetTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
+    NSArray* targetTermList = [TargetTerm getActiveTermList:targetTerm.type gameResultList:[GameResultManager loadGameResultList]];
     
     TargetTerm* newTargetTerm = targetTermList.firstObject;
     for (TargetTerm* compTerm in targetTermList){
@@ -257,133 +257,105 @@
         return;
     }
     
-    [self doMakeTermPicker:PICKER_TERM_RANGE];
-    
-    /*
-    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
-    if(targetTerm.type == TERM_TYPE_RANGE_YEAR || targetTerm.type == TERM_TYPE_RANGE_MONTH){
-        [self doMakeTermPicker:PICKER_TERM_RANGE];
-        // [self doMakeTermPicker:PICKER_TERM];
-    } else {
-        // [self doMakeTermPicker:PICKER_TERM_RANGE];
-        [self doMakeTermPicker:PICKER_TERM];
-    }
-     */
+    [self doMakeTermPicker];
 }
 
-- (void)doMakeTermPicker:(int)type {
+- (void)doMakeTermPicker {
     // PickerViewを準備
     [self preparePickerView];
+    targetPicker.tag = PICKER_TERM;
     
-    // Pickerのデフォルトを設定
-    if(type == PICKER_TERM_RANGE){
-        targetPicker.tag = PICKER_TERM_RANGE;
+    // termBeginList,termEndListを作る
+    termBeginList = [NSMutableArray array];
+    termEndList = [NSMutableArray array];
+    
+    // 現データの開始年と終了年を探る
+    NSArray* resultList = [GameResultManager loadGameResultList];
+    int beginYear = 9999;
+    int endYear = 0;
+    for(GameResult* result in resultList){
+        if(result.year < beginYear){
+            beginYear = result.year;
+        }
+        if(result.year > endYear){
+            endYear = result.year;
+        }
+    }
+    
+    // Pickerの中身を作る、合わせてデフォルトを探す
+    TargetTerm* allTerm = [[TargetTerm alloc] init];
+    allTerm.type = TERM_TYPE_ALL;
+    TargetTerm* recent5Term = [[TargetTerm alloc] init];
+    recent5Term.type = TERM_TYPE_RECENT5;
+    
+    [termBeginList addObject:allTerm];
+    [termBeginList addObject:recent5Term];
+    [termEndList addObject:allTerm];
+    
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
+    
+    int beginDefault = 0;
+    int endDefault = 0;
+    if(targetTerm.type == TERM_TYPE_RECENT5){
+        beginDefault = 1;
+    }
+    
+    for (int i=beginYear; i<=endYear; i++) {
+        TargetTerm* yearTerm = [[TargetTerm alloc] init];
+        yearTerm.type = TERM_TYPE_YEAR;
+        yearTerm.beginyear = i;
         
-        // termBeginList,termEndListを作る
-        termBeginList = [NSMutableArray array];
-        termEndList = [NSMutableArray array];
+        [termBeginList addObject:yearTerm];
+        [termEndList addObject:yearTerm];
         
-        // 現データの開始年と終了年を探る
-        NSArray* resultList = [GameResultManager loadGameResultList];
-        int beginYear = 9999;
-        int endYear = 0;
-        for(GameResult* result in resultList){
-            if(result.year < beginYear){
-                beginYear = result.year;
-            }
-            if(result.year > endYear){
-                endYear = result.year;
+        // 年が一致していればデフォルトとして設定
+        if(targetTerm.type == TERM_TYPE_YEAR){
+            if(targetTerm.beginyear == i){
+                beginDefault = (int)termBeginList.count-1;
+                endDefault = (int)termEndList.count-1;
             }
         }
-        
-        // Pickerの中身を作る、合わせてデフォルトを探す
-        TargetTerm* allTerm = [[TargetTerm alloc] init];
-        allTerm.type = TERM_TYPE_ALL;
-        TargetTerm* recent5Term = [[TargetTerm alloc] init];
-        recent5Term.type = TERM_TYPE_RECENT5;
-        [termBeginList addObject:allTerm];
-        [termBeginList addObject:recent5Term];
-        [termEndList addObject:allTerm];
-        
-        TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
-        int beginDefault = 0;
-        int endDefault = 0;
-        
-        if(targetTerm.type == TERM_TYPE_RECENT5){
-            beginDefault = 1;
-        }
-        
-        for (int i=beginYear; i<=endYear; i++) {
-            TargetTerm* yearTerm = [[TargetTerm alloc] init];
-            yearTerm.type = TERM_TYPE_YEAR;
-            yearTerm.beginyear = i;
-
-            [termBeginList addObject:yearTerm];
-            [termEndList addObject:yearTerm];
-            
-            if(targetTerm.type == TERM_TYPE_YEAR){
-                if(targetTerm.beginyear == i){
-                    beginDefault = (int)termBeginList.count-1;
-                    endDefault = (int)termEndList.count-1;
-                }
+        if(targetTerm.type == TERM_TYPE_RANGE_YEAR){
+            if(targetTerm.beginyear == i){
+                beginDefault = (int)termBeginList.count-1;
             }
-            if(targetTerm.type == TERM_TYPE_RANGE_YEAR){
-                if(targetTerm.beginyear == i){
-                    beginDefault = (int)termBeginList.count-1;
-                }
-                if(targetTerm.endyear == i){
-                    endDefault = (int)termEndList.count-1;
-                }
-            }
-        }
-        
-        for (int i=beginYear; i<=endYear; i++) {
-            for(int j=1; j<=12; j++){
-                TargetTerm* monthTerm = [[TargetTerm alloc] init];
-                monthTerm.type = TERM_TYPE_MONTH;
-                monthTerm.beginyear = i;
-                monthTerm.beginmonth = j;
-                
-                [termBeginList addObject:monthTerm];
-                [termEndList addObject:monthTerm];
-                
-                
-                if(targetTerm.type == TERM_TYPE_MONTH){
-                    if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
-                        beginDefault = (int)termBeginList.count-1;
-                        endDefault = (int)termEndList.count-1;
-                    }
-                }
-                if(targetTerm.type == TERM_TYPE_RANGE_MONTH){
-                    if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
-                        beginDefault = (int)termBeginList.count-1;
-                    }
-                    if(targetTerm.endyear == i && targetTerm.endmonth == j){
-                        endDefault = (int)termEndList.count-1;
-                    }
-                }
-            }
-        }
-        
-        // Pickerのデフォルトを設定
-        [targetPicker selectRow:beginDefault inComponent:0 animated:NO];
-        [targetPicker selectRow:endDefault inComponent:1 animated:NO];
-    } else {
-        targetPicker.tag = PICKER_TERM;
-        // termListを最新化
-        NSArray* resultList = [GameResultManager loadGameResultList];
-        termList = [TargetTerm getTargetTermListForPicker:resultList];
-        
-        // Pickerのデフォルトを設定
-        TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
-        for (int i=0;i<termList.count;i++){
-            TargetTerm* term = [termList objectAtIndex:i];
-            if([[term getTermString] isEqualToString:[targetTerm getTermString]]){
-                [targetPicker selectRow:i inComponent:0 animated:NO];
-                break;
+            if(targetTerm.endyear == i){
+                endDefault = (int)termEndList.count-1;
             }
         }
     }
+    
+    for (int i=beginYear; i<=endYear; i++) {
+        for(int j=1; j<=12; j++){
+            TargetTerm* monthTerm = [[TargetTerm alloc] init];
+            monthTerm.type = TERM_TYPE_MONTH;
+            monthTerm.beginyear = i;
+            monthTerm.beginmonth = j;
+            
+            [termBeginList addObject:monthTerm];
+            [termEndList addObject:monthTerm];
+            
+            // 年月が一致していればデフォルトとして設定
+            if(targetTerm.type == TERM_TYPE_MONTH){
+                if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
+                    beginDefault = (int)termBeginList.count-1;
+                    endDefault = (int)termEndList.count-1;
+                }
+            }
+            if(targetTerm.type == TERM_TYPE_RANGE_MONTH){
+                if(targetTerm.beginyear == i && targetTerm.beginmonth == j){
+                    beginDefault = (int)termBeginList.count-1;
+                }
+                if(targetTerm.endyear == i && targetTerm.endmonth == j){
+                    endDefault = (int)termEndList.count-1;
+                }
+            }
+        }
+    }
+    
+    // Pickerのデフォルトを設定
+    [targetPicker selectRow:beginDefault inComponent:0 animated:NO];
+    [targetPicker selectRow:endDefault inComponent:1 animated:NO];
     
     [self showPicker];
 }
@@ -409,19 +381,11 @@
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
         style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
-    NSString* changeStr = targetPicker.tag == PICKER_TERM ? @"範囲指定へ" : @"年月指定へ";
-    UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithTitle:changeStr
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarChangeButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"設定"
         style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    NSArray* items = nil;
-    if(targetPicker.tag == PICKER_TEAM){
-        items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
-    } else {
-        items = [NSArray arrayWithObjects:backButton, spacer, changeButton, spacer, doneButton, nil];
-    }
+    NSArray* items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
     [targetToolbar setItems:items animated:YES];
     
     [pickerBaseView addSubview:targetPicker];
@@ -440,6 +404,8 @@
     [UIView commitAnimations];
 }
 
+// あとで消すメソッド
+/*
 - (void)makeResultPicker {
     // すでにPickerが立ち上がっていたら無視
     if( targetPicker != nil ){
@@ -529,11 +495,10 @@
     
     [UIView commitAnimations];
 }
+*/
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
     if(pickerView.tag == PICKER_TERM){
-        return 1;
-    } else if(pickerView.tag == PICKER_TERM_RANGE){
         return 2;
     } else if(pickerView.tag == PICKER_TEAM){
         return 1;
@@ -543,8 +508,6 @@
 
 - (NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
     if(pickerView.tag == PICKER_TERM){
-        return termList.count;
-    } else if(pickerView.tag == PICKER_TERM_RANGE){
         return component == 0 ? termBeginList.count : termEndList.count;
     } else if(pickerView.tag == PICKER_TEAM){
         return teamList.count;
@@ -555,9 +518,7 @@
 - (NSString*)pickerView:(UIPickerView*)pickerView
            titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(pickerView.tag == PICKER_TERM){
-        return [[termList objectAtIndex:row] getTermString];
-    } else if(pickerView.tag == PICKER_TERM_RANGE){
-        return component == 0 ? [[termBeginList objectAtIndex:row] getTermString] : [[termEndList objectAtIndex:row] getTermString];
+        return component == 0 ? [[termBeginList objectAtIndex:row] getTermStringForView] : [[termEndList objectAtIndex:row] getTermStringForView];
     } else if(pickerView.tag == PICKER_TEAM){
         return [teamList objectAtIndex:row];
     }
@@ -568,25 +529,8 @@
     [self closePicker];
 }
 
-- (void)toolbarChangeButton:(UIBarButtonItem*)sender {
-    if(targetPicker.tag == PICKER_TERM){
-        [self closePicker];
-        [self doMakeTermPicker:PICKER_TERM_RANGE];
-    } else {
-        [self closePicker];
-        [self doMakeTermPicker:PICKER_TERM];
-    }
-}
-
 - (void)toolbarDoneButton:(id)sender {
     if(targetPicker.tag == PICKER_TERM){
-        TargetTerm* targetTerm = [termList objectAtIndex:[targetPicker selectedRowInComponent:0]];
-        [ConfigManager setCalcTargetTerm:targetTerm];
-        
-        [self updateStatistics];
-        [self closePicker];
-        return;
-    } else if(targetPicker.tag == PICKER_TERM_RANGE){
         TargetTerm* beginTerm = [termBeginList objectAtIndex:[targetPicker selectedRowInComponent:0]];
         TargetTerm* endTerm = [termEndList objectAtIndex:[targetPicker selectedRowInComponent:1]];
         
@@ -610,7 +554,7 @@
             // すべて＋すべてならすべて
             targetTerm.type = TERM_TYPE_ALL;
         } else if(beginTerm.type == TERM_TYPE_RECENT5){
-            // 最近５試合＋なんでもなら最近５試合を優先
+            // 最近５試合が入っていたら最近５試合
             targetTerm.type = TERM_TYPE_RECENT5;
         } else if(beginTerm.type == TERM_TYPE_YEAR && endTerm.type == TERM_TYPE_YEAR &&
                   beginTerm.beginyear == endTerm.beginyear){
@@ -858,13 +802,13 @@
         tsusan = @"最近5試合の";
         today = @""; // 最近５試合の場合は◯◯現在という言葉は入れない
     } else if(targetTerm.type == TERM_TYPE_YEAR){
-        term = [targetTerm getTermString];
+        term = [targetTerm getTermStringForShare];
         if(targetTerm.beginyear != dateComps.year){
             // 当年以外なら◯◯現在という言葉は入れない
             today = @"";
         }
     } else if(targetTerm.type == TERM_TYPE_MONTH){
-        term = [targetTerm getTermString];
+        term = [targetTerm getTermStringForShare];
         if(targetTerm.beginyear != dateComps.year || targetTerm.beginmonth != dateComps.month){
             // 当年当月以外なら◯◯現在という言葉は入れない
             today = @"";

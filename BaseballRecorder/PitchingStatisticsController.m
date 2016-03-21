@@ -104,10 +104,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)changeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―変更" value:nil screen:@"投手成績参照画面"];
-    
-    [self makeResultPicker];
+- (IBAction)termChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―期間変更" value:nil screen:@"投手成績参照画面"];
+    [self makeTermPicker];
+}
+
+- (IBAction)teamChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績参照画面―チーム変更" value:nil screen:@"投手成績参照画面"];
+    [self makeTeamPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
@@ -128,7 +132,7 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermString];
+    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermStringForShare];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";

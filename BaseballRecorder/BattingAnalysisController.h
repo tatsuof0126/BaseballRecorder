@@ -30,13 +30,12 @@
 @property BOOL posted;
 
 - (IBAction)leftButton:(id)sender;
-
 - (IBAction)rightButton:(id)sender;
 
-- (IBAction)changeButton:(id)sender;
+- (IBAction)termChangeButton:(id)sender;
+- (IBAction)teamChangeButton:(id)sender;
 
 - (IBAction)saveAnalysis:(id)sender;
-
 - (IBAction)shareAnalysis:(id)sender;
 
 @end

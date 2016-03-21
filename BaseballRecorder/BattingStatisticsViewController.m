@@ -115,13 +115,13 @@
     _tokuten.text = [NSString stringWithFormat:@"%d",battingStatistics.tokuten];
     _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
     
-    _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ OPS %@",
+    _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ 長打率 %@",
                          [Utility getFloatStr:battingStatistics.average appendBlank:YES],
                          [Utility getFloatStr:battingStatistics.obp appendBlank:YES],
-                         [Utility getFloatStr:battingStatistics.ops appendBlank:YES]];
+                         [Utility getFloatStr:battingStatistics.slg appendBlank:YES]];
 
-    _battingstat2.text = [NSString stringWithFormat:@"長打率 %@",
-                          [Utility getFloatStr:battingStatistics.slg appendBlank:YES]];
+    _battingstat2.text = [NSString stringWithFormat:@"OPS %@",
+                          [Utility getFloatStr:battingStatistics.ops appendBlank:YES]];
 }
 
 - (void)viewDidUnload {
@@ -153,17 +153,13 @@
 }
 
 - (IBAction)termChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―期間変更" value:nil screen:@"打撃成績参照画面"];
     [self makeTermPicker];
 }
 
 - (IBAction)teamChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―チーム変更" value:nil screen:@"打撃成績参照画面"];
     [self makeTeamPicker];
-}
-
-- (IBAction)changeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―変更" value:nil screen:@"打撃成績参照画面"];
-    
-    [self makeResultPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
@@ -184,7 +180,7 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermString];
+    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermStringForShare];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";
@@ -203,12 +199,12 @@
     if(shareType == SHARE_TYPE_TEXT){
         [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
         
-        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ "
+        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ 長打率%@ OPS%@ "
          ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
          ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
          ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
-         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
-         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
+         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]];
     
         if(battingStatistics.doubles != 0){
             [shareString appendFormat:@"二塁打%d ", battingStatistics.doubles];
@@ -240,12 +236,12 @@
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
         [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
-        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ OPS%@ 長打率%@ です。 #ベボレコ"
+        [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ 長打率%@ OPS%@ です。 #ベボレコ"
          ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
          ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]
          ,[Utility getFloatStr:battingStatistics.obp appendBlank:NO]
-         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]
-         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]];
+         ,[Utility getFloatStr:battingStatistics.slg appendBlank:NO]
+         ,[Utility getFloatStr:battingStatistics.ops appendBlank:NO]];
     }
     
     return shareString;

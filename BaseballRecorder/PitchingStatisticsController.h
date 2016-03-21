@@ -49,7 +49,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *imageShareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *mailBtn;
 
-- (IBAction)changeButton:(id)sender;
+
+- (IBAction)termChangeButton:(id)sender;
+- (IBAction)teamChangeButton:(id)sender;
+
 - (IBAction)tweetButton:(id)sender;
 - (IBAction)imageShareButton:(id)sender;
 - (IBAction)mailButton:(id)sender;

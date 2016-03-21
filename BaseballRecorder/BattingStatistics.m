@@ -88,11 +88,11 @@
     [bodyString appendString:[NSString stringWithFormat:@"二塁打：%d　三塁打：%d　本塁打：%d\n",doubles, triples, homeruns]];
     [bodyString appendString:[NSString stringWithFormat:@"三振：%d　四死球：%d　犠打：%d\n",strikeouts, walks, sacrifices]];
     [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　盗塁：%d\n",daten, tokuten, steal]];
-    [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　OPS：%@　長打率：%@\n",
+    [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　長打率：%@　OPS：%@\n",
                               [Utility getFloatStr:average appendBlank:NO],
                               [Utility getFloatStr:obp appendBlank:NO],
-                              [Utility getFloatStr:ops appendBlank:NO],
-                              [Utility getFloatStr:slg appendBlank:NO]]];
+                              [Utility getFloatStr:slg appendBlank:NO],
+                              [Utility getFloatStr:ops appendBlank:NO]]];
     
     return bodyString;
 }

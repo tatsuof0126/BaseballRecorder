@@ -24,7 +24,11 @@
 @property int endyear;
 @property int endmonth;
 
-- (NSString*)getTermString;
+// - (NSString*)getTermString;
+
+- (NSString*)getTermStringForView;
+
+- (NSString*)getTermStringForShare;
 
 - (NSString*)getTermStringForConfig;
 
@@ -34,8 +38,8 @@
 
 + (TargetTerm*)makeTargetTerm:(NSString*)string;
 
-+ (NSArray*)getTargetTermListForPicker:(NSArray*)gameResultList;
+//+ (NSArray*)getTargetTermListForPicker:(NSArray*)gameResultList;
 
-+ (NSArray*)getTargetTermList:(int)type gameResultList:(NSArray*)gameResultList;
++ (NSArray*)getActiveTermList:(int)type gameResultList:(NSArray*)gameResultList;
 
 @end

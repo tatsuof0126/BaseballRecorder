@@ -84,10 +84,14 @@
     [self moveRightTargetTerm];
 }
 
-- (IBAction)changeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―変更" value:nil screen:@"打撃分析画面"];
-    
-    [self makeResultPicker];
+- (IBAction)termChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―期間変更" value:nil screen:@"打撃分析画面"];
+    [self makeTermPicker];
+}
+
+- (IBAction)teamChangeButton:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―チーム変更" value:nil screen:@"打撃分析画面"];
+    [self makeTeamPicker];
 }
 
 - (void)showStatistics:(NSArray*)gameResultListForCalc {

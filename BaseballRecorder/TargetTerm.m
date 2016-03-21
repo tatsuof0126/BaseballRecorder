@@ -17,7 +17,7 @@
 @synthesize endyear;
 @synthesize endmonth;
 
-- (NSString*)getTermString {
+- (NSString*)getTermStringForView {
     switch (type) {
         case TERM_TYPE_ALL:
             return @"すべて";
@@ -47,6 +47,48 @@
                 return [NSString stringWithFormat:@"%d年%d月 〜",beginyear,beginmonth];
             } else {
                 return [NSString stringWithFormat:@"%d年%d月 〜 %d年%d月",beginyear,beginmonth,endyear,endmonth];
+            }
+            break;
+        default:
+            break;
+    }
+    return @"";
+}
+
+- (NSString*)getTermStringForShare {
+    switch (type) {
+        case TERM_TYPE_ALL:
+            return @"";
+            break;
+        case TERM_TYPE_RECENT5:
+            return @"最近５試合";
+            break;
+        case TERM_TYPE_YEAR:
+            return [NSString stringWithFormat:@"%d年",beginyear];
+            break;
+        case TERM_TYPE_MONTH:
+            return [NSString stringWithFormat:@"%d年%d月",beginyear,beginmonth];
+            break;
+        case TERM_TYPE_RANGE_YEAR:
+            if(beginyear == 0){
+                return [NSString stringWithFormat:@"%d年まで",endyear];
+            } else if(endyear == 0){
+                return [NSString stringWithFormat:@"%d年から",beginyear];
+            } else {
+                return [NSString stringWithFormat:@"%d年〜%d年",beginyear,endyear];
+            }
+            break;
+        case TERM_TYPE_RANGE_MONTH:
+            if(beginyear == 0){
+                return [NSString stringWithFormat:@"%d年%d月まで",endyear,endmonth];
+            } else if(endyear == 0){
+                return [NSString stringWithFormat:@"%d年%d月から",beginyear,beginmonth];
+            } else {
+                if(beginyear == endyear){
+                    return [NSString stringWithFormat:@"%d年%d月〜%d月",beginyear,beginmonth,endmonth];
+                } else {
+                    return [NSString stringWithFormat:@"%d年%d月〜%d年%d月",beginyear,beginmonth,endyear,endmonth];
+                }
             }
             break;
         default:
@@ -135,7 +177,8 @@
     return targetTerm;
 }
 
-+ (NSArray*)getTargetTermListForPicker:(NSArray*)gameResultList {
+/*
++ (NSArray*)getTargetTermListForPicker2:(NSArray*)gameResultList {
     NSMutableArray* targetTermList = [NSMutableArray array];
     
     // 固定分
@@ -182,23 +225,17 @@
     
     return targetTermList;
 }
+*/
 
-+ (NSArray*)getTargetTermList:(int)type gameResultList:(NSArray*)gameResultList {
++ (NSArray*)getActiveTermList:(int)type gameResultList:(NSArray*)gameResultList {
     NSMutableArray* targetTermList = [NSMutableArray array];
     
+    // 各分析画面での左右の矢印を出す判定にのみ利用するのでTERM_TYPE_YEARとTERM_TYPE_MONTHのみ計算
     switch (type) {
-        case TERM_TYPE_ALL:{
-            TargetTerm* allTerm = [[TargetTerm alloc] init];
-            allTerm.type = TERM_TYPE_ALL;
-            [targetTermList addObject:allTerm];
+        case TERM_TYPE_ALL:
             break;
-        }
-        case TERM_TYPE_RECENT5:{
-            TargetTerm* recent5Term = [[TargetTerm alloc] init];
-            recent5Term.type = TERM_TYPE_RECENT5;
-            [targetTermList addObject:recent5Term];
+        case TERM_TYPE_RECENT5:
             break;
-        }
         case TERM_TYPE_YEAR:{
             int tempyear = -999;
             for(GameResult* gameResult in gameResultList){
@@ -228,6 +265,10 @@
             }
             break;
         }
+        case TERM_TYPE_RANGE_YEAR:
+            break;
+        case TERM_TYPE_RANGE_MONTH:
+            break;
         default:
             break;
     }

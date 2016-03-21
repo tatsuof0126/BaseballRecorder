@@ -14,7 +14,6 @@
 // #define RECENT5_TARGET 1
 
 #define PICKER_TERM 1
-#define PICKER_TERM_RANGE 2
 #define PICKER_TEAM 9
 
 #define BATTING_RESULT  1
@@ -59,7 +58,7 @@
 
 - (void)updateStatistics;
 
-- (void)makeResultPicker;
+// - (void)makeResultPicker;
 
 - (void)makeTermPicker;
 

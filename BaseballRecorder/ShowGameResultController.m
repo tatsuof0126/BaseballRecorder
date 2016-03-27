@@ -247,7 +247,7 @@
     
 //    [self setFrameOriginY:_resultLabel originY:adjust1];
 //    [self setFrameOriginY:_result originY:adjust1];
-    [self setFrameOriginX:_tweetButton originX:adjust4 == baseAdjust ? 120 : 150];
+//    [self setFrameOriginX:_tweetButton originX:adjust4 == baseAdjust ? 120 : 150];
     [self setFrameOriginY:_tweetButton originY:adjust1+35];
     [self setFrameOriginY:_battingResultLabel originY:adjust1+40];
     
@@ -317,10 +317,10 @@
     }
     
     if(nowIndex+1 < gameResultList.count){
-        rightMoveFlg = YES;
+        leftMoveFlg = YES;
     }
     if(nowIndex > 0){
-        leftMoveFlg = YES;
+        rightMoveFlg = YES;
     }
     
     _rightBtn.hidden = !rightMoveFlg;
@@ -346,6 +346,7 @@
 }
 
 - (IBAction)editButton:(id)sender {
+    // 処理なし
 }
 
 - (IBAction)arrowButton:(id)sender {
@@ -364,11 +365,11 @@
         }
     }
     
-    if(sender == _rightBtn){
+    if(sender == _leftBtn){
         if(nowIndex+1 < gameResultList.count){
             newIndex = nowIndex+1;
         }
-    } else if(sender == _leftBtn){
+    } else if(sender == _rightBtn){
         if(nowIndex > 0){
             newIndex = nowIndex-1;
         }

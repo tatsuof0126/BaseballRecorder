@@ -41,7 +41,7 @@
     // 画面が開かれたときのトラッキング情報を送る
     [TrackingManager sendScreenTracking:@"設定画面"];
     
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     _versionName.text = [NSString stringWithFormat:@"version%@",version];
     
     _place.text = [ConfigManager getDefaultPlace];

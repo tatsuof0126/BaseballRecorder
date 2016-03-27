@@ -124,4 +124,15 @@
     [defaults synchronize];
 }
 
++ (NSString*)getUseVersion {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"USEVERSION"];
+}
+
++ (void)setUseVersion:(NSString*)useVersion {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:useVersion forKey:@"USEVERSION"];
+    [defaults synchronize];
+}
+
 @end

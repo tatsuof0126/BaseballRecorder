@@ -907,7 +907,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09b72fa7-7ffe-4ea5-a023-1da582766607";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};

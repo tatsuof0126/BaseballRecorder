@@ -122,12 +122,12 @@
     
 }
 
--(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray* array = [gameResultListOfYear objectAtIndex:section];
     return array.count;
 }
 
--(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];
     GameResult* result = [array objectAtIndex:indexPath.row];
     
@@ -209,11 +209,11 @@
     return cell;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  	return gameResultYearList.count;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [gameResultYearList objectAtIndex:section];
 }
 
@@ -273,6 +273,30 @@
     }
 }
 
+- (void)checkUpdated {
+    NSString* useVersion = [ConfigManager getUseVersion];
+    NSString* nowVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    /*
+    [ConfigManager setUseVersion:@"1.0"];
+    NSLog(@"use version is null : %@", useVersion == nil ? @"TRUE" : @"FALSE");
+    NSLog(@"use version : %@  now version : %@", useVersion, nowversion);
+     */
+    
+    if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO){
+        NSArray* gameResultList = [GameResultManager loadGameResultList];
+        if(gameResultList.count > 0 && [UIAlertController class]){
+            // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
+            // UIAlertControllerが使える場合のみ
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデートしていただき\nありがとうございます" message:@"バージョン2.5では、打撃成績/打席分析/投手成績の集計で期間指定ができるようになりました。ぜひお試しください。" preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
+        [ConfigManager setUseVersion:nowVersion];
+    }
+}
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -285,6 +309,10 @@
 
     [self loadGameResult];
     [gameResultListTableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self checkUpdated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

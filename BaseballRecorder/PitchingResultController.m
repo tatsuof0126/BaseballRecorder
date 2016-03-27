@@ -487,13 +487,17 @@
             break;
         case ALERT_SAVE:
             if(buttonIndex == 1){
-                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存" value:nil screen:@"投手成績入力画面"];
-                
                 // 入力内容をGameResultオブジェクトに反映
                 [self updateGameResult];
                 
-                // ファイルに保存
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                if(appDelegate.targetGameResult.resultid == 0){
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（新規）" value:nil screen:@"投手成績入力画面"];
+                } else {
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（更新）" value:nil screen:@"投手成績入力画面"];
+                }
+                
+                // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
                 // 試合結果参照画面へ
@@ -502,13 +506,17 @@
             break;
         case ALERT_SAVE_ONLY_BATTING:
             if(buttonIndex == 1){
-                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
-                
                 // 投手成績の入力内容をGameResultオブジェクトから削除
                 [self clearGameResult];
                 
-                // ファイルに保存
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                if(appDelegate.targetGameResult.resultid == 0){
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（新規）（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
+                } else {
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（更新）（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
+                }
+                
+                // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
                 // 試合結果参照画面へ

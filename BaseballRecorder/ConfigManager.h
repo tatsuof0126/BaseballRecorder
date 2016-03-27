@@ -49,4 +49,8 @@
 
 + (void)setRemoveAdsFlg:(BOOL)removeAdsFlg;
 
++ (NSString*)getUseVersion;
+
++ (void)setUseVersion:(NSString*)useVersion;
+
 @end

@@ -794,7 +794,6 @@
     today = [NSString stringWithFormat:@"（%zd年%zd月%zd日現在）",dateComps.year,dateComps.month,dateComps.day];
     
     TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
-    NSString* targetTeam = [ConfigManager getCalcTargetTeam];
     
     if(targetTerm.type == TERM_TYPE_ALL){
         tsusan = @"通算";
@@ -813,8 +812,19 @@
             // 当年当月以外なら◯◯現在という言葉は入れない
             today = @"";
         }
+    } else if(targetTerm.type == TERM_TYPE_RANGE_YEAR){
+        term = [targetTerm getTermStringForShare];
+        today = @"";
+    } else if(targetTerm.type == TERM_TYPE_RANGE_MONTH){
+        term = [targetTerm getTermStringForShare];
+        today = @"";
+    }
+    //「から」・「まで」で終わる場合は「の」をつけて「2015年からの」「2015年12月までの」にする。
+    if([term containsString:@"から"] || [term containsString:@"まで"]){
+        term = [NSString stringWithFormat:@"%@の",term];
     }
     
+    NSString* targetTeam = [ConfigManager getCalcTargetTeam];
     if([targetTeam isEqualToString:@"すべて"] == NO){
         team = targetTeam;
     }

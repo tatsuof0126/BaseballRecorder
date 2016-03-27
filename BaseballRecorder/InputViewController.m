@@ -675,23 +675,23 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
-//    NSLog(@"buttonIndex : %d",buttonIndex);
-
     switch (alertView.tag) {
         case ALERT_BACK:
             if(buttonIndex == 1){
                 [self dismissViewControllerAnimated:YES completion:nil];
-//                [self dismissModalViewControllerAnimated:YES];
             }
             break;
             
         case ALERT_SAVE:
             if(buttonIndex == 1){
-                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―保存" value:nil screen:@"打撃成績入力画面"];
-                
                 // 入力内容をオブジェクトに反映
                 [self updateGameResult];
+                
+                if(gameResult.resultid == 0){
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―保存（新規）" value:nil screen:@"打撃成績入力画面"];
+                } else {
+                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―保存（更新）" value:nil screen:@"打撃成績入力画面"];
+                }
                 
                 // ファイルに保存
                 [GameResultManager saveGameResult:gameResult];
@@ -727,8 +727,6 @@
                 */
                 
                 [self moveNextView];
-                
-                // [self dismissViewControllerAnimated:YES completion:nil];
             }
             break;
             

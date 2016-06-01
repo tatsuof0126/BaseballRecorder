@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *battingresult;
 @property (weak, nonatomic) IBOutlet UILabel *battingstat;
 @property (weak, nonatomic) IBOutlet UILabel *battingstat2;
+@property (weak, nonatomic) IBOutlet UILabel *battingstat3;
 
 @property (weak, nonatomic) IBOutlet UILabel *doubles;
 @property (weak, nonatomic) IBOutlet UILabel *triples;

@@ -21,7 +21,7 @@
 }
 
 + (NSString*)getFloatStr:(float)floatvalue appendBlank:(BOOL)appendBlank {
-    if(isnan(floatvalue) == YES){
+    if(isnan(floatvalue) == YES || isinf(floatvalue) == YES){
         return @".--- ";
     }
     
@@ -35,7 +35,7 @@
 }
 
 + (NSString*)getFloatStr2:(float)floatvalue {
-    if(isnan(floatvalue) == YES || isinf(floatvalue)){
+    if(isnan(floatvalue) == YES || isinf(floatvalue) == YES){
         return @"-.--";
     }
     

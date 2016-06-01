@@ -29,6 +29,9 @@
 @property float obp;
 @property float slg;
 @property float ops;
+@property float isod;
+@property float isop;
+@property float rc27;
 
 + (BattingStatistics*)calculateBattingStatistics:(NSArray*)gameResultList;
 

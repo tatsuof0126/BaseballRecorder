@@ -91,7 +91,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
-                                    <navigationItem title="ヘルプ" id="qcB-wa-2d2">
+                                    <navigationItem title="打撃成績の算出方法" id="qcB-wa-2d2">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="Hze-22-6PI">
                                             <connections>
                                                 <action selector="backButton:" destination="toA-tb-iJB" id="EQt-UA-Mlv"/>
@@ -104,66 +104,122 @@
                                 <rect key="frame" x="0.0" y="64" width="328" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【打撃成績の算出方法】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DlZ-vS-xEH">
-                                        <rect key="frame" x="10" y="21" width="280" height="21"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打率 ＝ 安打 ÷ 打数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JLE-bt-zez">
-                                        <rect key="frame" x="30" y="50" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="20" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出塁率 ＝ (安打＋四死球)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gIi-js-Bpd">
-                                        <rect key="frame" x="30" y="112" width="189" height="21"/>
+                                        <rect key="frame" x="20" y="82" width="189" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　　　　　÷ (打数＋四死球＋犠飛)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i83-oz-hlV">
-                                        <rect key="frame" x="31" y="133" width="263" height="21"/>
+                                        <rect key="frame" x="21" y="103" width="263" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ 四死球・犠打・打撃妨害は打数に含まない" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AdM-Zg-NRW">
-                                        <rect key="frame" x="65" y="70" width="332" height="21"/>
+                                        <rect key="frame" x="55" y="40" width="332" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   エラー・野選は打数に含み、安打に含まない" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JKH-T9-jL4">
-                                        <rect key="frame" x="65" y="83" width="332" height="21"/>
+                                        <rect key="frame" x="55" y="53" width="332" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長打率 ＝ 塁打数 ÷ 打数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CIr-ky-kPs">
-                                        <rect key="frame" x="30" y="166" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="136" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OPS ＝ 出塁率＋長打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H8N-aX-Jf3">
-                                        <rect key="frame" x="30" y="215" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="185" width="270" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IsoD ＝ 出塁率−打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dxa-q9-R6O">
+                                        <rect key="frame" x="20" y="215" width="270" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IsoP ＝ 長打率−打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jtz-U0-NV7">
+                                        <rect key="frame" x="20" y="245" width="270" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RC27 ＝ RC ÷ (打数−安打＋" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yUL-dT-pdp">
+                                        <rect key="frame" x="20" y="275" width="214" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RC ＝ (A+2.4C) × (B+3C) ÷ (9C) － 0.9C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5cY-Fw-5W5">
+                                        <rect key="frame" x="40" y="325" width="260" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B = 塁打+0.26×(四球+死球)+0.53×(犠飛+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mif-bA-NBX">
+                                        <rect key="frame" x="40" y="375" width="573" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="犠打) + 0.64×盗塁 - 0.03×三振" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3KW-1y-BoG">
+                                        <rect key="frame" x="66" y="396" width="323" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C = 打数 + 四球 + 死球 + 犠飛 + 犠打" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PNb-kn-dp0">
+                                        <rect key="frame" x="40" y="420" width="282" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="犠打＋犠飛）×27" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ra5-77-cWY">
+                                        <rect key="frame" x="158" y="295" width="132" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ 塁打数＝単打×1＋二塁打×2＋三塁打×3＋本塁打×4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uaa-fk-gP9">
-                                        <rect key="frame" x="65" y="186" width="332" height="21"/>
+                                        <rect key="frame" x="55" y="156" width="332" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A = 安打 + 四球 + 死球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ju-hq-Zlh">
+                                        <rect key="frame" x="40" y="350" width="173" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -194,7 +250,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                                 <items>
-                                    <navigationItem title="ヘルプ" id="wzV-Xe-95G">
+                                    <navigationItem title="投手成績の算出方法" id="wzV-Xe-95G">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="Bor-fo-Z58">
                                             <connections>
                                                 <action selector="backButton:" destination="sTY-hB-g86" id="mNW-zh-ulr"/>
@@ -207,37 +263,45 @@
                                 <rect key="frame" x="0.0" y="64" width="328" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【投手成績の算出方法】" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r24-RX-MP4">
-                                        <rect key="frame" x="10" y="21" width="280" height="21"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="防御率 ＝ 自責点 ÷ 投球回×9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hAB-wC-85k">
-                                        <rect key="frame" x="29" y="50" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="20" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHIP ＝ (被安打＋与四球) ÷ 投球回" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X9n-ZS-pEc">
-                                        <rect key="frame" x="29" y="85" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="55" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奪三振率 ＝ 奪三振 ÷ 投球回×9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fp2-TM-naD">
-                                        <rect key="frame" x="29" y="120" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="90" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K/BB  ＝ 奪三振 ÷ 与四球" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ahz-d9-oyS">
-                                        <rect key="frame" x="29" y="155" width="270" height="21"/>
+                                        <rect key="frame" x="20" y="125" width="270" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIP ＝ (被本塁打×13 ＋ 四死球×3 − " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sCN-cq-LsM">
+                                        <rect key="frame" x="20" y="160" width="271" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l64-dM-8wX">
+                                        <rect key="frame" x="60" y="185" width="240" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <string key="text">奪三振×2) ÷ イニング数 + 3.12</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1163,22 +1227,22 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　OPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" id="BFW-xk-lX8">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　長打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" id="BFW-xk-lX8">
                                         <rect key="frame" x="30" y="311" width="285" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="長打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfR-53-tKv">
-                                        <rect key="frame" x="30" y="341" width="280" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OPS　　　IsoD　　　IsoP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfR-53-tKv">
+                                        <rect key="frame" x="30" y="341" width="285" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aTi-Nb-YJl">
-                                        <rect key="frame" x="70" y="370" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="400" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="打撃成績をメール送信">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1261,6 +1325,13 @@
                                             <action selector="termChangeButton:" destination="3" eventType="touchUpInside" id="SWL-z5-VS6"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="RC27" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aIZ-9f-I5b">
+                                        <rect key="frame" x="30" y="371" width="285" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -1272,6 +1343,7 @@
                         <outlet property="battingresult" destination="omK-t0-btv" id="laI-9O-YXJ"/>
                         <outlet property="battingstat" destination="BFW-xk-lX8" id="2G0-Mu-g50"/>
                         <outlet property="battingstat2" destination="XfR-53-tKv" id="zfT-x7-d80"/>
+                        <outlet property="battingstat3" destination="aIZ-9f-I5b" id="Ic7-61-n2f"/>
                         <outlet property="daten" destination="Uj8-y3-BfI" id="xfr-3R-aUX"/>
                         <outlet property="doubles" destination="NFD-Fx-qgC" id="PzR-k3-lob"/>
                         <outlet property="homeruns" destination="XWT-jS-OU6" id="Q0f-zn-ACL"/>
@@ -1392,6 +1464,13 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="FIP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ZT-uH-4Tt">
+                                        <rect key="frame" x="187" y="366" width="26" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="完投" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d6n-Vh-tTM">
                                         <rect key="frame" x="220" y="306" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
@@ -1478,6 +1557,13 @@
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YRm-rZ-vNT">
                                         <rect key="frame" x="223" y="336" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="99.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JCk-3G-c0H">
+                                        <rect key="frame" x="223" y="366" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1637,6 +1723,7 @@
                     <connections>
                         <outlet property="dassanshin" destination="0aZ-Iw-uuZ" id="hKl-q5-jiJ"/>
                         <outlet property="era" destination="H0D-hS-QBt" id="imK-2R-1Li"/>
+                        <outlet property="fip" destination="JCk-3G-c0H" id="xbV-mk-Djd"/>
                         <outlet property="hianda" destination="dN9-PH-k8K" id="6G7-xE-9d1"/>
                         <outlet property="hihomerun" destination="3HL-j7-YH1" id="FEm-Yk-gJm"/>
                         <outlet property="imageShareBtn" destination="cFc-y6-8QP" id="euP-4b-CdD"/>

@@ -283,12 +283,12 @@
     NSLog(@"use version : %@  now version : %@", useVersion, nowversion);
      */
     
-    if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO){
+    if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO || VERUP_DIALOG_VIEW == 1){
         NSArray* gameResultList = [GameResultManager loadGameResultList];
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデートしていただき\nありがとうございます" message:@"バージョン2.5では、打撃成績/打席分析/投手成績の集計で期間指定ができるようになりました。ぜひお試しください。" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデートいただき\nありがとうございます" message:@"バージョン2.6では打撃成績/投手成績にセイバーメトリクスの指標（IsoD/IsoP/RC27/FIP）を追加しました。\n試合結果の入力が楽しくなりますね。" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
         }

@@ -30,6 +30,7 @@
 @property float whip;
 @property float k9;
 @property float kbb;
+@property float fip;
 
 + (PitchingStatistics*)calculatePitchingStatistics:(NSArray*)gameResultList;
 

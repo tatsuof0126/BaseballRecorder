@@ -10,8 +10,9 @@
 #import "GameResult.h"
 #import "InAppPurchaseManager.h"
 
-#define AD_VIEW 1 // 1=表示,0=非表示
-#define MAKE_SAMPLE_DATA 0 // 1=テストデータ作成
+#define AD_VIEW 1 // 1=表示,0=非表示（リリース時は1）
+#define VERUP_DIALOG_VIEW 0 // 1=表示,0=非表示（リリース時は0）
+#define MAKE_SAMPLE_DATA 0 // 1=テストデータ作成（リリース時は0）
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

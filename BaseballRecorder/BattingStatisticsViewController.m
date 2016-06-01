@@ -120,8 +120,13 @@
                          [Utility getFloatStr:battingStatistics.obp appendBlank:YES],
                          [Utility getFloatStr:battingStatistics.slg appendBlank:YES]];
 
-    _battingstat2.text = [NSString stringWithFormat:@"OPS %@",
-                          [Utility getFloatStr:battingStatistics.ops appendBlank:YES]];
+    _battingstat2.text = [NSString stringWithFormat:@"OPS %@  IsoD %@  IsoP %@",
+                          [Utility getFloatStr:battingStatistics.ops appendBlank:YES],
+                          [Utility getFloatStr:battingStatistics.isod appendBlank:YES],
+                          [Utility getFloatStr:battingStatistics.isop appendBlank:YES]];
+
+    _battingstat3.text = [NSString stringWithFormat:@"RC27 %@",
+                          [Utility getFloatStr2:battingStatistics.rc27]];
 }
 
 - (void)viewDidUnload {
@@ -180,24 +185,24 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermStringForShare];
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";
-    if([targetYearStr isEqualToString:@"すべて"] != YES){
-        [shareString appendString:targetYearStr];
-        [shareString appendString:@"の"];
-    } else {
+    if(targetTerm.type == TERM_TYPE_ALL){
         tsusanStr = @"通算";
+    } else {
+        [shareString appendString:[targetTerm getTermStringForShare]];
+        [shareString appendString:@"の"];
     }
     
     if([targetTeamStr isEqualToString:@"すべて"] != YES){
         [shareString appendString:targetTeamStr];
         [shareString appendString:@"での"];
     }
+    [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
     
     if(shareType == SHARE_TYPE_TEXT){
-        [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
         
         [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ 長打率%@ OPS%@ "
          ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
@@ -235,7 +240,6 @@
         }
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
-        [shareString appendFormat:@"%@打撃成績は、",tsusanStr];
         [shareString appendFormat:@"%d打席%d打数%d安打 打率%@ 出塁率%@ 長打率%@ OPS%@ です。 #ベボレコ"
          ,battingStatistics.boxs, battingStatistics.atbats, battingStatistics.hits
          ,[Utility getFloatStr:battingStatistics.average appendBlank:NO]

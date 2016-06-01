@@ -96,6 +96,7 @@
     _whip.text = [Utility getFloatStr2:pitchingStatistics.whip];
     _k9.text = [Utility getFloatStr2:pitchingStatistics.k9];
     _kbb.text = [Utility getFloatStr2:pitchingStatistics.kbb];
+    _fip.text = [Utility getFloatStr2:pitchingStatistics.fip];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,26 +133,24 @@
     // 試合結果の文言を作る
     NSMutableString* shareString = [NSMutableString string];
     
-    NSString* targetYearStr = [[ConfigManager getCalcTargetTerm] getTermStringForShare];
+    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
     NSString* targetTeamStr = [ConfigManager getCalcTargetTeam];
     
     NSString* tsusanStr = @"";
-    if([targetYearStr isEqualToString:@"すべて"] != YES){
-        [shareString appendString:targetYearStr];
-        [shareString appendString:@"の"];
-    } else {
+    if(targetTerm.type == TERM_TYPE_ALL){
         tsusanStr = @"通算";
+    } else {
+        [shareString appendString:[targetTerm getTermStringForShare]];
+        [shareString appendString:@"の"];
     }
     
     if([targetTeamStr isEqualToString:@"すべて"] != YES){
         [shareString appendString:targetTeamStr];
         [shareString appendString:@"での"];
     }
-    
+    [shareString appendFormat:@"%@投手成績は、",tsusanStr];
     
     if(shareType == SHARE_TYPE_TEXT){
-        [shareString appendFormat:@"%@投手成績は、",tsusanStr];
-    
         [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ 投球回%@ "
          ,pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose
          ,pitchingStatistics.save, pitchingStatistics.hold
@@ -175,16 +174,15 @@
             [shareString appendFormat:@"与死球%d ", pitchingStatistics.yoshikyu2];
         }
     
-        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ K/BB%@ "
+        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ K/BB%@ FIP%@ "
          ,pitchingStatistics.shitten, pitchingStatistics.jisekiten, pitchingStatistics.kanto
          ,[Utility getFloatStr2:pitchingStatistics.whip]
          ,[Utility getFloatStr2:pitchingStatistics.k9]
-         ,[Utility getFloatStr2:pitchingStatistics.kbb]];
+         ,[Utility getFloatStr2:pitchingStatistics.kbb]
+         ,[Utility getFloatStr2:pitchingStatistics.fip]];
     
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
-        [shareString appendFormat:@"%@投手成績は、",tsusanStr];
-
         [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ "
          ,pitchingStatistics.games, pitchingStatistics.win, pitchingStatistics.lose
          ,pitchingStatistics.save, pitchingStatistics.hold

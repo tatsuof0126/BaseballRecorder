@@ -31,7 +31,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *kanto;
 @property (strong, nonatomic) IBOutlet UILabel *whip;
 @property (strong, nonatomic) IBOutlet UILabel *k9;
-@property (weak, nonatomic) IBOutlet UILabel *kbb;
+@property (strong, nonatomic) IBOutlet UILabel *kbb;
+@property (strong, nonatomic) IBOutlet UILabel *fip;
 
 @property (strong, nonatomic) IBOutlet UILabel *year;
 @property (strong, nonatomic) IBOutlet UILabel *team;

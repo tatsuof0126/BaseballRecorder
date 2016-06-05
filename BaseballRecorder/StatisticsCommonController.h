@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 #import <ADG/ADGManagerViewController.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 // #define ALL_TARGET 0
 // #define RECENT5_TARGET 1

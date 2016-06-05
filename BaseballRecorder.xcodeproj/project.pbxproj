@@ -34,7 +34,6 @@
 		0B20309D18BA566200B94D8C /* BattingAnalysisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B20309C18BA566200B94D8C /* BattingAnalysisView.m */; };
 		0B21C2F716CD2C6B005FF0C5 /* StatisticsCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */; };
 		0B21C2FD16CD3385005FF0C5 /* PitchingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */; };
-		0B2271881AAC9CC300B29E37 /* ADG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2271871AAC9CC300B29E37 /* ADG.framework */; };
 		0B22718A1AAC9D0800B29E37 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */; };
 		0B22718C1AAC9D1400B29E37 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */; };
 		0B22718E1AAC9D2F00B29E37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */; };
@@ -102,6 +101,11 @@
 		0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC4265417C663A500AB95D0 /* Twitter.framework */; };
 		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
+		0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AD1CFFB598002172F7 /* FBSDKCoreKit.framework */; };
+		0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */; };
+		0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */; };
+		0BD4B5B41D04711E002172F7 /* ADG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B31D04711E002172F7 /* ADG.framework */; };
+		0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
 		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
@@ -171,7 +175,6 @@
 		0B21C2F616CD2C6B005FF0C5 /* StatisticsCommonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCommonController.m; sourceTree = "<group>"; };
 		0B21C2FB16CD3385005FF0C5 /* PitchingStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchingStatistics.h; sourceTree = "<group>"; };
 		0B21C2FC16CD3385005FF0C5 /* PitchingStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchingStatistics.m; sourceTree = "<group>"; };
-		0B2271871AAC9CC300B29E37 /* ADG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADG.framework; sourceTree = "<group>"; };
 		0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -263,6 +266,11 @@
 		0BC4265417C663A500AB95D0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0BC5F7F917C26D5400C755A7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0BD4B5AD1CFFB598002172F7 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		0BD4B5B31D04711E002172F7 /* ADG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADG.framework; sourceTree = "<group>"; };
+		0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "ADG-Resources.bundle"; path = "../../../../Users/tatsuo/Documents/AppDev/ベボレコ/sdk-master 2/ADG_iOSSDK/ADG.framework/Versions/A/Resources/ADG-Resources.bundle"; sourceTree = "<group>"; };
 		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
 		0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseAddonController.m; sourceTree = "<group>"; };
 		0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -288,21 +296,24 @@
 				0B22718A1AAC9D0800B29E37 /* CoreTelephony.framework in Frameworks */,
 				0B166C241A2377D300682DBC /* SystemConfiguration.framework in Frameworks */,
 				0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */,
+				0BD4B5B41D04711E002172F7 /* ADG.framework in Frameworks */,
 				0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */,
 				0B166C2D1A237C7B00682DBC /* libAdIdAccess.a in Frameworks */,
 				0B166C261A2377E300682DBC /* libz.dylib in Frameworks */,
 				0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */,
 				0B166C131A236EF200682DBC /* ImageIO.framework in Frameworks */,
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
+				0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
 				0B166C101A236BC000682DBC /* libNendAd.a in Frameworks */,
+				0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
 				0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */,
 				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
-				0B2271881AAC9CC300B29E37 /* ADG.framework in Frameworks */,
+				0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +366,7 @@
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */,
 				0B53465317BF676900601AAE /* arrow_left.png */,
 				0B53464D17BF561A00601AAE /* arrow_right.png */,
 				0B16F8B31933918400C82E16 /* arrow_none.png */,
@@ -393,14 +405,6 @@
 			path = image;
 			sourceTree = "<group>";
 		};
-		0B2271861AAC9CC300B29E37 /* ADG_iOSSDK */ = {
-			isa = PBXGroup;
-			children = (
-				0B2271871AAC9CC300B29E37 /* ADG.framework */,
-			);
-			path = ADG_iOSSDK;
-			sourceTree = "<group>";
-		};
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
@@ -409,7 +413,6 @@
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
 				0B166C141A23773100682DBC /* GoogleAnalyticsLibrary */,
-				0B2271861AAC9CC300B29E37 /* ADG_iOSSDK */,
 				0B16F89C19338AAF00C82E16 /* NendAd */,
 			);
 			sourceTree = "<group>";
@@ -426,6 +429,10 @@
 		0B9499AC16325697007F574D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BD4B5B31D04711E002172F7 /* ADG.framework */,
+				0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */,
+				0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */,
+				0BD4B5AD1CFFB598002172F7 /* FBSDKCoreKit.framework */,
 				0B22718D1AAC9D2F00B29E37 /* QuartzCore.framework */,
 				0B22718B1AAC9D1400B29E37 /* MediaPlayer.framework */,
 				0B2271891AAC9D0800B29E37 /* CoreTelephony.framework */,
@@ -675,6 +682,7 @@
 				0BB961091A5997530062EA3F /* icon-76.png in Resources */,
 				0BB960EC1A5996840062EA3F /* Images-2.xcassets in Resources */,
 				0B16F8B41933918400C82E16 /* arrow_none.png in Resources */,
+				0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */,
 				0B166C111A236BC000682DBC /* NADView_readme.txt in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
 				0BB960CC1A5996090062EA3F /* Default-736h@2x.png in Resources */,
@@ -857,6 +865,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ADG_iOSSDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
@@ -893,6 +902,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ADG_iOSSDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";

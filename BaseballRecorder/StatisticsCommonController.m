@@ -693,6 +693,35 @@
 - (void)postToFacebook:(int)shareType{
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
+    NSString* shareString = [self makeShareString:POST_FACEBOOK shareType:(int)shareType];
+    NSString* shareURLString = [self getShareURLString:POST_FACEBOOK shareType:(int)shareType];
+    UIImage* shareImage = [self getShareImage:POST_FACEBOOK shareType:(int)shareType];
+    
+    if(shareType == SHARE_TYPE_TEXT){
+        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+        content.contentURL = [NSURL URLWithString:shareURLString];
+        content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
+        content.quote = shareString;
+        
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+    } else if(shareType == SHARE_TYPE_IMAGE){
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = shareImage;
+        photo.userGenerated = YES;
+        photo.caption = shareString;
+        
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
+        
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+    }
+}
+
+/*
+- (void)postToFacebook:(int)shareType{
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_FACEBOOK shareType:(int)shareType];
@@ -726,6 +755,7 @@
     
     [self presentViewController:vc animated:YES completion:nil];
 }
+*/
 
 - (void)postToLine:(int)shareType{
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Lineシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];

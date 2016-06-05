@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "ShowGameResultController.h"
 #import "GameResultListController.h"
 #import "GameResultManager.h"
@@ -439,6 +440,19 @@
 - (void)postToFacebook {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Facebookシェア" value:nil screen:@"試合結果参照画面"];
     
+    NSString* shareString = [self makeShareString:POST_FACEBOOK];
+    
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:@"https://itunes.apple.com/jp/app/id578136103"];
+    content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
+    content.quote = shareString;
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+}
+
+/*
+- (void)postToFacebook {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Facebookシェア" value:nil screen:@"試合結果参照画面"];
+    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_FACEBOOK];
@@ -465,6 +479,7 @@
     
     [self presentViewController:vc animated:YES completion:nil];
 }
+*/
 
 - (void)postToLine {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Lineシェア" value:nil screen:@"試合結果参照画面"];
@@ -541,9 +556,6 @@
         }
         [battingString deleteCharactersInRange:NSMakeRange([battingString length]-1, 1)];
         [tweetString appendFormat:@"(%@)",battingString];
-        
-//        [tweetString appendFormat:@"打撃成績は %d打数%d安打%d打点%d盗塁（%@）",
-//         stats.atbats, stats.hits, gameResult.daten, gameResult.steal, battingString];
     }
     
     // 投手成績の文言をつける
@@ -567,7 +579,7 @@
     
     [tweetString appendString:@" #ベボレコ"];
     
-    if(type == POST_FACEBOOK || type == POST_LINE){
+    if(type == POST_LINE){
         [tweetString appendString:@" https://itunes.apple.com/jp/app/id578136103"];
     }
     

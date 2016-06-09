@@ -70,7 +70,8 @@
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
                                    @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc = [[ADGManagerViewController alloc]initWithAdParams :adgparam :self.view];
+        ADGManagerViewController *adgvc
+            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
         self.adg = adgvc;
         adg_.delegate = self;
         [adg_ loadRequest];

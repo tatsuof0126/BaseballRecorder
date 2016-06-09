@@ -64,9 +64,6 @@
 		0B9499B816325697007F574D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499B616325697007F574D /* InfoPlist.strings */; };
 		0B9499BA16325697007F574D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499B916325697007F574D /* main.m */; };
 		0B9499BE16325697007F574D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499BD16325697007F574D /* AppDelegate.m */; };
-		0B9499C016325697007F574D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499BF16325697007F574D /* Default.png */; };
-		0B9499C216325697007F574D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C116325697007F574D /* Default@2x.png */; };
-		0B9499C416325697007F574D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C316325697007F574D /* Default-568h@2x.png */; };
 		0B9499C716325697007F574D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9499C516325697007F574D /* MainStoryboard.storyboard */; };
 		0B9499CA16325697007F574D /* GameResultListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9499C916325697007F574D /* GameResultListController.m */; };
 		0B9499DE16325697007F574D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9499AD16325697007F574D /* UIKit.framework */; };
@@ -79,8 +76,6 @@
 		0B949A0416335C33007F574D /* GameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0316335C33007F574D /* GameResult.m */; };
 		0B949A0716335C8B007F574D /* BattingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B949A0616335C8B007F574D /* BattingResult.m */; };
 		0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9AA57218C35E53001F42F4 /* Social.framework */; };
-		0BB960CB1A5996090062EA3F /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960C91A5996090062EA3F /* Default-667h@2x.png */; };
-		0BB960CC1A5996090062EA3F /* Default-736h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960CA1A5996090062EA3F /* Default-736h@2x.png */; };
 		0BB960EC1A5996840062EA3F /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960EB1A5996840062EA3F /* Images-2.xcassets */; };
 		0BB960FC1A5997530062EA3F /* icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960ED1A5997530062EA3F /* icon-29.png */; };
 		0BB960FD1A5997530062EA3F /* icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB960EE1A5997530062EA3F /* icon-29@2x.png */; };
@@ -223,9 +218,6 @@
 		0B9499BB16325697007F574D /* BaseballRecorder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BaseballRecorder-Prefix.pch"; sourceTree = "<group>"; };
 		0B9499BC16325697007F574D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B9499BD16325697007F574D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0B9499BF16325697007F574D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		0B9499C116325697007F574D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		0B9499C316325697007F574D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B9499C816325697007F574D /* GameResultListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameResultListController.h; sourceTree = "<group>"; };
 		0B9499C916325697007F574D /* GameResultListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameResultListController.m; sourceTree = "<group>"; };
 		0B9499DB16325697007F574D /* BaseballRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,8 +235,6 @@
 		0B949A0516335C8A007F574D /* BattingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingResult.h; sourceTree = "<group>"; };
 		0B949A0616335C8B007F574D /* BattingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingResult.m; sourceTree = "<group>"; };
 		0B9AA57218C35E53001F42F4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		0BB960C91A5996090062EA3F /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
-		0BB960CA1A5996090062EA3F /* Default-736h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@2x.png"; sourceTree = "<group>"; };
 		0BB960EB1A5996840062EA3F /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		0BB960ED1A5997530062EA3F /* icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-29.png"; path = "BaseballRecorder/images/icon-29.png"; sourceTree = SOURCE_ROOT; };
 		0BB960EE1A5997530062EA3F /* icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-29@2x.png"; path = "BaseballRecorder/images/icon-29@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -539,11 +529,6 @@
 				0B9499B616325697007F574D /* InfoPlist.strings */,
 				0B9499B916325697007F574D /* main.m */,
 				0B9499BB16325697007F574D /* BaseballRecorder-Prefix.pch */,
-				0B9499BF16325697007F574D /* Default.png */,
-				0B9499C116325697007F574D /* Default@2x.png */,
-				0B9499C316325697007F574D /* Default-568h@2x.png */,
-				0BB960C91A5996090062EA3F /* Default-667h@2x.png */,
-				0BB960CA1A5996090062EA3F /* Default-736h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -613,7 +598,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Tatsuo Fujiwara";
 				TargetAttributes = {
 					0B9499A816325697007F574D = {
@@ -647,11 +632,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B9499B816325697007F574D /* InfoPlist.strings in Resources */,
-				0B9499C016325697007F574D /* Default.png in Resources */,
 				0BB961081A5997530062EA3F /* icon-72@2x.png in Resources */,
-				0B9499C216325697007F574D /* Default@2x.png in Resources */,
 				0BB960FC1A5997530062EA3F /* icon-29.png in Resources */,
-				0B9499C416325697007F574D /* Default-568h@2x.png in Resources */,
 				0B9499C716325697007F574D /* MainStoryboard.storyboard in Resources */,
 				0BB961001A5997530062EA3F /* icon-40@3x.png in Resources */,
 				0B1AA351163D772B00535116 /* book.png in Resources */,
@@ -670,7 +652,6 @@
 				0B40E43816C3F0DD00E0E95D /* disable_check.png in Resources */,
 				0BB961071A5997530062EA3F /* icon-72.png in Resources */,
 				0BB961061A5997530062EA3F /* icon-60@3x.png in Resources */,
-				0BB960CB1A5996090062EA3F /* Default-667h@2x.png in Resources */,
 				0B40E43916C3F0DD00E0E95D /* nocheck.png in Resources */,
 				0B16F8B7193391CB00C82E16 /* browser_window.png in Resources */,
 				0B40E43A16C3F0DD00E0E95D /* check.png in Resources */,
@@ -685,7 +666,6 @@
 				0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */,
 				0B166C111A236BC000682DBC /* NADView_readme.txt in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
-				0BB960CC1A5996090062EA3F /* Default-736h@2x.png in Resources */,
 				0B53464E17BF561A00601AAE /* arrow_right.png in Resources */,
 				0BB961021A5997530062EA3F /* icon-50@2x.png in Resources */,
 				0B53465417BF676900601AAE /* arrow_left.png in Resources */,
@@ -816,6 +796,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -862,16 +843,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ADG_iOSSDK",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NendAd",
@@ -884,6 +865,7 @@
 					"-force_load",
 					"\"/iPhoneAppDev/BaseballRecorder/GoogleAnalyticsLibrary/libAdIdAccess.a\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tatsuo.baseballrecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d1d26560-947b-4631-969e-cc662c0299b6";
@@ -899,15 +881,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ADG_iOSSDK",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NendAd",
@@ -915,6 +897,7 @@
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tatsuo.baseballrecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09b72fa7-7ffe-4ea5-a023-1da582766607";
@@ -935,6 +918,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorderTests/BaseballRecorderTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsuo.bbreco.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -952,6 +936,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BaseballRecorder/BaseballRecorder-Prefix.pch";
 				INFOPLIST_FILE = "BaseballRecorderTests/BaseballRecorderTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tatsuo.bbreco.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

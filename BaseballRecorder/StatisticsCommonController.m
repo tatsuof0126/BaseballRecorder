@@ -14,6 +14,9 @@
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "TrackingManager.h"
+#import "NADInterstitial.h"
+
+#define ALERT_WITHAD 9
 
 @interface StatisticsCommonController ()
 
@@ -673,7 +676,8 @@
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                                                                message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                alert.tag = ALERT_WITHAD;
                 [alert show];
             }
         }];
@@ -703,7 +707,7 @@
         content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
         content.quote = shareString;
         
-        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
     } else if(shareType == SHARE_TYPE_IMAGE){
         FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
         photo.image = shareImage;
@@ -714,7 +718,29 @@
         content.photos = @[photo];
         content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
         
-        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    }
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        // インタースティシャル広告を表示
+        [[NADInterstitial sharedInstance] showAd];
+    }
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError*)error {
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag == ALERT_WITHAD && buttonIndex == 0){
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            // インタースティシャル広告を表示
+            [[NADInterstitial sharedInstance] showAd];
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKShareKit/FBSDKSharing.h>
 #import "ShowGameResultController.h"
 #import "GameResultListController.h"
 #import "GameResultManager.h"
@@ -22,6 +23,7 @@
 #import "TrackingManager.h"
 
 #define ALERT_DELETE 1
+#define ALERT_WITHAD 9
 
 @interface ShowGameResultController ()
 
@@ -427,7 +429,8 @@
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                    message:@"つぶやきました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                alert.tag = ALERT_WITHAD;
                 [alert show];
             }
         }];
@@ -447,7 +450,20 @@
     content.contentURL = [NSURL URLWithString:@"https://itunes.apple.com/jp/app/id578136103"];
     content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
     content.quote = shareString;
-    [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        // インタースティシャル広告を表示
+        [[NADInterstitial sharedInstance] showAd];
+    }
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError*)error {
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
 }
 
 /*
@@ -619,7 +635,8 @@
         // 送信成功
         case MFMailComposeResultSent: {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                message:@"送信しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                message:@"送信しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alert.tag = ALERT_WITHAD;
             [alert show];
             break;
         }
@@ -646,7 +663,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // 削除ボタンでOKを押した場合
-    if(buttonIndex == 1){
+    if(alertView.tag == ALERT_DELETE && buttonIndex == 1){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―削除" value:nil screen:@"試合結果参照画面"];
         
         // AppDelegateからresultidを取得して削除
@@ -663,6 +680,14 @@
         // 一覧画面に戻る
         [self backToResultList];
     }
+    
+    if(alertView.tag == ALERT_WITHAD && buttonIndex == 0){
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            // インタースティシャル広告を表示
+            [[NADInterstitial sharedInstance] showAd];
+        }
+    }
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {

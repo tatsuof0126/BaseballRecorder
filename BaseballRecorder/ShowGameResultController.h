@@ -12,6 +12,8 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <ADG/ADGManagerViewController.h>
+#import <FBSDKShareKit/FBSDKSharing.h>
+
 // #import "NADView.h"
 
 #define POST_TWITTER  1
@@ -19,7 +21,7 @@
 #define POST_LINE     3
 
 @interface ShowGameResultController : UIViewController
-        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate>  {
+        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate>  {
     ADGManagerViewController *adg_;
 }
 
@@ -77,7 +79,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property BOOL posted;
-// @property BOOL tweeted;
 
 - (IBAction)arrowButton:(id)sender;
 

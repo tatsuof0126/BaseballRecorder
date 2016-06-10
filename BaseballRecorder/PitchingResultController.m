@@ -15,6 +15,7 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "NADInterstitial.h"
 #import "TrackingManager.h"
 
 #define PICKER_INNING  1
@@ -501,6 +502,11 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
+                if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+                    // インタースティシャル広告を表示
+                    [[NADInterstitial sharedInstance] showAd];
+                }
+                    
                 // 試合結果参照画面へ
                 [self moveNextView];
             }
@@ -520,6 +526,11 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
+                if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+                    // インタースティシャル広告を表示
+                    [[NADInterstitial sharedInstance] showAd];
+                }
+
                 // 試合結果参照画面へ
                 [self moveNextView];
             }

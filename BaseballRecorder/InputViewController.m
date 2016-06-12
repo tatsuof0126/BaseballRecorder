@@ -15,7 +15,6 @@
 #import "ShowGameResultController.h"
 #import "ResultPickerViewController.h"
 #import "SelectInputViewController.h"
-#import "NADInterstitial.h"
 #import "TrackingManager.h"
 
 #define NEW_INPUT 999
@@ -70,10 +69,10 @@
         
         // 日付を今日に初期設定
 //        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDate *date = [NSDate date];
         NSDateComponents *dateComps
-        = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+        = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
         
         gameResult.year = [Utility convert2int:dateComps.year];
         gameResult.month = [Utility convert2int:dateComps.month];
@@ -452,13 +451,13 @@
     resultToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" 閉じる "
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarBackButton:)];
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"クリア"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarClearButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarClearButton:)];
     UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"決定して次へ"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarNextButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarNextButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"  決定  "
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [clearButton setTag:resultno];
     [nextButton setTag:resultno];
@@ -697,32 +696,10 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:gameResult];
                 
+                // インタースティシャル広告表示をセット
                 if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-                    // インタースティシャル広告を表示
-                    [[NADInterstitial sharedInstance] showAd];
-                    /*
-                    NADInterstitialShowResult result = [[NADInterstitial sharedInstance] showAd];
-                    switch (result){
-                        case AD_SHOW_SUCCESS:
-                            NSLog(@"広告の表示に成功しました。");
-                            break;
-                        case AD_SHOW_ALREADY:
-                            NSLog(@"既に広告が表示されています。");
-                            break;
-                        case AD_FREQUENCY_NOT_REACHABLE:
-                            NSLog(@"広告のフリークエンシーカウントに達していません。");
-                            break;
-                        case AD_LOAD_INCOMPLETE:
-                            NSLog(@"抽選リクエストが実行されていない、もしくは実行中です。");
-                            break;
-                        case AD_REQUEST_INCOMPLETE:
-                            NSLog(@"抽選リクエストに失敗しています。");
-                            break;
-                        case AD_DOWNLOAD_INCOMPLETE:
-                            NSLog(@"広告のダウンロードが完了していません。");
-                            break;
-                    }
-                     */
+                    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                    appDelegate.showInterstitialFlg = YES;
                 }
                 
                 [self moveNextView];
@@ -797,9 +774,9 @@
     NSDate* date = [self getDate:_year.text month:_month.text day:_day.text];
     
     // 日時をカレンダーで年月日に分解する
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *dateComps
-        = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+        = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
     
     gameResult.year = [Utility convert2int:dateComps.year];
     gameResult.month = [Utility convert2int:dateComps.month];
@@ -883,7 +860,7 @@
     [formatter setLocale:[NSLocale systemLocale]];
     [formatter setTimeZone:[NSTimeZone systemTimeZone]];
 
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     [formatter setCalendar:calendar];
     
     NSDate *date = [formatter dateFromString:dateStr];
@@ -901,7 +878,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
     
     if(adg_){
         [adg_ pauseRefresh];

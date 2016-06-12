@@ -15,7 +15,6 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "NADInterstitial.h"
 #import "TrackingManager.h"
 
 #define PICKER_INNING  1
@@ -250,11 +249,11 @@
     pickerToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarBackButton:)];
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"クリア"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarClearButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarClearButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完了"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     NSArray *items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
@@ -502,11 +501,11 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
+                // インタースティシャル広告表示をセット
                 if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-                    // インタースティシャル広告を表示
-                    [[NADInterstitial sharedInstance] showAd];
+                    appDelegate.showInterstitialFlg = YES;
                 }
-                    
+                
                 // 試合結果参照画面へ
                 [self moveNextView];
             }
@@ -526,11 +525,11 @@
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
+                // インタースティシャル広告表示をセット
                 if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-                    // インタースティシャル広告を表示
-                    [[NADInterstitial sharedInstance] showAd];
+                    appDelegate.showInterstitialFlg = YES;
                 }
-
+                
                 // 試合結果参照画面へ
                 [self moveNextView];
             }

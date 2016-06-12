@@ -174,14 +174,32 @@
         if(pitchingStatistics.yoshikyu2 != 0){
             [shareString appendFormat:@"与死球%d ", pitchingStatistics.yoshikyu2];
         }
-    
-        [shareString appendFormat:@"失点%d 自責点%d 完投%d WHIP%@ 奪三振率%@ K/BB%@ FIP%@ "
-         ,pitchingStatistics.shitten, pitchingStatistics.jisekiten, pitchingStatistics.kanto
-         ,[Utility getFloatStr2:pitchingStatistics.whip]
-         ,[Utility getFloatStr2:pitchingStatistics.k9]
-         ,[Utility getFloatStr2:pitchingStatistics.kbb]
-         ,[Utility getFloatStr2:pitchingStatistics.fip]];
-    
+        [shareString appendFormat:@"失点%d 自責点%d "
+            ,pitchingStatistics.shitten, pitchingStatistics.jisekiten];
+        if(pitchingStatistics.kanto != 0){
+            [shareString appendFormat:@"完投%d ", pitchingStatistics.kanto];
+        }
+        NSString* whip = [NSString stringWithFormat:@"WHIP%@ ",
+                          [Utility getFloatStr2:pitchingStatistics.whip]];
+        if(type != POST_TWITTER || [shareString length] + [whip length] <= 131){
+            [shareString appendString:whip];
+        }
+        NSString* k9 = [NSString stringWithFormat:@"奪三振率%@ ",
+                        [Utility getFloatStr2:pitchingStatistics.k9]];
+        if(type != POST_TWITTER || [shareString length] + [k9 length] <= 131){
+            [shareString appendString:k9];
+        }
+        NSString* kbb = [NSString stringWithFormat:@"K/BB%@ ",
+                         [Utility getFloatStr2:pitchingStatistics.kbb]];
+        if(type != POST_TWITTER || [shareString length] + [kbb length] <= 131){
+            [shareString appendString:kbb];
+        }
+        NSString* fip = [NSString stringWithFormat:@"FIP%@ ",
+                         [Utility getFloatStr2:pitchingStatistics.fip]];
+        if(type != POST_TWITTER || [shareString length] + [fip length] <= 131){
+            [shareString appendString:fip];
+        }
+        
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
         [shareString appendFormat:@"%d試合%d勝%d敗%dセーブ%dホールド 防御率%@ 勝率%@ "

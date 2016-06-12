@@ -14,9 +14,6 @@
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "TrackingManager.h"
-#import "NADInterstitial.h"
-
-#define ALERT_WITHAD 9
 
 @interface StatisticsCommonController ()
 
@@ -383,9 +380,9 @@
     targetToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarBackButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"設定"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     NSArray* items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
@@ -406,99 +403,6 @@
     
     [UIView commitAnimations];
 }
-
-// あとで消すメソッド
-/*
-- (void)makeResultPicker {
-    // すでにPickerが立ち上がっていたら無視
-    if( targetPicker != nil ){
-        return;
-    }
-    
-    // termListを最新化
-    NSArray* resultList = [GameResultManager loadGameResultList];
-    termList = [TargetTerm getTargetTermListForPicker:resultList];
-    
-    // teamListを最新化
-    teamList = [NSMutableArray array];
-    [teamList addObject:@"すべて"];
-    for(GameResult* result in resultList){
-        NSString* team = result.myteam;
-        if ([teamList containsObject:team] == NO){
-            [teamList addObject:team];
-        }
-    }
-    
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    CGFloat width = rect.size.width;
-    CGFloat height = rect.size.height;
-    
-    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
-    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
-    pickerBaseView.backgroundColor = [UIColor clearColor];
-    
-    targetPicker = [[UIPickerView alloc] init];
-//    targetPicker.center = CGPointMake(width/2, height+125+60);
-    targetPicker.center = CGPointMake(width/2, 135);
-    targetPicker.delegate = self;  // デリゲートを自分自身に設定
-    targetPicker.dataSource = self;  // データソースを自分自身に設定
-    targetPicker.showsSelectionIndicator = YES;
-    targetPicker.backgroundColor = [UIColor whiteColor];
-    
-    // Pickerのデフォルトを設定
-    TargetTerm* targetTerm = [ConfigManager getCalcTargetTerm];
-    NSString* calcTargetTeam = [ConfigManager getCalcTargetTeam];
-    
-    for (int i=0;i<termList.count;i++){
-        TargetTerm* term = [termList objectAtIndex:i];
-        if([[term getTermString] isEqualToString:[targetTerm getTermString]]){
-            [targetPicker selectRow:i inComponent:0 animated:NO];
-            break;
-        }
-    }
-    
-    for (int i=0;i<teamList.count;i++){
-        NSString* team = [teamList objectAtIndex:i];
-        if([team isEqualToString:calcTargetTeam]){
-            [targetPicker selectRow:i inComponent:1 animated:NO];
-            break;
-        }
-    }
-    
-//    [targetPicker selectRow:targetyear inComponent:0 animated:NO];
-//    [targetPicker selectRow:targetteam inComponent:1 animated:NO];
-    
-    targetToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    targetToolbar.barStyle = UIBarStyleBlack;
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"閉じる"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarBackButton:)];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"設定"
-        style:UIBarButtonItemStyleBordered target:self action:@selector(toolbarDoneButton:)];
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    NSArray *items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
-    
-    [targetToolbar setItems:items animated:YES];
-    
-    [pickerBaseView addSubview:targetPicker];
-    [pickerBaseView addSubview:targetToolbar];
-    
-    [self.view addSubview:pickerBaseView];
-    
-    //アニメーションの設定開始
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
-    [UIView setAnimationDuration:0.3];    // 時間の指定
-    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
-//    targetPicker.center = CGPointMake(width/2, height-125);    // 表示する中心座標を表示画面中央に
-//    targetToolbar.center = CGPointMake(width/2, height-255);
-    
-    [UIView commitAnimations];
-}
-*/
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
     if(pickerView.tag == PICKER_TERM){
@@ -676,8 +580,7 @@
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                alert.tag = ALERT_WITHAD;
+                    message:@"つぶやきました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
             }
         }];
@@ -707,7 +610,7 @@
         content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
         content.quote = shareString;
         
-        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
     } else if(shareType == SHARE_TYPE_IMAGE){
         FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
         photo.image = shareImage;
@@ -718,29 +621,7 @@
         content.photos = @[photo];
         content.hashtag = [FBSDKHashtag hashtagWithString:@"#ベボレコ"];
         
-        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
-    }
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        // インタースティシャル広告を表示
-        [[NADInterstitial sharedInstance] showAd];
-    }
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError*)error {
-}
-
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag == ALERT_WITHAD && buttonIndex == 0){
-        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-            // インタースティシャル広告を表示
-            [[NADInterstitial sharedInstance] showAd];
-        }
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
     }
 }
 
@@ -842,10 +723,10 @@
     NSString* today = @"";
     
     // 今日の日付を取得する
-    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
     NSDateComponents *dateComps
-    = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
     
     today = [NSString stringWithFormat:@"（%zd年%zd月%zd日現在）",dateComps.year,dateComps.month,dateComps.day];
     

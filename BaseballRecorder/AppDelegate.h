@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ADG/ADGInterstitial.h>
 #import "GameResult.h"
 #import "InAppPurchaseManager.h"
 
@@ -22,6 +23,9 @@
 
 @property (strong, nonatomic) InAppPurchaseManager* purchaseManager;
 
+@property(nonatomic , retain) ADGInterstitial *interstitial;
+@property BOOL showInterstitialFlg;
+
 - (InAppPurchaseManager*)getInAppPurchaseManager;
 
 + (void)adjustForiPhone5:(UIView*)view;
@@ -29,5 +33,9 @@
 + (void)adjustOriginForiPhone5:(UIView*)view;
 
 + (void)adjustOriginForBeforeiOS6:(UIView*)view;
+
++ (void)showInterstitial;
+
+// + (void)dismissInterstitial;
 
 @end

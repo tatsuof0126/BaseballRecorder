@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0B1092E2193A4C620097C938 /* RectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1092E1193A4C620097C938 /* RectView.m */; };
-		0B166C101A236BC000682DBC /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C091A236BC000682DBC /* libNendAd.a */; };
-		0B166C111A236BC000682DBC /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B166C0E1A236BC000682DBC /* NADView_readme.txt */; };
 		0B166C131A236EF200682DBC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C121A236EF200682DBC /* ImageIO.framework */; };
 		0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */; };
 		0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C211A2377C600682DBC /* CoreData.framework */; };
@@ -122,13 +120,6 @@
 /* Begin PBXFileReference section */
 		0B1092E0193A4C620097C938 /* RectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectView.h; sourceTree = "<group>"; };
 		0B1092E1193A4C620097C938 /* RectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectView.m; sourceTree = "<group>"; };
-		0B166C091A236BC000682DBC /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
-		0B166C0A1A236BC000682DBC /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
-		0B166C0B1A236BC000682DBC /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
-		0B166C0C1A236BC000682DBC /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
-		0B166C0D1A236BC000682DBC /* NADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADInterstitial.h; sourceTree = "<group>"; };
-		0B166C0E1A236BC000682DBC /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
-		0B166C0F1A236BC000682DBC /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
 		0B166C121A236EF200682DBC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0B166C151A23773100682DBC /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		0B166C161A23773100682DBC /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -295,7 +286,6 @@
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
 				0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
-				0B166C101A236BC000682DBC /* libNendAd.a in Frameworks */,
 				0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
@@ -337,20 +327,6 @@
 				0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */,
 			);
 			path = GoogleAnalyticsLibrary;
-			sourceTree = "<group>";
-		};
-		0B16F89C19338AAF00C82E16 /* NendAd */ = {
-			isa = PBXGroup;
-			children = (
-				0B166C091A236BC000682DBC /* libNendAd.a */,
-				0B166C0A1A236BC000682DBC /* NADIconArrayView.h */,
-				0B166C0B1A236BC000682DBC /* NADIconLoader.h */,
-				0B166C0C1A236BC000682DBC /* NADIconView.h */,
-				0B166C0D1A236BC000682DBC /* NADInterstitial.h */,
-				0B166C0E1A236BC000682DBC /* NADView_readme.txt */,
-				0B166C0F1A236BC000682DBC /* NADView.h */,
-			);
-			path = NendAd;
 			sourceTree = "<group>";
 		};
 		0B1AA339163D4F3300535116 /* images */ = {
@@ -403,7 +379,6 @@
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
 				0B166C141A23773100682DBC /* GoogleAnalyticsLibrary */,
-				0B16F89C19338AAF00C82E16 /* NendAd */,
 			);
 			sourceTree = "<group>";
 		};
@@ -664,7 +639,6 @@
 				0BB960EC1A5996840062EA3F /* Images-2.xcassets in Resources */,
 				0B16F8B41933918400C82E16 /* arrow_none.png in Resources */,
 				0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */,
-				0B166C111A236BC000682DBC /* NADView_readme.txt in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
 				0B53464E17BF561A00601AAE /* arrow_right.png in Resources */,
 				0BB961021A5997530062EA3F /* icon-50@2x.png in Resources */,

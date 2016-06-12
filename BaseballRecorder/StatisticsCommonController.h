@@ -28,7 +28,7 @@
 #define POST_LINE 3
 
 @interface StatisticsCommonController : UIViewController
-<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, ADGManagerViewControllerDelegate, FBSDKSharingDelegate> {
+<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, ADGManagerViewControllerDelegate> {
     ADGManagerViewController *adg_;
 }
 

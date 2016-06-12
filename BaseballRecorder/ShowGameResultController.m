@@ -19,7 +19,6 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "NADInterstitial.h"
 #import "TrackingManager.h"
 
 #define ALERT_DELETE 1
@@ -66,7 +65,7 @@
         [adg_ loadRequest];
     }
     
-    [self showGameResult];    
+    [self showGameResult];
 }
 
 - (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
@@ -456,7 +455,7 @@
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // インタースティシャル広告を表示
-        [[NADInterstitial sharedInstance] showAd];
+        
     }
 }
 
@@ -523,8 +522,8 @@
     
     // 今日の試合だったら日付ではなく「今日の試合」と表示する
     NSString* dateString = @"";
-    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *todayComps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *todayComps = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
     
     if (gameResult.year == todayComps.year && gameResult.month == todayComps.month
         && gameResult.day == todayComps.day) {
@@ -673,21 +672,13 @@
         [GameResultManager removeGameResult:resultid];
         
         if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-            // インタースティシャル広告を表示
-            [[NADInterstitial sharedInstance] showAd];
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            appDelegate.showInterstitialFlg = YES;
         }
         
         // 一覧画面に戻る
         [self backToResultList];
     }
-    
-    if(alertView.tag == ALERT_WITHAD && buttonIndex == 0){
-        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-            // インタースティシャル広告を表示
-            [[NADInterstitial sharedInstance] showAd];
-        }
-    }
-    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
@@ -749,8 +740,22 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     if(adg_){
         [adg_ pauseRefresh];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.showInterstitialFlg == YES){
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            [AppDelegate showInterstitial];
+            appDelegate.showInterstitialFlg = NO;
+        }
     }
 }
 

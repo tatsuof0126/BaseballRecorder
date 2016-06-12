@@ -12,22 +12,20 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <ADG/ADGManagerViewController.h>
+#import <ADG/ADGInterstitial.h>
 #import <FBSDKShareKit/FBSDKSharing.h>
-
-// #import "NADView.h"
 
 #define POST_TWITTER  1
 #define POST_FACEBOOK 2
 #define POST_LINE     3
 
 @interface ShowGameResultController : UIViewController
-        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate>  {
+        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate, ADGInterstitialDelegate>  {
     ADGManagerViewController *adg_;
 }
 
 @property (nonatomic, retain) ADGManagerViewController *adg;
-
-// @property (nonatomic, retain) NADView* nadView;
+// @property(nonatomic , retain) ADGInterstitial *interstitial;
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;

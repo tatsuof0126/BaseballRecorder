@@ -315,7 +315,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
     
     if(adg_){
         [adg_ pauseRefresh];

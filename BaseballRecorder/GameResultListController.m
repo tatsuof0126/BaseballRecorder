@@ -29,6 +29,10 @@
 {
     [super viewDidLoad];
     
+    // テスト
+//    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    appDelegate.window.rootViewController = self;
+    
     // 画面が開かれたときのトラッキング情報を送る
     [TrackingManager sendScreenTracking:@"試合結果一覧画面"];
     
@@ -226,11 +230,34 @@
         NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];
         GameResult* result = [array objectAtIndex:indexPath.row];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の削除"
-            message:@"削除してよろしいですか？" delegate:self
-            cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
-        alert.tag = result.resultid;
-        [alert show];
+        // iOS8以上かどうかで処理を分ける
+        Class class = NSClassFromString(@"UIAlertController");
+        if(class){
+            // iOS8以上の時の処理
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"試合結果の削除" message:@"削除してよろしいですか？" preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"キャンセル" style:UIAlertActionStyleCancel handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―削除" value:nil screen:@"試合結果一覧画面"];
+                
+                [GameResultManager removeGameResult:result.resultid];
+                
+                [self loadGameResult];
+                [gameResultListTableView reloadData];
+                
+                // インタースティシャル広告を表示
+                if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+                    [AppDelegate showInterstitial];
+                }
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else{
+            // iOS7以下の時の処理
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の削除"
+                                                            message:@"削除してよろしいですか？" delegate:self
+                                                  cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
+            alert.tag = result.resultid;
+            [alert show];
+        }
     }
 }
 
@@ -244,8 +271,12 @@
         
         [self loadGameResult];
         [gameResultListTableView reloadData];
+        
+        // インタースティシャル広告を表示（エラーになるので出さない）
+        // if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        //    [AppDelegate showInterstitial];
+        // }
     }
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
@@ -279,9 +310,9 @@
     NSString* nowVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     /*
-    [ConfigManager setUseVersion:@"1.0"];
-    NSLog(@"use version is null : %@", useVersion == nil ? @"TRUE" : @"FALSE");
-    NSLog(@"use version : %@  now version : %@", useVersion, nowversion);
+    // [ConfigManager setUseVersion:@"1.0"];
+    // NSLog(@"use version is null : %@", useVersion == nil ? @"TRUE" : @"FALSE");
+    // NSLog(@"use version : %@  now version : %@", useVersion, nowversion);
      */
     
     if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO || VERUP_DIALOG_VIEW == 1){
@@ -313,11 +344,20 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self checkUpdated];
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.showInterstitialFlg == YES){
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            [AppDelegate showInterstitial];
+            appDelegate.showInterstitialFlg = NO;
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
     
     if(adg_){
         [adg_ pauseRefresh];

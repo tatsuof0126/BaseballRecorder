@@ -9,12 +9,14 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
 #import "GAI.h"
-#import "NADInterstitial.h"
+// #import "NADInterstitial.h"
 #import "ConfigManager.h"
 #import "GameResultManager.h"
 
 @implementation AppDelegate
 
+@synthesize interstitial;
+@synthesize showInterstitialFlg;
 @synthesize purchaseManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -25,8 +27,8 @@
     [self initializeGoogleAnalytics];
     
     // AppBankNetworkのインタースティシャル広告の初期化
-    [[NADInterstitial sharedInstance] loadAdWithApiKey:@"ced5049f9d729e1847dbfa8b0d188218a720f20e"
-                                                spotId:@"271381"];
+    // [[NADInterstitial sharedInstance] loadAdWithApiKey:@"ced5049f9d729e1847dbfa8b0d188218a720f20e"
+    //                                            spotId:@"271381"];
     
     // FBSDK
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -38,6 +40,10 @@
     
     // 設定ファイルを初期化（必要な場合のみ）
     [ConfigManager initConfig];
+    
+    // インタースティシャル広告の初期化
+    [self prepareInterstitial];
+    showInterstitialFlg = NO;
     
     return YES;
 }
@@ -131,6 +137,70 @@
         sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
     return [[FBSDKApplicationDelegate sharedInstance] application:application
             openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
+// インタースティシャル広告
+- (void)prepareInterstitial {
+    // 旧オブジェクトの初期化
+    if(interstitial){
+        [interstitial dismiss];
+        interstitial.delegate = nil;
+        interstitial = nil;
+    }
+    
+    // ADGInterstitialオブジェクトを作成
+    interstitial = [[ADGInterstitial alloc] init];
+    interstitial.delegate = self;
+    [interstitial setLocationId:@"38149"];
+    [interstitial setSpan:25 isPercentage:YES];
+    [interstitial preload];
+}
+
++ (void)showInterstitial {
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.interstitial show];
+
+//    BOOL showad = [appDelegate.interstitial show];
+//    NSLog(@"SHOW RESULT : %d", showad);
+}
+
+/*
++ (void)dismissInterstitial {
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate.interstitial dismiss];
+    appDelegate.interstitial.delegate = nil;
+    
+    [appDelegate prepareInterstitial];
+
+//    NSLog(@"DISMISS AD");
+}
+*/
+
+// Interstitialのデリゲート
+- (void)ADGInterstitialClose {
+//    NSLog(@"%@", @"ADGInterstitialClose");
+    [self prepareInterstitial];
+}
+
+- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController*)adgManagerViewController {
+//    NSLog(@"%@", @"ADGManagerViewControllerReceiveAd");
+}
+
+- (void)ADGManagerViewControllerFailedToReceiveAd:(ADGManagerViewController*)adgManagerViewController
+                                             code:(kADGErrorCode)code {
+//    NSLog(@"%@", @"ADGManagerViewControllerFailedToReceiveAd");
+    switch (code) {
+        case kADGErrorCodeExceedLimit:
+        case kADGErrorCodeNeedConnection:
+            break;
+        default:
+            [interstitial preload];
+            break;
+    }
+}
+
+- (void)ADGManagerViewControllerOpenUrl:(ADGManagerViewController*)adgManagerViewController{
+//    NSLog(@"%@", @"ADGManagerViewControllerOpenUrl");
 }
 
 @end

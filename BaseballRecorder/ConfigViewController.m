@@ -79,7 +79,6 @@
     scrollView.frame = CGRectMake(0, 64, 320, 366);
     scrollView.contentSize = CGSizeMake(320, 580);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
@@ -96,12 +95,10 @@
     // 読み込みに成功したら広告を見える場所に移動
     self.adg.view.frame = CGRectMake(0, 381, 320, 50);
     [AppDelegate adjustOriginForiPhone5:self.adg.view];
-    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
     
     // ScrollViewの大きさ定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     if([UIScreen mainScreen].bounds.size.height == 568){
         // iPhone5対応
@@ -114,6 +111,30 @@
 
 - (void)setFrameOriginY:(UIView*)view originY:(int)originY {
     view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
+}
+
+- (void)removeAdsBar {
+    if(self.adg != nil && [ConfigManager isRemoveAdsFlg] == YES){
+        // 広告表示していて、広告削除した場合は表示を消す
+        self.adg.view.frame = CGRectMake(0, 581, 320, 50);
+        [AppDelegate adjustOriginForiPhone5:self.adg.view];
+        
+        // ScrollViewの大きさ定義＆iPhone5対応
+        scrollView.frame = CGRectMake(0, 64, 320, 366);
+        [AppDelegate adjustForiPhone5:scrollView];
+        
+        if([UIScreen mainScreen].bounds.size.height == 568){
+            // iPhone5対応
+            [self setFrameOriginY:_apptitle originY:390];
+            [self setFrameOriginY:_versionName originY:390];
+            [self setFrameOriginY:appstoreLabel originY:413];
+            [self setFrameOriginY:otherappLabel originY:413];
+        }
+        
+        [adg_ pauseRefresh];
+        adg_.delegate = nil;
+        adg_ = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +181,10 @@
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     [self hiddenDoneButton];
     return YES;
+}
+
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (void)showDoneButton {
@@ -308,6 +333,9 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // 広告が削除された場合の対応
+    [self removeAdsBar];
     
     if(adg_){
         [adg_ resumeRefresh];

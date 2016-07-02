@@ -39,7 +39,6 @@
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
-    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
@@ -56,12 +55,25 @@
     // 読み込みに成功したら広告を見える場所に移動
     self.adg.view.frame = CGRectMake(0, 381, 320, 50);
     [AppDelegate adjustOriginForiPhone5:self.adg.view];
-    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
     
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
-    [AppDelegate adjustOriginForBeforeiOS6:gameResultListTableView];
+}
+
+- (void)removeAdsBar {
+    if(self.adg != nil && [ConfigManager isRemoveAdsFlg] == YES){
+        // 広告表示していて、広告削除した場合は表示を消す
+        self.adg.view.frame = CGRectMake(0, 581, 320, 50);
+        [AppDelegate adjustOriginForiPhone5:self.adg.view];
+        
+        gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
+        [AppDelegate adjustForiPhone5:gameResultListTableView];
+        
+        [adg_ pauseRefresh];
+        adg_.delegate = nil;
+        adg_ = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -246,7 +258,7 @@
                 
                 // インタースティシャル広告を表示
                 if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-                    [AppDelegate showInterstitial];
+                    [AppDelegate showInterstitial:self];
                 }
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -320,7 +332,7 @@
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデートいただき\nありがとうございます" message:@"バージョン2.6では打撃成績/投手成績にセイバーメトリクスの指標（IsoD/IsoP/RC27/FIP）を追加しました。\n試合結果の入力が楽しくなりますね。" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます" message:@"一部の端末で画面が小さくなる不具合があったため修正しました。レビューで教えていただきありがとうございます。" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
         }
@@ -347,10 +359,13 @@
     [super viewDidAppear:animated];
     [self checkUpdated];
     
+    // 広告が削除された場合の対応
+    [self removeAdsBar];
+    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if(appDelegate.showInterstitialFlg == YES){
         if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-            [AppDelegate showInterstitial];
+            [AppDelegate showInterstitial:self];
             appDelegate.showInterstitialFlg = NO;
         }
     }

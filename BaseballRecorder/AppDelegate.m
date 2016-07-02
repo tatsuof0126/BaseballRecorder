@@ -113,6 +113,7 @@
     }
 }
 
+/*
 + (void)adjustOriginForBeforeiOS6:(UIView*)view {
     // iOS5/6対応
     if([[[UIDevice currentDevice] systemVersion] compare:@"7" options:NSNumericSearch]
@@ -123,6 +124,7 @@
         view.frame = newRect;
     }
 }
+*/
 
 - (void)initializeGoogleAnalytics {
     // トラッキングIDを設定
@@ -144,6 +146,7 @@
     // 旧オブジェクトの初期化
     if(interstitial){
         [interstitial dismiss];
+        interstitial.rootViewController = nil;
         interstitial.delegate = nil;
         interstitial = nil;
     }
@@ -152,12 +155,14 @@
     interstitial = [[ADGInterstitial alloc] init];
     interstitial.delegate = self;
     [interstitial setLocationId:@"38149"];
-    [interstitial setSpan:25 isPercentage:YES];
+    [interstitial setSpan:100 isPercentage:YES];
+    [interstitial setEnableTestMode:YES];
     [interstitial preload];
 }
 
-+ (void)showInterstitial {
++ (void)showInterstitial:(UIViewController*)controller {
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.interstitial.rootViewController = controller;
     [appDelegate.interstitial show];
 
 //    BOOL showad = [appDelegate.interstitial show];

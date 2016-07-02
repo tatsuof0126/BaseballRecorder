@@ -32,9 +32,9 @@
 
 + (void)adjustOriginForiPhone5:(UIView*)view;
 
-+ (void)adjustOriginForBeforeiOS6:(UIView*)view;
+// + (void)adjustOriginForBeforeiOS6:(UIView*)view;
 
-+ (void)showInterstitial;
++ (void)showInterstitial:(UIViewController*)controller;
 
 // + (void)dismissInterstitial;
 

@@ -64,7 +64,6 @@
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     // 広告を表示
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
@@ -82,12 +81,10 @@
     // 読み込みに成功したら広告を見える場所に移動
     self.adg.view.frame = CGRectMake(0, 430, 320, 50);
     [AppDelegate adjustOriginForiPhone5:self.adg.view];
-    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
     
     // Scrollviewの大きさ定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
 }
 
 - (void)showPitchingResult {
@@ -158,6 +155,10 @@
     
     [self hiddenDoneButton];
     return YES;
+}
+
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (void)showDoneButton {

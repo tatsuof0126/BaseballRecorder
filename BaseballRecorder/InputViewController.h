@@ -61,6 +61,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *toPitchingButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
+- (IBAction)onTap:(id)sender;
+
 - (IBAction)toPitchingButton:(id)sender;
 - (IBAction)saveButton:(id)sender;
 - (IBAction)backButton:(id)sender;

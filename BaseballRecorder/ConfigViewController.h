@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *appstoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *otherappLabel;
 
+- (IBAction)onTap:(id)sender;
+
 - (IBAction)placeEdited:(id)sender;
 - (IBAction)myteamEdited:(id)sender;
 - (IBAction)sendtoEdited:(id)sender;

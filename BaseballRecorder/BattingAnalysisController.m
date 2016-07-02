@@ -41,9 +41,8 @@
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.contentSize = CGSizeMake(320, 510);
-    scrollView.frame = CGRectMake(0, 64, 320, 416);
+    scrollView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
     
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
@@ -63,12 +62,25 @@
     // 読み込みに成功したら広告を見える場所に移動
     self.adg.view.frame = CGRectMake(0, 381, 320, 50);
     [AppDelegate adjustOriginForiPhone5:self.adg.view];
-    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
     
     // ScrollViewの大きさ定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:scrollView];
+}
+
+- (void)removeAdsBar {
+    if(self.adg != nil && [ConfigManager isRemoveAdsFlg] == YES){
+        // 広告表示していて、広告削除した場合は表示を消す
+        self.adg.view.frame = CGRectMake(0, 581, 320, 50);
+        [AppDelegate adjustOriginForiPhone5:self.adg.view];
+        
+        scrollView.frame = CGRectMake(0, 64, 320, 366);
+        [AppDelegate adjustForiPhone5:scrollView];
+        
+        [adg_ pauseRefresh];
+        adg_.delegate = nil;
+        adg_ = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -215,6 +227,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // 広告が削除された場合の対応
+    [self removeAdsBar];
     
     if(adg_){
         [adg_ resumeRefresh];

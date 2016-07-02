@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Utility.h"
 #import "TrackingManager.h"
+#import "ConfigManager.h"
 
 #define APPSTORELABEL 1
 

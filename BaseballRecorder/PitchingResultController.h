@@ -48,6 +48,8 @@
 @property (strong, nonatomic) UIToolbar *pickerToolbar;
 @property (strong, nonatomic) UIPickerView *selectPicker;
 
+- (IBAction)onTap:(id)sender;
+
 - (IBAction)inputInning:(id)sender;
 - (IBAction)changeInning:(id)sender;
 

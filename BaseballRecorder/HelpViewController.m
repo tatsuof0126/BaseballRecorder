@@ -30,7 +30,6 @@
     // ScrollViewの高さを定義＆iPhone5対応
     _scrollView.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:_scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:_scrollView];
 
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
@@ -47,12 +46,10 @@
     // 読み込みに成功したら広告を見える場所に移動
     self.adg.view.frame = CGRectMake(0, 430, 320, 50);
     [AppDelegate adjustOriginForiPhone5:self.adg.view];
-    [AppDelegate adjustOriginForBeforeiOS6:self.adg.view];
 
     // Scrollviewの大きさ定義＆iPhone5対応
     _scrollView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:_scrollView];
-    [AppDelegate adjustOriginForBeforeiOS6:_scrollView];
 }
 
 - (IBAction)backButton:(id)sender {

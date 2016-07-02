@@ -182,9 +182,10 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
 //    NSLog(@"y : %f", scroolview.contentOffset.y);
     
-    if ((textField == _daten || textField == _tokuten || textField == _steal) &&
-        scrollView.contentOffset.y < 195.0f+gameResult.battingResultArray.count*40){
-        [scrollView setContentOffset:CGPointMake(0.0f, 195.0f+gameResult.battingResultArray.count*40) animated:YES];
+    if ((textField == _daten || textField == _tokuten || textField == _error ||
+         textField == _steal || textField == _stealOut) &&
+        scrollView.contentOffset.y < 215.0f+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 215.0f+gameResult.battingResultArray.count*40) animated:YES];
     }
     
     if ((textField == _myscore || textField == _otherscore) &&
@@ -227,8 +228,8 @@
 //    NSLog(@"y : %f", scrollView.contentOffset.y);
     
     if (textView == _memo &&
-        scrollView.contentOffset.y < 345.0f+gameResult.battingResultArray.count*40){
-        [scrollView setContentOffset:CGPointMake(0.0f, 345.0f+gameResult.battingResultArray.count*40) animated:YES];
+        scrollView.contentOffset.y < 385.0f+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 385.0f+gameResult.battingResultArray.count*40) animated:YES];
     }
     
     [self showDoneButton];
@@ -281,7 +282,9 @@
     [_otherscore endEditing:YES];
     [_daten endEditing:YES];
     [_tokuten endEditing:YES];
+    [_error endEditing:YES];
     [_steal endEditing:YES];
+    [_stealOut endEditing:YES];
     [_memo endEditing:YES];
 }
 
@@ -362,14 +365,18 @@
     [self setFrameOriginY:_daten originY:battingAdjust];
     [self setFrameOriginY:_tokutenLabel originY:battingAdjust+4];
     [self setFrameOriginY:_tokuten originY:battingAdjust];
-    [self setFrameOriginY:_stealLabel originY:battingAdjust+4];
-    [self setFrameOriginY:_steal originY:battingAdjust];
-    [self setFrameOriginY:_memoLabel originY:battingAdjust+45];
-    [self setFrameOriginY:_memo originY:battingAdjust+75];
-    [self setFrameOriginY:toPitchingButton originY:battingAdjust+memoAdjust+95];
+    [self setFrameOriginY:_errorLabel originY:battingAdjust+4];
+    [self setFrameOriginY:_error originY:battingAdjust];
+    [self setFrameOriginY:_stealLabel originY:battingAdjust+44];
+    [self setFrameOriginY:_steal originY:battingAdjust+40];
+    [self setFrameOriginY:_stealOutLabel originY:battingAdjust+44];
+    [self setFrameOriginY:_stealOut originY:battingAdjust+40];
+    [self setFrameOriginY:_memoLabel originY:battingAdjust+85];
+    [self setFrameOriginY:_memo originY:battingAdjust+115];
+    [self setFrameOriginY:toPitchingButton originY:battingAdjust+memoAdjust+135];
     
     // ScrollViewの長さを調整
-    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+370);
+    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+450);
     scrollView.contentSize = size;
 }
 
@@ -740,7 +747,8 @@
     }
     
     if(_myscore.text.length == 0 || _otherscore.text.length == 0 ||
-       _daten.text.length == 0 || _tokuten.text.length == 0 || _steal.text.length == 0){
+       _daten.text.length == 0 || _tokuten.text.length == 0 ||
+        _error.text.length == 0 || _steal.text.length == 0 || _stealOut.text.length == 0){
         blankFlg = YES;
     } else {
         // 数字以外が入っていたらエラーにする
@@ -748,7 +756,9 @@
         int otherscore = [_otherscore.text intValue];
         int daten = [_daten.text intValue];
         int tokuten = [_tokuten.text intValue];
+        int error = [_error.text intValue];
         int steal = [_steal.text intValue];
+        int stealOut = [_stealOut.text intValue];
         
         if((myscore == 0 && [_myscore.text isEqualToString:@"0"] == NO) ||
            (otherscore == 0 && [_otherscore.text isEqualToString:@"0"] == NO)){
@@ -757,7 +767,9 @@
         
         if((daten == 0 && [_daten.text isEqualToString:@"0"] == NO) ||
            (tokuten == 0 && [_tokuten.text isEqualToString:@"0"] == NO) ||
-           (steal == 0 && [_steal.text isEqualToString:@"0"] == NO)){
+           (error == 0 && [_error.text isEqualToString:@"0"] == NO) ||
+           (steal == 0 && [_steal.text isEqualToString:@"0"] == NO) ||
+           (stealOut == 0 && [_stealOut.text isEqualToString:@"0"] == NO)){
             [errorArray addObject:@"打撃成績が正しくありません"];
         }
         
@@ -903,8 +915,12 @@
     [self setDaten:nil];
     [self setTokutenLabel:nil];
     [self setTokuten:nil];
+    [self setErrorLabel:nil];
+    [self setError:nil];
     [self setStealLabel:nil];
     [self setSteal:nil];
+    [self setStealOutLabel:nil];
+    [self setStealOut:nil];
     [self setSaveButton:nil];
     [self setToPitchingButton:nil];
     [self setMemoLabel:nil];

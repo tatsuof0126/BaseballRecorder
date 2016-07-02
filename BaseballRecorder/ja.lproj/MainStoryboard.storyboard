@@ -467,14 +467,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="メモ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uKu-7T-aVN">
-                                        <rect key="frame" x="20" y="394" width="34" height="21"/>
+                                        <rect key="frame" x="20" y="452" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="42u-Gk-JMg">
-                                        <rect key="frame" x="210" y="354" width="34" height="21"/>
+                                        <rect key="frame" x="30" y="394" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -566,12 +566,21 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="pJ3-tG-wOQ">
-                                        <rect key="frame" x="255" y="350" width="35" height="30"/>
+                                        <rect key="frame" x="75" y="390" width="35" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="YZ6-hq-EbR"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="KDu-XR-IVU">
+                                        <rect key="frame" x="255" y="350" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="CYm-Gx-IRt" id="Xf6-Qx-Cpe"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="ti0-Gf-uRB">
@@ -600,7 +609,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DIK-rf-cB6">
-                                        <rect key="frame" x="190" y="420" width="100" height="36"/>
+                                        <rect key="frame" x="190" y="445" width="100" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="投手成績へ">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -610,7 +619,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="5M7-t0-zdo" customClass="UIPlaceHolderTextView">
-                                        <rect key="frame" x="30" y="425" width="260" height="90"/>
+                                        <rect key="frame" x="30" y="483" width="260" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -619,6 +628,29 @@
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="eao-nN-dws"/>
                                         </connections>
                                     </textView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁死" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vs2-he-aP1">
+                                        <rect key="frame" x="120" y="394" width="51" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="失策" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hNn-Nr-mBf">
+                                        <rect key="frame" x="210" y="354" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="Zrb-Dx-0ri">
+                                        <rect key="frame" x="185" y="390" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="CYm-Gx-IRt" id="kvG-SW-0Y7"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -652,6 +684,8 @@
                         <outlet property="daten" destination="SRv-Uf-eg2" id="LeY-Xa-jGC"/>
                         <outlet property="datenLabel" destination="2b5-0l-zby" id="uMZ-7A-FrW"/>
                         <outlet property="day" destination="sfy-hz-azw" id="HPb-dA-3tA"/>
+                        <outlet property="error" destination="KDu-XR-IVU" id="Aek-Cy-Erv"/>
+                        <outlet property="errorLabel" destination="hNn-Nr-mBf" id="F4I-7S-MO7"/>
                         <outlet property="inputNavi" destination="jrB-6f-Y6I" id="N3z-zO-3U6"/>
                         <outlet property="memo" destination="5M7-t0-zdo" id="RPA-sC-FRe"/>
                         <outlet property="memoLabel" destination="uKu-7T-aVN" id="e6z-kM-Ok8"/>
@@ -665,6 +699,8 @@
                         <outlet property="scrollView" destination="coX-Kk-ahP" id="8xH-V5-vNt"/>
                         <outlet property="steal" destination="pJ3-tG-wOQ" id="fVZ-4C-c2i"/>
                         <outlet property="stealLabel" destination="42u-Gk-JMg" id="oV1-7P-t1V"/>
+                        <outlet property="stealOut" destination="Zrb-Dx-0ri" id="EHe-W1-I56"/>
+                        <outlet property="stealOutLabel" destination="vs2-he-aP1" id="yHH-ku-kv1"/>
                         <outlet property="tagtext" destination="Rzz-ma-3Sq" id="Vae-Oh-uBr"/>
                         <outlet property="toPitchingButton" destination="DIK-rf-cB6" id="k9N-Ay-e58"/>
                         <outlet property="tokuten" destination="ti0-Gf-uRB" id="9Sg-Wu-Cg4"/>
@@ -2649,7 +2685,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7pF-G3-Z3a"/>
-        <segue reference="TXb-6e-0gl"/>
+        <segue reference="f1a-pn-9eD"/>
         <segue reference="PO9-Hz-laC"/>
     </inferredMetricsTieBreakers>
 </document>

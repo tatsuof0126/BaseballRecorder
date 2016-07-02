@@ -36,8 +36,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *daten;
 @property (weak, nonatomic) IBOutlet UILabel *tokutenLabel;
 @property (weak, nonatomic) IBOutlet UITextField *tokuten;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UITextField *error;
 @property (weak, nonatomic) IBOutlet UILabel *stealLabel;
 @property (weak, nonatomic) IBOutlet UITextField *steal;
+@property (weak, nonatomic) IBOutlet UILabel *stealOutLabel;
+@property (weak, nonatomic) IBOutlet UITextField *stealOut;
 
 @property (strong, nonatomic) IBOutlet UILabel *memoLabel;
 @property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *memo;

@@ -21,6 +21,9 @@
 #define ALERT_BACK 1
 #define ALERT_SAVE 2
 
+#define PICKER_DAJUN 1
+#define PICKER_SHUBI 2
+
 @interface InputViewController ()
 
 @end
@@ -33,9 +36,11 @@
 @synthesize scrollView;
 @synthesize pickerBaseView;
 @synthesize resultPicker;
+@synthesize selectPicker;
 @synthesize resultToolbar;
 @synthesize rectView;
 @synthesize inputtype;
+@synthesize showDetail;
 @synthesize edited;
 @synthesize toPitchingButton;
 @synthesize saveButton;
@@ -133,7 +138,7 @@
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
     
     _memo.text = gameResult.memo;
-    _memo.placeholder = @"打順や守備位置、サヨナラ勝ちなど　試合のメモが入力できます";
+    _memo.placeholder = @"当日の天候やサヨナラ勝ちなど\n試合のメモが入力できます";
     
     // TextViewを整形
     _memo.font = [UIFont systemFontOfSize:14];
@@ -160,6 +165,7 @@
         [adg_ loadRequest];
     }
     
+    showDetail = NO;
     edited = NO;
 }
 
@@ -180,23 +186,32 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-//    NSLog(@"y : %f", scroolview.contentOffset.y);
+    // NSLog(@"y : %f", scrollView.contentOffset.y);
+    
+    int detailAdjust = showDetail ? 110 : 0;
     
     if ((textField == _daten || textField == _tokuten || textField == _error ||
          textField == _steal || textField == _stealOut) &&
-        scrollView.contentOffset.y < 215.0f+gameResult.battingResultArray.count*40){
-        [scrollView setContentOffset:CGPointMake(0.0f, 215.0f+gameResult.battingResultArray.count*40) animated:YES];
+        scrollView.contentOffset.y < 250.0f+detailAdjust+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 250.0f+detailAdjust+gameResult.battingResultArray.count*40) animated:YES];
     }
     
-    if ((textField == _myscore || textField == _otherscore) &&
-        scrollView.contentOffset.y < 60.0f){
-        [scrollView setContentOffset:CGPointMake(0.0f, 60.0f) animated:YES];
+    if ((textField == _place) &&
+        scrollView.contentOffset.y < 175.0f){
+        [scrollView setContentOffset:CGPointMake(0.0f, 175.0f) animated:YES];
     }
+    
+    /*
+    if ((textField == _myscore || textField == _otherscore) &&
+        scrollView.contentOffset.y < 52.0f){
+        [scrollView setContentOffset:CGPointMake(0.0f, 52.0f) animated:YES];
+    }
+    */
     
     [self showDoneButton];
     
     // ResultPickerを閉じる
-    [self closeResultPicker];
+    [self closePicker];
     
     edited = YES;
 }
@@ -225,17 +240,19 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-//    NSLog(@"y : %f", scrollView.contentOffset.y);
+    // NSLog(@"y : %f", scrollView.contentOffset.y);
+    
+    int detailAdjust = showDetail ? 110 : 0;
     
     if (textView == _memo &&
-        scrollView.contentOffset.y < 385.0f+gameResult.battingResultArray.count*40){
-        [scrollView setContentOffset:CGPointMake(0.0f, 385.0f+gameResult.battingResultArray.count*40) animated:YES];
+        scrollView.contentOffset.y < 345.0f+detailAdjust+gameResult.battingResultArray.count*40){
+        [scrollView setContentOffset:CGPointMake(0.0f, 345.0f+detailAdjust+gameResult.battingResultArray.count*40) animated:YES];
     }
     
     [self showDoneButton];
     
     // ResultPickerを閉じる
-    [self closeResultPicker];
+    [self closePicker];
     
     edited = YES;
 }
@@ -254,6 +271,7 @@
 
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES];
+    [self closePicker];
 }
 
 - (void)showDoneButton {
@@ -305,18 +323,23 @@
     // 打撃結果表示用のViewを作って配置（第◯打席、打撃結果、変更ボタン）
     NSArray *battingResultArray = gameResult.battingResultArray;
     
+    int battingBaseY = 220;
+    if(showDetail == YES){
+        battingBaseY = 330;
+    }
+    
     for (int i=0; i<battingResultArray.count; i++) {
         BattingResult *battingResult = [battingResultArray objectAtIndex:i];
         
-        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+i*40,80,21)];
+        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,battingBaseY+5+i*40,80,21)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         
-        UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,265+i*40,160,21)];
+        UILabel *resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(110,battingBaseY+5+i*40,160,21)];
         resultlabel.text = [battingResult getResultShortString];
         resultlabel.textColor = [battingResult getResultColor];
         
         UIButton *changebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        changebutton.frame = CGRectMake(210,260+i*40,55,30);
+        changebutton.frame = CGRectMake(210,battingBaseY+i*40,55,30);
         [changebutton setTitle:@"変更" forState:UIControlStateNormal];
         [changebutton setTag:i];
         [changebutton addTarget:self action:@selector(changeResult:) forControlEvents:UIControlEventTouchDown];
@@ -334,11 +357,11 @@
     }
     
     // 一番下に入力用の打撃成績（第◯打席、入力ボタン）
-    UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,265+battingResultArray.count*40,80,21)];
+    UILabel *nlabel = [[UILabel alloc] initWithFrame:CGRectMake(30,battingBaseY+5+battingResultArray.count*40,80,21)];
     nlabel.text = [NSString stringWithFormat:@"第%zd打席",battingResultArray.count+1];
     
     UIButton *nbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    nbutton.frame = CGRectMake(110,260+battingResultArray.count*40,55,30);
+    nbutton.frame = CGRectMake(110,battingBaseY+battingResultArray.count*40,55,30);
     [nbutton setTitle:@"入力" forState:UIControlStateNormal];
     [nbutton addTarget:self action:@selector(inputResult:) forControlEvents:UIControlEventTouchDown];
     nbutton.tag = NEW_INPUT;
@@ -358,25 +381,40 @@
 - (void)adjustContentFrame {
     // 打点・得点・盗塁入力欄とメモ欄・投手成績へボタンの配置を調整
     // タグを隠す対応で350→310、410→370に修正
-    int battingAdjust = 310+[Utility convert2int:gameResult.battingResultArray.count]*40;
+    int detailAdjust = showDetail ? 110 : 0;
+    int battingAdjust = 270+[Utility convert2int:gameResult.battingResultArray.count]*40;
     int memoAdjust = _memo.frame.size.height;
     
-    [self setFrameOriginY:_datenLabel originY:battingAdjust+4];
-    [self setFrameOriginY:_daten originY:battingAdjust];
-    [self setFrameOriginY:_tokutenLabel originY:battingAdjust+4];
-    [self setFrameOriginY:_tokuten originY:battingAdjust];
-    [self setFrameOriginY:_errorLabel originY:battingAdjust+4];
-    [self setFrameOriginY:_error originY:battingAdjust];
-    [self setFrameOriginY:_stealLabel originY:battingAdjust+44];
-    [self setFrameOriginY:_steal originY:battingAdjust+40];
-    [self setFrameOriginY:_stealOutLabel originY:battingAdjust+44];
-    [self setFrameOriginY:_stealOut originY:battingAdjust+40];
-    [self setFrameOriginY:_memoLabel originY:battingAdjust+85];
-    [self setFrameOriginY:_memo originY:battingAdjust+115];
-    [self setFrameOriginY:toPitchingButton originY:battingAdjust+memoAdjust+135];
+    NSString* detailBtnStr = showDetail ? @"▼" : @"詳細";
+    [_detailBtn setTitle:detailBtnStr forState:UIControlStateNormal];
+    _placeLabel.hidden = !showDetail;
+    _place.hidden = !showDetail;
+    _placeBtn.hidden = !showDetail;
+    _semeLabel.hidden = !showDetail;
+    _semeBtn.hidden = !showDetail;
+    _dajunLabel.hidden = !showDetail;
+    _dajunBtn.hidden = !showDetail;
+    _shubiLabel.hidden = !showDetail;
+    _shubiBtn.hidden = !showDetail;
+    
+    [self setFrameOriginY:_battingResultLabel originY:189+detailAdjust];
+    
+    [self setFrameOriginY:_datenLabel originY:detailAdjust+battingAdjust+4];
+    [self setFrameOriginY:_daten originY:detailAdjust+battingAdjust];
+    [self setFrameOriginY:_tokutenLabel originY:detailAdjust+battingAdjust+4];
+    [self setFrameOriginY:_tokuten originY:detailAdjust+battingAdjust];
+    [self setFrameOriginY:_errorLabel originY:detailAdjust+battingAdjust+4];
+    [self setFrameOriginY:_error originY:detailAdjust+battingAdjust];
+    [self setFrameOriginY:_stealLabel originY:detailAdjust+battingAdjust+44];
+    [self setFrameOriginY:_steal originY:detailAdjust+battingAdjust+40];
+    [self setFrameOriginY:_stealOutLabel originY:detailAdjust+battingAdjust+44];
+    [self setFrameOriginY:_stealOut originY:detailAdjust+battingAdjust+40];
+    [self setFrameOriginY:_memoLabel originY:detailAdjust+battingAdjust+85];
+    [self setFrameOriginY:_memo originY:detailAdjust+battingAdjust+115];
+    [self setFrameOriginY:toPitchingButton originY:detailAdjust+battingAdjust+memoAdjust+135];
     
     // ScrollViewの長さを調整
-    CGSize size = CGSizeMake(320, battingAdjust+memoAdjust+450);
+    CGSize size = CGSizeMake(320, detailAdjust+battingAdjust+memoAdjust+450);
     scrollView.contentSize = size;
 }
 
@@ -396,7 +434,7 @@
         [self makeResultPicker:NEW_INPUT animated:YES];
         edited = YES;
     } else if(resultPicker.tag != NEW_INPUT){
-        [self closeResultPicker];
+        [self closePicker];
         [self makeResultPicker:NEW_INPUT animated:NO];
     }
 }
@@ -406,13 +444,14 @@
         [self makeResultPicker:button.tag animated:YES];
         edited = YES;
     } else if(resultPicker.tag != button.tag){
-        [self closeResultPicker];
+        [self closePicker];
         [self makeResultPicker:button.tag animated:NO];
     }
 }
 
 - (void)makeResultPicker:(NSInteger)resultno animated:(BOOL)animated {
     [self doneButton]; // 初めに他の編集項目の編集を終了させる
+    [self closePicker];
     
     // スクロール位置を設定
     NSInteger count = 0;
@@ -422,12 +461,14 @@
         count = resultno;
     }
     
+    int detailAdjust = showDetail ? 110 : 0;
+    
     // タグを隠す対応で、250→210
-    [scrollView setContentOffset:CGPointMake(0.0f, 210.0f+count*40) animated:YES];
+    [scrollView setContentOffset:CGPointMake(0.0f, 170.0f+detailAdjust+count*40) animated:YES];
     
     // 入力対象の打撃結果を赤線で囲う
     // タグを隠す対応で、295→255
-    rectView = [[RectView alloc] initWithFrame:CGRectMake(20, 255+count*40, 280, 40)];
+    rectView = [[RectView alloc] initWithFrame:CGRectMake(20, 215+detailAdjust+count*40, 280, 40)];
     [scrollView addSubview:rectView];
     
     // ResultPickerを作る
@@ -459,13 +500,13 @@
     resultToolbar.barStyle = UIBarStyleBlack;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" 閉じる "
-        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarBackButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarCloseButton:)];
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"クリア"
-        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarClearButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarResultClearButton:)];
     UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"決定して次へ"
-        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarNextButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarResultNextButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"  決定  "
-        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarDoneButton:)];
+        style:UIBarButtonItemStylePlain target:self action:@selector(toolbarResultDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [clearButton setTag:resultno];
     [nextButton setTag:resultno];
@@ -498,42 +539,156 @@
     }
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
-    return 2;
-}
+- (void)makeSelectPicker:(int)type {
+    [self doneButton]; // 初めに他の編集項目の編集を終了させる
+    [self closePicker];
 
--(NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (component == 0){
-        return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] count];
-    } else {
-        return [[BattingResult getBattingResultStringArray:R_STR_PICKER] count];
+    // TODO いろいろ閉じないと
+    
+    // SelectPickerを作る
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGFloat width = rect.size.width;
+    CGFloat height = rect.size.height;
+    
+    // PickerViewを乗せるView。アニメーションで出すのでとりあえず画面下に出す。
+    pickerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 250)];
+    pickerBaseView.backgroundColor = [UIColor clearColor];
+    
+    // PickerView
+    selectPicker = [[UIPickerView alloc] init];
+    selectPicker.center = CGPointMake(width/2, 135);
+    selectPicker.backgroundColor = [UIColor whiteColor];
+    selectPicker.delegate = self;  // デリゲートを自分自身に設定
+    selectPicker.dataSource = self;  // データソースを自分自身に設定
+    selectPicker.showsSelectionIndicator = YES;
+    selectPicker.tag = type;
+    
+    if(type == PICKER_DAJUN){
+        // あとで修正
+        [selectPicker selectRow:0 inComponent:0 animated:NO];
+    } else if(type == PICKER_SHUBI){
+        // あとで修正
+        [selectPicker selectRow:0 inComponent:0 animated:NO];
     }
+    
+    // Toolbar（既存の成績の編集の場合のみクリアボタンを出す）
+    resultToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    resultToolbar.barStyle = UIBarStyleBlack;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" 閉じる "
+                                                                   style:UIBarButtonItemStylePlain target:self action:@selector(toolbarCloseButton:)];
+    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"クリア"
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(toolbarSelectClearButton:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"  決定  "
+                                                                   style:UIBarButtonItemStylePlain target:self action:@selector(toolbarSelectDoneButton:)];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [clearButton setTag:type];
+    [doneButton setTag:type];
+    
+    NSArray *items = nil;
+    // あとで修正（新規かどうか）
+    if(1 == NEW_INPUT){
+        items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
+    } else {
+        items = [NSArray arrayWithObjects:backButton, clearButton, spacer, doneButton, nil];
+    }
+    
+    [resultToolbar setItems:items animated:YES];
+    
+    [pickerBaseView addSubview:selectPicker];
+    [pickerBaseView addSubview:resultToolbar];
+    
+    [self.view addSubview:pickerBaseView];
+    
+    //アニメーションの設定開始
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; //アニメーションの種類を設定
+    [UIView setAnimationDuration:0.3];    // 時間の指定
+    pickerBaseView.frame = CGRectMake(0, height-250, 320, 250);
+    [UIView commitAnimations];
 }
 
--(NSString*)pickerView:(UIPickerView*)pickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView {
+    if(pickerView == resultPicker){
+        return 2;
+    } else if(pickerView == selectPicker){
+        switch (selectPicker.tag) {
+            case PICKER_DAJUN:
+                return 1;
+                break;
+            case PICKER_SHUBI:
+                return 4; // とりあえず
+                break;
+            default:
+                break;
+        }
+    }
+    
+    return 1; // 来ないはず
+}
+
+- (NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if(pickerView == resultPicker){
+        if (component == 0){
+            return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] count];
+        } else {
+            return [[BattingResult getBattingResultStringArray:R_STR_PICKER] count];
+        }
+    } else if(pickerView == selectPicker){
+        switch (selectPicker.tag) {
+            case PICKER_DAJUN:
+                return [[GameResult getDajunPickerArray] count];
+                break;
+            case PICKER_SHUBI:
+                return [[GameResult getShortShubiPickerArray] count]; // とりあえず
+                break;
+            default:
+                break;
+        }
+    }
+    return 1; // 来ないはず
+}
+
+- (NSString*)pickerView:(UIPickerView*)pickerView
            titleForRow:(NSInteger)row forComponent:(NSInteger)component{    
-    if (component == 0){
-        return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] objectAtIndex:row];
-    } else {
-        return [[BattingResult getBattingResultStringArray:R_STR_PICKER] objectAtIndex:row];
+    if(pickerView == resultPicker){
+        if (component == 0){
+            return [[BattingResult getBattingPositionStringArray:P_STR_PICKER] objectAtIndex:row];
+        } else {
+            return [[BattingResult getBattingResultStringArray:R_STR_PICKER] objectAtIndex:row];
+        }
+    } else if(pickerView == selectPicker){
+        switch (selectPicker.tag) {
+            case PICKER_DAJUN:
+                return [[GameResult getDajunPickerArray] objectAtIndex:row];
+                break;
+            case PICKER_SHUBI:
+                return [[GameResult getShortShubiPickerArray] objectAtIndex:row]; // とりあえず
+                break;
+            default:
+                break;
+        }
+
     }
+    return @""; // 来ないはず
 }
 
-- (void)toolbarBackButton:(UIBarButtonItem*)sender {
-    [self closeResultPicker];
+- (void)toolbarCloseButton:(UIBarButtonItem*)sender {
+    [self closePicker];
 }
 
-- (void)toolbarClearButton:(id)sender {
+- (void)toolbarResultClearButton:(id)sender {
     int resultno = [Utility convert2int:[sender tag]];
     
     [gameResult removeBattingResult:resultno];
     
-    [self closeResultPicker];
+    [self closePicker];
     
     [self makeBattingResult];
 }
 
-- (void)toolbarNextButton:(id)sender {
+- (void)toolbarResultNextButton:(id)sender {
     int resultno = [Utility convert2int:[sender tag]];
     
     int position = [Utility convert2int:[resultPicker selectedRowInComponent:0]];
@@ -547,7 +702,7 @@
         } else {
             [gameResult replaceBattingResult:battingResult resultno:resultno];
         }
-        [self closeResultPicker];
+        [self closePicker];
         
         [self makeBattingResult];
         
@@ -555,7 +710,7 @@
     }
 }
 
-- (void)toolbarDoneButton:(id)sender {
+- (void)toolbarResultDoneButton:(id)sender {
     int resultno = [Utility convert2int:[sender tag]];
     
     int position = [Utility convert2int:[resultPicker selectedRowInComponent:0]];
@@ -570,18 +725,28 @@
             [gameResult replaceBattingResult:battingResult resultno:resultno];
         }
         
-        [self closeResultPicker];
+        [self closePicker];
         
         [self makeBattingResult];
     }
 }
 
-- (void)closeResultPicker {
+- (void)toolbarSelectClearButton:(id)sender {
+    
+}
+
+- (void)toolbarSelectDoneButton:(id)sender {
+    
+}
+
+- (void)closePicker {
+    [selectPicker removeFromSuperview];
     [resultPicker removeFromSuperview];
     [resultToolbar removeFromSuperview];
     [pickerBaseView removeFromSuperview];
     [rectView removeFromSuperview];
 
+    selectPicker = nil;
     pickerBaseView = nil;
     resultPicker = nil;
     resultToolbar = nil;
@@ -619,12 +784,52 @@
     scrollView.contentSize = size;
 }
 
+- (IBAction)detailButton:(id)sender {
+    showDetail = !showDetail;
+    [self.view endEditing:YES];
+    [self closePicker];
+    [self makeBattingResult];
+}
+
+- (IBAction)semeButton:(id)sender {
+    UIFont* font18 = [UIFont systemFontOfSize:18];
+    UIFont* font15 = [UIFont systemFontOfSize:15];
+    NSAttributedString* attrStr = nil;
+    
+    switch (_semeBtn.tag) {
+        case 0:
+            _semeBtn.tag = 1;
+            attrStr = [[NSAttributedString alloc] initWithString:@"先攻" attributes:@{NSFontAttributeName:font18}];
+            break;
+        case 1:
+            _semeBtn.tag = 2;
+            attrStr = [[NSAttributedString alloc] initWithString:@"後攻" attributes:@{NSFontAttributeName:font18}];
+            break;
+        case 2:
+            _semeBtn.tag = 0;
+            attrStr = [[NSAttributedString alloc] initWithString:@"未設定" attributes:@{NSFontAttributeName:font15}];
+            break;
+        default:
+            break;
+    }
+            
+            [_semeBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+}
+
+- (IBAction)dajunButton:(id)sender {
+    [self makeSelectPicker:PICKER_DAJUN];
+}
+
+- (IBAction)shubiButton:(id)sender {
+    [self makeSelectPicker:PICKER_SHUBI];
+}
+
 - (IBAction)toPitchingButton:(id)sender {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―投手成績へ" value:nil screen:@"打撃成績入力画面"];
     
     // 入力中状態を解除
     [self endTextEdit];
-    [self closeResultPicker];
+    [self closePicker];
     
     NSArray* errorArray = [self inputCheck];
     
@@ -733,10 +938,11 @@
             [errorArray addObject:@"日付が正しくありません。"];
         }
     }
-    
-    if(_place.text.length == 0){
-        blankFlg = YES;
-    }
+
+    // 場所は必須項目からはずした
+//    if(_place.text.length == 0){
+//        blankFlg = YES;
+//    }
     
     if(_myteam.text.length == 0){
         blankFlg = YES;

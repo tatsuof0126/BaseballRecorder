@@ -899,6 +899,21 @@
     return array;
 }
 
++ (NSArray*)getDajunPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:@"",@"１番",@"２番",@"３番",@"４番",@"５番",@"６番",@"７番",@"８番",@"９番",@"10番",@"11番",@"12番",@"代打",@"代走",@"守備交代",nil];
+    return array;
+}
+
++ (NSArray*)getShubiPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",@"ショート",@"レフト",@"センター",@"ライト",nil];
+    return array;
+}
+
++ (NSArray*)getShortShubiPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:@"",@"投手",@"捕手",@"一塁手",@"二塁手",@"三塁手",@"遊撃手",@"左翼手",@"中堅手",@"右翼手",nil];
+    return array;
+}
+
 - (NSArray*)getTagList {
     return [tagtext componentsSeparatedByString:@","];
 }

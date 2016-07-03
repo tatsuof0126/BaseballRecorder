@@ -334,7 +334,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="対戦相手を入力" minimumFontSize="17" id="rZN-tH-TQ9">
-                                        <rect key="frame" x="120" y="140" width="155" height="30"/>
+                                        <rect key="frame" x="120" y="100" width="155" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -352,7 +352,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="試合のあった場所を入力" minimumFontSize="17" id="MC9-1Q-s8H">
-                                        <rect key="frame" x="90" y="60" width="185" height="30"/>
+                                        <rect key="frame" x="90" y="252" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -361,7 +361,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="参加したチームを入力" minimumFontSize="17" id="xRT-sV-3RH">
-                                        <rect key="frame" x="90" y="100" width="185" height="30"/>
+                                        <rect key="frame" x="90" y="60" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -370,7 +370,7 @@
                                         </connections>
                                     </textField>
                                     <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="大会名など集計キーを入力" minimumFontSize="17" id="Rzz-ma-3Sq">
-                                        <rect key="frame" x="90" y="180" width="185" height="30"/>
+                                        <rect key="frame" x="90" y="163" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -386,28 +386,42 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="場所" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HTg-PW-90h">
-                                        <rect key="frame" x="20" y="64" width="34" height="21"/>
+                                        <rect key="frame" x="30" y="256" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="先攻/後攻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DHW-1u-dKF">
+                                        <rect key="frame" x="30" y="184" width="74" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打順/守備" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0gM-xb-7cc">
+                                        <rect key="frame" x="30" y="219" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="チーム" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yt6-Bl-4Eu">
-                                        <rect key="frame" x="20" y="104" width="51" height="21"/>
+                                        <rect key="frame" x="20" y="64" width="51" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="タグ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aRd-cH-Wd8">
-                                        <rect key="frame" x="20" y="184" width="34" height="21"/>
+                                        <rect key="frame" x="20" y="167" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="相手チーム" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gJJ-DQ-wB5">
-                                        <rect key="frame" x="20" y="144" width="85" height="21"/>
+                                        <rect key="frame" x="20" y="104" width="85" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -453,7 +467,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打撃成績" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cTe-Wb-pNG">
-                                        <rect key="frame" x="20" y="229" width="68" height="21"/>
+                                        <rect key="frame" x="20" y="312" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -488,7 +502,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="AcW-ne-Ddf">
-                                        <rect key="frame" x="283" y="64" width="22" height="22"/>
+                                        <rect key="frame" x="283" y="256" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <connections>
@@ -496,7 +510,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="AqQ-yF-Reo">
-                                        <rect key="frame" x="283" y="104" width="22" height="22"/>
+                                        <rect key="frame" x="283" y="64" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -511,7 +525,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="a85-gR-iQI">
-                                        <rect key="frame" x="283" y="144" width="22" height="22"/>
+                                        <rect key="frame" x="283" y="104" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -526,7 +540,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="XQX-7K-cYP">
-                                        <rect key="frame" x="283" y="184" width="22" height="22"/>
+                                        <rect key="frame" x="283" y="167" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -541,14 +555,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合結果" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gZ1-I3-r73">
-                                        <rect key="frame" x="20" y="184" width="68" height="21"/>
+                                        <rect key="frame" x="20" y="144" width="68" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="7wM-fo-M7g">
-                                        <rect key="frame" x="120" y="180" width="45" height="30"/>
+                                        <rect key="frame" x="120" y="140" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -583,6 +597,15 @@
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="Xf6-Qx-Cpe"/>
                                         </connections>
                                     </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="Zrb-Dx-0ri">
+                                        <rect key="frame" x="185" y="390" width="35" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="CYm-Gx-IRt" id="kvG-SW-0Y7"/>
+                                        </connections>
+                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="ti0-Gf-uRB">
                                         <rect key="frame" x="165" y="350" width="35" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -593,7 +616,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="jdu-Sb-Vsc">
-                                        <rect key="frame" x="200" y="180" width="45" height="30"/>
+                                        <rect key="frame" x="200" y="140" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -602,7 +625,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="対" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u4g-AQ-Pzq">
-                                        <rect key="frame" x="174" y="184" width="17" height="21"/>
+                                        <rect key="frame" x="174" y="144" width="17" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -642,15 +665,45 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="Zrb-Dx-0ri">
-                                        <rect key="frame" x="185" y="390" width="35" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NZy-d4-rIv">
+                                        <rect key="frame" x="260" y="139" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <state key="normal" title="詳細"/>
                                         <connections>
-                                            <outlet property="delegate" destination="CYm-Gx-IRt" id="kvG-SW-0Y7"/>
+                                            <action selector="detailButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="TUa-s7-0Sl"/>
                                         </connections>
-                                    </textField>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="p32-kY-FjU">
+                                        <rect key="frame" x="110" y="179" width="50" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="未設定"/>
+                                        <connections>
+                                            <action selector="semeButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="1RN-5b-AAK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bt0-5y-qPz">
+                                        <rect key="frame" x="105" y="215" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="入力"/>
+                                        <connections>
+                                            <action selector="dajunButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="mPu-Qt-Pw0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d3e-Cf-Mpw">
+                                        <rect key="frame" x="215" y="214" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="入力"/>
+                                        <connections>
+                                            <action selector="shubiButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="yeG-vd-I68"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="守備位置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ieX-wQ-VKN">
+                                        <rect key="frame" x="200" y="188" width="70" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -681,9 +734,13 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="battingResultLabel" destination="cTe-Wb-pNG" id="DoW-9k-SfH"/>
+                        <outlet property="dajunBtn" destination="bt0-5y-qPz" id="RXv-DZ-WJk"/>
+                        <outlet property="dajunLabel" destination="0gM-xb-7cc" id="Kyo-in-N07"/>
                         <outlet property="daten" destination="SRv-Uf-eg2" id="LeY-Xa-jGC"/>
                         <outlet property="datenLabel" destination="2b5-0l-zby" id="uMZ-7A-FrW"/>
                         <outlet property="day" destination="sfy-hz-azw" id="HPb-dA-3tA"/>
+                        <outlet property="detailBtn" destination="NZy-d4-rIv" id="iif-5f-FQi"/>
                         <outlet property="error" destination="KDu-XR-IVU" id="Aek-Cy-Erv"/>
                         <outlet property="errorLabel" destination="hNn-Nr-mBf" id="F4I-7S-MO7"/>
                         <outlet property="inputNavi" destination="jrB-6f-Y6I" id="N3z-zO-3U6"/>
@@ -695,8 +752,14 @@
                         <outlet property="otherscore" destination="jdu-Sb-Vsc" id="RTA-aw-Top"/>
                         <outlet property="otherteam" destination="rZN-tH-TQ9" id="vxn-e7-RN3"/>
                         <outlet property="place" destination="MC9-1Q-s8H" id="cVc-uD-U1W"/>
+                        <outlet property="placeBtn" destination="AcW-ne-Ddf" id="uFc-CR-GJw"/>
+                        <outlet property="placeLabel" destination="HTg-PW-90h" id="HxT-d9-U7l"/>
                         <outlet property="saveButton" destination="zbX-kA-Wxe" id="o3G-wy-Cet"/>
                         <outlet property="scrollView" destination="coX-Kk-ahP" id="8xH-V5-vNt"/>
+                        <outlet property="semeBtn" destination="p32-kY-FjU" id="hfu-7u-iBR"/>
+                        <outlet property="semeLabel" destination="DHW-1u-dKF" id="6gw-Tp-XQd"/>
+                        <outlet property="shubiBtn" destination="d3e-Cf-Mpw" id="nZY-9P-VlY"/>
+                        <outlet property="shubiLabel" destination="ieX-wQ-VKN" id="E1r-BQ-P4c"/>
                         <outlet property="steal" destination="pJ3-tG-wOQ" id="fVZ-4C-c2i"/>
                         <outlet property="stealLabel" destination="42u-Gk-JMg" id="oV1-7P-t1V"/>
                         <outlet property="stealOut" destination="Zrb-Dx-0ri" id="EHe-W1-I56"/>

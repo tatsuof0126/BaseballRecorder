@@ -159,6 +159,7 @@
 
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES];
+    [self closeSelectPicker];
 }
 
 - (void)showDoneButton {

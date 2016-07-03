@@ -86,6 +86,12 @@
 
 + (NSArray*)getSekininPickerArray;
 
++ (NSArray*)getDajunPickerArray;
+
++ (NSArray*)getShubiPickerArray;
+
++ (NSArray*)getShortShubiPickerArray;
+
 + (NSString*)adjustTagText:(NSString*)sourceString;
 
 @end

@@ -38,13 +38,13 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *semeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *semeBtn;
-@property (strong, nonatomic) IBOutlet UILabel *dajunLabel;
-@property (strong, nonatomic) IBOutlet UIButton *dajunBtn;
-@property (strong, nonatomic) IBOutlet UILabel *shubiLabel;
-@property (strong, nonatomic) IBOutlet UIButton *shubiBtn;
+@property (strong, nonatomic) IBOutlet UILabel *dajunShubiLabel;
+@property (strong, nonatomic) IBOutlet UIButton *dajunShubiInputBtn;
+@property (strong, nonatomic) IBOutlet UILabel *dajunShubi;
+@property (strong, nonatomic) IBOutlet UIButton *dajunShubiChangeBtn;
 
-
-
+@property int dajun;
+@property (strong, nonatomic) NSMutableArray* shubiArray;
 
 @property (strong, nonatomic) IBOutlet UILabel *battingResultLabel;
 
@@ -89,9 +89,8 @@
 - (IBAction)detailButton:(id)sender;
 
 - (IBAction)semeButton:(id)sender;
-- (IBAction)dajunButton:(id)sender;
-- (IBAction)shubiButton:(id)sender;
-
+- (IBAction)dajunShubiInputButton:(id)sender;
+- (IBAction)dajunShubiChangeButton:(id)sender;
 - (IBAction)toPitchingButton:(id)sender;
 - (IBAction)saveButton:(id)sender;
 - (IBAction)backButton:(id)sender;

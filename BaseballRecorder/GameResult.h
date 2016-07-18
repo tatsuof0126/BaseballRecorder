@@ -30,6 +30,14 @@
 @property int daten;
 @property int tokuten;
 @property int steal;
+@property int stealOut;
+@property int error;
+
+@property int dajun;
+@property int shubi1;
+@property int shubi2;
+@property int shubi3;
+@property int seme;
 
 @property (strong, nonatomic, readwrite) NSString *memo;
 
@@ -88,9 +96,17 @@
 
 + (NSArray*)getDajunPickerArray;
 
++ (NSArray*)getShortDajunPickerArray;
+
 + (NSArray*)getShubiPickerArray;
 
 + (NSArray*)getShortShubiPickerArray;
+
+- (NSString*)getSemeString;
+
+- (NSString*)getDajunString;
+
+- (NSString*)getShubiConnectedString;
 
 + (NSString*)adjustTagText:(NSString*)sourceString;
 

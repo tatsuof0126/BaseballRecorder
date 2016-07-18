@@ -8,7 +8,7 @@
 
 #import "GameResult.h"
 
-#define SAVE_VERSION 7
+#define SAVE_VERSION 8
 
 @implementation GameResult
 
@@ -27,6 +27,14 @@
 @synthesize daten;
 @synthesize tokuten;
 @synthesize steal;
+@synthesize stealOut;
+@synthesize error;
+@synthesize dajun;
+@synthesize shubi1;
+@synthesize shubi2;
+@synthesize shubi3;
+@synthesize seme;
+
 @synthesize memo;
 
 @synthesize inning;
@@ -59,6 +67,14 @@
         daten = 0;
         tokuten = 0;
         steal = 0;
+        stealOut = 0;
+        error = 0;
+        seme = 0;
+        dajun = 0;
+        shubi1 = 0;
+        shubi2 = 0;
+        shubi3 = 0;
+        
         memo = @"";
         
         inning = 0;
@@ -109,6 +125,15 @@
     return [NSString stringWithFormat:@"%@ %d - %d %@",myteam,myscore,otherscore,otherteam];
 }
 
+- (NSString*)getGameResultStringWithTeamSeme {
+    NSString* semeStr = @"";
+    if(seme != 0){
+        semeStr = [NSString stringWithFormat:@"(%@)",[self getSemeString]];
+    }
+    
+    return [NSString stringWithFormat:@"%@%@ %d - %d %@",myteam,semeStr,myscore,otherscore,otherteam];
+}
+
 - (NSString*)getMailSubject {
     return [NSString stringWithFormat:@"【ベボレコ】%d年%d月%d日 %@ %d-%d %@ @ベボレコ"
             ,year,month,day,myteam,myscore,otherscore,otherteam];
@@ -118,21 +143,33 @@
     NSMutableString* bodyString = [NSMutableString string];
     
     [bodyString appendString:[NSString stringWithFormat:@"%d年%d月%d日 %@\n",year,month,day,place]];
-    [bodyString appendString:[NSString stringWithFormat:@"%@\n",[self getGameResultStringWithTeam]]];
+    [bodyString appendString:[NSString stringWithFormat:@"%@\n",[self getGameResultStringWithTeamSeme]]];
     
 //    [bodyString appendString:[NSString stringWithFormat:@"%@ %d-%d %@\n",myteam,myscore,otherscore,otherteam]];
     
     // 打撃成績
     if( (battingResultArray != nil && battingResultArray.count >= 1) ||
-       daten >= 1 || tokuten >= 1 || steal >= 1){
+       daten >= 1 || tokuten >= 1 || error >= 1 || steal >= 1 || stealOut >= 1){
         [bodyString appendString:[NSString stringWithFormat:@"\n打撃成績\n"]];
+
+        NSMutableString* dajunShubiStr = [NSMutableString string];
+        if(dajun != 0){
+            [dajunShubiStr appendFormat:@"%@ ", [self getDajunString]];
+        }
+        [dajunShubiStr appendString:[self getShubiConnectedString]];
+        if([dajunShubiStr length] > 0){
+            [bodyString appendString:[NSString stringWithFormat:@"%@\n", dajunShubiStr]];
+        }
+        
         for (int i=0;i<battingResultArray.count;i++){
             BattingResult* battingResult = [battingResultArray objectAtIndex:i];
             [bodyString appendString:[NSString stringWithFormat:@"第%d打席：%@\n"
                                   ,i+1,[battingResult getResultLongString]]];
         }
-        [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　盗塁：%d\n",
-                              daten,tokuten,steal]];
+        [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　失策：%d\n",
+                              daten,tokuten,error]];
+        [bodyString appendString:[NSString stringWithFormat:@"盗塁：%d　盗塁死：%d\n",
+                                  steal,stealOut]];
     }
     
     // 投手成績
@@ -185,6 +222,8 @@
         return [self getGameResultNSDataV6];
     } else if( SAVE_VERSION == 7 ){
         return [self getGameResultNSDataV7];
+    } else if( SAVE_VERSION == 8 ){
+        return [self getGameResultNSDataV8];
     } else {
         return [self getGameResultNSDataV1];
     }
@@ -478,6 +517,54 @@
     return data;
 }
 
+// V8 盗塁死、失策、先攻後攻、打順、守備位置１〜３を追加
+- (NSData*)getGameResultNSDataV8 {
+    NSMutableString* resultStr = [NSMutableString string];
+    
+    if (UUID == nil || [UUID isEqualToString:@""] || [UUID isEqualToString:@"(null)"]) {
+        // UUIDを作成
+        CFUUIDRef uuidObj = CFUUIDCreate(nil);
+        UUID = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
+        CFRelease(uuidObj);
+    }
+    
+    // １行目：ファイル形式バージョン（V7）、UUID
+    [resultStr appendString:[NSString stringWithFormat:@"V8,%@\n",UUID]];
+    
+    // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁、盗塁死、失策、先攻後攻、打順、守備位置１、守備位置２、守備位置３）
+    [resultStr appendString:[NSString stringWithFormat:
+                             @"%d,%d,%d,%d,%@,%@,%@,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
+                             ,resultid,year,month,day,place,myteam,otherteam,myscore,otherscore
+                             ,daten,tokuten,steal,stealOut,error,seme,dajun,shubi1,shubi2,shubi3]];
+    
+    // ３行目：タグ（カンマ区切り）
+    [resultStr appendString:[NSString stringWithFormat:@"%@\n",tagtext]];
+    
+    // ４行目：打撃成績（場所、結果、場所、結果・・・・）
+    for(int i=0;i<battingResultArray.count;i++){
+        BattingResult* battingResult = [battingResultArray objectAtIndex:i];
+        
+        [resultStr appendString:[NSString stringWithFormat:@"%d,%d"
+                                 ,battingResult.position,battingResult.result]];
+        
+        if( i+1 != battingResultArray.count){
+            [resultStr appendString:@","];
+        }
+    }
+    [resultStr appendString:@"\n"];
+    
+    // ５行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手、投球数）
+    [resultStr appendString:[NSString stringWithFormat:@"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
+                             ,inning,inning2,hianda,hihomerun,dassanshin,yoshikyu,yoshikyu2,shitten,jisekiten,kanto,sekinin,tamakazu]];
+    
+    // ６行目以降：メモ
+    [resultStr appendString:[NSString stringWithFormat:@"%@",memo]];
+    
+    NSData* data = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return data;
+}
+
 + (GameResult*)makeGameResult:(NSData*)data {
     NSString* resultStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSArray* resultStrArray = [resultStr componentsSeparatedByString:@"\n"];
@@ -509,6 +596,9 @@
         } else if([versionStr isEqualToString:@"V7"] == YES){
             // "V7"という文字列ならV7形式
             return [self makeGameResultV7:resultStrArray resultUUID:resultUUID];
+        } else if([versionStr isEqualToString:@"V8"] == YES){
+            // "V7"という文字列ならV7形式
+            return [self makeGameResultV8:resultStrArray resultUUID:resultUUID];
         } else {
             // どのバージョンでもない場合はV1形式と見なす
             return [self makeGameResultV1:resultStrArray];
@@ -709,8 +799,8 @@
     return gameResult;
 }
 
-// V7形式での読み込み（V5からタグを追加）
-// １行目：ファイル形式バージョン（V4）、UUID
+// V7形式での読み込み（V6から投球数を追加）
+// １行目：ファイル形式バージョン、UUID
 // ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁）
 // ３行目：タグ（カンマ区切り）
 // ４行目：打撃成績（場所、結果、場所、結果・・・・）
@@ -729,15 +819,15 @@
     // ３行目はタグ
     gameResult.tagtext = [resultStrArray objectAtIndex:2];
     
-    // ４行目は打撃成績（打撃成績がないときは空行だが３行目自体は存在する）
+    // ４行目は打撃成績（打撃成績がないときは空行だが４行目自体は存在する）
     NSString* battingResultStr = [resultStrArray objectAtIndex:3];
     [self setBattingResult:gameResult battingResultStr:battingResultStr convert:NO];
     
-    // ５行目は投手成績（投手成績がないときは空行だが４行目自体は存在する）
+    // ５行目は投手成績（投手成績がないときは空行だが５行目自体は存在する）
     NSString* pitchingResultStr = [resultStrArray objectAtIndex:4];
     [self setPitchingResultV2:gameResult pitchingResultStr:pitchingResultStr];
     
-    // ６行目以降はメモ（メモがないときは空行だが５行目自体は存在する）
+    // ６行目以降はメモ（メモがないときは空行だが６行目自体は存在する）
     NSMutableString* memoStr = [NSMutableString string];
     for(int i=5;i<resultStrArray.count;i++){
         [memoStr appendString:@"\n"];
@@ -747,6 +837,46 @@
     gameResult.memo = [memoStr substringFromIndex:1];
     
     //    NSLog(@"memo : %@",gameResult.memo);
+    
+    return gameResult;
+}
+
+// V8形式での読み込み（V7から盗塁死、失策、先攻後攻、打順、守備位置１〜３を追加）
+// １行目：ファイル形式バージョン、UUID
+// ２行目：試合情報（ID、年、月、日、場所、自チーム、相手チーム、自チーム得点、相手チーム得点、打点、得点、盗塁、盗塁死、失策、先攻後攻、打順、守備位置１、守備位置２、守備位置３）
+// ３行目：タグ（カンマ区切り）
+// ４行目：打撃成績（場所、結果、場所、結果・・・・）
+// ５行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手、投球数）
+// ６行目以降：メモ
++ (GameResult*)makeGameResultV8:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
+    GameResult* gameResult = [[GameResult alloc] init];
+    
+    // １行目は読み込み済のためUUIDのみ設定
+    gameResult.UUID = resultUUID;
+    
+    // ２行目は試合情報
+    NSString* gameInfoStr = [resultStrArray objectAtIndex:1];
+    [self setGameInfoV3:gameResult gameInfoStr:gameInfoStr];
+    
+    // ３行目はタグ
+    gameResult.tagtext = [resultStrArray objectAtIndex:2];
+    
+    // ４行目は打撃成績（打撃成績がないときは空行だが４行目自体は存在する）
+    NSString* battingResultStr = [resultStrArray objectAtIndex:3];
+    [self setBattingResult:gameResult battingResultStr:battingResultStr convert:NO];
+    
+    // ５行目は投手成績（投手成績がないときは空行だが５行目自体は存在する）
+    NSString* pitchingResultStr = [resultStrArray objectAtIndex:4];
+    [self setPitchingResultV2:gameResult pitchingResultStr:pitchingResultStr];
+    
+    // ６行目以降はメモ（メモがないときは空行だが６行目自体は存在する）
+    NSMutableString* memoStr = [NSMutableString string];
+    for(int i=5;i<resultStrArray.count;i++){
+        [memoStr appendString:@"\n"];
+        [memoStr appendString:[resultStrArray objectAtIndex:i]];
+    }
+    
+    gameResult.memo = [memoStr substringFromIndex:1];
     
     return gameResult;
 }
@@ -778,6 +908,29 @@
     gameResult.daten = [[gameInfoStrArray objectAtIndex:9] intValue];
     gameResult.tokuten = [[gameInfoStrArray objectAtIndex:10] intValue];
     gameResult.steal = [[gameInfoStrArray objectAtIndex:11] intValue];
+}
+
++ (void)setGameInfoV3:(GameResult*)gameResult gameInfoStr:(NSString*)gameInfoStr {
+    NSArray* gameInfoStrArray = [gameInfoStr componentsSeparatedByString:@","];
+    gameResult.resultid = [[gameInfoStrArray objectAtIndex:0] intValue];
+    gameResult.year = [[gameInfoStrArray objectAtIndex:1] intValue];
+    gameResult.month = [[gameInfoStrArray objectAtIndex:2] intValue];
+    gameResult.day = [[gameInfoStrArray objectAtIndex:3] intValue];
+    gameResult.place = [gameInfoStrArray objectAtIndex:4];
+    gameResult.myteam = [gameInfoStrArray objectAtIndex:5];
+    gameResult.otherteam = [gameInfoStrArray objectAtIndex:6];
+    gameResult.myscore = [[gameInfoStrArray objectAtIndex:7] intValue];
+    gameResult.otherscore = [[gameInfoStrArray objectAtIndex:8] intValue];
+    gameResult.daten = [[gameInfoStrArray objectAtIndex:9] intValue];
+    gameResult.tokuten = [[gameInfoStrArray objectAtIndex:10] intValue];
+    gameResult.steal = [[gameInfoStrArray objectAtIndex:11] intValue];
+    gameResult.stealOut = [[gameInfoStrArray objectAtIndex:12] intValue];
+    gameResult.error = [[gameInfoStrArray objectAtIndex:13] intValue];
+    gameResult.seme = [[gameInfoStrArray objectAtIndex:14] intValue];
+    gameResult.dajun = [[gameInfoStrArray objectAtIndex:15] intValue];
+    gameResult.shubi1 = [[gameInfoStrArray objectAtIndex:16] intValue];
+    gameResult.shubi2 = [[gameInfoStrArray objectAtIndex:17] intValue];
+    gameResult.shubi3 = [[gameInfoStrArray objectAtIndex:18] intValue];
 }
 
 + (void)setBattingResult:(GameResult*)gameResult battingResultStr:(NSString*)battingResultStr convert:(BOOL)convert {
@@ -904,14 +1057,46 @@
     return array;
 }
 
++ (NSArray*)getShortDajunPickerArray {
+    NSArray* array = [NSArray arrayWithObjects:@"",@"１番",@"２番",@"３番",@"４番",@"５番",@"６番",@"７番",@"８番",@"９番",@"10番",@"11番",@"12番",@"代打",@"代走",@"守備",nil];
+    return array;
+}
+
 + (NSArray*)getShubiPickerArray {
     NSArray* array = [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",@"ショート",@"レフト",@"センター",@"ライト",nil];
     return array;
 }
 
 + (NSArray*)getShortShubiPickerArray {
-    NSArray* array = [NSArray arrayWithObjects:@"",@"投手",@"捕手",@"一塁手",@"二塁手",@"三塁手",@"遊撃手",@"左翼手",@"中堅手",@"右翼手",nil];
+    NSArray* array = [NSArray arrayWithObjects:@"",@"投手",@"捕手",@"一塁",@"二塁",@"三塁",@"遊撃",@"左翼",@"中堅",@"右翼",nil];
     return array;
+}
+
+- (NSString*)getDajunString {
+    NSArray* array = [GameResult getDajunPickerArray];
+    return [array objectAtIndex:dajun];
+}
+
+- (NSString*)getShubiConnectedString {
+    NSArray* array = shubi3 == 0 ? [GameResult getShubiPickerArray] : [GameResult getShortShubiPickerArray];
+    
+    NSMutableString* str = [NSMutableString string];
+    if(shubi1 != 0){
+        [str appendString:[array objectAtIndex:shubi1]];
+    }
+    if(shubi2 != 0){
+        [str appendFormat:@"→%@", [array objectAtIndex:shubi2]];
+    }
+    if(shubi3 != 0){
+        [str appendFormat:@"→%@", [array objectAtIndex:shubi3]];
+    }
+    
+    return str;
+}
+
+- (NSString*)getSemeString {
+    NSArray* array = [NSArray arrayWithObjects:@"未設定",@"先攻",@"後攻",nil];
+    return [array objectAtIndex:seme];
 }
 
 - (NSArray*)getTagList {

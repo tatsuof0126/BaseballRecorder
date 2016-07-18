@@ -332,7 +332,9 @@
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます" message:@"一部の端末で画面が小さくなる不具合があったため修正しました。レビューで教えていただきありがとうございます。" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます"
+                    message:@"このバージョンから、打順・守備位置・先攻/後攻・盗塁死・失策が記録できるようになりました。ぜひご活用ください。"
+                    preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
         }

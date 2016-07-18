@@ -34,7 +34,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *sacrifices;
 @property (weak, nonatomic) IBOutlet UILabel *daten;
 @property (weak, nonatomic) IBOutlet UILabel *tokuten;
+@property (strong, nonatomic) IBOutlet UILabel *error;
 @property (weak, nonatomic) IBOutlet UILabel *steal;
+@property (strong, nonatomic) IBOutlet UILabel *stealout;
 
 @property (weak, nonatomic) IBOutlet UILabel *team;
 @property (weak, nonatomic) IBOutlet UILabel *year;
@@ -44,7 +46,7 @@
 @property (strong, nonatomic) TeamStatistics* teamStatistics;
 @property (strong, nonatomic) BattingStatistics* battingStatistics;
 
-@property (strong, nonatomic) IBOutlet UIButton *changeBtn;
+// @property (strong, nonatomic) IBOutlet UIButton *changeBtn;
 @property (strong, nonatomic) IBOutlet UIButton *shareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *imageShareBtn;
 @property (strong, nonatomic) IBOutlet UIButton *mailBtn;

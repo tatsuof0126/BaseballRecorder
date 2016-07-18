@@ -269,10 +269,12 @@
     [scrollView addSubview:tmpbar];
     
     // 一時的にラベルを貼る
-    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(190,445,120,20)];
-    tmplabel.adjustsFontSizeToFitWidth = YES;
+    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(160,440,150,30)];
+    tmplabel.font = [UIFont systemFontOfSize:17];
     tmplabel.text = @"草野球日記 ベボレコ";
     [scrollView addSubview:tmplabel];
+    
+
     
     // ScrollViewの内容をContextに書き出し
     CGRect rect = scrollView.bounds;

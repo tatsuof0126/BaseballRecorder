@@ -126,7 +126,9 @@
     _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices];
     _daten.text = [NSString stringWithFormat:@"%d",battingStatistics.daten];
     _tokuten.text = [NSString stringWithFormat:@"%d",battingStatistics.tokuten];
+    _error.text = [NSString stringWithFormat:@"%d",battingStatistics.error];
     _steal.text = [NSString stringWithFormat:@"%d",battingStatistics.steal];
+    _stealout.text = [NSString stringWithFormat:@"%d",battingStatistics.stealOut];
     
     _battingstat.text = [NSString stringWithFormat:@"打率 %@ 出塁率 %@ 長打率 %@",
                          [Utility getFloatStr:battingStatistics.average appendBlank:YES],
@@ -138,7 +140,8 @@
                           [Utility getFloatStr:battingStatistics.isod appendBlank:YES],
                           [Utility getFloatStr:battingStatistics.isop appendBlank:YES]];
 
-    _battingstat3.text = [NSString stringWithFormat:@"RC27 %@",
+    _battingstat3.text = [NSString stringWithFormat:@"盗塁成功率 %@  RC27 %@",
+                          [Utility getFloatStr:battingStatistics.stealrate appendBlank:YES],
                           [Utility getFloatStr2:battingStatistics.rc27]];
 }
 
@@ -248,8 +251,14 @@
         if(battingStatistics.tokuten != 0){
             [shareString appendFormat:@"得点%d ", battingStatistics.tokuten];
         }
+        if(battingStatistics.error != 0){
+            [shareString appendFormat:@"失策%d ", battingStatistics.error];
+        }
         if(battingStatistics.steal != 0){
             [shareString appendFormat:@"盗塁%d ", battingStatistics.steal];
+        }
+        if(battingStatistics.stealOut != 0){
+            [shareString appendFormat:@"盗塁死%d ", battingStatistics.stealOut];
         }
         [shareString appendString:@"です。 #ベボレコ"];
     } else if(shareType == SHARE_TYPE_IMAGE){
@@ -281,7 +290,8 @@
 - (UIImage*)getScreenImage {
     // 投稿用にScrollViewの大きさを調整・スクロールを戻す、項目を少し下に下げる、ボタンを消す
     CGRect scrollOldRect = scrollView.frame;
-    scrollView.frame = CGRectMake(0, 64, 320, 480);
+    // scrollView.frame = CGRectMake(0, 64, 320, 480);
+    scrollView.frame = CGRectMake(0, 64, 320, 510);
     [scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
     
     for (UIView* view in scrollView.subviews){
@@ -291,7 +301,7 @@
         view.frame = newRect;
     }
     
-    _changeBtn.hidden = YES;
+    // _changeBtn.hidden = YES;
     _shareBtn.hidden = YES;
     _imageShareBtn.hidden = YES;
     _mailBtn.hidden = YES;
@@ -306,8 +316,8 @@
     [scrollView addSubview:tmpbar];
     
     // 一時的にラベルを貼る
-    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(190,445,120,20)];
-    tmplabel.adjustsFontSizeToFitWidth = YES;
+    UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(160,470,150,30)];
+    tmplabel.font = [UIFont systemFontOfSize:17];
     tmplabel.text = @"草野球日記 ベボレコ";
     [scrollView addSubview:tmplabel];
     
@@ -329,7 +339,7 @@
     
     // ScrollViewの大きさを元に戻す、ボタンを出す、項目の場所を戻す
     scrollView.frame = scrollOldRect;
-    _changeBtn.hidden = NO;
+    // _changeBtn.hidden = NO;
     _shareBtn.hidden = NO;
     _imageShareBtn.hidden = NO;
     _mailBtn.hidden = NO;

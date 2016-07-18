@@ -23,7 +23,9 @@
 @property int sacrificeflies;
 @property int daten;
 @property int tokuten;
+@property int error;
 @property int steal;
+@property int stealOut;
 
 @property float average;
 @property float obp;
@@ -32,6 +34,7 @@
 @property float isod;
 @property float isop;
 @property float rc27;
+@property float stealrate;
 
 + (BattingStatistics*)calculateBattingStatistics:(NSArray*)gameResultList;
 

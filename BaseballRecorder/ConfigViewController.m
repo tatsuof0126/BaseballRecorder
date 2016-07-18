@@ -160,18 +160,6 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [self showDoneButton];
     
-    /*
-    // ScrollViewを大きくしてスクロールできるようにする
-    CGSize size;
-    // iPhone5対応
-    if([UIScreen mainScreen].bounds.size.height == 568){
-        size = CGSizeMake(320, 748);
-    } else {
-        size = CGSizeMake(320, 660);
-    }
-    scrollView.contentSize = size;
-    */
-     
     // ちょうどいいところにスクロール
     if (textField == _sendto && scrollView.contentOffset.y < 130.0f){
         [scrollView setContentOffset:CGPointMake(0.0f, 130.0f) animated:YES];
@@ -180,6 +168,11 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     [self hiddenDoneButton];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
+    [textField resignFirstResponder];
     return YES;
 }
 
@@ -203,10 +196,6 @@
 }
 
 - (void)doneButton {
-    // ScrollViewのサイズを戻す
-//    CGSize size = CGSizeMake(320, 455);
-//    scrollView.contentSize = size;
-
     [_place endEditing:YES];
     [_myteam endEditing:YES];
     [_sendto endEditing:YES];

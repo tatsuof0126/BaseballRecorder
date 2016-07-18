@@ -337,7 +337,7 @@
                                         <rect key="frame" x="120" y="100" width="155" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="pMH-Wp-fhl"/>
                                         </connections>
@@ -355,7 +355,7 @@
                                         <rect key="frame" x="90" y="252" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="3m6-zA-M3S"/>
                                         </connections>
@@ -364,7 +364,7 @@
                                         <rect key="frame" x="90" y="60" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="CYm-Gx-IRt" id="NAU-vc-fVw"/>
                                         </connections>
@@ -682,23 +682,23 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bt0-5y-qPz">
-                                        <rect key="frame" x="105" y="215" width="60" height="30"/>
+                                        <rect key="frame" x="110" y="215" width="50" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="入力"/>
                                         <connections>
-                                            <action selector="dajunButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="mPu-Qt-Pw0"/>
+                                            <action selector="dajunShubiInputButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="eDx-VV-szR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d3e-Cf-Mpw">
-                                        <rect key="frame" x="215" y="214" width="60" height="30"/>
+                                        <rect key="frame" x="255" y="214" width="50" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="入力"/>
+                                        <state key="normal" title="変更"/>
                                         <connections>
-                                            <action selector="shubiButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="yeG-vd-I68"/>
+                                            <action selector="dajunShubiChangeButton:" destination="CYm-Gx-IRt" eventType="touchUpInside" id="Hab-OT-Jea"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="守備位置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ieX-wQ-VKN">
-                                        <rect key="frame" x="200" y="188" width="70" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="１番 ショート" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="ieX-wQ-VKN">
+                                        <rect key="frame" x="113" y="219" width="150" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -735,8 +735,10 @@
                     </view>
                     <connections>
                         <outlet property="battingResultLabel" destination="cTe-Wb-pNG" id="DoW-9k-SfH"/>
-                        <outlet property="dajunBtn" destination="bt0-5y-qPz" id="RXv-DZ-WJk"/>
-                        <outlet property="dajunLabel" destination="0gM-xb-7cc" id="Kyo-in-N07"/>
+                        <outlet property="dajunShubi" destination="ieX-wQ-VKN" id="KPu-0N-94m"/>
+                        <outlet property="dajunShubiChangeBtn" destination="d3e-Cf-Mpw" id="OA8-zZ-e0B"/>
+                        <outlet property="dajunShubiInputBtn" destination="bt0-5y-qPz" id="52X-ug-vpH"/>
+                        <outlet property="dajunShubiLabel" destination="0gM-xb-7cc" id="JYd-r4-Nag"/>
                         <outlet property="daten" destination="SRv-Uf-eg2" id="LeY-Xa-jGC"/>
                         <outlet property="datenLabel" destination="2b5-0l-zby" id="uMZ-7A-FrW"/>
                         <outlet property="day" destination="sfy-hz-azw" id="HPb-dA-3tA"/>
@@ -758,8 +760,6 @@
                         <outlet property="scrollView" destination="coX-Kk-ahP" id="8xH-V5-vNt"/>
                         <outlet property="semeBtn" destination="p32-kY-FjU" id="hfu-7u-iBR"/>
                         <outlet property="semeLabel" destination="DHW-1u-dKF" id="6gw-Tp-XQd"/>
-                        <outlet property="shubiBtn" destination="d3e-Cf-Mpw" id="nZY-9P-VlY"/>
-                        <outlet property="shubiLabel" destination="ieX-wQ-VKN" id="E1r-BQ-P4c"/>
                         <outlet property="steal" destination="pJ3-tG-wOQ" id="fVZ-4C-c2i"/>
                         <outlet property="stealLabel" destination="42u-Gk-JMg" id="oV1-7P-t1V"/>
                         <outlet property="stealOut" destination="Zrb-Dx-0ri" id="EHe-W1-I56"/>
@@ -1332,13 +1332,41 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W8l-4N-ry3">
-                                        <rect key="frame" x="220" y="281" width="60" height="21"/>
+                                        <rect key="frame" x="40" y="311" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="izK-2G-ck1">
+                                        <rect key="frame" x="94" y="311" width="32" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁死" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hbf-fJ-gfa">
+                                        <rect key="frame" x="130" y="311" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="2xW-Ej-hvM">
+                                        <rect key="frame" x="184" y="311" width="32" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="失策" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dmk-26-iOf">
+                                        <rect key="frame" x="220" y="281" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="dTr-0Z-YSJ">
                                         <rect key="frame" x="274" y="281" width="32" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1346,21 +1374,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="打率　　出塁率　　長打率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" id="BFW-xk-lX8">
-                                        <rect key="frame" x="30" y="311" width="285" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OPS　　　IsoD　　　IsoP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfR-53-tKv">
                                         <rect key="frame" x="30" y="341" width="285" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OPS　　　IsoD　　　IsoP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfR-53-tKv">
+                                        <rect key="frame" x="30" y="371" width="285" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aTi-Nb-YJl">
-                                        <rect key="frame" x="70" y="400" width="180" height="44"/>
+                                        <rect key="frame" x="70" y="430" width="180" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal" title="打撃成績をメール送信">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1443,8 +1471,8 @@
                                             <action selector="termChangeButton:" destination="3" eventType="touchUpInside" id="SWL-z5-VS6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="RC27" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aIZ-9f-I5b">
-                                        <rect key="frame" x="30" y="371" width="285" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁成功率　　RC27" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aIZ-9f-I5b">
+                                        <rect key="frame" x="30" y="401" width="285" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1464,6 +1492,7 @@
                         <outlet property="battingstat3" destination="aIZ-9f-I5b" id="Ic7-61-n2f"/>
                         <outlet property="daten" destination="Uj8-y3-BfI" id="xfr-3R-aUX"/>
                         <outlet property="doubles" destination="NFD-Fx-qgC" id="PzR-k3-lob"/>
+                        <outlet property="error" destination="dTr-0Z-YSJ" id="xSD-0r-Oqa"/>
                         <outlet property="homeruns" destination="XWT-jS-OU6" id="Q0f-zn-ACL"/>
                         <outlet property="imageShareBtn" destination="JjP-0i-nOo" id="xVK-oU-i95"/>
                         <outlet property="leftBtn" destination="dNV-Mw-eMb" id="Xok-q8-3qI"/>
@@ -1473,6 +1502,7 @@
                         <outlet property="scrollView" destination="8Lq-Z0-qel" id="2kx-Qu-Qof"/>
                         <outlet property="shareBtn" destination="QFa-fM-5jq" id="vHm-n5-MGO"/>
                         <outlet property="steal" destination="izK-2G-ck1" id="lLW-IL-0WM"/>
+                        <outlet property="stealout" destination="2xW-Ej-hvM" id="aj6-JX-Wpg"/>
                         <outlet property="strikeouts" destination="Jne-FM-mXc" id="VT4-1m-KEo"/>
                         <outlet property="team" destination="lVz-3r-PKd" id="RPO-1R-WA8"/>
                         <outlet property="teamresult" destination="zMW-zz-lf2" id="9d9-Lo-ZNW"/>
@@ -2000,9 +2030,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="場所" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="DM5-Xq-CTs">
-                                        <rect key="frame" x="20" y="55" width="290" height="21"/>
+                                        <rect key="frame" x="20" y="90" width="290" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="１番   セカンド" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="sRB-k5-ibV">
+                                        <rect key="frame" x="30" y="149" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2091,7 +2128,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vL6-2d-rke">
-                                        <rect key="frame" x="255" y="170" width="30" height="21"/>
+                                        <rect key="frame" x="75" y="190" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2105,7 +2142,35 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6vc-FK-C9f">
-                                        <rect key="frame" x="210" y="170" width="34" height="21"/>
+                                        <rect key="frame" x="30" y="190" width="34" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G4F-2o-F0W">
+                                        <rect key="frame" x="180" y="190" width="30" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="盗塁死" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9os-Vq-Dd9">
+                                        <rect key="frame" x="120" y="190" width="51" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jYD-dx-8eF">
+                                        <rect key="frame" x="257" y="170" width="30" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="失策" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5o1-om-B42">
+                                        <rect key="frame" x="212" y="170" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2153,7 +2218,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="試合結果" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="k0D-xC-ZmK">
-                                        <rect key="frame" x="20" y="90" width="290" height="21"/>
+                                        <rect key="frame" x="20" y="55" width="290" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2190,6 +2255,13 @@
                                             <action selector="arrowButton:" destination="5rJ-uI-mNK" eventType="touchUpInside" id="Ue6-8g-ex1"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(先攻)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wL8-uE-zf3">
+                                        <rect key="frame" x="44" y="75" width="46" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </scrollView>
@@ -2200,12 +2272,15 @@
                     <navigationItem key="navigationItem" id="yD1-Pe-DMg"/>
                     <connections>
                         <outlet property="battingResultLabel" destination="FUg-ni-9WU" id="Vp2-bs-dhS"/>
+                        <outlet property="dajunShubi" destination="sRB-k5-ibV" id="S4f-mt-MCJ"/>
                         <outlet property="dassanshin" destination="G7k-A7-NOB" id="vmB-B5-Lod"/>
                         <outlet property="dassanshinLabel" destination="Ua3-NU-l1m" id="BgJ-Ce-bND"/>
                         <outlet property="date" destination="UZC-h3-ozf" id="YBg-Oi-wqf"/>
                         <outlet property="daten" destination="92X-a2-zYx" id="mMk-YB-g3r"/>
                         <outlet property="datenLabel" destination="3c7-kK-ZvK" id="vcP-p0-aGI"/>
                         <outlet property="deleteButton" destination="X1M-f3-R4z" id="oIw-XB-aNI"/>
+                        <outlet property="error" destination="jYD-dx-8eF" id="4zT-mL-JR9"/>
+                        <outlet property="errorLabel" destination="5o1-om-B42" id="Fg3-sY-DnS"/>
                         <outlet property="hianda" destination="niQ-Ri-nmf" id="Jbh-U4-bH5"/>
                         <outlet property="hiandaLabel" destination="nEu-aR-mU7" id="q48-K7-v2o"/>
                         <outlet property="hihomerun" destination="myP-PD-v0Z" id="WDH-j9-xqZ"/>
@@ -2224,10 +2299,13 @@
                         <outlet property="rightBtn" destination="zqO-Ba-zuu" id="jIl-cN-38o"/>
                         <outlet property="scrollview" destination="PSL-Xw-zeH" id="aHJ-zJ-WEd"/>
                         <outlet property="sekinin" destination="I2U-n4-s69" id="mFl-zz-4YT"/>
+                        <outlet property="seme" destination="wL8-uE-zf3" id="ZNI-iB-H58"/>
                         <outlet property="shitten" destination="hzb-Ld-phm" id="tfo-e6-I0n"/>
                         <outlet property="shittenLabel" destination="OMG-ez-Ekw" id="d65-wC-vY5"/>
                         <outlet property="steal" destination="vL6-2d-rke" id="GBc-Pl-Fdx"/>
                         <outlet property="stealLabel" destination="6vc-FK-C9f" id="Hcn-xc-dol"/>
+                        <outlet property="stealOut" destination="G4F-2o-F0W" id="R2b-SS-iUg"/>
+                        <outlet property="stealOutLabel" destination="9os-Vq-Dd9" id="5Z5-1D-E0n"/>
                         <outlet property="tagText" destination="qx0-qL-2Yr" id="Udy-ON-ROi"/>
                         <outlet property="tagTextLabel" destination="3EJ-vL-wNS" id="xVX-Iu-ILe"/>
                         <outlet property="tamakazu" destination="OSZ-Qf-4gK" id="Xl6-IC-g15"/>
@@ -2298,7 +2376,7 @@
                                         <rect key="frame" x="100" y="51" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <action selector="placeEdited:" destination="sHv-AF-uZY" eventType="editingDidEnd" id="FmE-wP-uKv"/>
                                             <outlet property="delegate" destination="sHv-AF-uZY" id="MB6-Bh-Zy5"/>
@@ -2308,7 +2386,7 @@
                                         <rect key="frame" x="100" y="91" width="185" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <action selector="myteamEdited:" destination="sHv-AF-uZY" eventType="editingDidEnd" id="5mn-cn-1RG"/>
                                             <outlet property="delegate" destination="sHv-AF-uZY" id="X10-IA-Kgd"/>
@@ -2339,7 +2417,7 @@
                                         <rect key="frame" x="30" y="166" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                                         <connections>
                                             <action selector="sendtoEdited:" destination="sHv-AF-uZY" eventType="editingDidEnd" id="0YA-ht-Juv"/>
                                             <outlet property="delegate" destination="sHv-AF-uZY" id="sbz-RI-5LR"/>
@@ -2749,6 +2827,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="7pF-G3-Z3a"/>
         <segue reference="f1a-pn-9eD"/>
-        <segue reference="PO9-Hz-laC"/>
+        <segue reference="Ofd-zu-7oJ"/>
     </inferredMetricsTieBreakers>
 </document>

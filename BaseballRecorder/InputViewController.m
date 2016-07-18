@@ -21,9 +21,6 @@
 #define ALERT_BACK 1
 #define ALERT_SAVE 2
 
-#define PICKER_DAJUN 1
-#define PICKER_SHUBI 2
-
 @interface InputViewController ()
 
 @end
@@ -135,10 +132,33 @@
     
     _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
     _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
+    _error.text = [NSString stringWithFormat:@"%d",gameResult.error];
     _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+    _stealOut.text = [NSString stringWithFormat:@"%d",gameResult.stealOut];
+    
+    _dajun = gameResult.dajun;
+    _shubiArray = [NSMutableArray array];
+    if(gameResult.shubi1 != 0){
+        [_shubiArray addObject:[NSNumber numberWithInt:gameResult.shubi1]];
+    }
+    if(gameResult.shubi2 != 0){
+        [_shubiArray addObject:[NSNumber numberWithInt:gameResult.shubi2]];
+    }
+    if(gameResult.shubi3 != 0){
+        [_shubiArray addObject:[NSNumber numberWithInt:gameResult.shubi3]];
+    }
+    
+    _semeBtn.tag = gameResult.seme;
+    [self setSemeButton];
+    
+    showDetail = NO;
+    if([gameResult.place isEqualToString:@""] == NO ||
+       _semeBtn.tag != 0 || _dajun != 0 || _shubiArray.count > 0){
+        showDetail = YES;
+    }
     
     _memo.text = gameResult.memo;
-    _memo.placeholder = @"当日の天候やサヨナラ勝ちなど\n試合のメモが入力できます";
+    _memo.placeholder = @"その日の天候やサヨナラ勝ちなど\n試合のメモが入力できます";
     
     // TextViewを整形
     _memo.font = [UIFont systemFontOfSize:14];
@@ -165,7 +185,6 @@
         [adg_ loadRequest];
     }
     
-    showDetail = NO;
     edited = NO;
 }
 
@@ -267,6 +286,11 @@
     
     // コンテンツの配置を調整（投手成績へボタンとScrollViewの高さ）
     [self adjustContentFrame];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)onTap:(id)sender {
@@ -392,10 +416,29 @@
     _placeBtn.hidden = !showDetail;
     _semeLabel.hidden = !showDetail;
     _semeBtn.hidden = !showDetail;
-    _dajunLabel.hidden = !showDetail;
-    _dajunBtn.hidden = !showDetail;
-    _shubiLabel.hidden = !showDetail;
-    _shubiBtn.hidden = !showDetail;
+    _dajunShubiLabel.hidden = !showDetail;
+    _dajunShubi.hidden = !showDetail;
+    _dajunShubiInputBtn.hidden = !showDetail;
+    _dajunShubiChangeBtn.hidden = !showDetail;
+    
+    if(showDetail == YES){
+        if(_dajun == 0 && _shubiArray.count == 0){
+            _dajunShubiChangeBtn.hidden = YES;
+            _dajunShubi.hidden = YES;
+        } else {
+            // 打順/守備欄の文字列を設定
+            NSArray* dajunStr = [[GameResult getDajunPickerArray] objectAtIndex:_dajun];
+            NSArray* shubiStrArray = _shubiArray.count > 1 ? [GameResult getShortShubiPickerArray] : [GameResult getShubiPickerArray];
+            NSMutableString* shubiStr = [NSMutableString string];
+            for(NSNumber* num in _shubiArray){
+                [shubiStr appendString:@" "];
+                [shubiStr appendString:[shubiStrArray objectAtIndex:[num intValue]]];
+            }
+            _dajunShubi.text = [NSString stringWithFormat:@"%@%@",dajunStr, shubiStr];
+            
+            _dajunShubiInputBtn.hidden = YES;
+        }
+    }
     
     [self setFrameOriginY:_battingResultLabel originY:189+detailAdjust];
     
@@ -539,11 +582,9 @@
     }
 }
 
-- (void)makeSelectPicker:(int)type {
+- (void)makeSelectPicker {
     [self doneButton]; // 初めに他の編集項目の編集を終了させる
     [self closePicker];
-
-    // TODO いろいろ閉じないと
     
     // SelectPickerを作る
     CGRect rect = [[UIScreen mainScreen] bounds];
@@ -561,14 +602,15 @@
     selectPicker.delegate = self;  // デリゲートを自分自身に設定
     selectPicker.dataSource = self;  // データソースを自分自身に設定
     selectPicker.showsSelectionIndicator = YES;
-    selectPicker.tag = type;
+    selectPicker.tag = _shubiArray.count > 1 ? 1+_shubiArray.count : 2; // 項目（列）の数
     
-    if(type == PICKER_DAJUN){
-        // あとで修正
-        [selectPicker selectRow:0 inComponent:0 animated:NO];
-    } else if(type == PICKER_SHUBI){
-        // あとで修正
-        [selectPicker selectRow:0 inComponent:0 animated:NO];
+    // Pickerの値を初期設定
+    [selectPicker selectRow:_dajun inComponent:0 animated:NO];
+    int i=1;
+    for(NSNumber* num in _shubiArray){
+        int numInt = [num intValue];
+        [selectPicker selectRow:numInt inComponent:i animated:NO];
+        i++;
     }
     
     // Toolbar（既存の成績の編集の場合のみクリアボタンを出す）
@@ -579,18 +621,17 @@
                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(toolbarCloseButton:)];
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"クリア"
                                                                     style:UIBarButtonItemStylePlain target:self action:@selector(toolbarSelectClearButton:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"守備追加"
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(toolbarSelectAddButton:)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"  決定  "
                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(toolbarSelectDoneButton:)];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [clearButton setTag:type];
-    [doneButton setTag:type];
     
     NSArray *items = nil;
-    // あとで修正（新規かどうか）
-    if(1 == NEW_INPUT){
-        items = [NSArray arrayWithObjects:backButton, spacer, doneButton, nil];
+    if(_dajun == 0 && _shubiArray.count == 0){
+        items = [NSArray arrayWithObjects:backButton, spacer, addButton, spacer,doneButton, nil];
     } else {
-        items = [NSArray arrayWithObjects:backButton, clearButton, spacer, doneButton, nil];
+        items = [NSArray arrayWithObjects:backButton, clearButton, spacer, addButton, spacer,doneButton, nil];
     }
     
     [resultToolbar setItems:items animated:YES];
@@ -613,16 +654,7 @@
     if(pickerView == resultPicker){
         return 2;
     } else if(pickerView == selectPicker){
-        switch (selectPicker.tag) {
-            case PICKER_DAJUN:
-                return 1;
-                break;
-            case PICKER_SHUBI:
-                return 4; // とりあえず
-                break;
-            default:
-                break;
-        }
+        return pickerView.tag;
     }
     
     return 1; // 来ないはず
@@ -636,15 +668,10 @@
             return [[BattingResult getBattingResultStringArray:R_STR_PICKER] count];
         }
     } else if(pickerView == selectPicker){
-        switch (selectPicker.tag) {
-            case PICKER_DAJUN:
-                return [[GameResult getDajunPickerArray] count];
-                break;
-            case PICKER_SHUBI:
-                return [[GameResult getShortShubiPickerArray] count]; // とりあえず
-                break;
-            default:
-                break;
+        if(component == 0){
+            return [[GameResult getDajunPickerArray] count];
+        } else {
+            return [[GameResult getShubiPickerArray] count];
         }
     }
     return 1; // 来ないはず
@@ -659,17 +686,19 @@
             return [[BattingResult getBattingResultStringArray:R_STR_PICKER] objectAtIndex:row];
         }
     } else if(pickerView == selectPicker){
-        switch (selectPicker.tag) {
-            case PICKER_DAJUN:
+        if(component == 0){
+            if(selectPicker.tag == 2){
                 return [[GameResult getDajunPickerArray] objectAtIndex:row];
-                break;
-            case PICKER_SHUBI:
-                return [[GameResult getShortShubiPickerArray] objectAtIndex:row]; // とりあえず
-                break;
-            default:
-                break;
+            } else {
+                return [[GameResult getShortDajunPickerArray] objectAtIndex:row];
+            }
+        } else {
+            if(selectPicker.tag == 2){
+                return [[GameResult getShubiPickerArray] objectAtIndex:row];
+            } else {
+                return [[GameResult getShortShubiPickerArray] objectAtIndex:row];
+            }
         }
-
     }
     return @""; // 来ないはず
 }
@@ -732,11 +761,35 @@
 }
 
 - (void)toolbarSelectClearButton:(id)sender {
+    _dajun = 0;
+    _shubiArray = [NSMutableArray array];
     
+    [self makeBattingResult];
+    [self closePicker];
+}
+
+- (void)toolbarSelectAddButton:(id)sender {
+    if(selectPicker.tag < 4){
+        selectPicker.tag++;
+        [selectPicker reloadAllComponents];
+    }
 }
 
 - (void)toolbarSelectDoneButton:(id)sender {
+    // Pickerでの設定値を変数に格納
+    _dajun = (int)[selectPicker selectedRowInComponent:0];
+    _shubiArray = [NSMutableArray array];
+    for(int i=1;i<selectPicker.tag;i++){
+        int selectShubi = (int)[selectPicker selectedRowInComponent:i];
+        int lastShubi = [_shubiArray lastObject] != nil ? [[_shubiArray lastObject] intValue] : 0;
+        
+        if(selectShubi != 0 && selectShubi != lastShubi){
+            [_shubiArray addObject:[NSNumber numberWithInteger:selectShubi]];
+        }
+    }
     
+    [self makeBattingResult];
+    [self closePicker];
 }
 
 - (void)closePicker {
@@ -792,36 +845,45 @@
 }
 
 - (IBAction)semeButton:(id)sender {
+    [self.view endEditing:YES];
+    [self closePicker];
+    
+    _semeBtn.tag++;
+    if(_semeBtn.tag >= 3){
+        _semeBtn.tag = 0;
+    }
+    
+    [self setSemeButton];
+}
+
+- (void)setSemeButton {
     UIFont* font18 = [UIFont systemFontOfSize:18];
     UIFont* font15 = [UIFont systemFontOfSize:15];
     NSAttributedString* attrStr = nil;
     
     switch (_semeBtn.tag) {
         case 0:
-            _semeBtn.tag = 1;
-            attrStr = [[NSAttributedString alloc] initWithString:@"先攻" attributes:@{NSFontAttributeName:font18}];
+            attrStr = [[NSAttributedString alloc] initWithString:@"未設定" attributes:@{NSFontAttributeName:font15}];
             break;
         case 1:
-            _semeBtn.tag = 2;
-            attrStr = [[NSAttributedString alloc] initWithString:@"後攻" attributes:@{NSFontAttributeName:font18}];
+            attrStr = [[NSAttributedString alloc] initWithString:@"先攻" attributes:@{NSFontAttributeName:font18}];
             break;
         case 2:
-            _semeBtn.tag = 0;
-            attrStr = [[NSAttributedString alloc] initWithString:@"未設定" attributes:@{NSFontAttributeName:font15}];
+            attrStr = [[NSAttributedString alloc] initWithString:@"後攻" attributes:@{NSFontAttributeName:font18}];
             break;
         default:
             break;
     }
-            
-            [_semeBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
+    
+    [_semeBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
 }
 
-- (IBAction)dajunButton:(id)sender {
-    [self makeSelectPicker:PICKER_DAJUN];
+- (IBAction)dajunShubiInputButton:(id)sender {
+    [self makeSelectPicker];
 }
 
-- (IBAction)shubiButton:(id)sender {
-    [self makeSelectPicker:PICKER_SHUBI];
+- (IBAction)dajunShubiChangeButton:(id)sender {
+    [self makeSelectPicker];
 }
 
 - (IBAction)toPitchingButton:(id)sender {
@@ -1011,6 +1073,24 @@
     gameResult.daten = [_daten.text intValue];
     gameResult.tokuten = [_tokuten.text intValue];
     gameResult.steal = [_steal.text intValue];
+    gameResult.stealOut = [_stealOut.text intValue];
+    gameResult.error = [_error.text intValue];
+    
+    gameResult.dajun = _dajun;
+    gameResult.seme = (int)_semeBtn.tag;
+    gameResult.shubi1 = 0;
+    gameResult.shubi2 = 0;
+    gameResult.shubi3 = 0;
+    if(_shubiArray.count >= 1){
+        gameResult.shubi1 = [[_shubiArray objectAtIndex:0] intValue];
+    }
+    if(_shubiArray.count >= 2){
+        gameResult.shubi2 = [[_shubiArray objectAtIndex:1] intValue];
+    }
+    if(_shubiArray.count >= 3){
+        gameResult.shubi3 = [[_shubiArray objectAtIndex:2] intValue];
+    }
+    
     
     // 末尾の空白・改行はカット
     gameResult.memo = [[self escapeString:_memo.text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

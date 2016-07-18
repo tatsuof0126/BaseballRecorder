@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B0342BA1D257BF600D0D302 /* AppVadorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342B91D257BF600D0D302 /* AppVadorSDK.framework */; };
 		0B0342BC1D257C6900D0D302 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342BB1D257C6800D0D302 /* AVFoundation.framework */; };
 		0B0342BE1D257C7900D0D302 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342BD1D257C7900D0D302 /* CoreMedia.framework */; };
 		0B0342C01D257E9400D0D302 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342BF1D257E9400D0D302 /* libsqlite3.tbd */; };
-		0B0342C61D2582B300D0D302 /* FiveAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342C51D2582B300D0D302 /* FiveAd.framework */; };
 		0B1092E2193A4C620097C938 /* RectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1092E1193A4C620097C938 /* RectView.m */; };
 		0B166C131A236EF200682DBC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C121A236EF200682DBC /* ImageIO.framework */; };
 		0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */; };
@@ -103,6 +101,8 @@
 		0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */; };
 		0BD4B5B41D04711E002172F7 /* ADG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B31D04711E002172F7 /* ADG.framework */; };
 		0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */; };
+		0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */; };
+		0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
 		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
@@ -122,11 +122,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B0342B91D257BF600D0D302 /* AppVadorSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppVadorSDK.framework; sourceTree = "<group>"; };
 		0B0342BB1D257C6800D0D302 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0B0342BD1D257C7900D0D302 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0B0342BF1D257E9400D0D302 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		0B0342C51D2582B300D0D302 /* FiveAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FiveAd.framework; sourceTree = "<group>"; };
 		0B1092E0193A4C620097C938 /* RectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectView.h; sourceTree = "<group>"; };
 		0B1092E1193A4C620097C938 /* RectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectView.m; sourceTree = "<group>"; };
 		0B166C121A236EF200682DBC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -260,6 +258,8 @@
 		0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		0BD4B5B31D04711E002172F7 /* ADG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADG.framework; sourceTree = "<group>"; };
 		0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "ADG-Resources.bundle"; path = "../../../../Users/tatsuo/Documents/AppDev/ベボレコ/sdk-master 2/ADG_iOSSDK/ADG.framework/Versions/A/Resources/ADG-Resources.bundle"; sourceTree = "<group>"; };
+		0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FiveAd.framework; sourceTree = "<group>"; };
+		0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppVadorSDK.framework; sourceTree = "<group>"; };
 		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
 		0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseAddonController.m; sourceTree = "<group>"; };
 		0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -299,14 +299,14 @@
 				0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
+				0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */,
 				0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */,
 				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
 				0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */,
-				0B0342BA1D257BF600D0D302 /* AppVadorSDK.framework in Frameworks */,
+				0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
-				0B0342C61D2582B300D0D302 /* FiveAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,10 +407,10 @@
 			isa = PBXGroup;
 			children = (
 				0B0342BF1D257E9400D0D302 /* libsqlite3.tbd */,
-				0B0342C51D2582B300D0D302 /* FiveAd.framework */,
+				0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */,
+				0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */,
 				0B0342BD1D257C7900D0D302 /* CoreMedia.framework */,
 				0B0342BB1D257C6800D0D302 /* AVFoundation.framework */,
-				0B0342B91D257BF600D0D302 /* AppVadorSDK.framework */,
 				0BD4B5B31D04711E002172F7 /* ADG.framework */,
 				0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */,
 				0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */,
@@ -887,7 +887,7 @@
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
 				OTHER_LDFLAGS = "";
-				"OTHER_LDFLAGS[arch=*]" = "";
+				"OTHER_LDFLAGS[arch=*]" = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tatsuo.baseballrecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

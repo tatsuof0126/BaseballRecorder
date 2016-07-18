@@ -155,8 +155,9 @@
     interstitial = [[ADGInterstitial alloc] init];
     interstitial.delegate = self;
     [interstitial setLocationId:@"38149"];
-    [interstitial setSpan:100 isPercentage:YES];
-    [interstitial setEnableTestMode:YES];
+    [interstitial setSpan:25 isPercentage:YES];
+    // [interstitial setSpan:100 isPercentage:YES];
+    // [interstitial setEnableTestMode:YES];
     [interstitial preload];
 }
 

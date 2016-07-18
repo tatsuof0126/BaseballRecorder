@@ -94,18 +94,47 @@
     // 矢印の表示有無を決定
     [self setArrowImage];
     
+    int baseAdjust = 60;
+    
     // 試合成績
     _date.text = [gameResult getDateString];
-    _place.text = gameResult.place;
     _result.text = [gameResult getGameResultStringWithTeam];
     _tagText.text = gameResult.tagtext;
+
+    if(gameResult.seme != 0){
+        _seme.text = [NSString stringWithFormat:@"(%@)",[gameResult getSemeString]];
+        baseAdjust += 20;
+    } else {
+        _seme.text = @"";
+    }
+    
+    _place.text = gameResult.place;
+    if([gameResult.place isEqualToString:@""] == NO){
+        baseAdjust += 30;
+    }
     
     // 打撃成績
-    int baseAdjust = 90;
     BOOL battingResultFlg = NO;
     if( (gameResult.battingResultArray != nil && gameResult.battingResultArray.count >= 1) ||
-       gameResult.daten >= 1 || gameResult.tokuten >= 1 || gameResult.steal >= 1){
+       gameResult.daten != 0 || gameResult.tokuten != 0 || gameResult.error != 0 ||
+       gameResult.steal != 0 || gameResult.stealOut != 0 ||
+       gameResult.dajun != 0 || gameResult.shubi1 != 0){
         battingResultFlg = YES;
+    }
+    
+    int dajunShubiAdjust = 0;
+    if(gameResult.dajun != 0 || gameResult.shubi1 != 0){
+        dajunShubiAdjust = 30;
+        
+        NSMutableString* str = [NSMutableString string];
+        if(gameResult.dajun != 0){
+            [str appendFormat:@"%@ ", [gameResult getDajunString]];
+        }
+        [str appendString:[gameResult getShubiConnectedString]];
+        
+        _dajunShubi.text = str;
+    } else {
+        _dajunShubi.text = @"";
     }
     
     NSArray* viewArray = [_scrollview subviews];
@@ -119,11 +148,11 @@
     for(int i=0;i<gameResult.battingResultArray.count;i++){
         BattingResult* battingResult = [gameResult.battingResultArray objectAtIndex:i];
         
-        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,baseAdjust+65+i*30,90,30)];
+        UILabel* titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(30,baseAdjust+dajunShubiAdjust+55+i*30,90,30)];
         titlelabel.text = [NSString stringWithFormat:@"第%d打席",i+1];
         titlelabel.tag = 1;
         
-        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(125,baseAdjust+65+i*30,200,30)];
+        UILabel* resultlabel = [[UILabel alloc] initWithFrame:CGRectMake(105,baseAdjust+dajunShubiAdjust+55+i*30,200,30)];
         resultlabel.text = [battingResult getResultSemiLongString];
         resultlabel.tag = 1;
         resultlabel.textColor = [battingResult getResultColor];
@@ -137,13 +166,19 @@
     _daten.hidden = !battingResultFlg;
     _tokutenLabel.hidden = !battingResultFlg;
     _tokuten.hidden = !battingResultFlg;
+    _errorLabel.hidden = !battingResultFlg;
+    _error.hidden = !battingResultFlg;
     _stealLabel.hidden = !battingResultFlg;
     _steal.hidden = !battingResultFlg;
+    _stealOutLabel.hidden = !battingResultFlg;
+    _stealOut.hidden = !battingResultFlg;
     
     if(battingResultFlg == YES){
         _daten.text = [NSString stringWithFormat:@"%d",gameResult.daten];
         _tokuten.text = [NSString stringWithFormat:@"%d",gameResult.tokuten];
+        _error.text = [NSString stringWithFormat:@"%d",gameResult.error];
         _steal.text = [NSString stringWithFormat:@"%d",gameResult.steal];
+        _stealOut.text = [NSString stringWithFormat:@"%d",gameResult.stealOut];
     }
  
     // 投手成績
@@ -235,59 +270,67 @@
     }
     
     // 表示の高さを調整
-    int battingAdjust = battingResultFlg ? 70+[Utility convert2int:gameResult.battingResultArray.count]*30 : 0;
+    int battingAdjust = battingResultFlg ? 65+(int)gameResult.battingResultArray.count*30 : -40;
     int pitchingAdjust = pitchingResultFlg ? 160 : 0;
     int tamakazuAdjust = tamakazuFlg ? 30 : 0;
     int memoAdjust = memoFlg ? 45+_memo.frame.size.height : 0;
     
     int adjust1 = baseAdjust;
-    int adjust2 = baseAdjust+battingAdjust;
-    int adjust3 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+tamakazuAdjust;
-    int adjust4 = baseAdjust+tagAdjust+battingAdjust+pitchingAdjust+tamakazuAdjust+memoAdjust;
+    int adjust2 = baseAdjust+battingAdjust+dajunShubiAdjust;
+    int adjust3 = baseAdjust+tagAdjust+battingAdjust+dajunShubiAdjust+pitchingAdjust+tamakazuAdjust;
+    int adjust4 = baseAdjust+tagAdjust+battingAdjust+dajunShubiAdjust+pitchingAdjust+tamakazuAdjust+memoAdjust;
     
 //    [self setFrameOriginY:_resultLabel originY:adjust1];
 //    [self setFrameOriginY:_result originY:adjust1];
 //    [self setFrameOriginX:_tweetButton originX:adjust4 == baseAdjust ? 120 : 150];
-    [self setFrameOriginY:_tweetButton originY:adjust1+35];
-    [self setFrameOriginY:_battingResultLabel originY:adjust1+40];
+
+    [self setFrameOriginY:_place originY:adjust1-5];
+    
+    [self setFrameOriginY:_battingResultLabel originY:adjust1+30];
+    [self setFrameOriginY:_tweetButton originY:adjust1+25];
+    [self setFrameOriginY:_dajunShubi originY:adjust1+60];
     
     [self setFrameOriginY:_datenLabel originY:adjust2];
     [self setFrameOriginY:_daten originY:adjust2];
     [self setFrameOriginY:_tokutenLabel originY:adjust2];
     [self setFrameOriginY:_tokuten originY:adjust2];
-    [self setFrameOriginY:_stealLabel originY:adjust2];
-    [self setFrameOriginY:_steal originY:adjust2];
+    [self setFrameOriginY:_errorLabel originY:adjust2];
+    [self setFrameOriginY:_error originY:adjust2];
+    [self setFrameOriginY:_stealLabel originY:adjust2+30];
+    [self setFrameOriginY:_steal originY:adjust2+30];
+    [self setFrameOriginY:_stealOutLabel originY:adjust2+30];
+    [self setFrameOriginY:_stealOut originY:adjust2+30];
     
-    [self setFrameOriginY:_pitchingResultLabel originY:adjust2+40];
-    [self setFrameOriginY:_inningLabel originY:adjust2+70];
-    [self setFrameOriginY:_inning originY:adjust2+70];
-    [self setFrameOriginY:_sekinin originY:adjust2+70];
-    [self setFrameOriginY:_hiandaLabel originY:adjust2+100];
-    [self setFrameOriginY:_hianda originY:adjust2+100];
-    [self setFrameOriginY:_hihomerunLabel originY:adjust2+100];
-    [self setFrameOriginY:_hihomerun originY:adjust2+100];
-    [self setFrameOriginY:_dassanshinLabel originY:adjust2+130];
-    [self setFrameOriginY:_dassanshin originY:adjust2+130];
-    [self setFrameOriginY:_yoshikyuLabel originY:adjust2+130];
-    [self setFrameOriginY:_yoshikyu originY:adjust2+130];
-    [self setFrameOriginY:_yoshikyu2Label originY:adjust2+130];
-    [self setFrameOriginY:_yoshikyu2 originY:adjust2+130];
-    [self setFrameOriginY:_shittenLabel originY:adjust2+160];
-    [self setFrameOriginY:_shitten originY:adjust2+160];
-    [self setFrameOriginY:_jisekitenLabel originY:adjust2+160];
-    [self setFrameOriginY:_jisekiten originY:adjust2+160];
-    [self setFrameOriginY:_tamakazuLabel originY:adjust2+190];
-    [self setFrameOriginY:_tamakazu originY:adjust2+190];
+    [self setFrameOriginY:_pitchingResultLabel originY:adjust2+70];
+    [self setFrameOriginY:_inningLabel originY:adjust2+100];
+    [self setFrameOriginY:_inning originY:adjust2+100];
+    [self setFrameOriginY:_sekinin originY:adjust2+100];
+    [self setFrameOriginY:_hiandaLabel originY:adjust2+130];
+    [self setFrameOriginY:_hianda originY:adjust2+130];
+    [self setFrameOriginY:_hihomerunLabel originY:adjust2+130];
+    [self setFrameOriginY:_hihomerun originY:adjust2+130];
+    [self setFrameOriginY:_dassanshinLabel originY:adjust2+160];
+    [self setFrameOriginY:_dassanshin originY:adjust2+160];
+    [self setFrameOriginY:_yoshikyuLabel originY:adjust2+160];
+    [self setFrameOriginY:_yoshikyu originY:adjust2+160];
+    [self setFrameOriginY:_yoshikyu2Label originY:adjust2+160];
+    [self setFrameOriginY:_yoshikyu2 originY:adjust2+160];
+    [self setFrameOriginY:_shittenLabel originY:adjust2+190];
+    [self setFrameOriginY:_shitten originY:adjust2+190];
+    [self setFrameOriginY:_jisekitenLabel originY:adjust2+190];
+    [self setFrameOriginY:_jisekiten originY:adjust2+190];
+    [self setFrameOriginY:_tamakazuLabel originY:adjust2+220];
+    [self setFrameOriginY:_tamakazu originY:adjust2+220];
     
     [self setFrameOriginY:_tagTextLabel originY:adjust3+5];
     [self setFrameOriginY:_tagText originY:adjust3+5];
     
-    [self setFrameOriginY:_memoLabel originY:adjust3+40];
-    [self setFrameOriginY:_memo originY:adjust3+67];
+    [self setFrameOriginY:_memoLabel originY:adjust3+70];
+    [self setFrameOriginY:_memo originY:adjust3+97];
     
-    [self setFrameOriginY:_mailButton originY:adjust4 == baseAdjust ? adjust4+75 : adjust4+45];
-    [self setFrameOriginY:_deleteButton originY:adjust4 == baseAdjust ? adjust4+130 : adjust4+100];
-    _scrollview.contentSize = CGSizeMake(320, adjust4+310);
+    [self setFrameOriginY:_mailButton originY:adjust4 == baseAdjust-40 ? adjust4+105 : adjust4+75];
+    [self setFrameOriginY:_deleteButton originY:adjust4 == baseAdjust-40 ? adjust4+160 : adjust4+130];
+    _scrollview.contentSize = CGSizeMake(320, adjust4+340);
 }
 
 - (void)setFrameOriginX:(UIView*)view originX:(int)originX {

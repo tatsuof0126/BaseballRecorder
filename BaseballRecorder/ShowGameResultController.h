@@ -35,15 +35,22 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagText;
 // @property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *result;
+@property (strong, nonatomic) IBOutlet UILabel *seme;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
+@property (strong, nonatomic) IBOutlet UILabel *dajunShubi;
 @property (weak, nonatomic) IBOutlet UILabel *battingResultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *datenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tokutenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stealLabel;
+@property (strong, nonatomic) IBOutlet UILabel *stealOutLabel;
+@property (strong, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *daten;
 @property (weak, nonatomic) IBOutlet UILabel *tokuten;
 @property (weak, nonatomic) IBOutlet UILabel *steal;
+@property (strong, nonatomic) IBOutlet UILabel *stealOut;
+@property (strong, nonatomic) IBOutlet UILabel *error;
 
 @property (weak, nonatomic) IBOutlet UILabel *pitchingResultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *inningLabel;

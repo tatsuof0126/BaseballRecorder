@@ -80,9 +80,6 @@ typedef enum: NSInteger {
 // enabled by default.
 + (void)enableSound:(BOOL)enabled;
 + (BOOL)isSoundEnabled;
-
-+ (NSString *)version;
-
 @end
 
 /******************************************************************************

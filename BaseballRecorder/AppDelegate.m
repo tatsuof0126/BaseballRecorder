@@ -11,6 +11,7 @@
 #import "GAI.h"
 // #import "NADInterstitial.h"
 #import "ConfigManager.h"
+#import "TrackingManager.h"
 #import "GameResultManager.h"
 
 @implementation AppDelegate
@@ -143,31 +144,40 @@
 
 // インタースティシャル広告
 - (void)prepareInterstitial {
-    // 旧オブジェクトの初期化
-    if(interstitial){
-        [interstitial dismiss];
-        interstitial.rootViewController = nil;
-        interstitial.delegate = nil;
-        interstitial = nil;
+    @try {
+        // 旧オブジェクトの初期化
+        if(interstitial){
+            [interstitial dismiss];
+            interstitial.rootViewController = nil;
+            interstitial.delegate = nil;
+            interstitial = nil;
+        }
+        
+        // ADGInterstitialオブジェクトを作成
+        interstitial = [[ADGInterstitial alloc] init];
+        interstitial.delegate = self;
+        [interstitial setLocationId:@"38149"];
+        [interstitial setSpan:25 isPercentage:YES];
+        [interstitial preload];
+    } @catch (NSException *exception) {
+        [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"prepareInterstitial" value:nil screen:@"prepareInterstitial"];
     }
-    
-    // ADGInterstitialオブジェクトを作成
-    interstitial = [[ADGInterstitial alloc] init];
-    interstitial.delegate = self;
-    [interstitial setLocationId:@"38149"];
-    [interstitial setSpan:25 isPercentage:YES];
-    // [interstitial setSpan:100 isPercentage:YES];
-    // [interstitial setEnableTestMode:YES];
-    [interstitial preload];
 }
 
 + (void)showInterstitial:(UIViewController*)controller {
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    appDelegate.interstitial.rootViewController = controller;
-    [appDelegate.interstitial show];
-
-//    BOOL showad = [appDelegate.interstitial show];
-//    NSLog(@"SHOW RESULT : %d", showad);
+    @try {
+        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        if(appDelegate.interstitial == nil){
+            return;
+        }
+        appDelegate.interstitial.rootViewController = controller;
+        [appDelegate.interstitial show];
+        
+        // BOOL showad = [appDelegate.interstitial show];
+        // NSLog(@"SHOW RESULT : %d", showad);
+    } @catch (NSException *exception) {
+        [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"showInterstitial" value:nil screen:@"showInterstitial"];
+    }
 }
 
 /*

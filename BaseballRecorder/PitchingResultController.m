@@ -157,9 +157,19 @@
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+    if ([touch.view isKindOfClass:[UIControl class]]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (IBAction)onTap:(id)sender {
-    [self.view endEditing:YES];
-    [self closeSelectPicker];
+    // iOS8未満でない（＝iOS8以上）なら
+    if([[[UIDevice currentDevice] systemVersion] compare:@"8" options:NSNumericSearch] != NSOrderedAscending){
+        [self.view endEditing:YES];
+        [self closeSelectPicker];
+    }
 }
 
 - (void)showDoneButton {

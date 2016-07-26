@@ -328,6 +328,8 @@
      */
     
     if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO || VERUP_DIALOG_VIEW == 1){
+        /*
+        Ver2.7.1では出さない
         NSArray* gameResultList = [GameResultManager loadGameResultList];
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
@@ -338,7 +340,7 @@
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
         }
-        
+        */
         [ConfigManager setUseVersion:nowVersion];
     }
 }

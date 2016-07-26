@@ -774,9 +774,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5X-IS-4Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="UQL-H7-LTd">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="UQL-H7-LTd">
                     <connections>
                         <action selector="onTap:" destination="CYm-Gx-IRt" id="NB5-4S-3fM"/>
+                        <outlet property="delegate" destination="CYm-Gx-IRt" id="Art-z7-1b7"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1136,9 +1137,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIu-QM-3Vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="V9E-KN-bo8">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="V9E-KN-bo8">
                     <connections>
                         <action selector="onTap:" destination="sOh-sz-83Q" id="Egx-iE-hAV"/>
+                        <outlet property="delegate" destination="sOh-sz-83Q" id="rF1-sW-B6z"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2517,9 +2519,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="skm-EP-R8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Yez-an-NV4">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="Yez-an-NV4">
                     <connections>
                         <action selector="onTap:" destination="sHv-AF-uZY" id="dUu-Qt-32Y"/>
+                        <outlet property="delegate" destination="sHv-AF-uZY" id="Gdm-0V-Ub9"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2826,7 +2829,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7pF-G3-Z3a"/>
-        <segue reference="f1a-pn-9eD"/>
+        <segue reference="TXb-6e-0gl"/>
         <segue reference="Ofd-zu-7oJ"/>
     </inferredMetricsTieBreakers>
 </document>

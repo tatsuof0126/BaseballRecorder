@@ -49,6 +49,10 @@
 
 + (void)setRemoveAdsFlg:(BOOL)removeAdsFlg;
 
++ (BOOL)isServerUseFlg;
+
++ (void)setServerUseFlg:(BOOL)serverUseFlg;
+
 + (NSString*)getUseVersion;
 
 + (void)setUseVersion:(NSString*)useVersion;

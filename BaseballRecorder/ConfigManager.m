@@ -124,6 +124,17 @@
     [defaults synchronize];
 }
 
++ (BOOL)isServerUseFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"SERVERUSEFLG"];
+}
+
++ (void)setServerUseFlg:(BOOL)serverUseFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:serverUseFlg forKey:@"SERVERUSEFLG"];
+    [defaults synchronize];
+}
+
 + (NSString*)getUseVersion {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"USEVERSION"];

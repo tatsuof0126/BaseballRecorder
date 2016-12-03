@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ADG/ADGManagerViewController.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #import "CheckBoxButton.h"
 
-@interface PitchingResultController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, ADGManagerViewControllerDelegate> {
-    ADGManagerViewController *adg_;
-}
+@interface PitchingResultController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, GADBannerViewDelegate>
 
-@property (nonatomic, retain) ADGManagerViewController *adg;
+@property (strong, nonatomic) GADBannerView *gadView;
 
 @property (weak, nonatomic) IBOutlet UITextField *hianda;
 @property (weak, nonatomic) IBOutlet UITextField *hihomerun;

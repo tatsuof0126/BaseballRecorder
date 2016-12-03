@@ -2299,7 +2299,7 @@
                         <outlet property="place" destination="DM5-Xq-CTs" id="NV1-TV-3IX"/>
                         <outlet property="result" destination="k0D-xC-ZmK" id="iLN-pc-6qx"/>
                         <outlet property="rightBtn" destination="zqO-Ba-zuu" id="jIl-cN-38o"/>
-                        <outlet property="scrollview" destination="PSL-Xw-zeH" id="aHJ-zJ-WEd"/>
+                        <outlet property="scrollView" destination="PSL-Xw-zeH" id="Dsd-i7-2X5"/>
                         <outlet property="sekinin" destination="I2U-n4-s69" id="mFl-zz-4YT"/>
                         <outlet property="seme" destination="wL8-uE-zf3" id="ZNI-iB-H58"/>
                         <outlet property="shitten" destination="hzb-Ld-phm" id="tfo-e6-I0n"/>

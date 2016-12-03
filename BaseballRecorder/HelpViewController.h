@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ADG/ADGManagerViewController.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
-@interface HelpViewController : UIViewController {
-    ADGManagerViewController *adg_;
-}
+@interface HelpViewController : UIViewController <GADBannerViewDelegate>
 
-@property (nonatomic, retain) ADGManagerViewController *adg;
+@property (strong, nonatomic) GADBannerView *gadView;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

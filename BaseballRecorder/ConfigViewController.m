@@ -17,7 +17,7 @@
 
 @implementation ConfigViewController
 
-@synthesize adg = adg_;
+@synthesize gadView;
 @synthesize inputNavi;
 @synthesize configTableView;
 @synthesize removeadsButton;
@@ -45,15 +45,18 @@
     
     // メニュー
     if([ConfigManager isRemoveAdsFlg] == YES || [UIScreen mainScreen].bounds.size.height != 568){
-        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
+        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
+        configCategoryArray = [NSArray arrayWithObjects:@"",  nil];
         configMenuArray = [NSArray arrayWithObjects:
                            [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil], nil];
+                           // [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           nil];
     } else {
-        configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
+        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
+        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
         configMenuArray = [NSArray arrayWithObjects:
                        [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                       [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                       //[NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
                        [NSArray arrayWithObjects:@"広告を削除する", nil], nil];
     }
     
@@ -81,66 +84,41 @@
     configTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:configTableView];
     
+    // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
-                                   @"originx" : @(0), @"originy" : @(581), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc
-            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
-        self.adg = adgvc;
-        adg_.delegate = self;
-        [adg_ loadRequest];
+        gadView = [AppDelegate makeGadView:self];
     }
 }
 
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 読み込みに成功したら広告を見える場所に移動
-    self.adg.view.frame = CGRectMake(0, 381, 320, 50);
-    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+- (void)adViewDidReceiveAd:(GADBannerView*)adView {
+    // 読み込みに成功したら広告を表示
+    gadView.frame = CGRectMake(0, 381, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:gadView];
+    [self.view addSubview:gadView];
     
-    // ScrollViewの大きさ定義＆iPhone5対応
+    // TableViewの大きさ定義＆iPhone5対応
     configTableView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:configTableView];
-    
-    /*
-    if([UIScreen mainScreen].bounds.size.height == 568){
-        // iPhone5対応
-        [self setFrameOriginY:_apptitle originY:340];
-        [self setFrameOriginY:_versionName originY:340];
-        [self setFrameOriginY:appstoreLabel originY:363];
-        [self setFrameOriginY:otherappLabel originY:363];
-    }
-     */
-}
-
-- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
-    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)removeAdsBar {
-    if(self.adg != nil && [ConfigManager isRemoveAdsFlg] == YES){
+    if(gadView != nil && [ConfigManager isRemoveAdsFlg] == YES){
         // 広告表示していて、広告削除した場合は表示を消す
-        self.adg.view.frame = CGRectMake(0, 581, 320, 50);
-        [AppDelegate adjustOriginForiPhone5:self.adg.view];
+        [gadView removeFromSuperview];
+        gadView.delegate = nil;
+        gadView = nil;
         
-        // ScrollViewの大きさ定義＆iPhone5対応
+        // TableViewの大きさ定義＆iPhone5対応
         configTableView.frame = CGRectMake(0, 64, 320, 366);
         [AppDelegate adjustForiPhone5:configTableView];
-        
-        /*
-        if([UIScreen mainScreen].bounds.size.height == 568){
-            // iPhone5対応
-            [self setFrameOriginY:_apptitle originY:390];
-            [self setFrameOriginY:_versionName originY:390];
-            [self setFrameOriginY:appstoreLabel originY:413];
-            [self setFrameOriginY:otherappLabel originY:413];
-        }
-        */
-        
-        [adg_ pauseRefresh];
-        adg_.delegate = nil;
-        adg_ = nil;
     }
 }
+
+/*
+- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
+    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
+}
+*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return configCategoryArray.count;
@@ -175,6 +153,17 @@
     if(indexPath.section == 0 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"inputconfig" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 0){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―広告削除" value:nil screen:@"設定画面"];
+        if([ConfigManager isRemoveAdsFlg] == NO){
+            [self showMoveAddonView:@"広告を削除するにはアドオンの入手が必要です。"];
+        }
+    }
+    
+    /*
+    
+    if(indexPath.section == 0 && indexPath.row == 0){
+        [self performSegueWithIdentifier:@"inputconfig" sender:self];
+    } else if(indexPath.section == 1 && indexPath.row == 0){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードの発行" value:nil screen:@"設定画面"];
         //if([ConfigManager isServerUseFlg] == NO){
         //    [self showMoveAddonView:@"機種変更コードの発行にはアドオンの入手が必要です。"];
@@ -190,6 +179,8 @@
             [self showMoveAddonView:@"広告を削除するにはアドオンの入手が必要です。"];
         }
     }
+     */
+    
 }
 
 - (void)showMoveAddonView:(NSString*)message {
@@ -245,23 +236,11 @@
     [self removeAdsBar];
     
     [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
-
-    if(adg_){
-        [adg_ resumeRefresh];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if(adg_){
-        [adg_ pauseRefresh];
-    }
 }
 
 - (void)dealloc {
-    adg_.delegate = nil;
-    adg_ = nil;
+    gadView.delegate = nil;
+    gadView = nil;
 }
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #import <Social/Social.h>
-#import <ADG/ADGManagerViewController.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
 // #define ALL_TARGET 0
@@ -28,11 +28,9 @@
 #define POST_LINE 3
 
 @interface StatisticsCommonController : UIViewController
-<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, ADGManagerViewControllerDelegate> {
-    ADGManagerViewController *adg_;
-}
+<UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, GADBannerViewDelegate>
 
-@property (nonatomic, retain) ADGManagerViewController *adg;
+@property (strong, nonatomic) GADBannerView *gadView;
 
 //@property int targetyear;
 //@property int targetteam;

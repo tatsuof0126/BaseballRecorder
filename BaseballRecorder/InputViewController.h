@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ADG/ADGManagerViewController.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #import "GameResult.h"
 #import "BattingResult.h"
 #import "UIPlaceHolderTextView.h"
@@ -16,11 +16,9 @@
 #define INPUT_TYPE_NEW 1
 #define INPUT_TYPE_UPDATE 2
 
-@interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, ADGManagerViewControllerDelegate> {
-    ADGManagerViewController *adg_;
-}
+@interface InputViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, GADBannerViewDelegate>
 
-@property (nonatomic, retain) ADGManagerViewController *adg;
+@property (strong, nonatomic) GADBannerView *gadView;
 
 @property (weak, nonatomic) IBOutlet UITextField *year;
 @property (weak, nonatomic) IBOutlet UITextField *month;

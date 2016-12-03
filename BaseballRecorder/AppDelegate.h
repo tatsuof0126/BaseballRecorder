@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #import <ADG/ADGInterstitial.h>
 #import "GameResult.h"
 #import "InAppPurchaseManager.h"
@@ -37,5 +38,7 @@
 + (void)showInterstitial:(UIViewController*)controller;
 
 // + (void)dismissInterstitial;
+
++ (GADBannerView*)makeGadView:(UIViewController<GADBannerViewDelegate>*)controller;
 
 @end

@@ -66,37 +66,64 @@
     CGContextAddLineToPoint(context, 30.0, 288.0);
     CGContextStrokePath(context);
     
-    CGContextSetLineWidth(context, 3.5);
-    CGContextSetLineCap(context, kCGLineCapRound);
+    // 打撃成績を集約
+    NSMutableArray* battingResultArrayForView = [NSMutableArray array];
+    for(GameResult* gameResult in gameResultListForAnalysis){
+        [battingResultArrayForView addObjectsFromArray:gameResult.battingResultArray];
+    }
+    // 描画順をランダムに入れ替える
+    for (int i = (int)battingResultArrayForView.count-1; i>0; i--) {
+        int randomNum = arc4random() % i;
+        [battingResultArrayForView exchangeObjectAtIndex:i withObjectAtIndex:randomNum];
+    }
     
-    // 打撃成績を元に直線を描画
-    for(int i=0;i<[gameResultListForAnalysis count];i++){
-        GameResult* result = [gameResultListForAnalysis objectAtIndex:[gameResultListForAnalysis count]-1-i];
-        
-        for(BattingResult* battingResult in result.battingResultArray){
-            if(battingResult.position != 0){
-                CGContextSetStrokeColorWithColor(context,
-                                                 [battingResult getResultColorForAnalysisView].CGColor);
-                
-                CGPoint targetBasePoint = targetBasePoints[battingResult.position];
-                if (battingResult.result == R_HOMERUN &&
-                    battingResult.position >=7 && battingResult.position <= 13) {
-                    // ホームランの場合は場所を変える（レフト・センター・ライト・左中間・右中間・レフト線・ライト線のみ）
-                    targetBasePoint = targetBasePointsHomerun[battingResult.position-7];
-                }
-                
-                float x = arc4random()/(float)UINT_MAX*10.0-5;
-                float y = arc4random()/(float)UINT_MAX*10.0-5;
-                if(targetBasePoint.y+y <= 2.0f){
-                    y = 2.0f-targetBasePoint.y; // 上すぎる場合は調節
-                }
-                
-                CGPoint targetPoint = CGPointMake(targetBasePoint.x+x, targetBasePoint.y+y);
+    // 300打席以上になったら線を細くする
+    if(battingResultArrayForView.count >= 400){
+        CGContextSetLineWidth(context, 2.5);
+    } else if(battingResultArrayForView.count >= 200){
+        CGContextSetLineWidth(context, 3.0);
+    } else {
+        CGContextSetLineWidth(context, 3.5);
+    }
+    CGContextSetLineCap(context, kCGLineCapRound);
 
-                CGPoint points[] = {basePoint, targetPoint};
-                CGContextAddLines(context, points, 2);
-                CGContextStrokePath(context);
+    // 直線を描画
+    for(BattingResult* battingResult in battingResultArrayForView){
+        if(battingResult.position != 0){
+            CGContextSetStrokeColorWithColor(context, [battingResult getResultColorForAnalysisView].CGColor);
+            
+            CGPoint targetBasePoint = targetBasePoints[battingResult.position];
+            if (battingResult.result == R_HOMERUN &&
+                battingResult.position >=7 && battingResult.position <= 13) {
+                // ホームランの場合は場所を変える（レフト・センター・ライト・左中間・右中間・レフト線・ライト線のみ）
+                targetBasePoint = targetBasePointsHomerun[battingResult.position-7];
             }
+            
+            // float x = arc4random()/(float)UINT_MAX*10.0-5;
+            // float y = arc4random()/(float)UINT_MAX*10.0-5;
+            float x = arc4random()/(float)UINT_MAX*30.0f-15.0f;
+            float y = arc4random()/(float)UINT_MAX*30.0f-15.0f;
+            
+            float targetX = targetBasePoint.x + x;
+            float targetY = targetBasePoint.y + y;
+            
+            // 上すぎる場合は調節
+            if(targetY <= 2.0f){
+                targetY = 2.0f;
+            }
+            
+            // ファールゾーンに出ている場合はフェアゾーンに戻す
+            float yoko = fabs(targetX - 140.0);
+            float maxtate = 258.0 - yoko;
+            if(targetY > maxtate){
+                targetY = maxtate;
+            }
+            
+            CGPoint targetPoint = CGPointMake(targetX, targetY);
+            
+            CGPoint points[] = {basePoint, targetPoint};
+            CGContextAddLines(context, points, 2);
+            CGContextStrokePath(context);
         }
     }
 }

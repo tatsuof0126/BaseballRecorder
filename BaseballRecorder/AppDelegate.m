@@ -219,4 +219,16 @@
 //    NSLog(@"%@", @"ADGManagerViewControllerOpenUrl");
 }
 
++ (GADBannerView*)makeGadView:(UIViewController<GADBannerViewDelegate>*)controller {
+    GADBannerView* gadView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    gadView.delegate = controller;
+    gadView.adUnitID = @"ca-app-pub-6719193336347757/9619868251";
+    gadView.rootViewController = controller;
+    GADRequest* request = [GADRequest request];
+    //request.testDevices = @[kGADSimulatorID, @"2dc8fc8942df647fb90b48c2272a59e6", @"b6474e40085305a78a0e53bb0956b6a0", @"1084e3d70a3d8780d5da956bb04a44b4", @"1637233b45ab1f6b3ca62e7003528879"];
+    request.testDevices = @[kGADSimulatorID];
+    [gadView loadRequest:request];
+    return gadView;
+}
+
 @end

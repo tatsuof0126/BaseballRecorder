@@ -13,7 +13,7 @@
 #import "ConfigManager.h"
 #import "GameResultManager.h"
 #import "ShowGameResultController.h"
-#import "ResultPickerViewController.h"
+// #import "ResultPickerViewController.h"
 #import "SelectInputViewController.h"
 #import "TrackingManager.h"
 
@@ -27,7 +27,7 @@
 
 @implementation InputViewController
 
-@synthesize adg = adg_;
+@synthesize gadView;
 @synthesize gameResult;
 @synthesize battingResultViewArray;
 @synthesize scrollView;
@@ -174,26 +174,21 @@
     scrollView.frame = CGRectMake(0, 64, 320, 416);
     [AppDelegate adjustForiPhone5:scrollView];
     
-    // 広告を表示
-    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
-                                   @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc
-            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
-        self.adg = adgvc;
-        adg_.delegate = self;
-        [adg_ loadRequest];
-    }
-    
     edited = NO;
+    
+    // 広告表示（admob）
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        gadView = [AppDelegate makeGadView:self];
+    }
 }
 
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 読み込みに成功したら広告を見える場所に移動
-    self.adg.view.frame = CGRectMake(0, 430, 320, 50);
-    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+- (void)adViewDidReceiveAd:(GADBannerView*)adView {
+    // 読み込みに成功したら広告を表示
+    gadView.frame = CGRectMake(0, 430, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:gadView];
+    [self.view addSubview:gadView];
     
-    // Scrollviewの大きさ定義＆iPhone5対応
+    // TableViewの大きさ定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:scrollView];
 }
@@ -506,6 +501,11 @@
     [self doneButton]; // 初めに他の編集項目の編集を終了させる
     [self closePicker];
     
+    // 広告ビューを隠す
+    if(gadView != nil){
+        [gadView setHidden:YES];
+    }
+    
     // スクロール位置を設定
     NSInteger count = 0;
     if(resultno == NEW_INPUT){
@@ -595,6 +595,11 @@
 - (void)makeSelectPicker {
     [self doneButton]; // 初めに他の編集項目の編集を終了させる
     [self closePicker];
+    
+    // 広告ビューを隠す
+    if(gadView != nil){
+        [gadView setHidden:YES];
+    }
     
     // SelectPickerを作る
     CGRect rect = [[UIScreen mainScreen] bounds];
@@ -814,6 +819,11 @@
     resultPicker = nil;
     resultToolbar = nil;
     rectView = nil;
+    
+    // 広告ビューを再表示
+    if(gadView != nil){
+        [gadView setHidden:NO];
+    }
 }
 
 - (IBAction)backButton:(id)sender {
@@ -1177,26 +1187,9 @@
     return date;
 }
 
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if(adg_){
-        [adg_ resumeRefresh];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if(adg_){
-        [adg_ pauseRefresh];
-    }
-}
-
 - (void)dealloc {
-    adg_.delegate = nil;
-    adg_ = nil;
+    gadView.delegate = nil;
+    gadView = nil;
 }
 
 - (void)viewDidUnload {

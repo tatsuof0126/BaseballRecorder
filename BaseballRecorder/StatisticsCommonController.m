@@ -34,7 +34,7 @@
 @synthesize targetPicker;
 @synthesize targetToolbar;
 @synthesize posted;
-@synthesize adg = adg_;
+@synthesize gadView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

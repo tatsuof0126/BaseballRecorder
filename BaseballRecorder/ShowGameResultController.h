@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 #import <Social/Social.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import <ADG/ADGManagerViewController.h>
 #import <ADG/ADGInterstitial.h>
 #import <FBSDKShareKit/FBSDKSharing.h>
 
@@ -20,12 +20,9 @@
 #define POST_LINE     3
 
 @interface ShowGameResultController : UIViewController
-        <MFMailComposeViewControllerDelegate, ADGManagerViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate, ADGInterstitialDelegate>  {
-    ADGManagerViewController *adg_;
-}
+        <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate, ADGInterstitialDelegate, GADBannerViewDelegate>
 
-@property (nonatomic, retain) ADGManagerViewController *adg;
-// @property(nonatomic , retain) ADGInterstitial *interstitial;
+@property (strong, nonatomic) GADBannerView *gadView;
 
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *place;
@@ -37,7 +34,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *result;
 @property (strong, nonatomic) IBOutlet UILabel *seme;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) IBOutlet UILabel *dajunShubi;
 @property (weak, nonatomic) IBOutlet UILabel *battingResultLabel;

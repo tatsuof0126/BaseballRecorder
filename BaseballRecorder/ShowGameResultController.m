@@ -30,7 +30,8 @@
 
 @implementation ShowGameResultController
 
-@synthesize adg = adg_;
+@synthesize gadView;
+@synthesize scrollView;
 @synthesize posted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,30 +52,26 @@
     [TrackingManager sendScreenTracking:@"試合結果参照画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
-    _scrollview.frame = CGRectMake(0, 64, 320, 416);
-    [AppDelegate adjustForiPhone5:_scrollview];
-    
-    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
-                                   @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc
-            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
-        self.adg = adgvc;
-        adg_.delegate = self;
-        [adg_ loadRequest];
-    }
+    scrollView.frame = CGRectMake(0, 64, 320, 416);
+    [AppDelegate adjustForiPhone5:scrollView];
     
     [self showGameResult];
+    
+    // 広告表示（admob）
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        gadView = [AppDelegate makeGadView:self];
+    }
 }
 
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 読み込みに成功したら広告を見える場所に移動
-    self.adg.view.frame = CGRectMake(0, 430, 320, 50);
-    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+- (void)adViewDidReceiveAd:(GADBannerView*)adView {
+    // 読み込みに成功したら広告を表示
+    gadView.frame = CGRectMake(0, 430, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:gadView];
+    [self.view addSubview:gadView];
     
-    // Scrollviewの大きさ定義＆iPhone5対応
-    _scrollview.frame = CGRectMake(0, 64, 320, 366);
-    [AppDelegate adjustForiPhone5:_scrollview];
+    // TableViewの大きさ定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 366);
+    [AppDelegate adjustForiPhone5:scrollView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,7 +134,7 @@
         _dajunShubi.text = @"";
     }
     
-    NSArray* viewArray = [_scrollview subviews];
+    NSArray* viewArray = [scrollView subviews];
     for(int i=0;i<viewArray.count;i++){
         UIView* view = [viewArray objectAtIndex:i];
         if(view.tag == 1){
@@ -157,8 +154,8 @@
         resultlabel.tag = 1;
         resultlabel.textColor = [battingResult getResultColor];
         
-        [_scrollview addSubview:titlelabel];
-        [_scrollview addSubview:resultlabel];
+        [scrollView addSubview:titlelabel];
+        [scrollView addSubview:resultlabel];
     }
     
     _battingResultLabel.hidden = !battingResultFlg;
@@ -330,7 +327,7 @@
     
     [self setFrameOriginY:_mailButton originY:adjust4 == baseAdjust-40 ? adjust4+105 : adjust4+75];
     [self setFrameOriginY:_deleteButton originY:adjust4 == baseAdjust-40 ? adjust4+160 : adjust4+130];
-    _scrollview.contentSize = CGSizeMake(320, adjust4+340);
+    scrollView.contentSize = CGSizeMake(320, adjust4+340);
 }
 
 - (void)setFrameOriginX:(UIView*)view originX:(int)originX {
@@ -734,7 +731,7 @@
     [self setDate:nil];
     [self setPlace:nil];
     [self setResult:nil];
-    [self setScrollview:nil];
+    [self setScrollView:nil];
     [self setDatenLabel:nil];
     [self setTokutenLabel:nil];
     [self setStealLabel:nil];
@@ -772,19 +769,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if(adg_){
-        [adg_ resumeRefresh];
-    }
-        
     [self showGameResult];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if(adg_){
-        [adg_ pauseRefresh];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -800,8 +785,8 @@
 }
 
 - (void) dealloc {
-    adg_.delegate = nil;
-    adg_ = nil;
+    gadView.delegate = nil;
+    gadView = nil;
 }
 
 @end

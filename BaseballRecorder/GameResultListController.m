@@ -20,7 +20,7 @@
 
 @implementation GameResultListController
 
-@synthesize adg = adg_;
+@synthesize gadView;
 @synthesize gameResultYearList;
 @synthesize gameResultListOfYear;
 @synthesize gameResultListTableView;
@@ -29,10 +29,6 @@
 {
     [super viewDidLoad];
     
-    // テスト
-//    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//    appDelegate.window.rootViewController = self;
-    
     // 画面が開かれたときのトラッキング情報を送る
     [TrackingManager sendScreenTracking:@"試合結果一覧画面"];
     
@@ -40,21 +36,17 @@
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:gameResultListTableView];
     
+    // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
-            @"originx" : @(0), @"originy" : @(581), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc
-            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
-        self.adg = adgvc;
-        adg_.delegate = self;
-        [adg_ loadRequest];
+        gadView = [AppDelegate makeGadView:self];
     }
 }
 
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 読み込みに成功したら広告を見える場所に移動
-    self.adg.view.frame = CGRectMake(0, 381, 320, 50);
-    [AppDelegate adjustOriginForiPhone5:self.adg.view];
+- (void)adViewDidReceiveAd:(GADBannerView*)adView {
+    // 読み込みに成功したら広告を表示
+    gadView.frame = CGRectMake(0, 381, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:gadView];
+    [self.view addSubview:gadView];
     
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 316);
@@ -62,17 +54,15 @@
 }
 
 - (void)removeAdsBar {
-    if(self.adg != nil && [ConfigManager isRemoveAdsFlg] == YES){
+    if(gadView != nil && [ConfigManager isRemoveAdsFlg] == YES){
         // 広告表示していて、広告削除した場合は表示を消す
-        self.adg.view.frame = CGRectMake(0, 581, 320, 50);
-        [AppDelegate adjustOriginForiPhone5:self.adg.view];
+        [gadView removeFromSuperview];
+        gadView.delegate = nil;
+        gadView = nil;
         
+        // TableViewの大きさ定義＆iPhone5対応
         gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
         [AppDelegate adjustForiPhone5:gameResultListTableView];
-        
-        [adg_ pauseRefresh];
-        adg_.delegate = nil;
-        adg_ = nil;
     }
 }
 
@@ -329,7 +319,7 @@
     
     if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO || VERUP_DIALOG_VIEW == 1){
         /*
-        Ver2.7.1では出さない
+        Ver2.8では出さない
         NSArray* gameResultList = [GameResultManager loadGameResultList];
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
@@ -348,23 +338,19 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if(adg_){
-        [adg_ resumeRefresh];
-    }
-    
     [gameResultListTableView deselectRowAtIndexPath:
         [gameResultListTableView indexPathForSelectedRow] animated:NO];
 
     [self loadGameResult];
     [gameResultListTableView reloadData];
+    
+    // 広告が削除された場合の対応
+    [self removeAdsBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self checkUpdated];
-    
-    // 広告が削除された場合の対応
-    [self removeAdsBar];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if(appDelegate.showInterstitialFlg == YES){
@@ -375,17 +361,9 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if(adg_){
-        [adg_ pauseRefresh];
-    }
-}
-
 - (void)dealloc {
-    adg_.delegate = nil;
-    adg_ = nil;
+    gadView.delegate = nil;
+    gadView = nil;
 }
 
 @end

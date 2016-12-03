@@ -113,9 +113,17 @@
 		0BE4C4A516FF406D00DAD11F /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A416FF406C00DAD11F /* Utility.m */; };
 		0BE78EF31AA4DEE7003AAE8D /* TargetTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */; };
 		0BF3AB6B1B525DE10029DC13 /* Help2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */; };
+		D05570EC45A2D4BD2990678A /* libPods-BaseballRecorder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA80F88DA27E003A25503D7 /* libPods-BaseballRecorder.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0B7EE73C1DE9ECEB003BC42D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B7EE7381DE9ECEB003BC42D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD655AEAA177732252D722208E580A27;
+			remoteInfo = "Pods-BaseballRecorder";
+		};
 		0B9499E016325697007F574D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0B9499A016325696007F574D /* Project object */;
@@ -209,6 +217,7 @@
 		0B6BB1D216AEE6E100B66509 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		0B6BB1D616AEF09200B66509 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0B6BB1E516B0334200B66509 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		0B7EE7381DE9ECEB003BC42D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		0B7F820A164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0B7F820B164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0B7F820C164C134700811465 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -284,6 +293,9 @@
 		0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TargetTerm.h; sourceTree = "<group>"; };
 		0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Help2ViewController.m; sourceTree = "<group>"; };
 		0BF3AB6C1B525E020029DC13 /* Help2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Help2ViewController.h; sourceTree = "<group>"; };
+		5DA80F88DA27E003A25503D7 /* libPods-BaseballRecorder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseballRecorder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A18D0FFE1989EDEFF88CDF82 /* Pods-BaseballRecorder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseballRecorder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder.debug.xcconfig"; sourceTree = "<group>"; };
+		F8E21AE7E4F3284BF923F87D /* Pods-BaseballRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseballRecorder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +331,7 @@
 				0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */,
 				0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
+				D05570EC45A2D4BD2990678A /* libPods-BaseballRecorder.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +408,14 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		0B7EE7391DE9ECEB003BC42D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B7EE73D1DE9ECEB003BC42D /* libPods-BaseballRecorder.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0B94999E16325696007F574D = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +424,7 @@
 				0B9499AC16325697007F574D /* Frameworks */,
 				0B9499AA16325697007F574D /* Products */,
 				0B166C141A23773100682DBC /* GoogleAnalyticsLibrary */,
+				98C3CABC82E2D739A4FBAA54 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +467,7 @@
 				0B9499AD16325697007F574D /* UIKit.framework */,
 				0B9499AF16325697007F574D /* Foundation.framework */,
 				0B9499B116325697007F574D /* CoreGraphics.framework */,
+				5DA80F88DA27E003A25503D7 /* libPods-BaseballRecorder.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -563,6 +586,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		98C3CABC82E2D739A4FBAA54 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B7EE7381DE9ECEB003BC42D /* Pods.xcodeproj */,
+				A18D0FFE1989EDEFF88CDF82 /* Pods-BaseballRecorder.debug.xcconfig */,
+				F8E21AE7E4F3284BF923F87D /* Pods-BaseballRecorder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -570,9 +603,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B9499ED16325697007F574D /* Build configuration list for PBXNativeTarget "BaseballRecorder" */;
 			buildPhases = (
+				2FD68FDE71B6F0F4EEFE8BF5 /* [CP] Check Pods Manifest.lock */,
 				0B9499A516325697007F574D /* Sources */,
 				0B9499A616325697007F574D /* Frameworks */,
 				0B9499A716325697007F574D /* Resources */,
+				0AC1CEC96F51034D042B6BE4 /* [CP] Embed Pods Frameworks */,
+				C9C4DB0A6C0073B1E85E4F5E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -629,6 +665,12 @@
 			mainGroup = 0B94999E16325696007F574D;
 			productRefGroup = 0B9499AA16325697007F574D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0B7EE7391DE9ECEB003BC42D /* Products */;
+					ProjectRef = 0B7EE7381DE9ECEB003BC42D /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0B9499A816325697007F574D /* BaseballRecorder */,
@@ -636,6 +678,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0B7EE73D1DE9ECEB003BC42D /* libPods-BaseballRecorder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPods-BaseballRecorder.a";
+			remoteRef = 0B7EE73C1DE9ECEB003BC42D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0B9499A716325697007F574D /* Resources */ = {
@@ -693,6 +745,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0AC1CEC96F51034D042B6BE4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0B9499D916325697007F574D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -705,6 +772,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		2FD68FDE71B6F0F4EEFE8BF5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C9C4DB0A6C0073B1E85E4F5E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -852,6 +949,7 @@
 		};
 		0B9499EE16325697007F574D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A18D0FFE1989EDEFF88CDF82 /* Pods-BaseballRecorder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -879,6 +977,7 @@
 					"\"/iPhoneAppDev/BaseballRecorder/GoogleAnalyticsLibrary/libAdIdAccess.a\"",
 					"-lz",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tatsuo.baseballrecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -891,6 +990,7 @@
 		};
 		0B9499EF16325697007F574D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8E21AE7E4F3284BF923F87D /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -910,8 +1010,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
-				OTHER_LDFLAGS = "";
-				"OTHER_LDFLAGS[arch=*]" = "-lz";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tatsuo.baseballrecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

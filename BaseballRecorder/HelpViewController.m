@@ -17,7 +17,8 @@
 
 @implementation HelpViewController
 
-@synthesize adg = adg_;
+@synthesize gadView;
+@synthesize scrollView;
 
 - (void)viewDidLoad
 {
@@ -28,28 +29,24 @@
     [TrackingManager sendScreenTracking:@"ヘルプ画面（打撃成績）"];
     
     // ScrollViewの高さを定義＆iPhone5対応
-    _scrollView.frame = CGRectMake(0, 64, 320, 416);
-    [AppDelegate adjustForiPhone5:_scrollView];
+    scrollView.frame = CGRectMake(0, 64, 320, 416);
+    [AppDelegate adjustForiPhone5:scrollView];
 
+    // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        NSDictionary *adgparam = @{@"locationid" : @"21680", @"adtype" : @(kADG_AdType_Sp),
-                                   @"originx" : @(0), @"originy" : @(630), @"w" : @(320), @"h" : @(50)};
-        ADGManagerViewController *adgvc
-            = [[ADGManagerViewController alloc] initWithAdParams:adgparam adView:self.view];
-        self.adg = adgvc;
-        adg_.delegate = self;
-        [adg_ loadRequest];
+        gadView = [AppDelegate makeGadView:self];
     }
 }
 
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 読み込みに成功したら広告を見える場所に移動
-    self.adg.view.frame = CGRectMake(0, 430, 320, 50);
-    [AppDelegate adjustOriginForiPhone5:self.adg.view];
-
-    // Scrollviewの大きさ定義＆iPhone5対応
-    _scrollView.frame = CGRectMake(0, 64, 320, 366);
-    [AppDelegate adjustForiPhone5:_scrollView];
+- (void)adViewDidReceiveAd:(GADBannerView*)adView {
+    // 読み込みに成功したら広告を表示
+    gadView.frame = CGRectMake(0, 430, 320, 50);
+    [AppDelegate adjustOriginForiPhone5:gadView];
+    [self.view addSubview:gadView];
+    
+    // TableViewの大きさ定義＆iPhone5対応
+    scrollView.frame = CGRectMake(0, 64, 320, 366);
+    [AppDelegate adjustForiPhone5:scrollView];
 }
 
 - (IBAction)backButton:(id)sender {
@@ -58,25 +55,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if(adg_){
-        [adg_ resumeRefresh];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if(adg_){
-        [adg_ pauseRefresh];
-    }
-}
-
 - (void) dealloc {
-    adg_.delegate = nil;
-    adg_ = nil;
+    gadView.delegate = nil;
+    gadView = nil;
 }
 
 @end

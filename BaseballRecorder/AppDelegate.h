@@ -27,6 +27,8 @@
 @property(nonatomic , retain) ADGInterstitial *interstitial;
 @property BOOL showInterstitialFlg;
 
++ (AppDelegate*)getAppDelegate;
+
 - (InAppPurchaseManager*)getInAppPurchaseManager;
 
 + (void)adjustForiPhone5:(UIView*)view;

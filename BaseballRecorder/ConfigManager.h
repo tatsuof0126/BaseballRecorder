@@ -57,4 +57,12 @@
 
 + (void)setUseVersion:(NSString*)useVersion;
 
++ (NSString*)getMigrationCd;
+
++ (void)setMigrationCd:(NSString*)migrationCd;
+
++ (NSDate*)getCreateDate;
+
++ (void)setCreateDate:(NSDate*)createDate;
+
 @end

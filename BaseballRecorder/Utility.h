@@ -21,4 +21,6 @@
 
 + (int)convert2int:(NSInteger)integer;
 
++ (UIActivityIndicatorView*)getIndicatorView:(UIViewController*)controller;
+
 @end

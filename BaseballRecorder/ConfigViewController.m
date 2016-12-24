@@ -45,18 +45,18 @@
     
     // メニュー
     if([ConfigManager isRemoveAdsFlg] == YES || [UIScreen mainScreen].bounds.size.height != 568){
-        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
-        configCategoryArray = [NSArray arrayWithObjects:@"",  nil];
+        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
+        // configCategoryArray = [NSArray arrayWithObjects:@"",  nil];
         configMenuArray = [NSArray arrayWithObjects:
                            [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                           // [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
                            nil];
     } else {
-        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
-        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
+        configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
+        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
         configMenuArray = [NSArray arrayWithObjects:
                        [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                       //[NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                       [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
                        [NSArray arrayWithObjects:@"広告を削除する", nil], nil];
     }
     
@@ -114,12 +114,6 @@
     }
 }
 
-/*
-- (void)setFrameOriginY:(UIView*)view originY:(int)originY {
-    view.frame = CGRectMake(view.frame.origin.x, originY, view.frame.size.width, view.frame.size.height);
-}
-*/
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return configCategoryArray.count;
 }
@@ -153,17 +147,6 @@
     if(indexPath.section == 0 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"inputconfig" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 0){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―広告削除" value:nil screen:@"設定画面"];
-        if([ConfigManager isRemoveAdsFlg] == NO){
-            [self showMoveAddonView:@"広告を削除するにはアドオンの入手が必要です。"];
-        }
-    }
-    
-    /*
-    
-    if(indexPath.section == 0 && indexPath.row == 0){
-        [self performSegueWithIdentifier:@"inputconfig" sender:self];
-    } else if(indexPath.section == 1 && indexPath.row == 0){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードの発行" value:nil screen:@"設定画面"];
         //if([ConfigManager isServerUseFlg] == NO){
         //    [self showMoveAddonView:@"機種変更コードの発行にはアドオンの入手が必要です。"];
@@ -179,8 +162,6 @@
             [self showMoveAddonView:@"広告を削除するにはアドオンの入手が必要です。"];
         }
     }
-     */
-    
 }
 
 - (void)showMoveAddonView:(NSString*)message {

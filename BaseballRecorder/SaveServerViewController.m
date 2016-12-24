@@ -8,6 +8,11 @@
 
 #import "SaveServerViewController.h"
 #import "APIManager.h"
+#import "S3Manager.h"
+#import "Utility.h"
+#import "GameResultManager.h"
+#import "GameResult.h"
+#import "ConfigManager.h"
 
 @interface SaveServerViewController ()
 
@@ -15,9 +20,25 @@
 
 @implementation SaveServerViewController
 
+@synthesize indicator;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self updateLabel];
+}
+
+- (void)updateLabel {
+    _migrationCdLabel.text = [ConfigManager getMigrationCd];
+    
+    NSDate* createDate = [ConfigManager getCreateDate];
+    if(createDate != nil){
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy年MM月dd日"];
+        [formatter setLocale:[NSLocale systemLocale]];
+        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+        _createDateLabel.text = [formatter stringFromDate:createDate];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,15 +57,69 @@
 */
 
 - (IBAction)saveServer:(id)sender {
-    [self saveServer];
+    // ぐるぐるを出す
+    indicator = [Utility getIndicatorView:self];
+    [indicator startAnimating];
+    [self.view addSubview:indicator];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperationWithBlock:^{
+        [self saveGameResult];
+    }];
 }
 
-- (void)saveServer {
-    [APIManager APISaveGameResults];
+- (void)saveGameResult {
+    int uploadCount = 0;
+    BOOL failed = NO;
     
+    NSArray* gameResultList = [GameResultManager loadGameResultList];
     
+    NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* dirpath = [dirpaths objectAtIndex:0];
     
+    NSString* migrationCd = [self getMigrationCd];
+    NSString* prefix = [NSString stringWithFormat:@"%@/", migrationCd];
+    for(GameResult* gameResult in gameResultList){
+        NSString* filename = [NSString stringWithFormat:@"gameresult%d.dat",gameResult.resultid];
+        NSString* filepath = [dirpath stringByAppendingPathComponent:filename];
+        
+        BOOL succeed = [S3Manager S3Upload:prefix fileName:filename filePath:filepath];
+        if(succeed == YES){
+            uploadCount++;
+        } else {
+            failed = YES;
+        }
+    }
     
+    // ぐるぐるを止める
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [indicator stopAnimating];
+        if(failed == NO){
+            [ConfigManager setMigrationCd:migrationCd];
+            [ConfigManager setCreateDate:[NSDate date]];
+
+            [self updateLabel];
+            
+            [Utility showAlert:[NSString stringWithFormat:@"%d件のデータをサーバーにアップロードしました。\n機種変更コードは［%@］です。", uploadCount, migrationCd]];
+        } else {
+            [Utility showAlert:@"アップロードに失敗しました。しばらくしてからお試しください。"];
+        }
+    }];
+    
+}
+
+- (NSString*)getMigrationCd {
+    int migrationCdInt = 0;
+    while(true){
+        migrationCdInt = arc4random_uniform(89999999) + 10000000;
+        
+        NSArray* filelist = [S3Manager S3GetFileList:[NSString stringWithFormat:@"%d/", migrationCdInt]];
+        if(filelist != nil && filelist.count == 0){
+            break;
+        }
+    }
+    
+    return [NSString stringWithFormat:@"%d", migrationCdInt];
 }
 
 - (IBAction)backButton:(id)sender {

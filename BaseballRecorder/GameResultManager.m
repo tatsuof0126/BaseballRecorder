@@ -55,6 +55,24 @@
     return gameResult;
 }
 
+/*
++ (NSArray*)getGameResultFileList {
+    NSMutableArray* resultArray = [NSMutableArray array];
+    
+    NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* dirpath = [dirpaths objectAtIndex:0];
+    
+    NSArray* filenameArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirpath error:nil];
+    for(NSString* filename in filenameArray){
+        if([filename containsString:@"gameresult"]){
+            [resultArray addObject:[dirpath stringByAppendingPathComponent:filename]];
+        }
+    }
+    
+    return resultArray;
+}
+*/
+
 + (NSArray*)loadGameResultList {
     NSMutableArray* resultList = [NSMutableArray array];
     

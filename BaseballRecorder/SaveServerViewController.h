@@ -13,8 +13,11 @@
 
 @property (strong, nonatomic) GADBannerView *gadView;
 
-@property (strong, nonatomic) IBOutlet UILabel *datacode;
-@property (strong, nonatomic) IBOutlet UILabel *limitdate;
+@property (strong, nonatomic) UIActivityIndicatorView* indicator;
+
+
+@property (strong, nonatomic) IBOutlet UILabel *migrationCdLabel;
+@property (strong, nonatomic) IBOutlet UILabel *createDateLabel;
 
 - (IBAction)saveServer:(id)sender;
 

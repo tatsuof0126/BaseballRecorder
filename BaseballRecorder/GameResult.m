@@ -569,9 +569,14 @@
     NSString* resultStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSArray* resultStrArray = [resultStr componentsSeparatedByString:@"\n"];
     
-//    NSLog(@"resultStr : %@", resultStr);
-    
     @try {
+        // NSLog(@"resultStr : %@", resultStr);
+        // NSLog(@"------");
+        // for(NSString* str in resultStrArray){
+        //     NSLog(@"%@", str);
+        // }
+        // NSLog(@"------");
+        
         // １行目にファイル形式とUUIDがあるはず
         NSString* headerStr = [resultStrArray objectAtIndex:0];
         NSArray* headerStrArray = [headerStr componentsSeparatedByString:@","];
@@ -605,8 +610,8 @@
         }
     }
     @catch (NSException *exception) {
-//        NSLog(@"例外名：%@", exception.name);
-//        NSLog(@"理由：%@", exception.reason);
+        NSLog(@"例外名：%@", exception.name);
+        NSLog(@"理由：%@", exception.reason);
     }
     
     // 例外が発生したらnilを返す

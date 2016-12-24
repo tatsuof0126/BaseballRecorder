@@ -13,6 +13,14 @@
 
 @property (strong, nonatomic) GADBannerView *gadView;
 
+@property (strong, nonatomic) UIActivityIndicatorView* indicator;
+
+@property (strong, nonatomic) IBOutlet UITextField *migrationCdText;
+
+- (IBAction)onTap:(id)sender;
+
+- (IBAction)loadServer:(id)sender;
+
 - (IBAction)backButton:(id)sender;
 
 @end

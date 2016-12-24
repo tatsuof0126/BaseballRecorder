@@ -146,4 +146,26 @@
     [defaults synchronize];
 }
 
++ (NSString*)getMigrationCd {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"MIGRATIONCD"];
+}
+
++ (void)setMigrationCd:(NSString*)migrationCd {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:migrationCd forKey:@"MIGRATIONCD"];
+    [defaults synchronize];
+}
+
++ (NSDate*)getCreateDate {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:@"CREATEDATE"];
+}
+
++ (void)setCreateDate:(NSDate*)createDate {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:createDate forKey:@"CREATEDATE"];
+    [defaults synchronize];
+}
+
 @end

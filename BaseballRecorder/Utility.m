@@ -49,4 +49,12 @@
     return [[NSNumber numberWithInteger:integer] intValue];
 }
 
++ (UIActivityIndicatorView*)getIndicatorView:(UIViewController*)controller {
+    UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicator.color = [UIColor darkGrayColor];
+    indicator.hidesWhenStopped = YES;
+    indicator.center = CGPointMake(controller.view.bounds.size.width / 2, controller.view.bounds.size.height / 2);
+    return indicator;
+}
+
 @end

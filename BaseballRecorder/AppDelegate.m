@@ -9,7 +9,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
 #import "GAI.h"
-// #import "NADInterstitial.h"
+#import "GADInterstitial.h"
 #import "ConfigManager.h"
 #import "TrackingManager.h"
 #import "GameResultManager.h"
@@ -17,6 +17,7 @@
 @implementation AppDelegate
 
 @synthesize interstitial;
+@synthesize gadInterstitial;
 @synthesize showInterstitialFlg;
 @synthesize purchaseManager;
 
@@ -44,6 +45,7 @@
     
     // インタースティシャル広告の初期化
     [self prepareInterstitial];
+    [self prepareGadInterstitial];
     showInterstitialFlg = NO;
     
     return YES;
@@ -233,6 +235,30 @@
     request.testDevices = @[kGADSimulatorID];
     [gadView loadRequest:request];
     return gadView;
+}
+
+- (void)prepareGadInterstitial {
+    @try {
+        gadInterstitial = [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-6719193336347757/3349348650"];
+        gadInterstitial.delegate = self;
+        [gadInterstitial loadRequest:[GADRequest request]];
+    } @catch (NSException *exception) {
+        [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"prepareGadInterstitial" value:nil screen:@"prepareGadInterstitial"];
+    }
+}
+
+- (void)showGadInterstitial:(UIViewController*)controller {
+    @try {
+        if ([gadInterstitial isReady]) {
+            [gadInterstitial presentFromRootViewController:controller];
+        }
+    } @catch (NSException *exception) {
+        [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"showGadInterstitial" value:nil screen:@"showGadInterstitial"];
+    }
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial*)interstitial {
+    [self prepareGadInterstitial];
 }
 
 @end

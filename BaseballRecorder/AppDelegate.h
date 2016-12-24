@@ -16,7 +16,7 @@
 #define VERUP_DIALOG_VIEW 0 // 1=表示,0=非表示（リリース時は0）
 #define MAKE_SAMPLE_DATA 0 // 1=テストデータ作成（リリース時は0）
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -25,6 +25,7 @@
 @property (strong, nonatomic) InAppPurchaseManager* purchaseManager;
 
 @property(nonatomic , retain) ADGInterstitial *interstitial;
+@property(nonatomic, strong) GADInterstitial *gadInterstitial;
 @property BOOL showInterstitialFlg;
 
 + (AppDelegate*)getAppDelegate;
@@ -42,5 +43,11 @@
 // + (void)dismissInterstitial;
 
 + (GADBannerView*)makeGadView:(UIViewController<GADBannerViewDelegate>*)controller;
+
+- (void)prepareGadInterstitial;
+
+- (void)showGadInterstitial:(UIViewController*)controller;
+
+- (void)interstitialDidDismissScreen:(GADInterstitial*)interstitial;
 
 @end

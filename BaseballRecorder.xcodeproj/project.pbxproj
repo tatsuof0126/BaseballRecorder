@@ -132,6 +132,13 @@
 			remoteGlobalIDString = BD655AEAA177732252D722208E580A27;
 			remoteInfo = "Pods-BaseballRecorder";
 		};
+		0B87E79B1E0EC2130023F583 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B7EE7381DE9ECEB003BC42D /* Pods.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AA00AD9354ED22B03FBE04D1F9D392A;
+			remoteInfo = "Pods-BaseballRecorder";
+		};
 		0B9499E016325697007F574D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0B9499A016325696007F574D /* Project object */;
@@ -656,6 +663,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0B87E79C1E0EC2130023F583 /* PBXTargetDependency */,
 			);
 			name = BaseballRecorder;
 			productName = BaseballRecorder;
@@ -919,6 +927,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0B87E79C1E0EC2130023F583 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-BaseballRecorder";
+			targetProxy = 0B87E79B1E0EC2130023F583 /* PBXContainerItemProxy */;
+		};
 		0B9499E116325697007F574D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0B9499A816325697007F574D /* BaseballRecorder */;

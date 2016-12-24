@@ -16,7 +16,7 @@
 
 @implementation AppDelegate
 
-@synthesize interstitial;
+// @synthesize interstitial;
 @synthesize gadInterstitial;
 @synthesize showInterstitialFlg;
 @synthesize purchaseManager;
@@ -44,7 +44,7 @@
     [ConfigManager initConfig];
     
     // インタースティシャル広告の初期化
-    [self prepareInterstitial];
+    // [self prepareInterstitial];
     [self prepareGadInterstitial];
     showInterstitialFlg = NO;
     
@@ -149,6 +149,7 @@
 }
 
 // インタースティシャル広告
+/*
 - (void)prepareInterstitial {
     @try {
         // 旧オブジェクトの初期化
@@ -169,7 +170,9 @@
         [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"prepareInterstitial" value:nil screen:@"prepareInterstitial"];
     }
 }
+*/
 
+/*
 + (void)showInterstitial:(UIViewController*)controller {
     @try {
         AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -185,6 +188,7 @@
         [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"showInterstitial" value:nil screen:@"showInterstitial"];
     }
 }
+*/
 
 /*
 + (void)dismissInterstitial {
@@ -199,6 +203,7 @@
 */
 
 // Interstitialのデリゲート
+/*
 - (void)ADGInterstitialClose {
 //    NSLog(@"%@", @"ADGInterstitialClose");
     [self prepareInterstitial];
@@ -224,6 +229,7 @@
 - (void)ADGManagerViewControllerOpenUrl:(ADGManagerViewController*)adgManagerViewController{
 //    NSLog(@"%@", @"ADGManagerViewControllerOpenUrl");
 }
+*/
 
 + (GADBannerView*)makeGadView:(UIViewController<GADBannerViewDelegate>*)controller {
     GADBannerView* gadView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];

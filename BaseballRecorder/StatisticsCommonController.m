@@ -52,10 +52,12 @@
     // 子クラスでオーバーライドする前提
 }
 
+/*
 - (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
     // 子クラスでオーバーライドする前提
 
 }
+*/
 
 - (void)didReceiveMemoryWarning
 {

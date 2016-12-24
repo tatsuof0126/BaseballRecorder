@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import <ADG/ADGInterstitial.h>
+// #import <ADG/ADGInterstitial.h>
 #import "GameResult.h"
 #import "InAppPurchaseManager.h"
 
@@ -24,7 +24,7 @@
 
 @property (strong, nonatomic) InAppPurchaseManager* purchaseManager;
 
-@property(nonatomic , retain) ADGInterstitial *interstitial;
+// @property(nonatomic , retain) ADGInterstitial *interstitial;
 @property(nonatomic, strong) GADInterstitial *gadInterstitial;
 @property BOOL showInterstitialFlg;
 
@@ -38,7 +38,7 @@
 
 // + (void)adjustOriginForBeforeiOS6:(UIView*)view;
 
-+ (void)showInterstitial:(UIViewController*)controller;
+// + (void)showInterstitial:(UIViewController*)controller;
 
 // + (void)dismissInterstitial;
 

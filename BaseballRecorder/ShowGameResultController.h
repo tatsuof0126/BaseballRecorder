@@ -12,7 +12,7 @@
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import <ADG/ADGInterstitial.h>
+// #import <ADG/ADGInterstitial.h>
 #import <FBSDKShareKit/FBSDKSharing.h>
 
 #define POST_TWITTER  1
@@ -20,7 +20,7 @@
 #define POST_LINE     3
 
 @interface ShowGameResultController : UIViewController
-        <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate, ADGInterstitialDelegate, GADBannerViewDelegate>
+        <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, FBSDKSharingDelegate, GADBannerViewDelegate>
 
 @property (strong, nonatomic) GADBannerView *gadView;
 

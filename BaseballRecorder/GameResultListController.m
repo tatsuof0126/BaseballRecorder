@@ -248,7 +248,8 @@
                 
                 // インタースティシャル広告を表示
                 if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-                    [AppDelegate showInterstitial:self];
+                    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                    [appDelegate showGadInterstitial:self];
                 }
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -275,9 +276,10 @@
         [gameResultListTableView reloadData];
         
         // インタースティシャル広告を表示（エラーになるので出さない）
-        // if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-        //    [AppDelegate showInterstitial];
-        // }
+        if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            [appDelegate showGadInterstitial:self];
+        }
     }
 }
 
@@ -355,7 +357,8 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if(appDelegate.showInterstitialFlg == YES){
         if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
-            [AppDelegate showInterstitial:self];
+            [appDelegate showGadInterstitial:self];
+            // [AppDelegate showInterstitial:self];
             appDelegate.showInterstitialFlg = NO;
         }
     }

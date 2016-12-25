@@ -688,17 +688,13 @@
         UIImage* shareImage = [self getShareImage:POST_LINE shareType:(int)shareType];
         
         UIPasteboard *pasteboard = nil;
-
+        
         //iOS7.0以降では共有のクリップボードしか使えない。その際クリップボードが上書きされてしまうので注意。
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
-            pasteboard = [UIPasteboard generalPasteboard];
-        } else {
-            pasteboard = [UIPasteboard pasteboardWithUniqueName];
-        }
+        pasteboard = [UIPasteboard generalPasteboard];
         
         [pasteboard setData:UIImagePNGRepresentation(shareImage) forPasteboardType:@"public.png"];
         NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name];
-
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
     }
 }

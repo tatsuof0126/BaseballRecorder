@@ -115,10 +115,7 @@
 }
 
 - (IBAction)onTap:(id)sender {
-    // iOS8未満でない（＝iOS8以上）なら
-    if([[[UIDevice currentDevice] systemVersion] compare:@"8" options:NSNumericSearch] != NSOrderedAscending){
-        [self.view endEditing:YES];
-    }
+    [self.view endEditing:YES];
 }
 
 - (IBAction)placeEdited:(id)sender {

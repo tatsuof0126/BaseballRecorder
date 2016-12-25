@@ -10,6 +10,6 @@
 
 @interface APIManager : NSObject
 
-+ (void)APISaveGameResults;
+// + (void)APISaveGameResults;
 
 @end

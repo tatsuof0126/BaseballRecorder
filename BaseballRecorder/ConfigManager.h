@@ -65,4 +65,8 @@
 
 + (void)setCreateDate:(NSDate*)createDate;
 
++ (int)getCreateCount;
+
++ (void)setCreateCount:(int)createCount;
+
 @end

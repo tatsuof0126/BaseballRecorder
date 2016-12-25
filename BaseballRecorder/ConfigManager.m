@@ -168,4 +168,15 @@
     [defaults synchronize];
 }
 
++ (int)getCreateCount {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return (int)[defaults integerForKey:@"CREATECOUNT"];
+}
+
++ (void)setCreateCount:(int)createCount {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:createCount forKey:@"CREATECOUNT"];
+    [defaults synchronize];
+}
+
 @end

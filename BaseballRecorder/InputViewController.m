@@ -296,11 +296,8 @@
 }
 
 - (IBAction)onTap:(id)sender {
-    // iOS8未満でない（＝iOS8以上）なら
-    if([[[UIDevice currentDevice] systemVersion] compare:@"8" options:NSNumericSearch] != NSOrderedAscending){
-        [self.view endEditing:YES];
-        [self closePicker];
-    }
+    [self.view endEditing:YES];
+    [self closePicker];
 }
 
 - (void)showDoneButton {
@@ -1015,8 +1012,8 @@
         blankFlg = YES;
     } else {
         // 日付チェック
-        NSDate* date = [self getDate:_year.text month:_month.text day:_day.text];
-        if(date == NULL){
+        NSDate* date = [Utility getDate:_year.text month:_month.text day:_day.text];
+        if(date == nil){
             [errorArray addObject:@"日付が正しくありません。"];
         }
     }
@@ -1072,7 +1069,7 @@
 
 - (void)updateGameResult {
     // 日付は一度カレンダーに変換してから取得する。
-    NSDate* date = [self getDate:_year.text month:_month.text day:_day.text];
+    NSDate* date = [Utility getDate:_year.text month:_month.text day:_day.text];
     
     // 日時をカレンダーで年月日に分解する
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -1171,6 +1168,7 @@
     edited = YES;
 }
 
+/*
 -(NSDate*)getDate:(NSString*)year month:(NSString*)month day:(NSString*)day {
     NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00", year, month, day];
     
@@ -1186,6 +1184,7 @@
     
     return date;
 }
+*/
 
 - (void)dealloc {
     gadView.delegate = nil;

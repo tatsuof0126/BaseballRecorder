@@ -10,6 +10,7 @@
 
 @implementation APIManager
 
+/*
 + (void)APISaveGameResults {
     NSString* url = @"http://192.168.51.5:3000/gameresults";
     NSString* param = @"{\"device_id\": \"1234567890\", \"gameresults\": [{\"id\": \"1\", \"uuid\": \"abcde\"}, {\"id\": \"2\", \"uuid\": \"fghij\"}]}";
@@ -37,6 +38,7 @@
     
     
 }
+*/
 
 /*
 + (APIResult*)doPost:(NSString*)url param:(NSString*)param {

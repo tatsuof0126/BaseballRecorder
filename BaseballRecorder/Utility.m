@@ -57,4 +57,59 @@
     return indicator;
 }
 
++ (NSDate*)getDate:(NSString*)year month:(NSString*)month day:(NSString*)day {
+    NSString* dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00", year, month, day];
+    
+    // NSLog(@"%@/%@/%@",year, month, day);
+    
+    // Dateオブジェクトに変換して正しい日時かをチェック
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [formatter setLocale:[NSLocale systemLocale]];
+    [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [formatter setCalendar:calendar];
+    
+    NSDate* retDate = [formatter dateFromString:dateStr];
+    
+    if(retDate == nil){
+        return nil;
+    }
+    
+    // 日付チェック（2月31日などをチェック）
+    NSCalendar* checkCalendar = [NSCalendar currentCalendar];
+    [checkCalendar setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDateComponents* dateComps = [checkCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:retDate];
+    
+    if([year integerValue] != dateComps.year ||
+       [month integerValue] != dateComps.month ||
+       [day integerValue] != dateComps.day){
+        return nil;
+    }
+    
+    // NSLog(@" -> %@", [retDate description]);
+    
+    return retDate;
+}
+
++ (BOOL)isToday:(NSDate*)date {
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *dateComps
+        = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    NSDate* nowDate = [NSDate date];
+    NSCalendar* nowCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *nowDateComps
+        = [nowCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:nowDate];
+    
+    if(dateComps.year == nowDateComps.year &&
+       dateComps.month == nowDateComps.month &&
+       dateComps.day == nowDateComps.day){
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end

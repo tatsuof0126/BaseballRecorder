@@ -57,6 +57,20 @@
 */
 
 - (IBAction)saveServer:(id)sender {
+    // データ件数が０件なら保存しない
+    NSArray* gameResultList = [GameResultManager loadGameResultList];
+    if(gameResultList == nil || gameResultList.count == 0){
+        [Utility showAlert:@"試合結果がありません。"];
+        return;
+    }
+    
+    // １日に６回以上は登録させない
+    int createCount = [ConfigManager getCreateCount];
+    if(createCount >= 5 && [Utility isToday:[ConfigManager getCreateDate]]){
+        [Utility showAlert:@"１日に発行できる機種変更コードは５個までです。"];
+        return;
+    }
+    
     // ぐるぐるを出す
     indicator = [Utility getIndicatorView:self];
     [indicator startAnimating];
@@ -64,15 +78,14 @@
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperationWithBlock:^{
-        [self saveGameResult];
+        [self saveGameResult:gameResultList];
     }];
 }
 
-- (void)saveGameResult {
+- (void)saveGameResult:(NSArray*)gameResultList {
     int uploadCount = 0;
     BOOL failed = NO;
     
-    NSArray* gameResultList = [GameResultManager loadGameResultList];
     
     NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* dirpath = [dirpaths objectAtIndex:0];
@@ -96,8 +109,13 @@
         [indicator stopAnimating];
         if(failed == NO){
             [ConfigManager setMigrationCd:migrationCd];
+            int createCount = 1;
+            if([Utility isToday:[ConfigManager getCreateDate]]){
+                createCount = [ConfigManager getCreateCount] + 1;
+            }
+            [ConfigManager setCreateCount:createCount];
             [ConfigManager setCreateDate:[NSDate date]];
-
+            
             [self updateLabel];
             
             [Utility showAlert:[NSString stringWithFormat:@"%d件のデータをサーバーにアップロードしました。\n機種変更コードは［%@］です。", uploadCount, migrationCd]];

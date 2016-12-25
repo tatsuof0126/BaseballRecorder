@@ -23,4 +23,8 @@
 
 + (UIActivityIndicatorView*)getIndicatorView:(UIViewController*)controller;
 
++ (NSDate*)getDate:(NSString*)year month:(NSString*)month day:(NSString*)day;
+
++ (BOOL)isToday:(NSDate*)date;
+
 @end

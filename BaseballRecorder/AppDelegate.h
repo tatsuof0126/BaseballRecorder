@@ -13,8 +13,11 @@
 #import "InAppPurchaseManager.h"
 
 #define AD_VIEW 1 // 1=表示,0=非表示（リリース時は1）
+#define SET_SAVE_SERVER_ON 0 // 1=ON設定,0=何もしない（リリース時は0）
 #define VERUP_DIALOG_VIEW 0 // 1=表示,0=非表示（リリース時は0）
 #define MAKE_SAMPLE_DATA 0 // 1=テストデータ作成（リリース時は0）
+
+#define INTERSTITIAL_FREQ 25 // インタースティシャル広告の表示割合（％）
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate>
 

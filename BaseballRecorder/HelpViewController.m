@@ -30,6 +30,8 @@
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 416);
+    scrollView.contentSize = CGSizeMake(320, 600);
+    
     [AppDelegate adjustForiPhone5:scrollView];
 
     // 広告表示（admob）

@@ -49,13 +49,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  	return 2;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
-        return @"アドオンを購入して広告を削除";
+        return @"アドオンを購入";
     } else if(section == 1){
         return @"以前にアドオンを購入済みの方";
     } else {
@@ -63,29 +63,55 @@
     }
 }
 
--(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    if(section == 0){
+        return 2;
+    } else if(section == 1){
+        return 1;
+    }
     return 1;
 }
 
--(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     int section = [Utility convert2int:indexPath.section];
+    int row = [Utility convert2int:indexPath.row];
     
+    /*
     UITableViewCell* cell;
-    
     NSString* cellName = [NSString stringWithFormat:@"%@%d",@"PurchaseCell",section];
     cell = [tableView dequeueReusableCellWithIdentifier:cellName];
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:cellName];
     }
+    */
     
-    if(section == 0){
-        cell.textLabel.text = @"広告を削除する";
-    } else if(section == 1){
-        cell.textLabel.text = @"購入済みアドオンをリストア";
-    } else {
-        cell.textLabel.text = @"";
+    NSString* cellName = @"PurchaseCell";
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellName];
+    if(cell == nil){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                      reuseIdentifier:cellName];
     }
+    
+    NSString* text = @"";
+    NSString* detailText = @"";
+    
+    if(section == 0 && row == 0){
+        text = @"広告を削除";
+        if([ConfigManager isRemoveAdsFlg] == YES){
+            detailText = @"購入済み";
+        }
+    } else if(section == 0 && row == 1){
+        text = @"機種変更コードを利用";
+        if([ConfigManager isServerUseFlg] == YES){
+            detailText = @"購入済み";
+        }
+    } else if(section == 1){
+        text = @"購入済みアドオンをリストア";
+    }
+    
+    cell.textLabel.text = text;
+    cell.detailTextLabel.text = detailText;
     
     return cell;
 }
@@ -93,13 +119,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
     
-    if(indexPath.section == 0){
+    if(indexPath.section == 0 && indexPath.row == 0){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―広告削除" value:nil screen:@"アドオン購入画面"];
-        
-        [self requestAddon:@"com.tatsuo.baseballrecorder.removeads"];
+        if([ConfigManager isRemoveAdsFlg] == NO){
+            [self requestAddon:@"com.tatsuo.baseballrecorder.removeads"];
+        } else {
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
+            [Utility showAlert:@"このアドオンはすでに購入済みです。"];
+        }
+    } else if(indexPath.section == 0 && indexPath.row == 1){
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―機種変更コード利用" value:nil screen:@"アドオン購入画面"];
+        if([ConfigManager isServerUseFlg] == NO){
+            [self requestAddon:@"com.tatsuo.baseballrecorder.useserverflg"];
+        } else {
+            [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
+            [Utility showAlert:@"このアドオンはすでに購入済みです。"];
+        }
     } else if(indexPath.section == 1){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―リストア" value:nil screen:@"アドオン購入画面"];
-        
         [self restoreAddon];
     }
 }
@@ -171,11 +208,11 @@
 
 - (void)endPurchase {
     doingPurchase = NO;
+    [addonTableView reloadData];
 }
 
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

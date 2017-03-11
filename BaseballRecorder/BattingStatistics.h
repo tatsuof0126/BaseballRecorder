@@ -26,6 +26,7 @@
 @property int error;
 @property int steal;
 @property int stealOut;
+@property int doubleplay;
 
 @property float average;
 @property float obp;

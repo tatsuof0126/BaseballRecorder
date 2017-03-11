@@ -17,7 +17,8 @@
 #define S_STRIKEOUTS 6
 #define S_WALKS    7
 #define S_SACRIFICES 8
-#define S_SACRIFICEFLIES 9
+#define S_DOUBLEPLAY 9
+#define S_SACRIFICEFLIES 99
 
 #define P_STR_PICKER 0
 #define P_STR_SHORT  1

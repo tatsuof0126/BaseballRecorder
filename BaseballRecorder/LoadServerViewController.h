@@ -16,10 +16,13 @@
 @property (strong, nonatomic) UIActivityIndicatorView* indicator;
 
 @property (strong, nonatomic) IBOutlet UITextField *migrationCdText;
+@property (strong, nonatomic) IBOutlet UITextView *infoText;
 
 - (IBAction)onTap:(id)sender;
 
 - (IBAction)loadServer:(id)sender;
+
+- (IBAction)updateInfo:(id)sender;
 
 - (IBAction)backButton:(id)sender;
 

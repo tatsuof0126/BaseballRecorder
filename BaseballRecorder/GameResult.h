@@ -13,6 +13,7 @@
 
 @interface GameResult : NSObject
 
+@property int version;
 @property (strong, nonatomic, readwrite) NSString *UUID;
 @property int resultid;
 @property int year;
@@ -109,5 +110,7 @@
 - (NSString*)getShubiConnectedString;
 
 + (NSString*)adjustTagText:(NSString*)sourceString;
+
+- (BOOL)isLatestVersion;
 
 @end

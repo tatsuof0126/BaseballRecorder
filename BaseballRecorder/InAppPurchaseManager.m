@@ -121,10 +121,7 @@
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
 //    NSLog(@"--- paymentQueueRestoreCompletedTransactionsFinished ---");
     
-    if([ConfigManager isRemoveAdsFlg] == NO){
-        [Utility showAlert:@"リストアしました" message:@"広告を削除にするには[広告を削除する]ボタンからアドオンを購入してください。"];
-    }
-    
+    [Utility showAlert:@"リストアしました"];
     [source endPurchase];
     source = nil;
 }
@@ -140,11 +137,25 @@
     // 購入したアドオンを判定
     if([productId isEqualToString:@"com.tatsuo.baseballrecorder.removeads"]){
         // 広告削除アドオン
-        [ConfigManager setRemoveAdsFlg:YES];
         if(restore == NO){
-            [Utility showAlert:@"購入しました" message:@"次回起動時より広告が表示されなくなります。"];
+            [ConfigManager setRemoveAdsFlg:YES];
+            [Utility showAlert:@"購入しました" message:@"広告が表示されなくなりました。"];
         } else {
-            [Utility showAlert:@"リストアしました" message:@"次回起動時より広告が表示されなくなります。"];
+            if([ConfigManager isRemoveAdsFlg] == NO){
+                [ConfigManager setRemoveAdsFlg:YES];
+                [Utility showAlert:@"リストアしました" message:@"広告が表示されなくなりました。"];
+            }
+        }
+    } else if ([productId isEqualToString:@"com.tatsuo.baseballrecorder.useserverflg"]){
+        // 機種変更コードアドオン
+        if(restore == NO){
+            [ConfigManager setServerUseFlg:YES];
+            [Utility showAlert:@"購入しました" message:@"機種変更コードの利用が可能になりました。"];
+        } else {
+            if([ConfigManager isServerUseFlg] == NO){
+                [ConfigManager setServerUseFlg:YES];
+                [Utility showAlert:@"リストアしました" message:@"機種変更コードの利用が可能になりました。"];
+            }
         }
     }
 }

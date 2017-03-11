@@ -118,7 +118,8 @@
     _homeruns.text = [NSString stringWithFormat:@"%d",battingStatistics.homeruns];
     _strikeouts.text = [NSString stringWithFormat:@"%d",battingStatistics.strikeouts];
     _walks.text = [NSString stringWithFormat:@"%d",battingStatistics.walks];
-    _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices];
+    _sacrifices.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrifices - battingStatistics.sacrificeflies];
+    _sacrificesflies.text = [NSString stringWithFormat:@"%d",battingStatistics.sacrificeflies];
     _daten.text = [NSString stringWithFormat:@"%d",battingStatistics.daten];
     _tokuten.text = [NSString stringWithFormat:@"%d",battingStatistics.tokuten];
     _error.text = [NSString stringWithFormat:@"%d",battingStatistics.error];

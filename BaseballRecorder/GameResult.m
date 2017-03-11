@@ -13,6 +13,7 @@
 @implementation GameResult
 
 @synthesize battingResultArray;
+@synthesize version;
 @synthesize UUID;
 @synthesize resultid;
 @synthesize year;
@@ -602,7 +603,7 @@
             // "V7"という文字列ならV7形式
             return [self makeGameResultV7:resultStrArray resultUUID:resultUUID];
         } else if([versionStr isEqualToString:@"V8"] == YES){
-            // "V7"という文字列ならV7形式
+            // "V8"という文字列ならV8形式
             return [self makeGameResultV8:resultStrArray resultUUID:resultUUID];
         } else {
             // どのバージョンでもない場合はV1形式と見なす
@@ -623,6 +624,7 @@
 // ２行目：打撃成績（場所、結果、場所、結果・・・・）
 + (GameResult*)makeGameResultV1:(NSArray*)resultStrArray {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 1;
     
     // １行目は試合情報
     NSString* gameInfoStr = [resultStrArray objectAtIndex:0];
@@ -642,6 +644,7 @@
 // ３行目：打撃成績（場所、結果、場所、結果・・・・）
 + (GameResult*)makeGameResultV2:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 2;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -665,6 +668,7 @@
 // ４行目：投手成績（投球回、投球回小数点以下、安打、本塁打、奪三振、与四球、与死球、失点、自責点、完投、責任投手）
 + (GameResult*)makeGameResultV3:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 3;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -693,6 +697,7 @@
 // ５行目以降：メモ
 + (GameResult*)makeGameResultV4:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 4;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -732,6 +737,7 @@
 // ５行目以降：メモ
 + (GameResult*)makeGameResultV5:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 5;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -771,7 +777,8 @@
 // ６行目以降：メモ
 + (GameResult*)makeGameResultV6:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
-    
+    gameResult.version = 6;
+
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
     
@@ -813,6 +820,7 @@
 // ６行目以降：メモ
 + (GameResult*)makeGameResultV7:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 7;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -855,6 +863,7 @@
 // ６行目以降：メモ
 + (GameResult*)makeGameResultV8:(NSArray*)resultStrArray resultUUID:(NSString*)resultUUID {
     GameResult* gameResult = [[GameResult alloc] init];
+    gameResult.version = 8;
     
     // １行目は読み込み済のためUUIDのみ設定
     gameResult.UUID = resultUUID;
@@ -1068,12 +1077,12 @@
 }
 
 + (NSArray*)getShubiPickerArray {
-    NSArray* array = [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",@"ショート",@"レフト",@"センター",@"ライト",nil];
+    NSArray* array = [NSArray arrayWithObjects:@"",@"ピッチャー",@"キャッチャー",@"ファースト",@"セカンド",@"サード",@"ショート",@"レフト",@"センター",@"ライト",@"指名打者",nil];
     return array;
 }
 
 + (NSArray*)getShortShubiPickerArray {
-    NSArray* array = [NSArray arrayWithObjects:@"",@"投手",@"捕手",@"一塁",@"二塁",@"三塁",@"遊撃",@"左翼",@"中堅",@"右翼",nil];
+    NSArray* array = [NSArray arrayWithObjects:@"",@"投手",@"捕手",@"一塁",@"二塁",@"三塁",@"遊撃",@"左翼",@"中堅",@"右翼",@"DH",nil];
     return array;
 }
 
@@ -1130,6 +1139,10 @@
     }
     
     return returnString;
+}
+
+- (BOOL)isLatestVersion {
+    return version == SAVE_VERSION;
 }
 
 @end

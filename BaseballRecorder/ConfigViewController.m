@@ -43,22 +43,7 @@
     // 画面が開かれたときのトラッキング情報を送る
     [TrackingManager sendScreenTracking:@"設定画面"];
     
-    // メニュー
-    if([ConfigManager isRemoveAdsFlg] == YES || [UIScreen mainScreen].bounds.size.height != 568){
-        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
-        // configCategoryArray = [NSArray arrayWithObjects:@"",  nil];
-        configMenuArray = [NSArray arrayWithObjects:
-                           [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
-                           nil];
-    } else {
-        configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
-        // configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
-        configMenuArray = [NSArray arrayWithObjects:
-                       [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                       [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
-                       [NSArray arrayWithObjects:@"広告を削除する", nil], nil];
-    }
+    [self makeMenuArray];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     _versionName.text = [NSString stringWithFormat:@"version%@",version];
@@ -76,9 +61,9 @@
     [AppDelegate adjustOriginForiPhone5:otherappLabel];
     
     // すでに広告が非表示ならボタンを消す
-    if([ConfigManager isRemoveAdsFlg] == YES){
-        inputNavi.rightBarButtonItem = nil;
-    }
+    // if([ConfigManager isRemoveAdsFlg] == YES){
+    //     inputNavi.rightBarButtonItem = nil;
+    // }
     
     // ScrollViewの大きさ定義＆iPhone5対応
     configTableView.frame = CGRectMake(0, 64, 320, 366);
@@ -99,6 +84,23 @@
     // TableViewの大きさ定義＆iPhone5対応
     configTableView.frame = CGRectMake(0, 64, 320, 316);
     [AppDelegate adjustForiPhone5:configTableView];
+}
+
+- (void)makeMenuArray {
+    // メニュー
+    if([ConfigManager isRemoveAdsFlg] == YES || [UIScreen mainScreen].bounds.size.height != 568){
+        configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
+        configMenuArray = [NSArray arrayWithObjects:
+                           [NSArray arrayWithObjects:@"入力・表示の設定", nil],
+                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           nil];
+    } else {
+        configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
+        configMenuArray = [NSArray arrayWithObjects:
+                           [NSArray arrayWithObjects:@"入力・表示の設定", nil],
+                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           [NSArray arrayWithObjects:@"広告を削除する", nil], nil];
+    }
 }
 
 - (void)removeAdsBar {
@@ -148,14 +150,14 @@
         [self performSegueWithIdentifier:@"inputconfig" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 0){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードの発行" value:nil screen:@"設定画面"];
-        //if([ConfigManager isServerUseFlg] == NO){
-        //    [self showMoveAddonView:@"機種変更コードの発行にはアドオンの入手が必要です。"];
-        //} else {
-            [self performSegueWithIdentifier:@"saveserver" sender:self];
-        //}
+        [self performSegueWithIdentifier:@"saveserver" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 1){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードを使う" value:nil screen:@"設定画面"];
-        [self performSegueWithIdentifier:@"loadserver" sender:self];
+        if([ConfigManager isServerUseFlg] == NO){
+            [self showMoveAddonView:@"機種変更コードを使うにはアドオンの入手が必要です。（一度入手すると何度でも機種変更コードを利用できます）"];
+        } else {
+            [self performSegueWithIdentifier:@"loadserver" sender:self];
+        }
     } else if(indexPath.section == 2 && indexPath.row == 0){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―広告削除" value:nil screen:@"設定画面"];
         if([ConfigManager isRemoveAdsFlg] == NO){
@@ -212,11 +214,14 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
+    
+    [self makeMenuArray];
+    [configTableView reloadData];
     
     // 広告が削除された場合の対応
     [self removeAdsBar];
-    
-    [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)dealloc {

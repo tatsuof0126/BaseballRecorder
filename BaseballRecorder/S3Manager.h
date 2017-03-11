@@ -18,4 +18,6 @@
 
 + (BOOL)S3Upload:(NSString*)prefix fileName:(NSString*)fileName filePath:(NSString*)filePath;
 
++ (NSString*)S3GetInfo;
+
 @end

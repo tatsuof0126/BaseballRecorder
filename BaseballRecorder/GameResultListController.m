@@ -309,19 +309,16 @@
      */
     
     if(useVersion == nil || [useVersion isEqualToString:nowVersion] == NO || VERUP_DIALOG_VIEW == 1){
-        /*
-        Ver2.8では出さない
         NSArray* gameResultList = [GameResultManager loadGameResultList];
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます"
-                    message:@"このバージョンから、打順・守備位置・先攻/後攻・盗塁死・失策が記録できるようになりました。ぜひご活用ください。"
+                    message:@"バージョン3.0から機種変更時のデータの引継ぎができるようになっています。\n設定メニューから機種変更コードの発行をお試しください。"
                     preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
         }
-        */
         [ConfigManager setUseVersion:nowVersion];
     }
 }

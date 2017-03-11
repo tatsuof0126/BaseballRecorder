@@ -27,7 +27,7 @@
     
     NSString* floatStr = [NSString stringWithFormat:@"%0.03f",floatvalue];
     
-    if(floatvalue < 1.0){
+    if(floatvalue >= 0.0f && floatvalue < 1.0f){
         floatStr = [[floatStr substringFromIndex:1] stringByAppendingString:@" "];
     }
     
@@ -94,6 +94,10 @@
 }
 
 + (BOOL)isToday:(NSDate*)date {
+    if(date == nil){
+        return NO;
+    }
+    
     NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *dateComps
         = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];

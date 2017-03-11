@@ -44,16 +44,16 @@ static NSArray* battingStatisticsArray;
             = [NSArray arrayWithObjects:
                // 打撃成績入力Picker用
                [NSArray arrayWithObjects:@"",@"ゴロ",@"フライ",@"ﾌｧｰﾙﾌﾗｲ",@"ライナー",@"エラー",@"ﾌｨﾙﾀﾞｰｽﾁｮｲｽ",
-                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",nil],
+                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打/犠飛",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",@"併殺打",nil],
                // 表示用（短縮）
                [NSArray arrayWithObjects:@"",@"ゴ",@"飛",@"邪飛",@"直",@"失",@"野選",@"安",
-                @"二",@"三",@"本",@"犠",@"三振",@"振逃",@"四球",@"死球",@"打妨",nil],
+                @"二",@"三",@"本",@"犠",@"三振",@"振逃",@"四球",@"死球",@"打妨",@"併",nil],
                // 表示用（やや短縮）
                [NSArray arrayWithObjects:@"",@"ゴロ",@"フライ",@"邪フライ",@"ライナー",@"エラー",@"野選",
-                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",nil],
+                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",@"併殺打",nil],
                // 表示用（正式名称）
                [NSArray arrayWithObjects:@"",@"ゴロ",@"フライ",@"ファールフライ",@"ライナー",@"エラー",@"フィルダースチョイス",
-                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",nil],
+                @"ヒット",@"二塁打",@"三塁打",@"ホームラン",@"犠打",@"三振",@"振り逃げ",@"四球",@"死球",@"打撃妨害",@"併殺打",nil],
                nil];
     }
     
@@ -75,16 +75,16 @@ static NSArray* battingStatisticsArray;
             = [NSArray arrayWithObjects:
                // ポジションが必須か
                [NSArray arrayWithObjects:
-                byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,bno,bno,bno,bno,bno,nil],
+                byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,byes,bno,bno,bno,bno,bno,byes,nil],
                // 試合結果参照画面での表示色
                [NSArray arrayWithObjects:
-                black,black,black,black,black,black,black,red,red,red,red,blue,black,black,blue,blue,black,nil],
+                black,black,black,black,black,black,black,red,red,red,red,blue,black,black,blue,blue,black,black,nil],
                // 打撃分析画面での線の色
                [NSArray arrayWithObjects:
-                dgray,dgray,dgray,dgray,dgray,dgray,dgray,blue,red,red,red,dgray,dgray,dgray,dgray,dgray,dgray,nil],
+                dgray,dgray,dgray,dgray,dgray,dgray,dgray,blue,red,red,red,dgray,dgray,dgray,dgray,dgray,dgray,dgray,nil],
                // 試合結果一覧画面での表示色
                [NSArray arrayWithObjects:
-                gray,gray,gray,gray,gray,gray,gray,red,red,red,red,blue,gray,gray,blue,blue,gray,nil],
+                gray,gray,gray,gray,gray,gray,gray,red,red,red,red,blue,gray,gray,blue,blue,gray,gray,nil],
                nil];
     }
     
@@ -98,23 +98,25 @@ static NSArray* battingStatisticsArray;
         
         battingStatisticsArray =[NSArray arrayWithObjects:
             // 打数
-            [NSArray arrayWithObjects:n0,n1,n1,n1,n1,n1,n1,n1,n1,n1,n1,n0,n1,n1,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n1,n1,n1,n1,n1,n1,n1,n1,n1,n1,n0,n1,n1,n0,n0,n0,n1,nil],
             // 安打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n1,n1,n1,n1,n0,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n1,n1,n1,n1,n0,n0,n0,n0,n0,n0,n0,nil],
             // 単打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,nil],
             // 二塁打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,n0,n0,nil],
             // 三塁打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,n0,nil],
             // 本塁打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,n0,nil],
             // 三振
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n1,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n1,n0,n0,n0,n0,nil],
             // 四死球
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n1,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n1,n0,n0,nil],
             // 犠打
-            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,nil],
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,n0,n0,n0,n0,n0,n0,nil],
+            // 併殺打
+            [NSArray arrayWithObjects:n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n0,n1,nil],
             nil];
     }
     
@@ -158,7 +160,7 @@ static NSArray* battingStatisticsArray;
     NSArray *resultArray = [BattingResult getBattingResultStringArray:R_STR_SEMILONG];
     
     NSString *positionStr = [positionArray objectAtIndex:position];
-    NSString *resultStr = [resultArray objectAtIndex:result];
+    NSString *resultStr = [self getResultStrAdjusted:resultArray]; // 犠飛を考慮
     
     return [positionStr stringByAppendingString:resultStr];
 }
@@ -168,9 +170,19 @@ static NSArray* battingStatisticsArray;
     NSArray *resultArray = [BattingResult getBattingResultStringArray:R_STR_LONG];
     
     NSString *positionStr = [positionArray objectAtIndex:position];
-    NSString *resultStr = [resultArray objectAtIndex:result];
+    NSString *resultStr = [self getResultStrAdjusted:resultArray]; // 犠飛を考慮
     
     return [positionStr stringByAppendingString:resultStr];
+}
+
+- (NSString*)getResultStrAdjusted:(NSArray*)resultArray {
+    if (result == 11 &&
+        (position == 7 || position == 8 || position == 9 || position == 10 ||
+         position == 11 || position == 12 || position == 13)){
+            return @"犠飛";
+    }
+
+    return [resultArray objectAtIndex:result];
 }
 
 - (UIColor*)getResultColor {
@@ -200,7 +212,7 @@ static NSArray* battingStatisticsArray;
         // 犠打のうち、飛んだ方向がレフト・センター・ライト・左中間・右中間の場合は犠飛として返す
         if (result == 11 &&
             (position == 7 || position == 8 || position == 9 || position == 10 ||
-             position == 11 || position == 12 || position ==13)){
+             position == 11 || position == 12 || position == 13)){
             return 1;
         }
         

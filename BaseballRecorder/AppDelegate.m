@@ -40,6 +40,11 @@
         [GameResultManager makeSampleData];
     }
     
+    // サーバー利用フラグを立てる
+    if(SET_SAVE_SERVER_ON == 1){
+        [ConfigManager setServerUseFlg:YES];
+    }
+    
     // 設定ファイルを初期化（必要な場合のみ）
     [ConfigManager initConfig];
     
@@ -254,9 +259,17 @@
 }
 
 - (void)showGadInterstitial:(UIViewController*)controller {
+    int rand = (int)arc4random_uniform(100);
+    if(rand >= INTERSTITIAL_FREQ){
+        return;
+    }
+    
     @try {
         if ([gadInterstitial isReady]) {
             [gadInterstitial presentFromRootViewController:controller];
+        } else {
+            // 広告の準備ができてないならロード失敗と判断して、次回に備え再読み込み
+            [self prepareGadInterstitial];
         }
     } @catch (NSException *exception) {
         [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"showGadInterstitial" value:nil screen:@"showGadInterstitial"];

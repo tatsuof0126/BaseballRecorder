@@ -179,4 +179,26 @@
     [defaults synchronize];
 }
 
++ (NSString*)getS3Info {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"S3INFO"];
+}
+
++ (void)setS3Info:(NSString*)s3Info {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:s3Info forKey:@"S3INFO"];
+    [defaults synchronize];
+}
+
++ (NSDate*)getS3InfoUpdateDate {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:@"S3INFOUPDATEDATE"];
+}
+
++ (void)setS3InfoUpdateDate:(NSDate*)s3InfoUpdateDate {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:s3InfoUpdateDate forKey:@"S3INFOUPDATEDATE"];
+    [defaults synchronize];
+}
+
 @end

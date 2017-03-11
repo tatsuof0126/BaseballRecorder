@@ -69,4 +69,12 @@
 
 + (void)setCreateCount:(int)createCount;
 
++ (NSString*)getS3Info;
+
++ (void)setS3Info:(NSString*)s3Info;
+
++ (NSDate*)getS3InfoUpdateDate;
+
++ (void)setS3InfoUpdateDate:(NSDate*)s3InfoUpdateDate;
+
 @end

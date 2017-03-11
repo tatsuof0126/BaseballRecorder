@@ -29,6 +29,7 @@
 @synthesize error;
 @synthesize steal;
 @synthesize stealOut;
+@synthesize doubleplay;
 
 @synthesize average;
 @synthesize obp;
@@ -60,6 +61,7 @@
             battingStatistics.walks    += [battingResult getStatisticsCounts:S_WALKS];
             battingStatistics.sacrifices += [battingResult getStatisticsCounts:S_SACRIFICES];
             battingStatistics.sacrificeflies += [battingResult getStatisticsCounts:S_SACRIFICEFLIES];
+            battingStatistics.doubleplay += [battingResult getStatisticsCounts:S_DOUBLEPLAY];
         }
         
         battingStatistics.daten  += gameResult.daten;
@@ -100,23 +102,14 @@
     // 出塁機会C = 打数 + 四球 + 死球 + 犠飛 + 犠打
     // RC =（A+2.4×C）×（B+3×C）÷(9×C)－0.9×C
     // RC27 = RC÷（打数－安打＋盗塁死＋犠打＋犠飛＋併殺打）×27
-    float a = hits + walks - stealOut; // TODO 併殺打を引く
+    float a = hits + walks - stealOut - doubleplay;
     float b = (singles+doubles*2+triples*3+homeruns*4) + walks*0.26 + sacrifices*0.53 + steal*0.64 - strikeouts*0.03;
     float c = atbats + walks + sacrifices;
     float rc = (a+2.4*c) * (b+3*c) / (9*c) - 0.9*c;
-    rc27 = rc / (float)(atbats - hits + sacrifices + stealOut) * 27; // TODO 併殺打を加える
+    rc27 = rc / (float)(atbats - hits + sacrifices + stealOut + doubleplay) * 27;
     
     // 盗塁成功率＝盗塁÷（盗塁＋盗塁死）
     stealrate = (float)steal / (float)(steal + stealOut);
-    
-    /*
-    NSLog(@"a : %f", a);
-    NSLog(@"b : %f", b);
-    NSLog(@"c : %f", c);
-    NSLog(@"rc : %f", rc);
-    NSLog(@"rc27 : %f", rc27);
-    */
-    
 }
 
 - (NSString*)getMailBody {
@@ -124,9 +117,9 @@
     
     [bodyString appendString:[NSString stringWithFormat:@"%d打席　%d打数　%d安打\n",boxs, atbats, hits]];
     [bodyString appendString:[NSString stringWithFormat:@"二塁打：%d　三塁打：%d　本塁打：%d\n",doubles, triples, homeruns]];
-    [bodyString appendString:[NSString stringWithFormat:@"三振：%d　四死球：%d　犠打：%d\n",strikeouts, walks, sacrifices]];
-    [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　失策：%d\n",daten, tokuten, error]];
-    [bodyString appendString:[NSString stringWithFormat:@"盗塁：%d　盗塁死：%d\n",steal, stealOut]];
+    [bodyString appendString:[NSString stringWithFormat:@"三振：%d　四死球：%d　犠打：%d\n",strikeouts, walks, (sacrifices-sacrificeflies)]];
+    [bodyString appendString:[NSString stringWithFormat:@"打点：%d　得点：%d　犠飛：%d\n",daten, tokuten, sacrificeflies]];
+    [bodyString appendString:[NSString stringWithFormat:@"盗塁：%d　盗塁死：%d　失策：%d\n",steal, stealOut, error]];
     [bodyString appendString:[NSString stringWithFormat:@"打率：%@　出塁率：%@　長打率：%@\n",
                               [Utility getFloatStr:average appendBlank:NO],
                               [Utility getFloatStr:obp appendBlank:NO],

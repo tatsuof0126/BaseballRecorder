@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *strikeouts;
 @property (weak, nonatomic) IBOutlet UILabel *walks;
 @property (weak, nonatomic) IBOutlet UILabel *sacrifices;
+@property (weak, nonatomic) IBOutlet UILabel *sacrificesflies;
 @property (weak, nonatomic) IBOutlet UILabel *daten;
 @property (weak, nonatomic) IBOutlet UILabel *tokuten;
 @property (strong, nonatomic) IBOutlet UILabel *error;

@@ -12,8 +12,6 @@
 
 @implementation S3Manager
 
-NSString* const AWS_KEY = @"AKIAJ75XQ52YMTDG7V7A";
-NSString* const AWS_SECRET = @"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";
 NSString* const S3_BUCKET = @"baseballrecorder";
 
 + (NSArray*)S3GetFileList:(NSString*)prefix {
@@ -30,7 +28,14 @@ NSString* const S3_BUCKET = @"baseballrecorder";
     //リクエストをコール
     AWSS3* s3 = [AWSS3 defaultS3];
     [[s3 listObjects:listRequest] continueWithBlock:^id(AWSTask *task) {
-        if (task.result) {
+        if(task.error){
+            // エラーの場合はresultArrayをnilにして返す
+            resultArray = nil;
+            connecting = NO;
+            return nil;
+        }
+        
+        if(task.result) {
             AWSS3ListObjectsOutput* result = task.result;
             for(AWSS3Object* object in result.contents){
                 [resultArray addObject:object.key];
@@ -67,7 +72,7 @@ NSString* const S3_BUCKET = @"baseballrecorder";
 }
 
 + (NSString*)S3Download:(NSString*)key {
-    NSLog(@"S3Download start key = %@", key);
+    // NSLog(@"S3Download start key = %@", key);
     
     NSString* __block resultFilePath = nil;
     BOOL __block connecting = YES;
@@ -77,7 +82,7 @@ NSString* const S3_BUCKET = @"baseballrecorder";
     // ダウンロード先を指定
     NSString* keyPath = [key stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     NSString* downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:keyPath];
-    NSLog(@"DL path = %@", downloadingFilePath);
+    // NSLog(@"DL path = %@", downloadingFilePath);
     
     NSURL* downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
     
@@ -92,6 +97,13 @@ NSString* const S3_BUCKET = @"baseballrecorder";
     [[transferManager download:downloadRequest]
         continueWithExecutor:[AWSExecutor mainThreadExecutor] withBlock:^id(AWSTask* task) {
         if(task.error){
+            // NSLog(@"Error: %@", task.error);
+            
+            connecting = NO;
+            
+            return nil;
+            
+            /*
             if([task.error.domain isEqualToString:AWSS3TransferManagerErrorDomain]) {
                 switch(task.error.code) {
                     case AWSS3TransferManagerErrorCancelled:
@@ -105,12 +117,13 @@ NSString* const S3_BUCKET = @"baseballrecorder";
                 // Unknown error.
                 NSLog(@"Error: %@", task.error);
             }
+             */
         }
         
         if(task.result){
-            AWSS3TransferManagerDownloadOutput* downloadOutput = task.result;
+            //AWSS3TransferManagerDownloadOutput* downloadOutput = task.result;
             //File downloaded successfully.
-            NSLog(@"downloadOutput: %@", [downloadOutput description]);
+            //NSLog(@"downloadOutput: %@", [downloadOutput description]);
             
             /*
             NSData* readdata = [NSData dataWithContentsOfFile:downloadingFilePath];
@@ -171,5 +184,8 @@ NSString* const S3_BUCKET = @"baseballrecorder";
     return succeed;
 }
 
++ (NSString*)S3GetInfo {
+    return [self S3Download:@"info_iphone.txt"];
+}
 
 @end

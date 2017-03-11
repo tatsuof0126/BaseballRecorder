@@ -158,7 +158,7 @@
         GameResult* gameResult = [GameResult makeGameResult:data];
         
         // 打席の結果を1000件入れてみる
-        [self addSampleBattingResult:gameResult count:25];
+        // [self addSampleBattingResult:gameResult count:25];
         
         [self saveGameResult:gameResult];
     }
@@ -167,13 +167,13 @@
 + (void)addSampleBattingResult:(GameResult*)gameResult count:(int)count {
     for(int i=0; i<count; i++){
         int position = (int)arc4random_uniform(14);
-        int result = (int)arc4random_uniform(17);
+        int result = (int)arc4random_uniform(18);
         int rand = (int)arc4random_uniform(4);
         BattingResult *battingResult = [BattingResult makeBattingResult:position result:result];
         if(battingResult != nil){
-            if(rand != 10 &&
+            if(rand != 2 &&
                (position == 9 || position == 11 || position == 13)){
-                
+                // 打撃成績を偏らせるために無視
             } else {
                 [gameResult addBattingResult:battingResult];
             }

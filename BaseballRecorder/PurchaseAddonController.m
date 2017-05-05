@@ -130,7 +130,7 @@
     } else if(indexPath.section == 0 && indexPath.row == 1){
         [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―機種変更コード利用" value:nil screen:@"アドオン購入画面"];
         if([ConfigManager isServerUseFlg] == NO){
-            [self requestAddon:@"com.tatsuo.baseballrecorder.useserverflg"];
+            [self requestAddon:@"com.tatsuo.baseballrecorder.useserverflag"];
         } else {
             [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
             [Utility showAlert:@"このアドオンはすでに購入済みです。"];

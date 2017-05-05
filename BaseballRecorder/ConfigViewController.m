@@ -10,6 +10,7 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "TrackingManager.h"
+#import "S3Manager.h"
 
 @interface ConfigViewController ()
 
@@ -68,6 +69,16 @@
     // ScrollViewの大きさ定義＆iPhone5対応
     configTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:configTableView];
+    
+    // Modeを取得
+    NSString* mode = [ConfigManager getMode];
+    NSLog(@"mode => [%@]", mode);
+    if([@"9" isEqualToString:mode] == NO){
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [queue addOperationWithBlock:^{
+            [self getMode];
+        }];
+    }
     
     // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
@@ -210,6 +221,19 @@
         
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+- (void)getMode {
+    NSString* tempInfoPath = [S3Manager S3GetMode];
+    NSString* modeString = [NSString stringWithContentsOfFile:tempInfoPath encoding:NSUTF8StringEncoding error:nil];
+    
+    NSLog(@"getmode => [%@]", modeString);
+    
+    if(modeString != nil && [modeString isEqualToString:@""] == NO){
+        [ConfigManager setMode:modeString];
+    }
+    
+    [[NSFileManager defaultManager] removeItemAtPath:tempInfoPath error:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

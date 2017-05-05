@@ -20,6 +20,10 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *infoText;
 
+@property (strong, nonatomic) IBOutlet UILabel *message3;
+@property (strong, nonatomic) IBOutlet UILabel *userIdLabel;
+@property (strong, nonatomic) IBOutlet UITextField *userIdText;
+
 - (IBAction)saveServer:(id)sender;
 
 - (IBAction)updateInfo:(id)sender;

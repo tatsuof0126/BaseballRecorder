@@ -20,4 +20,6 @@
 
 + (NSString*)S3GetInfo;
 
++ (NSString*)S3GetMode;
+
 @end

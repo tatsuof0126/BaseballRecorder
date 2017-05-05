@@ -201,4 +201,15 @@
     [defaults synchronize];
 }
 
++ (NSString*)getMode {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"MODE"];
+}
+
++ (void)setMode:(NSString*)mode {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:mode forKey:@"MODE"];
+    [defaults synchronize];
+}
+
 @end

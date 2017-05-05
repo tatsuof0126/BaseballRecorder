@@ -38,7 +38,17 @@
     if(updateDate == nil || since > 24*60*60){
         [self updateInfo];
     }
-
+    
+    // Modeを取得
+    NSString* mode = [ConfigManager getMode];
+    NSLog(@"mode => [%@]", mode);
+    if([@"2" isEqualToString:mode]){
+        _message3.hidden = YES;
+    } else {
+        _userIdLabel.hidden = YES;
+        _userIdText.hidden = YES;
+    }
+    
     // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         gadView = [AppDelegate makeGadView:self];

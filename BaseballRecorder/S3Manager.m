@@ -188,4 +188,8 @@ NSString* const S3_BUCKET = @"baseballrecorder";
     return [self S3Download:@"info_iphone.txt"];
 }
 
++ (NSString*)S3GetMode {
+    return [self S3Download:@"mode_iphone.txt"];
+}
+
 @end

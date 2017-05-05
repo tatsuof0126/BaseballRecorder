@@ -77,4 +77,8 @@
 
 + (void)setS3InfoUpdateDate:(NSDate*)s3InfoUpdateDate;
 
++ (NSString*)getMode;
+
++ (void)setMode:(NSString*)mode;
+
 @end

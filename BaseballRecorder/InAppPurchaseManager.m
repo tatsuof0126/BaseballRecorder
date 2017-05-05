@@ -146,7 +146,7 @@
                 [Utility showAlert:@"リストアしました" message:@"広告が表示されなくなりました。"];
             }
         }
-    } else if ([productId isEqualToString:@"com.tatsuo.baseballrecorder.useserverflg"]){
+    } else if ([productId isEqualToString:@"com.tatsuo.baseballrecorder.useserverflag"]){
         // 機種変更コードアドオン
         if(restore == NO){
             [ConfigManager setServerUseFlg:YES];

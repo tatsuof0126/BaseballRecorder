@@ -39,6 +39,20 @@
         [self updateInfo];
     }
     
+    // Modeを取得
+    NSString* mode = [ConfigManager getMode];
+    NSLog(@"mode => [%@]", mode);
+    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
+        _migrationCdText.hidden = YES;
+        _message1.text = @"ユーザーIDとパスワードを入力";
+        _message2.hidden = YES;
+    } else {
+        _userIdLabel.hidden = YES;
+        _userIdText.hidden = YES;
+        _passwordLabel.hidden = YES;
+        _passwordText.hidden = YES;
+    }
+    
     // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         gadView = [AppDelegate makeGadView:self];
@@ -87,6 +101,13 @@
     }
     
     NSString* migrationCd = _migrationCdText.text;
+    
+    // Modeを取得
+    NSString* mode = [ConfigManager getMode];
+    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
+        migrationCd = _passwordText.text;
+    }
+    
     if(migrationCd == nil || [@"" isEqualToString:migrationCd]){
         [Utility showAlert:@"機種変更コードを入力してください。"];
         return;
@@ -135,6 +156,18 @@
     } else if(resultArray.count == 0){
         message = @"データが存在しません。機種変更コードが正しいかどうかを確認してください。";
         dataExists = NO;
+    }
+    
+    // Modeを取得
+    NSString* mode = [ConfigManager getMode];
+    NSLog(@"mode => [%@]", mode);
+    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
+        NSString* userId = _userIdText.text;
+        if([userId isEqualToString:@"testuser01"] == NO &&
+           [userId isEqualToString:@"testuser02"] == NO){
+            message = @"ユーザーIDとパスワードが正しいかどうかを確認してください。";
+            dataExists = NO;
+        }
     }
     
     // データが取れなかったときはアラートを出して終了

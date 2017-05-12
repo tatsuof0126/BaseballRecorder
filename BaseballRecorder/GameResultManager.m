@@ -7,6 +7,7 @@
 //
 
 #import "GameResultManager.h"
+#import "S3Manager.h"
 
 @implementation GameResultManager
 
@@ -179,6 +180,66 @@
             }
         }
     }
+}
+
++ (NSString*)getMigrationId {
+    int migrationIdInt = 0;
+    while(true){
+        migrationIdInt = arc4random_uniform(89999999) + 10000000;
+        
+        // iPhoneで発行するIDは3で割り切れることにする
+        if(migrationIdInt % 3 != 0){
+            continue;
+        }
+        
+        // すでにそのIDが使われていないか確認
+        NSArray* filelist = [S3Manager S3GetFileList:[NSString stringWithFormat:@"%d/", migrationIdInt]];
+        if(filelist == nil){
+            return nil;
+        }
+        
+        if(filelist != nil && filelist.count == 0){
+            break;
+        }
+    }
+    
+    return [NSString stringWithFormat:@"%d", migrationIdInt];
+}
+
+// MigrationPasswordの生成方法
+// １桁目：１桁目〜４桁目を７倍したときの先頭１桁
+// ２桁目：１桁目〜４桁目を７倍したときの末尾１桁
+// ３桁目：１桁目〜４桁目を７倍したときの末尾２桁
+// ４桁目：５桁目〜８桁目を３倍したときの末尾１桁
+// ５桁目：５桁目〜８桁目を３倍したときの末尾２桁
+// ６桁目：５桁目〜８桁目を３倍したときの末尾３桁
++ (NSString*)getMigrationPassword:(NSString*)migrationId {
+    if(migrationId == nil || [migrationId length] < 8){
+        return nil;
+    }
+    
+    NSString* id1234 = [migrationId substringWithRange:NSMakeRange(0, 4)];
+    NSString* id5678 = [migrationId substringWithRange:NSMakeRange(4, 4)];
+    
+    NSString* id1234By7 = [NSString stringWithFormat:@"%d", [id1234 intValue] * 7];
+    NSString* id5678By3 = [NSString stringWithFormat:@"%d", [id5678 intValue] * 3];
+    
+    NSString* password1 = [id1234By7 substringWithRange:NSMakeRange(0, 1)];
+    NSString* password2 = [id1234By7 substringWithRange:NSMakeRange([id1234By7 length]-1, 1)];
+    NSString* password3 = [id1234By7 substringWithRange:NSMakeRange([id1234By7 length]-2, 1)];
+    NSString* password4 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-1, 1)];
+    NSString* password5 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-2, 1)];
+    NSString* password6 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-3, 1)];
+    
+    NSString* passwordString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
+                                password1, password2, password3, password4, password5, password6];
+    
+    NSLog(@"migrationId : %@", migrationId);
+    NSLog(@"id1234by7 : %@", id1234By7);
+    NSLog(@"id5678By3 : %@", id5678By3);
+    NSLog(@"passwordString : %@", passwordString);
+    
+    return passwordString;
 }
 
 @end

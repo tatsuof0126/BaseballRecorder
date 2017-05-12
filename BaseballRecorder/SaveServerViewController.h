@@ -15,14 +15,11 @@
 
 @property (strong, nonatomic) UIActivityIndicatorView* indicator;
 
-@property (strong, nonatomic) IBOutlet UILabel *migrationCdLabel;
+@property (strong, nonatomic) IBOutlet UILabel *migrationIdLabel;
+@property (strong, nonatomic) IBOutlet UILabel *migrationPasswordLabel;
 @property (strong, nonatomic) IBOutlet UILabel *createDateLabel;
 
 @property (strong, nonatomic) IBOutlet UITextView *infoText;
-
-@property (strong, nonatomic) IBOutlet UILabel *message3;
-@property (strong, nonatomic) IBOutlet UILabel *userIdLabel;
-@property (strong, nonatomic) IBOutlet UITextField *userIdText;
 
 - (IBAction)saveServer:(id)sender;
 

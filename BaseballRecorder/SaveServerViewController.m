@@ -9,6 +9,7 @@
 #import "SaveServerViewController.h"
 #import "AppDelegate.h"
 #import "S3Manager.h"
+#import "TrackingManager.h"
 #import "Utility.h"
 #import "GameResultManager.h"
 #import "GameResult.h"
@@ -28,6 +29,9 @@
     
     [self updateLabel];
     
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"データバックアップ画面"];
+    
     // お知らせを表示
     [AppDelegate adjustForiPhone5:_infoText];
     [self updateInfoText];
@@ -38,17 +42,7 @@
     if(updateDate == nil || since > 24*60*60){
         [self updateInfo];
     }
-    
-    // Modeを取得
-    NSString* mode = [ConfigManager getMode];
-    NSLog(@"mode => [%@]", mode);
-    if([@"2" isEqualToString:mode]){
-        _message3.hidden = YES;
-    } else {
-        _userIdLabel.hidden = YES;
-        _userIdText.hidden = YES;
-    }
-    
+        
     // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         gadView = [AppDelegate makeGadView:self];
@@ -61,13 +55,14 @@
     [AppDelegate adjustOriginForiPhone5:gadView];
     [self.view addSubview:gadView];
     
-    // TableViewの大きさ定義＆iPhone5対応
-    _infoText.frame = CGRectMake(0, 340, 320, 90);
+    // TextViewの大きさ定義＆iPhone5対応
+    _infoText.frame = CGRectMake(0, 370, 320, 60);
     [AppDelegate adjustForiPhone5:_infoText];
 }
 
 - (void)updateLabel {
-    _migrationCdLabel.text = [ConfigManager getMigrationCd];
+    _migrationIdLabel.text = [ConfigManager getMigrationId];
+    _migrationPasswordLabel.text = [ConfigManager getMigrationPassword];
     
     NSDate* createDate = [ConfigManager getCreateDate];
     if(createDate != nil){
@@ -102,6 +97,8 @@
 */
 
 - (IBAction)saveServer:(id)sender {
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"データバックアップ画面―データバックアップ" value:nil screen:@"データバックアップ画面"];
+    
     if(indicator != nil && [indicator isAnimating]){
         // ぐるぐるの最中なら無視
         return;
@@ -117,7 +114,7 @@
     // １日に６回以上は登録させない
     int createCount = [ConfigManager getCreateCount];
     if(createCount >= 5 && [Utility isToday:[ConfigManager getCreateDate]]){
-        [Utility showAlert:@"１日に発行できる機種変更コードは５個までです。"];
+        [Utility showAlert:@"１日にできるバックアップは５回までです。"];
         return;
     }
     
@@ -146,13 +143,14 @@
     NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* dirpath = [dirpaths objectAtIndex:0];
     
-    NSString* migrationCd = [self getMigrationCd];
-    if(migrationCd == nil){
+    NSString* migrationId = [GameResultManager getMigrationId];
+    NSString* migrationPassword = [GameResultManager getMigrationPassword:migrationId];
+    if(migrationId == nil){
         failed = YES;
     }
     
     if(failed == NO){
-        NSString* prefix = [NSString stringWithFormat:@"%@/", migrationCd];
+        NSString* prefix = [NSString stringWithFormat:@"%@/", migrationId];
         NSArray* gameResultList = [GameResultManager loadGameResultList];
         for(GameResult* gameResult in gameResultList){
             NSString* filename = [NSString stringWithFormat:@"gameresult%d.dat", gameResult.resultid];
@@ -171,7 +169,8 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [indicator stopAnimating];
         if(failed == NO){
-            [ConfigManager setMigrationCd:migrationCd];
+            [ConfigManager setMigrationId:migrationId];
+            [ConfigManager setMigrationPassword:migrationPassword];
             int createCount = 1;
             if([Utility isToday:[ConfigManager getCreateDate]]){
                 createCount = [ConfigManager getCreateCount] + 1;
@@ -181,30 +180,12 @@
             
             [self updateLabel];
             
-            [Utility showAlert:[NSString stringWithFormat:@"%d件のデータをアップロードしました。\n機種変更コードは［%@］です。", uploadCount, migrationCd]];
+            [Utility showAlert:[NSString stringWithFormat:@"%d件のデータをバックアップしました。\nIDとパスワードは画面を確認してください。", uploadCount]];
         } else {
-            [Utility showAlert:@"機種変更コードの発行に失敗しました。ネットワークに接続されているかを確認してください。"];
+            [Utility showAlert:@"データのバックアップに失敗しました。ネットワークに接続されているかを確認してください。"];
         }
     }];
     
-}
-
-- (NSString*)getMigrationCd {
-    int migrationCdInt = 0;
-    while(true){
-        migrationCdInt = arc4random_uniform(89999999) + 10000000;
-        
-        NSArray* filelist = [S3Manager S3GetFileList:[NSString stringWithFormat:@"%d/", migrationCdInt]];
-        if(filelist == nil){
-            return nil;
-        }
-        
-        if(filelist != nil && filelist.count == 0){
-            break;
-        }
-    }
-    
-    return [NSString stringWithFormat:@"%d", migrationCdInt];
 }
 
 - (IBAction)updateInfo:(id)sender {

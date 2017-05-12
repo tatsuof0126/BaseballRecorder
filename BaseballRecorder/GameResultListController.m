@@ -314,7 +314,7 @@
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます"
-                    message:@"バージョン3.0から機種変更時のデータの引継ぎができるようになっています。\n設定メニューから機種変更コードの発行をお試しください。"
+                    message:@"バージョン3.0から機種変更時のデータの引継ぎができるようになっています。\n設定メニューからデータバックアップ（機種変更用）をお試しください。"
                     preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];

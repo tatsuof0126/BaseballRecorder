@@ -146,14 +146,25 @@
     [defaults synchronize];
 }
 
-+ (NSString*)getMigrationCd {
++ (NSString*)getMigrationId {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults stringForKey:@"MIGRATIONCD"];
+    return [defaults stringForKey:@"MIGRATIONID"];
 }
 
-+ (void)setMigrationCd:(NSString*)migrationCd {
++ (void)setMigrationId:(NSString*)migrationId {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:migrationCd forKey:@"MIGRATIONCD"];
+    [defaults setObject:migrationId forKey:@"MIGRATIONID"];
+    [defaults synchronize];
+}
+
++ (NSString*)getMigrationPassword {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"MIGRATIONPASSWORD"];
+}
+
++ (void)setMigrationPassword:(NSString*)migrationPassword {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:migrationPassword forKey:@"MIGRATIONPASSWORD"];
     [defaults synchronize];
 }
 
@@ -201,6 +212,7 @@
     [defaults synchronize];
 }
 
+/*
 + (NSString*)getMode {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     return [defaults stringForKey:@"MODE"];
@@ -211,5 +223,6 @@
     [defaults setObject:mode forKey:@"MODE"];
     [defaults synchronize];
 }
+*/
 
 @end

@@ -24,4 +24,8 @@
 
 + (void)makeSampleData;
 
++ (NSString*)getMigrationId;
+
++ (NSString*)getMigrationPassword:(NSString*)migrationId;
+
 @end

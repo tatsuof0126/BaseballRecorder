@@ -57,9 +57,13 @@
 
 + (void)setUseVersion:(NSString*)useVersion;
 
-+ (NSString*)getMigrationCd;
++ (NSString*)getMigrationId;
 
-+ (void)setMigrationCd:(NSString*)migrationCd;
++ (void)setMigrationId:(NSString*)migrationId;
+
++ (NSString*)getMigrationPassword;
+
++ (void)setMigrationPassword:(NSString*)migrationPassword;
 
 + (NSDate*)getCreateDate;
 
@@ -77,8 +81,8 @@
 
 + (void)setS3InfoUpdateDate:(NSDate*)s3InfoUpdateDate;
 
-+ (NSString*)getMode;
+// + (NSString*)getMode;
 
-+ (void)setMode:(NSString*)mode;
+// + (void)setMode:(NSString*)mode;
 
 @end

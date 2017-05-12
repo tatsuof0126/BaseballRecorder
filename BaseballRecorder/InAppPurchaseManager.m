@@ -146,15 +146,15 @@
                 [Utility showAlert:@"リストアしました" message:@"広告が表示されなくなりました。"];
             }
         }
-    } else if ([productId isEqualToString:@"com.tatsuo.baseballrecorder.useserverflag"]){
-        // 機種変更コードアドオン
+    } else if ([productId isEqualToString:@"com.tatsuo.baseballrecorder.serveruseflg"]){
+        // バックアップデータ取り出しアドオン
         if(restore == NO){
             [ConfigManager setServerUseFlg:YES];
-            [Utility showAlert:@"購入しました" message:@"機種変更コードの利用が可能になりました。"];
+            [Utility showAlert:@"購入しました" message:@"バックアップデータの取り出しが可能になりました。"];
         } else {
             if([ConfigManager isServerUseFlg] == NO){
                 [ConfigManager setServerUseFlg:YES];
-                [Utility showAlert:@"リストアしました" message:@"機種変更コードの利用が可能になりました。"];
+                [Utility showAlert:@"リストアしました" message:@"バックアップデータの取り出しが可能になりました。"];
             }
         }
     }

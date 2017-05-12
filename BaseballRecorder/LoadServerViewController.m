@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "S3Manager.h"
 #import "ConfigManager.h"
+#import "TrackingManager.h"
 #import "Utility.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
@@ -26,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // _migrationCdText.text = @"12345678";
+    // 画面が開かれたときのトラッキング情報を送る
+    [TrackingManager sendScreenTracking:@"バックアップデータ取り出し画面"];
     
     // お知らせを表示
     [AppDelegate adjustForiPhone5:_infoText];
@@ -37,20 +39,6 @@
     NSTimeInterval since = [[NSDate date] timeIntervalSinceDate:updateDate];
     if(updateDate == nil || since > 24*60*60){
         [self updateInfo];
-    }
-    
-    // Modeを取得
-    NSString* mode = [ConfigManager getMode];
-    NSLog(@"mode => [%@]", mode);
-    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
-        _migrationCdText.hidden = YES;
-        _message1.text = @"ユーザーIDとパスワードを入力";
-        _message2.hidden = YES;
-    } else {
-        _userIdLabel.hidden = YES;
-        _userIdText.hidden = YES;
-        _passwordLabel.hidden = YES;
-        _passwordText.hidden = YES;
     }
     
     // 広告表示（admob）
@@ -65,8 +53,8 @@
     [AppDelegate adjustOriginForiPhone5:gadView];
     [self.view addSubview:gadView];
     
-    // TableViewの大きさ定義＆iPhone5対応
-    _infoText.frame = CGRectMake(0, 275, 320, 155);
+    // TextViewの大きさ定義＆iPhone5対応
+    _infoText.frame = CGRectMake(0, 300, 320, 130);
     [AppDelegate adjustForiPhone5:_infoText];
 }
 
@@ -100,21 +88,34 @@
         return;
     }
     
-    NSString* migrationCd = _migrationCdText.text;
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"バックアップデータ取り出し画面―バックアップデータ取り出し" value:nil screen:@"バックアップデータ取り出し画面"];
     
-    // Modeを取得
-    NSString* mode = [ConfigManager getMode];
-    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
-        migrationCd = _passwordText.text;
-    }
+    NSString* migrationId = _migrationIdText.text;
+    NSString* migrationPassword = _migrationPasswordText.text;
     
-    if(migrationCd == nil || [@"" isEqualToString:migrationCd]){
-        [Utility showAlert:@"機種変更コードを入力してください。"];
+    if(migrationId == nil || [@"" isEqualToString:migrationId] ||
+       migrationPassword == nil || [@"" isEqualToString:migrationPassword]){
+        [Utility showAlert:@"IDとパスワードを入力してください。"];
         return;
     }
-    int migrationCdInt = [migrationCd intValue];
-    if(migrationCdInt < 10000000 || migrationCdInt > 99999999){
-        [Utility showAlert:@"機種変更コードは8桁の数字を入力してください。"];
+    
+    int migrationIdInt = [migrationId intValue];
+    if(migrationIdInt < 10000000 || migrationIdInt > 99999999){
+        [Utility showAlert:@"IDは8桁の数字を入力してください。"];
+        return;
+    }
+    
+    int migrationPasswordInt = [migrationPassword intValue];
+    if(migrationPasswordInt < 100000 || migrationPasswordInt > 999999){
+        [Utility showAlert:@"パスワードは6桁の数字を入力してください。"];
+        return;
+    }
+    
+    // パスワードが合っているかをチェック（Android対応のため999999はOKとする）
+    NSString* originPassword = [GameResultManager getMigrationPassword:migrationId];
+    if([migrationPassword isEqualToString:@"999999"] == NO &&
+       [migrationPassword isEqualToString:originPassword] == NO){
+        [Utility showAlert:@"ID・パスワードが違います。もう一度入力してください。"];
         return;
     }
     
@@ -122,7 +123,7 @@
     
     // 確認ダイアログを表示
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
-        message:@"機種変更コードを使ってデータを取り込みます。\nよろしいですか？"
+        message:@"バックアップデータを取り出します。よろしいですか？"
         preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
@@ -135,7 +136,7 @@
                                                          
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
             [queue addOperationWithBlock:^{
-                [self restoreGameResult:[NSString stringWithFormat:@"%@/", migrationCd]];
+                [self restoreGameResult:[NSString stringWithFormat:@"%@/", migrationId]];
             }];
         }];
     
@@ -145,29 +146,17 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)restoreGameResult:(NSString*)migrationCd {
-    NSArray* resultArray = [S3Manager S3GetFileList:migrationCd];
+- (void)restoreGameResult:(NSString*)migrationId {
+    NSArray* resultArray = [S3Manager S3GetFileList:migrationId];
     
     BOOL dataExists = YES;
     NSString* message = @"";
     if(resultArray == nil){
-        message = @"データの取得に失敗しました。ネットワークに接続されているかを確認してください。";
+        message = @"データの取得に失敗しました。\nネットワークに接続されているかを確認してください。";
         dataExists = NO;
     } else if(resultArray.count == 0){
-        message = @"データが存在しません。機種変更コードが正しいかどうかを確認してください。";
+        message = @"データが存在しません。\nID・パスワードが正しいかどうか、保存期間を過ぎていないかを確認してください。";
         dataExists = NO;
-    }
-    
-    // Modeを取得
-    NSString* mode = [ConfigManager getMode];
-    NSLog(@"mode => [%@]", mode);
-    if([@"1" isEqualToString:mode] || [@"2" isEqualToString:mode]){
-        NSString* userId = _userIdText.text;
-        if([userId isEqualToString:@"testuser01"] == NO &&
-           [userId isEqualToString:@"testuser02"] == NO){
-            message = @"ユーザーIDとパスワードが正しいかどうかを確認してください。";
-            dataExists = NO;
-        }
     }
     
     // データが取れなかったときはアラートを出して終了

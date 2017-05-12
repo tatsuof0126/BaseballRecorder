@@ -102,7 +102,7 @@
             detailText = @"購入済み";
         }
     } else if(section == 0 && row == 1){
-        text = @"機種変更コードを利用";
+        text = @"バックアップデータ取り出し";
         if([ConfigManager isServerUseFlg] == YES){
             detailText = @"購入済み";
         }
@@ -128,9 +128,9 @@
             [Utility showAlert:@"このアドオンはすでに購入済みです。"];
         }
     } else if(indexPath.section == 0 && indexPath.row == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―機種変更コード利用" value:nil screen:@"アドオン購入画面"];
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―バックアップデータ取り出し" value:nil screen:@"アドオン購入画面"];
         if([ConfigManager isServerUseFlg] == NO){
-            [self requestAddon:@"com.tatsuo.baseballrecorder.useserverflag"];
+            [self requestAddon:@"com.tatsuo.baseballrecorder.serveruseflg"];
         } else {
             [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
             [Utility showAlert:@"このアドオンはすでに購入済みです。"];

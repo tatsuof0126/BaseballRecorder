@@ -70,16 +70,6 @@
     configTableView.frame = CGRectMake(0, 64, 320, 366);
     [AppDelegate adjustForiPhone5:configTableView];
     
-    // Modeを取得
-    NSString* mode = [ConfigManager getMode];
-    NSLog(@"mode => [%@]", mode);
-    if([@"9" isEqualToString:mode] == NO){
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        [queue addOperationWithBlock:^{
-            [self getMode];
-        }];
-    }
-    
     // 広告表示（admob）
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         gadView = [AppDelegate makeGadView:self];
@@ -103,13 +93,13 @@
         configCategoryArray = [NSArray arrayWithObjects:@"", @"", nil];
         configMenuArray = [NSArray arrayWithObjects:
                            [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           [NSArray arrayWithObjects:@"データバックアップ（機種変更用）", @"バックアップデータ取り出し", nil],
                            nil];
     } else {
         configCategoryArray = [NSArray arrayWithObjects:@"", @"", @"", nil];
         configMenuArray = [NSArray arrayWithObjects:
                            [NSArray arrayWithObjects:@"入力・表示の設定", nil],
-                           [NSArray arrayWithObjects:@"機種変更コードを発行", @"機種変更コードを使う", nil],
+                           [NSArray arrayWithObjects:@"データバックアップ（機種変更用）", @"バックアップデータ取り出し", nil],
                            [NSArray arrayWithObjects:@"広告を削除する", nil], nil];
     }
 }
@@ -160,12 +150,12 @@
     if(indexPath.section == 0 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"inputconfig" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 0){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードの発行" value:nil screen:@"設定画面"];
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―データバックアップ（機種変更用）" value:nil screen:@"設定画面"];
         [self performSegueWithIdentifier:@"saveserver" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―機種変更コードを使う" value:nil screen:@"設定画面"];
+        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―バックアップデータ取り出し" value:nil screen:@"設定画面"];
         if([ConfigManager isServerUseFlg] == NO){
-            [self showMoveAddonView:@"機種変更コードを使うにはアドオンの入手が必要です。（一度入手すると何度でも機種変更コードを利用できます）"];
+            [self showMoveAddonView:@"バックアップデータ取り出しにはアドオンの入手が必要です。（一度入手すると何度でもバックアップデータの取り出しが可能です）"];
         } else {
             [self performSegueWithIdentifier:@"loadserver" sender:self];
         }
@@ -221,19 +211,6 @@
         
         [[UIApplication sharedApplication] openURL:url];
     }
-}
-
-- (void)getMode {
-    NSString* tempInfoPath = [S3Manager S3GetMode];
-    NSString* modeString = [NSString stringWithContentsOfFile:tempInfoPath encoding:NSUTF8StringEncoding error:nil];
-    
-    NSLog(@"getmode => [%@]", modeString);
-    
-    if(modeString != nil && [modeString isEqualToString:@""] == NO){
-        [ConfigManager setMode:modeString];
-    }
-    
-    [[NSFileManager defaultManager] removeItemAtPath:tempInfoPath error:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

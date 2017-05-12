@@ -15,15 +15,10 @@
 
 @property (strong, nonatomic) UIActivityIndicatorView* indicator;
 
-@property (strong, nonatomic) IBOutlet UITextField *migrationCdText;
-@property (strong, nonatomic) IBOutlet UITextView *infoText;
+@property (strong, nonatomic) IBOutlet UITextField *migrationIdText;
+@property (strong, nonatomic) IBOutlet UITextField *migrationPasswordText;
 
-@property (strong, nonatomic) IBOutlet UILabel *message1;
-@property (strong, nonatomic) IBOutlet UILabel *message2;
-@property (strong, nonatomic) IBOutlet UILabel *userIdLabel;
-@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
-@property (strong, nonatomic) IBOutlet UITextField *userIdText;
-@property (strong, nonatomic) IBOutlet UITextField *passwordText;
+@property (strong, nonatomic) IBOutlet UITextView *infoText;
 
 - (IBAction)onTap:(id)sender;
 

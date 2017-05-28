@@ -60,12 +60,13 @@
 + (NSDate*)getDate:(NSString*)year month:(NSString*)month day:(NSString*)day {
     NSString* dateStr = [NSString stringWithFormat:@"%@-%@-%@ 00:00", year, month, day];
     
-    // NSLog(@"%@/%@/%@",year, month, day);
+    // NSLog(@"%@/%@/%@ -> %@",year, month, day, dateStr);
     
     // Dateオブジェクトに変換して正しい日時かをチェック
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     [formatter setLocale:[NSLocale systemLocale]];
+    // [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     [formatter setTimeZone:[NSTimeZone systemTimeZone]];
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -77,18 +78,30 @@
         return nil;
     }
     
+    // NSLog(@"retDate -> %@", [retDate description]);
+    
     // 日付チェック（2月31日などをチェック）
-    NSCalendar* checkCalendar = [NSCalendar currentCalendar];
+    // NSCalendar* checkCalendar = [NSCalendar currentCalendar];
+    NSCalendar* checkCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     [checkCalendar setTimeZone:[NSTimeZone systemTimeZone]];
     NSDateComponents* dateComps = [checkCalendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:retDate];
     
-    if([year integerValue] != dateComps.year ||
-       [month integerValue] != dateComps.month ||
+    // NSLog(@"%@ <-> %d", year, (int)dateComps.year);
+    // NSLog(@"%@ <-> %d", month, (int)dateComps.month);
+    // NSLog(@"%@ <-> %d", day, (int)dateComps.day);
+    
+    // if([year integerValue] != dateComps.year ||
+    //    [month integerValue] != dateComps.month ||
+    //    [day integerValue] != dateComps.day){
+    //     return nil;
+    // }
+    
+    if([month integerValue] != dateComps.month ||
        [day integerValue] != dateComps.day){
         return nil;
     }
     
-    // NSLog(@" -> %@", [retDate description]);
+    // NSLog(@"retDate -> %@", [retDate description]);
     
     return retDate;
 }

@@ -11,7 +11,6 @@
 		0B0342BE1D257C7900D0D302 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342BD1D257C7900D0D302 /* CoreMedia.framework */; };
 		0B0342C01D257E9400D0D302 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0342BF1D257E9400D0D302 /* libsqlite3.tbd */; };
 		0B1092E2193A4C620097C938 /* RectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1092E1193A4C620097C938 /* RectView.m */; };
-		0B1548561DD4BC4E00068D0E /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1548551DD4BC4E00068D0E /* APIManager.m */; };
 		0B166C131A236EF200682DBC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C121A236EF200682DBC /* ImageIO.framework */; };
 		0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */; };
 		0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C211A2377C600682DBC /* CoreData.framework */; };
@@ -156,8 +155,6 @@
 		0B0342BF1D257E9400D0D302 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0B1092E0193A4C620097C938 /* RectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectView.h; sourceTree = "<group>"; };
 		0B1092E1193A4C620097C938 /* RectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectView.m; sourceTree = "<group>"; };
-		0B1548541DD4BC4E00068D0E /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
-		0B1548551DD4BC4E00068D0E /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		0B166C121A236EF200682DBC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0B166C151A23773100682DBC /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		0B166C161A23773100682DBC /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -543,8 +540,6 @@
 				0B20309C18BA566200B94D8C /* BattingAnalysisView.m */,
 				0B3C77C1164952ED00A214EC /* ConfigManager.h */,
 				0B3C77C2164952ED00A214EC /* ConfigManager.m */,
-				0B1548541DD4BC4E00068D0E /* APIManager.h */,
-				0B1548551DD4BC4E00068D0E /* APIManager.m */,
 				0B6E5C3F1E0D8361006C91E0 /* S3Config.h */,
 				0B6E5C401E0D8361006C91E0 /* S3Config.m */,
 				0B6E5C351E09857A006C91E0 /* S3Manager.h */,
@@ -840,7 +835,6 @@
 				0B9499CA16325697007F574D /* GameResultListController.m in Sources */,
 				0B9499F516325AAF007F574D /* ConfigViewController.m in Sources */,
 				0B9499FF16329738007F574D /* ResultPickerViewController.m in Sources */,
-				0B1548561DD4BC4E00068D0E /* APIManager.m in Sources */,
 				0B949A011632A1E3007F574D /* InputViewController.m in Sources */,
 				0B949A0416335C33007F574D /* GameResult.m in Sources */,
 				0B949A0716335C8B007F574D /* BattingResult.m in Sources */,

@@ -85,7 +85,11 @@
         NSString* filename = [filenameArray objectAtIndex:i];
         NSString* filepath = [dirpath stringByAppendingPathComponent:filename];
         
-//        NSLog(@"filepath : %@",filepath);
+        // NSLog(@"filepath : %@",filepath);
+        
+        if([filename containsString:@"gameresult"] == NO){
+            continue;
+        }
         
         NSData* readdata = [NSData dataWithContentsOfFile:filepath];
         

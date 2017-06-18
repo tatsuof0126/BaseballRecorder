@@ -21,15 +21,10 @@
 
 @implementation StatisticsCommonController
 
-//@synthesize gameResultList;
-//@synthesize gameResultListOfYear;
-//@synthesize yearList;
 @synthesize teamList;
 @synthesize termBeginList;
 @synthesize termEndList;
 @synthesize termList;
-//@synthesize targetyear;
-//@synthesize targetteam;
 @synthesize pickerBaseView;
 @synthesize targetPicker;
 @synthesize targetToolbar;
@@ -52,13 +47,6 @@
     // 子クラスでオーバーライドする前提
 }
 
-/*
-- (void)ADGManagerViewControllerReceiveAd:(ADGManagerViewController *)adgManagerViewController {
-    // 子クラスでオーバーライドする前提
-
-}
-*/
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -66,8 +54,6 @@
 }
 
 - (void)updateStatistics {
-//    [self loadGameResult];
-//    [self setCalcTarget];
     NSArray* gameResultListForCalc = [self getGameResultListForCalc];
     [self showStatistics:gameResultListForCalc];
 }
@@ -542,8 +528,13 @@
     [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
     [actionSheet addButtonWithTitle:@"Facebookに投稿"];
     [actionSheet addButtonWithTitle:@"Lineに送る"];
+    if(shareType == SHARE_TYPE_IMAGE){
+        [actionSheet addButtonWithTitle:@"Instagramに投稿"];
+        actionSheet.cancelButtonIndex = 4;
+    } else {
+        actionSheet.cancelButtonIndex = 3;
+    }
     [actionSheet addButtonWithTitle:@"キャンセル"];
-    actionSheet.cancelButtonIndex = 3;
     [actionSheet showInView:self.view.window];
 }
 
@@ -558,10 +549,13 @@
         case 2:
             [self postToLine:(int)actionSheet.tag];
             break;
+        case 3:
+            [self postToInstagram:(int)actionSheet.tag];
+            break;
     }
 }
 
-- (void)postToTwitter:(int)shareType{
+- (void)postToTwitter:(int)shareType {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Twitterシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     posted = NO;
@@ -599,7 +593,7 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)postToFacebook:(int)shareType{
+- (void)postToFacebook:(int)shareType {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     NSString* shareString = [self makeShareString:POST_FACEBOOK shareType:(int)shareType];
@@ -627,46 +621,7 @@
     }
 }
 
-/*
-- (void)postToFacebook:(int)shareType{
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
-    
-    posted = NO;
-    
-    NSString* shareString = [self makeShareString:POST_FACEBOOK shareType:(int)shareType];
-    NSString* shareURLString = [self getShareURLString:POST_FACEBOOK shareType:(int)shareType];
-    UIImage* shareImage = [self getShareImage:POST_FACEBOOK shareType:(int)shareType];
-    
-    SLComposeViewController *vc = [SLComposeViewController
-                                   composeViewControllerForServiceType:SLServiceTypeFacebook];
-    [vc setCompletionHandler:^(SLComposeViewControllerResult result){
-        switch (result) {
-            case SLComposeViewControllerResultDone:
-                posted = YES;
-                break;
-            default:
-                break;
-        }
-        if(posted == YES){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"投稿しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-    }];
-    
-    [vc setInitialText:shareString];
-    if (shareURLString != nil){
-        [vc addURL:[NSURL URLWithString:shareURLString]];
-    }
-    if (shareImage != nil){
-        [vc addImage:shareImage];
-    }
-    
-    [self presentViewController:vc animated:YES completion:nil];
-}
-*/
-
-- (void)postToLine:(int)shareType{
+- (void)postToLine:(int)shareType {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Lineシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
@@ -697,6 +652,47 @@
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
     }
+}
+
+- (void)postToInstagram:(int)shareType {
+    if(shareType != SHARE_TYPE_IMAGE){
+        return;
+    }
+    
+    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Instagramシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
+    
+    UIImage* shareImage = [self getShareImage:POST_INSTAGRAM shareType:(int)shareType];
+    NSData* imageData = UIImagePNGRepresentation(shareImage);
+    
+    NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* dirpath = [dirpaths objectAtIndex:0];
+    NSString* filepath = [dirpath stringByAppendingPathComponent:@"shareimage.igo"];
+
+    [imageData writeToFile:filepath atomically:YES];
+    
+    NSURL* url = [NSURL fileURLWithPath:filepath];
+    _interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
+    _interactionController.delegate = self;
+    _interactionController.UTI = @"com.instagram.exclusivegram";
+    
+    BOOL show = [_interactionController presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
+    if(show == NO){
+        [Utility showAlert:@"投稿に失敗しました。Instagramがインストールされているか確認してください。"];
+    }
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController*)controller willBeginSendingToApplication:(NSString*)application {
+    // NSLog(@"willBeginSendingToApplication - %@", application);
+    
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController*)controller didEndSendingToApplication:(NSString*)application {
+    // NSLog(@"didEndSendingToApplication - %@", application);
+    
+}
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController*)controller {
+    // NSLog(@"documentInteractionControllerDidDismissOpenInMenu");
 }
 
 - (NSString*)makeShareString:(int)type shareType:(int)shareType {

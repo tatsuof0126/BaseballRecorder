@@ -314,6 +314,8 @@
     // 一時的にラベルを貼る
     UILabel* tmplabel = [[UILabel alloc] initWithFrame:CGRectMake(160,470,150,30)];
     tmplabel.font = [UIFont systemFontOfSize:17];
+    tmplabel.adjustsFontSizeToFitWidth = YES;
+    tmplabel.minimumScaleFactor = 0.5f;
     tmplabel.text = @"草野球日記 ベボレコ";
     [scrollView addSubview:tmplabel];
     

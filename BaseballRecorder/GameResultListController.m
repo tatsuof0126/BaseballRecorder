@@ -313,11 +313,11 @@
         if(gameResultList.count > 0 && [UIAlertController class]){
             // アップデート時 かつ １件以上試合結果があるときはダイアログを表示する。
             // UIAlertControllerが使える場合のみ
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます"
-                    message:@"打撃成績・投手成績や打撃分析の画面からInstagramへの投稿ができるようになっています。ぜひお試しください。"
-                    preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [self presentViewController:alertController animated:YES completion:nil];
+            // UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"アップデート\nありがとうございます"
+            //        message:@"打撃成績・投手成績や打撃分析の画面からInstagramへの投稿ができるようになっています。ぜひお試しください。"
+            //        preferredStyle:UIAlertControllerStyleAlert];
+            //[alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            //[self presentViewController:alertController animated:YES completion:nil];
         }
         [ConfigManager setUseVersion:nowVersion];
     }

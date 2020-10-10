@@ -41,7 +41,7 @@
     }
     
     // サーバー利用フラグを立てる
-    if(SET_SAVE_SERVER_ON == 1){
+    if(SET_USE_SERVER_ON == 1){
         [ConfigManager setServerUseFlg:YES];
     }
     

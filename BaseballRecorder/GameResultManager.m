@@ -8,6 +8,7 @@
 
 #import "GameResultManager.h"
 #import "S3Manager.h"
+#import "TrackingManager.h"
 
 @implementation GameResultManager
 
@@ -56,39 +57,29 @@
     return gameResult;
 }
 
-/*
-+ (NSArray*)getGameResultFileList {
-    NSMutableArray* resultArray = [NSMutableArray array];
-    
-    NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* dirpath = [dirpaths objectAtIndex:0];
-    
-    NSArray* filenameArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirpath error:nil];
-    for(NSString* filename in filenameArray){
-        if([filename containsString:@"gameresult"]){
-            [resultArray addObject:[dirpath stringByAppendingPathComponent:filename]];
-        }
-    }
-    
-    return resultArray;
-}
-*/
-
 + (NSArray*)loadGameResultList {
     NSMutableArray* resultList = [NSMutableArray array];
     
     NSArray* dirpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* dirpath = [dirpaths objectAtIndex:0];
     NSArray* filenameArray = [[NSFileManager defaultManager]subpathsAtPath:dirpath];
-    
+
+    // NSLog(@"dirpath -> %@",dirpath);
+
     for (int i=0; i<filenameArray.count; i++) {
         NSString* filename = [filenameArray objectAtIndex:i];
         NSString* filepath = [dirpath stringByAppendingPathComponent:filename];
         
-        // NSLog(@"filepath : %@",filepath);
+        // NSLog(@"filename -> %@",filename);
+        
+        if([filename isEqualToString:@"shareimage.igo"]){
+            continue;
+        }
         
         if([filename containsString:@"gameresult"] == NO){
-            continue;
+            NSString* message = [NSString stringWithFormat:@"filename -> %@",filename];
+            [TrackingManager sendEventTracking:@"Warning" action:@"Warning" label:message value:nil screen:@"GameResultManager"];
+            // NSLog(@"WARNING -> %@", message);
         }
         
         NSData* readdata = [NSData dataWithContentsOfFile:filepath];
@@ -231,17 +222,24 @@
     NSString* password1 = [id1234By7 substringWithRange:NSMakeRange(0, 1)];
     NSString* password2 = [id1234By7 substringWithRange:NSMakeRange([id1234By7 length]-1, 1)];
     NSString* password3 = [id1234By7 substringWithRange:NSMakeRange([id1234By7 length]-2, 1)];
+    
     NSString* password4 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-1, 1)];
-    NSString* password5 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-2, 1)];
-    NSString* password6 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-3, 1)];
+    NSString* password5 = @"0";
+    if([id5678By3 length] >= 2){
+        password5 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-2, 1)];
+    }
+    NSString* password6 = @"0";
+    if([id5678By3 length] >= 3){
+        password6 = [id5678By3 substringWithRange:NSMakeRange([id5678By3 length]-3, 1)];
+    }
     
     NSString* passwordString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
                                 password1, password2, password3, password4, password5, password6];
     
-    NSLog(@"migrationId : %@", migrationId);
-    NSLog(@"id1234by7 : %@", id1234By7);
-    NSLog(@"id5678By3 : %@", id5678By3);
-    NSLog(@"passwordString : %@", passwordString);
+    // NSLog(@"migrationId : %@", migrationId);
+    // NSLog(@"id1234By7 : %@", id1234By7);
+    // NSLog(@"id5678By3 : %@", id5678By3);
+    // NSLog(@"passwordString : %@", passwordString);
     
     return passwordString;
 }

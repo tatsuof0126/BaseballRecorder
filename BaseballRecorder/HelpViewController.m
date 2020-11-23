@@ -7,7 +7,6 @@
 //
 
 #import "HelpViewController.h"
-#import "TrackingManager.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 
@@ -24,9 +23,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"ヘルプ画面（打撃成績）"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 416);
@@ -52,8 +48,6 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"ヘルプ画面（打撃成績）―戻る" value:nil screen:@"ヘルプ画面（打撃成績）"];
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

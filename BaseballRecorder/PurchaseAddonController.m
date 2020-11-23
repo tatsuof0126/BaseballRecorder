@@ -10,7 +10,6 @@
 #import "InAppPurchaseManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "TrackingManager.h"
 #import "ConfigManager.h"
 
 #define APPSTORELABEL 1
@@ -38,9 +37,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"アドオン購入画面"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,7 +116,6 @@
 //    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
     
     if(indexPath.section == 0 && indexPath.row == 0){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―広告削除" value:nil screen:@"アドオン購入画面"];
         if([ConfigManager isRemoveAdsFlg] == NO){
             [self requestAddon:@"com.tatsuo.baseballrecorder.removeads"];
         } else {
@@ -128,7 +123,6 @@
             [Utility showAlert:@"このアドオンはすでに購入済みです。"];
         }
     } else if(indexPath.section == 0 && indexPath.row == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―バックアップデータ取り出し" value:nil screen:@"アドオン購入画面"];
         if([ConfigManager isServerUseFlg] == NO){
             [self requestAddon:@"com.tatsuo.baseballrecorder.serveruseflg"];
         } else {
@@ -136,7 +130,6 @@
             [Utility showAlert:@"このアドオンはすでに購入済みです。"];
         }
     } else if(indexPath.section == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"アドオン購入画面―リストア" value:nil screen:@"アドオン購入画面"];
         [self restoreAddon];
     }
 }

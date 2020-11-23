@@ -11,7 +11,6 @@
 #import "GameResultManager.h"
 #import "InputViewController.h"
 #import "ConfigManager.h"
-#import "TrackingManager.h"
 #import "Utility.h"
 
 @interface GameResultListController ()
@@ -28,9 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"試合結果一覧画面"];
     
     // TableViewの大きさ定義＆iPhone5対応
     gameResultListTableView.frame = CGRectMake(0, 64, 320, 366);
@@ -236,8 +232,6 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"試合結果の削除" message:@"削除してよろしいですか？" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"キャンセル" style:UIAlertActionStyleCancel handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―削除" value:nil screen:@"試合結果一覧画面"];
-                
             [GameResultManager removeGameResult:result.resultid];
                 
             [self loadGameResult];
@@ -255,8 +249,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―削除" value:nil screen:@"試合結果一覧画面"];
-
         int resultid = [Utility convert2int:alertView.tag];
         
         [GameResultManager removeGameResult:resultid];
@@ -279,16 +271,12 @@
 
     if(tag == 1){
         // 追加ボタン
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―追加" value:nil screen:@"試合結果一覧画面"];
-        
         InputViewController* controller = [segue destinationViewController];
         controller.inputtype = INPUT_TYPE_NEW;
         
         appDelegate.targetGameResult = nil;
     } else {
         // 個別の試合結果を選択
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果一覧画面―既存選択" value:nil screen:@"試合結果一覧画面"];
-        
         NSIndexPath* indexPath = [gameResultListTableView indexPathForSelectedRow];
         
         NSArray* array = [gameResultListOfYear objectAtIndex:indexPath.section];

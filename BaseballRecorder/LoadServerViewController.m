@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "S3Manager.h"
 #import "ConfigManager.h"
-#import "TrackingManager.h"
 #import "Utility.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
@@ -26,9 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"バックアップデータ取り出し画面"];
     
     // お知らせを表示
     [AppDelegate adjustForiPhone5:_infoText];
@@ -87,8 +83,6 @@
         // ぐるぐるの最中なら無視
         return;
     }
-    
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"バックアップデータ取り出し画面―バックアップデータ取り出し" value:nil screen:@"バックアップデータ取り出し画面"];
     
     NSString* migrationId = _migrationIdText.text;
     NSString* migrationPassword = _migrationPasswordText.text;

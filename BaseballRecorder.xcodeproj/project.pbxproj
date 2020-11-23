@@ -15,7 +15,6 @@
 		0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */; };
 		0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C211A2377C600682DBC /* CoreData.framework */; };
 		0B166C241A2377D300682DBC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C231A2377D300682DBC /* SystemConfiguration.framework */; };
-		0B166C2B1A23798A00682DBC /* TrackingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B166C2A1A23798A00682DBC /* TrackingManager.m */; };
 		0B166C2D1A237C7B00682DBC /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B166C2C1A237C7B00682DBC /* libAdIdAccess.a */; };
 		0B16F8B41933918400C82E16 /* arrow_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B31933918400C82E16 /* arrow_none.png */; };
 		0B16F8B7193391CB00C82E16 /* browser_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B16F8B5193391CB00C82E16 /* browser_window.png */; };
@@ -107,9 +106,6 @@
 		0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC4265417C663A500AB95D0 /* Twitter.framework */; };
 		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
-		0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AD1CFFB598002172F7 /* FBSDKCoreKit.framework */; };
-		0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */; };
-		0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */; };
 		0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */; };
 		0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
@@ -167,8 +163,6 @@
 		0B166C1F1A23773100682DBC /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		0B166C211A2377C600682DBC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0B166C231A2377D300682DBC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		0B166C291A23798A00682DBC /* TrackingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackingManager.h; sourceTree = "<group>"; };
-		0B166C2A1A23798A00682DBC /* TrackingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackingManager.m; sourceTree = "<group>"; };
 		0B166C2C1A237C7B00682DBC /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		0B16F8B31933918400C82E16 /* arrow_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_none.png; path = BaseballRecorder/images/arrow_none.png; sourceTree = SOURCE_ROOT; };
 		0B16F8B5193391CB00C82E16 /* browser_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = browser_window.png; path = BaseballRecorder/images/browser_window.png; sourceTree = SOURCE_ROOT; };
@@ -335,9 +329,7 @@
 				0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */,
 				0B166C131A236EF200682DBC /* ImageIO.framework in Frameworks */,
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
-				0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
-				0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
 				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
 				0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */,
@@ -346,7 +338,6 @@
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B6E5C311E084E4C006C91E0 /* AWSCognito.framework in Frameworks */,
 				0B9499B016325697007F574D /* Foundation.framework in Frameworks */,
-				0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */,
 				0B6E5C331E084E51006C91E0 /* AWSS3.framework in Frameworks */,
 				0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */,
 				0B9499B216325697007F574D /* CoreGraphics.framework in Frameworks */,
@@ -562,8 +553,6 @@
 				0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */,
 				0BE4C4A316FF406C00DAD11F /* Utility.h */,
 				0BE4C4A416FF406C00DAD11F /* Utility.m */,
-				0B166C291A23798A00682DBC /* TrackingManager.h */,
-				0B166C2A1A23798A00682DBC /* TrackingManager.m */,
 				0BE78EF41AA4DEFE003AAE8D /* TargetTerm.h */,
 				0BE78EF21AA4DEE7003AAE8D /* TargetTerm.m */,
 				0BB960EB1A5996840062EA3F /* Images-2.xcassets */,
@@ -823,7 +812,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B166C2B1A23798A00682DBC /* TrackingManager.m in Sources */,
 				0B20309D18BA566200B94D8C /* BattingAnalysisView.m in Sources */,
 				0B9499BA16325697007F574D /* main.m in Sources */,
 				0B9499BE16325697007F574D /* AppDelegate.m in Sources */,

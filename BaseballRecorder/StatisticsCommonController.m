@@ -13,7 +13,6 @@
 #import "TargetTerm.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "TrackingManager.h"
 
 @interface StatisticsCommonController ()
 
@@ -544,7 +543,7 @@
             [self postToTwitter:(int)actionSheet.tag];
             break;
         case 1:
-            [self postToFacebook:(int)actionSheet.tag];
+            // [self postToFacebook:(int)actionSheet.tag];
             break;
         case 2:
             [self postToLine:(int)actionSheet.tag];
@@ -556,8 +555,6 @@
 }
 
 - (void)postToTwitter:(int)shareType {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Twitterシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
-    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_TWITTER shareType:(int)shareType];
@@ -593,6 +590,7 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+/*
 - (void)postToFacebook:(int)shareType {
     [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Facebookシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
@@ -620,10 +618,9 @@
         [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
     }
 }
+*/
 
 - (void)postToLine:(int)shareType {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Lineシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
-    
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
         [Utility showAlert:@"Lineがインストールされていません。"];
     }
@@ -658,8 +655,6 @@
     if(shareType != SHARE_TYPE_IMAGE){
         return;
     }
-    
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃/投手成績参照・打撃分析画面―Instagramシェア" value:nil screen:@"打撃/投手成績参照・打撃分析画面"];
     
     UIImage* shareImage = [self getShareImage:POST_INSTAGRAM shareType:(int)shareType];
     NSData* imageData = UIImagePNGRepresentation(shareImage);

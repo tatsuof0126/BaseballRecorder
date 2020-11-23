@@ -15,7 +15,6 @@
 #import "ShowGameResultController.h"
 // #import "ResultPickerViewController.h"
 #import "SelectInputViewController.h"
-#import "TrackingManager.h"
 
 #define NEW_INPUT 999
 #define ALERT_BACK 1
@@ -56,9 +55,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"打撃成績入力画面"];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     //    int resultid = appDelegate.targatResultid;
@@ -824,8 +820,6 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―戻る" value:nil screen:@"打撃成績入力画面"];
-    
     if(edited == YES){
         // 入力・編集していたら警告ダイアログを出す
         NSString* messageStr = nil;
@@ -904,8 +898,6 @@
 }
 
 - (IBAction)toPitchingButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―投手成績へ" value:nil screen:@"打撃成績入力画面"];
-    
     // 入力中状態を解除
     [self endTextEdit];
     [self closePicker];
@@ -978,12 +970,6 @@
             if(buttonIndex == 1){
                 // 入力内容をオブジェクトに反映
                 [self updateGameResult];
-                
-                if(gameResult.resultid == 0){
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―保存（新規）" value:nil screen:@"打撃成績入力画面"];
-                } else {
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績入力画面―保存（更新）" value:nil screen:@"打撃成績入力画面"];
-                }
                 
                 // ファイルに保存
                 [GameResultManager saveGameResult:gameResult];
@@ -1140,9 +1126,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     NSString* segueStr = [segue identifier];
-    
-    NSString* labelStr = [NSString stringWithFormat:@"打撃成績入力画面―%@",segueStr];
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:labelStr value:nil screen:@"打撃成績入力画面"];
     
     if ([segueStr isEqualToString:@"registsegue"] == YES) {
         // とりあえず何もなし

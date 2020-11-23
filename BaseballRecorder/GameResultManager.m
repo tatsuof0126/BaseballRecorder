@@ -8,7 +8,6 @@
 
 #import "GameResultManager.h"
 #import "S3Manager.h"
-#import "TrackingManager.h"
 
 @implementation GameResultManager
 
@@ -76,11 +75,13 @@
             continue;
         }
         
+        /*
         if([filename containsString:@"gameresult"] == NO){
             NSString* message = [NSString stringWithFormat:@"filename -> %@",filename];
             [TrackingManager sendEventTracking:@"Warning" action:@"Warning" label:message value:nil screen:@"GameResultManager"];
             // NSLog(@"WARNING -> %@", message);
         }
+        */
         
         NSData* readdata = [NSData dataWithContentsOfFile:filepath];
         

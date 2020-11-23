@@ -9,7 +9,6 @@
 #import "InputConfigViewController.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
-#import "TrackingManager.h"
 
 @interface InputConfigViewController ()
 
@@ -25,9 +24,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"入力・表示設定画面"];
     
     _place.text = [ConfigManager getDefaultPlace];
     _myteam.text = [ConfigManager getDefaultMyTeam];
@@ -119,15 +115,11 @@
 }
 
 - (IBAction)placeEdited:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"入力・表示設定画面―場所設定" value:nil screen:@"入力・表示設定画面"];
-    
     UITextField* place = sender;
     [ConfigManager setDefaultPlace:place.text];
 }
 
 - (IBAction)myteamEdited:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"入力・表示設定画面―チーム設定" value:nil screen:@"入力・表示設定画面"];
-    
     UITextField* myteam = sender;
     [ConfigManager setDefaultMyTeam:myteam.text];
 }
@@ -137,21 +129,15 @@
 }
 
 - (void)saveDefaultSendto {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"入力・表示設定画面―メールアドレス設定" value:nil screen:@"入力・表示設定画面"];
-    
     NSString* email = _sendto.text;
     [ConfigManager setDefaultSendTo:email];
 }
 
 - (void)checkBoxSelected:(UITapGestureRecognizer*)sender {
     if(sender.view == _calcInning7){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"入力・表示設定画面―７回計算" value:nil screen:@"入力・表示設定画面"];
-        
         [_calcInning7 checkboxPush:_calcInning7];
         [ConfigManager setCalcInning7Flg:_calcInning7.selected];
     } else if(sender.view == _showMyteam){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"入力・表示設定画面―自チーム名表示" value:nil screen:@"入力・表示設定画面"];
-        
         [_showMyteam checkboxPush:_showMyteam];
         [ConfigManager setShowMyteamFlg:_showMyteam.selected];
     }

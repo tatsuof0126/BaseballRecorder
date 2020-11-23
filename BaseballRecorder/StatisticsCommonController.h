@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import <Social/Social.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
+// #import <FBSDKShareKit/FBSDKShareKit.h>
 
 #define PICKER_TERM 1
 #define PICKER_TEAM 9

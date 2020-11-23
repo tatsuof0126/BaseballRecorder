@@ -9,7 +9,6 @@
 #import "SaveServerViewController.h"
 #import "AppDelegate.h"
 #import "S3Manager.h"
-#import "TrackingManager.h"
 #import "Utility.h"
 #import "GameResultManager.h"
 #import "GameResult.h"
@@ -28,9 +27,6 @@
     [super viewDidLoad];
     
     [self updateLabel];
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"データバックアップ画面"];
     
     // お知らせを表示
     [AppDelegate adjustForiPhone5:_infoText];
@@ -97,8 +93,6 @@
 */
 
 - (IBAction)saveServer:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"データバックアップ画面―データバックアップ" value:nil screen:@"データバックアップ画面"];
-    
     if(indicator != nil && [indicator isAnimating]){
         // ぐるぐるの最中なら無視
         return;

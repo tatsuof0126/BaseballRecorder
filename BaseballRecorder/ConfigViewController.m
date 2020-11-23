@@ -9,7 +9,6 @@
 #import "ConfigViewController.h"
 #import "ConfigManager.h"
 #import "AppDelegate.h"
-#import "TrackingManager.h"
 #import "S3Manager.h"
 
 @interface ConfigViewController ()
@@ -40,9 +39,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"設定画面"];
     
     [self makeMenuArray];
     
@@ -150,17 +146,14 @@
     if(indexPath.section == 0 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"inputconfig" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 0){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―データバックアップ（機種変更用）" value:nil screen:@"設定画面"];
         [self performSegueWithIdentifier:@"saveserver" sender:self];
     } else if(indexPath.section == 1 && indexPath.row == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―バックアップデータ取り出し" value:nil screen:@"設定画面"];
         if([ConfigManager isServerUseFlg] == NO){
             [self showMoveAddonView:@"バックアップデータ取り出しにはアドオンの入手が必要です。（一度入手すると何度でもバックアップデータの取り出しが可能です）"];
         } else {
             [self performSegueWithIdentifier:@"loadserver" sender:self];
         }
     } else if(indexPath.section == 2 && indexPath.row == 0){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―広告削除" value:nil screen:@"設定画面"];
         if([ConfigManager isRemoveAdsFlg] == NO){
             [self showMoveAddonView:@"広告を削除するにはアドオンの入手が必要です。"];
         }
@@ -175,7 +168,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―アドオン入手画面へ遷移" value:nil screen:@"設定画面"];
         [self performSegueWithIdentifier:@"getaddon" sender:self];
     }
     [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
@@ -199,14 +191,10 @@
 - (void)tapAction:(UITapGestureRecognizer*)sender{
     if(sender.view == appstoreLabel){
 //        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―レビューを書く" value:nil screen:@"設定画面"];
-        
         NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
 
         [[UIApplication sharedApplication] openURL:url];
     } else if(sender.view == otherappLabel){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"設定画面―他のアプリを見る" value:nil screen:@"設定画面"];
-        
         NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.com/apps/TatsuoFujiwara"];
         
         [[UIApplication sharedApplication] openURL:url];

@@ -15,7 +15,6 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "TrackingManager.h"
 
 #define PICKER_INNING  1
 #define PICKER_SEKININ 2
@@ -55,9 +54,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"投手成績入力画面"];
     
     [self showPitchingResult];
     
@@ -496,12 +492,6 @@
                 [self updateGameResult];
                 
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-                if(appDelegate.targetGameResult.resultid == 0){
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（新規）" value:nil screen:@"投手成績入力画面"];
-                } else {
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（更新）" value:nil screen:@"投手成績入力画面"];
-                }
-                
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
@@ -520,12 +510,6 @@
                 [self clearGameResult];
                 
                 AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-                if(appDelegate.targetGameResult.resultid == 0){
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（新規）（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
-                } else {
-                    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―保存（更新）（打撃成績のみ）" value:nil screen:@"投手成績入力画面"];
-                }
-                
                 // ファイルに保存
                 [GameResultManager saveGameResult:appDelegate.targetGameResult];
                 
@@ -621,8 +605,6 @@
 }
 
 - (IBAction)toBattingButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"投手成績入力画面―打撃成績へ" value:nil screen:@"投手成績入力画面"];
-    
     // 入力中状態を解除
     [self doneButton];
     

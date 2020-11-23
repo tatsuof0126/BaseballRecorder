@@ -6,12 +6,11 @@
 //  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
 //
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+// #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
 #import "GAI.h"
 #import "GADInterstitial.h"
 #import "ConfigManager.h"
-#import "TrackingManager.h"
 #import "GameResultManager.h"
 
 @implementation AppDelegate
@@ -26,14 +25,14 @@
     // Override point for customization after application launch.
     
     // Google Analyticsの初期化
-    [self initializeGoogleAnalytics];
+    // [self initializeGoogleAnalytics];
     
     // AppBankNetworkのインタースティシャル広告の初期化
     // [[NADInterstitial sharedInstance] loadAdWithApiKey:@"ced5049f9d729e1847dbfa8b0d188218a720f20e"
     //                                            spotId:@"271381"];
     
     // FBSDK
-    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    // [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     // サンプルデータを作る
     if(MAKE_SAMPLE_DATA == 1){
@@ -80,7 +79,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [FBSDKAppEvents activateApp];
+    // [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -138,6 +137,7 @@
 }
 */
 
+/*
 - (void)initializeGoogleAnalytics {
     // トラッキングIDを設定
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-23529359-5"];
@@ -145,13 +145,16 @@
     // 例外を Google Analytics に送る
     [GAI sharedInstance].trackUncaughtExceptions = YES;
 }
+*/
 
 // FBSDK
+/*
 - (BOOL)application:(UIApplication*)application openURL:(NSURL*)url
         sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
     return [[FBSDKApplicationDelegate sharedInstance] application:application
             openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
+*/
 
 // インタースティシャル広告
 /*
@@ -254,7 +257,9 @@
         gadInterstitial.delegate = self;
         [gadInterstitial loadRequest:[GADRequest request]];
     } @catch (NSException *exception) {
+        /*
         [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"prepareGadInterstitial" value:nil screen:@"prepareGadInterstitial"];
+         */
     }
 }
 
@@ -272,7 +277,9 @@
             [self prepareGadInterstitial];
         }
     } @catch (NSException *exception) {
+        /*
         [TrackingManager sendEventTracking:@"Exception" action:@"Exception" label:@"showGadInterstitial" value:nil screen:@"showGadInterstitial"];
+         */
     }
 }
 

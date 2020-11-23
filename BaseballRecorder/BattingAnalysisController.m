@@ -9,7 +9,6 @@
 #import "BattingAnalysisController.h"
 #import "AppDelegate.h"
 #import "ConfigManager.h"
-#import "TrackingManager.h"
 
 @interface BattingAnalysisController ()
 
@@ -36,9 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"打撃分析画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.contentSize = CGSizeMake(320, 510);
@@ -93,12 +89,10 @@
 }
 
 - (IBAction)termChangeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―期間変更" value:nil screen:@"打撃分析画面"];
     [self makeTermPicker];
 }
 
 - (IBAction)teamChangeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―チーム変更" value:nil screen:@"打撃分析画面"];
     [self makeTeamPicker];
 }
 
@@ -111,8 +105,6 @@
 }
 
 - (IBAction)saveAnalysis:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―保存" value:nil screen:@"打撃分析画面"];
-    
     [_indView startAnimating];
     
     [NSThread detachNewThreadSelector:@selector(saveCapturedImage:) toTarget:self withObject:_indView];
@@ -142,8 +134,6 @@
 }
 
 - (IBAction)shareAnalysis:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃分析画面―シェア" value:nil screen:@"打撃分析画面"];
-    
     [super shareStatistics:SHARE_TYPE_IMAGE];
 }
 

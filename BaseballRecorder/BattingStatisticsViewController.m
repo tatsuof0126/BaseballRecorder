@@ -11,7 +11,6 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "TrackingManager.h"
 
 @interface BattingStatisticsViewController ()
 
@@ -36,9 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"打撃成績参照画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.contentSize = CGSizeMake(320, 520);
@@ -170,25 +166,19 @@
 }
 
 - (IBAction)termChangeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―期間変更" value:nil screen:@"打撃成績参照画面"];
     [self makeTermPicker];
 }
 
 - (IBAction)teamChangeButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―チーム変更" value:nil screen:@"打撃成績参照画面"];
     [self makeTeamPicker];
 }
 
 - (IBAction)tweetButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―シェア" value:nil screen:@"打撃成績参照画面"];
-    
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_TEXT];
 }
 
 - (IBAction)imageShareButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―画像でシェア" value:nil screen:@"打撃成績参照画面"];
-    
     // 親クラスのメソッドを呼び出してシェア
     [super shareStatistics:SHARE_TYPE_IMAGE];
 }
@@ -353,8 +343,6 @@
 }
 
 - (IBAction)mailButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"打撃成績参照画面―メール送信" value:nil screen:@"打撃成績参照画面"];
-    
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
     

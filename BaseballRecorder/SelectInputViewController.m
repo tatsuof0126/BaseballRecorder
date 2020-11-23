@@ -9,7 +9,6 @@
 #import "SelectInputViewController.h"
 #import "GameResult.h"
 #import "GameResultManager.h"
-#import "TrackingManager.h"
 
 @interface SelectInputViewController ()
 
@@ -36,9 +35,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:[NSString stringWithFormat:@"%@画面",[self getTitleString]]];
     
     titleItem.title = [self getTitleString];
     [self makeSelectList];
@@ -145,8 +141,6 @@
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
  */
     } else {
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:[NSString stringWithFormat:@"%@画面-選択",[self getTitleString]] value:nil screen:[NSString stringWithFormat:@"%@画面",[self getTitleString]]];
-        
         targetField.text = [selectlist objectAtIndex:indexPath.row];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

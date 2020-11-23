@@ -19,7 +19,6 @@
 #import "ConfigManager.h"
 #import "AppDelegate.h"
 #import "Utility.h"
-#import "TrackingManager.h"
 
 #define ALERT_DELETE 1
 #define ALERT_WITHAD 9
@@ -49,7 +48,7 @@
 	// Do any additional setup after loading the view.
     
     // 画面が開かれたときのトラッキング情報を送る
-    [TrackingManager sendScreenTracking:@"試合結果参照画面"];
+    // [TrackingManager sendScreenTracking:@"試合結果参照画面"];
     
     // ScrollViewの高さを定義＆iPhone5対応
     scrollView.frame = CGRectMake(0, 64, 320, 416);
@@ -368,8 +367,6 @@
 }
 
 - (IBAction)backButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―一覧へ" value:nil screen:@"試合結果参照画面"];
-    
     [self backToResultList];
 }
 
@@ -438,7 +435,7 @@
             [self postToTwitter];
             break;
         case 1:
-            [self postToFacebook];
+            // [self postToFacebook];
             break;
         case 2:
             [self postToLine];
@@ -447,8 +444,6 @@
 }
 
 - (void)postToTwitter {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Twitterシェア" value:nil screen:@"試合結果参照画面"];
-    
     posted = NO;
     
     NSString* shareString = [self makeShareString:POST_TWITTER];
@@ -477,9 +472,8 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+/*
 - (void)postToFacebook {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Facebookシェア" value:nil screen:@"試合結果参照画面"];
-    
     NSString* shareString = [self makeShareString:POST_FACEBOOK];
     
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
@@ -488,6 +482,7 @@
     content.quote = shareString;
     [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
 }
+*/
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
@@ -535,8 +530,6 @@
 */
 
 - (void)postToLine {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―Lineシェア" value:nil screen:@"試合結果参照画面"];
-    
     posted = NO;
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
@@ -640,8 +633,6 @@
 }
 
 - (IBAction)mailButton:(id)sender {
-    [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―メール送信" value:nil screen:@"試合結果参照画面"];
-    
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
     
@@ -700,8 +691,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // 削除ボタンでOKを押した場合
     if(alertView.tag == ALERT_DELETE && buttonIndex == 1){
-        [TrackingManager sendEventTracking:@"Button" action:@"Push" label:@"試合結果参照画面―削除" value:nil screen:@"試合結果参照画面"];
-        
         // AppDelegateからresultidを取得して削除
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         int resultid = appDelegate.targetGameResult.resultid;

@@ -8,7 +8,6 @@
 
 // #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
-#import "GAI.h"
 #import "GADInterstitial.h"
 #import "ConfigManager.h"
 #import "GameResultManager.h"

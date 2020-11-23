@@ -7,8 +7,6 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
-#import <FBSDKShareKit/FBSDKSharing.h>
 #import "ShowGameResultController.h"
 #import "GameResultListController.h"
 #import "GameResultManager.h"
@@ -484,6 +482,7 @@
 }
 */
 
+/*
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
         // インタースティシャル広告を表示
@@ -496,6 +495,7 @@
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
 }
+*/
 
 /*
 - (void)postToFacebook {

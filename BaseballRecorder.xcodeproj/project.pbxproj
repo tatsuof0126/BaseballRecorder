@@ -110,8 +110,6 @@
 		0BD4B5AE1CFFB598002172F7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AD1CFFB598002172F7 /* FBSDKCoreKit.framework */; };
 		0BD4B5B01CFFB5B4002172F7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */; };
 		0BD4B5B21CFFB5CE002172F7 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */; };
-		0BD4B5B41D04711E002172F7 /* ADG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4B5B31D04711E002172F7 /* ADG.framework */; };
-		0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */; };
 		0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */; };
 		0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
@@ -298,7 +296,6 @@
 		0BD4B5AF1CFFB5B4002172F7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		0BD4B5B11CFFB5CE002172F7 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		0BD4B5B31D04711E002172F7 /* ADG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADG.framework; sourceTree = "<group>"; };
-		0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "ADG-Resources.bundle"; path = "../../../../Users/tatsuo/Documents/AppDev/ベボレコ/sdk-master 2/ADG_iOSSDK/ADG.framework/Versions/A/Resources/ADG-Resources.bundle"; sourceTree = "<group>"; };
 		0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FiveAd.framework; sourceTree = "<group>"; };
 		0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppVadorSDK.framework; sourceTree = "<group>"; };
 		0BE4C49A16FB646100DAD11F /* PurchaseAddonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseAddonController.h; sourceTree = "<group>"; };
@@ -333,7 +330,6 @@
 				0B22718A1AAC9D0800B29E37 /* CoreTelephony.framework in Frameworks */,
 				0B166C241A2377D300682DBC /* SystemConfiguration.framework in Frameworks */,
 				0B166C221A2377C600682DBC /* CoreData.framework in Frameworks */,
-				0BD4B5B41D04711E002172F7 /* ADG.framework in Frameworks */,
 				0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */,
 				0B166C2D1A237C7B00682DBC /* libAdIdAccess.a in Frameworks */,
 				0B166C201A23773100682DBC /* libGoogleAnalyticsServices.a in Frameworks */,
@@ -392,7 +388,6 @@
 		0B1AA339163D4F3300535116 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0BD4B5B51D04727F002172F7 /* ADG-Resources.bundle */,
 				0B53465317BF676900601AAE /* arrow_left.png */,
 				0B53464D17BF561A00601AAE /* arrow_right.png */,
 				0B16F8B31933918400C82E16 /* arrow_none.png */,
@@ -679,6 +674,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				ja,
 				Base,
@@ -731,7 +727,6 @@
 				0BB961091A5997530062EA3F /* icon-76.png in Resources */,
 				0BB960EC1A5996840062EA3F /* Images-2.xcassets in Resources */,
 				0B16F8B41933918400C82E16 /* arrow_none.png in Resources */,
-				0BD4B5B61D04727F002172F7 /* ADG-Resources.bundle in Resources */,
 				0B40E44516CAB45100E0E95D /* baseball@2x.png in Resources */,
 				0B53464E17BF561A00601AAE /* arrow_right.png in Resources */,
 				0BB961021A5997530062EA3F /* icon-50@2x.png in Resources */,
@@ -1002,6 +997,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 15;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1024,11 +1020,12 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
+				MARKETING_VERSION = 3.2;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-framework",
 					AdSupport,
 					"-force_load",
-					"\"/iPhoneAppDev/BaseballRecorder/GoogleAnalyticsLibrary/libAdIdAccess.a\"",
+					"\"/Users/tatsuo/iOSProjects/BaseballRecorder/GoogleAnalyticsLibrary/libAdIdAccess.a\"",
 					"-lz",
 					"-ObjC",
 					"$(inherited)",
@@ -1051,6 +1048,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 15;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1072,6 +1070,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/GoogleAnalyticsLibrary",
 				);
+				MARKETING_VERSION = 3.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lz",

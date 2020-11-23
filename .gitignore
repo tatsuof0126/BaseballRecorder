@@ -1,2 +1,7 @@
 /BaseballRecorder/S3Config.m
+
+/BaseballRecorder.xcodeproj/xcuserdata/
+/BaseballRecorder.xcworkspace/xcshareddata/
+/BaseballRecorder.xcworkspace/xcuserdata/
+
 Pods/*

@@ -417,6 +417,7 @@
 }
 
 - (IBAction)tweetButton:(id)sender {
+    /*
     UIActionSheet* actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
     [actionSheet addButtonWithTitle:@"Twitterにつぶやく"];
@@ -425,8 +426,38 @@
     [actionSheet addButtonWithTitle:@"キャンセル"];
     actionSheet.cancelButtonIndex = 3;
     [actionSheet showInView:self.view.window];
+    */
+    
+    // コントローラを生成
+    UIAlertController *alertController =
+        [UIAlertController alertControllerWithTitle:nil message:nil
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+    // キャンセル用のアクションを生成
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"キャンセル"
+                                 style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *actionTwitter = [UIAlertAction actionWithTitle:@"Twitterにつぶやく"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                [self postToTwitter];
+                               }];
+
+    UIAlertAction *actionLine = [UIAlertAction actionWithTitle:@"Lineに送る"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                    [self postToLine];
+                                   }];
+
+    // コントローラにアクションを追加
+    [alertController addAction:cancelAction];
+    [alertController addAction:actionTwitter];
+    [alertController addAction:actionLine];
+
+    // アクションシート表示処理
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
+/*
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
@@ -440,6 +471,7 @@
             break;
     }
 }
+*/
 
 - (void)postToTwitter {
     posted = NO;
@@ -457,10 +489,14 @@
         }
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
+                [Utility showAlert:@"つぶやきました"];
+                
+                /*
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
                     message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 alert.tag = ALERT_WITHAD;
                 [alert show];
+                 */
             }
         }];
     }];
@@ -537,10 +573,14 @@
     }
     
     NSString* shareString = [self makeShareString:POST_LINE];
-    NSString* encodedString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString* encodedString = [shareString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    // NSString* encodedString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/text/%@", encodedString];
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString] options:@{} completionHandler:nil];
+
+    // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
 }
 
 - (NSString*)makeShareString:(int)type {
@@ -661,17 +701,25 @@
             break;
         // 送信成功
         case MFMailComposeResultSent: {
+            [Utility showAlert:@"送信しました"];
+            
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                 message:@"送信しました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             alert.tag = ALERT_WITHAD;
             [alert show];
+             */
             break;
         }
         // 送信失敗
         case MFMailComposeResultFailed: {
+            [Utility showAlert:@"送信に失敗しました"];
+            
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                 message:@"送信に失敗しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+             */
             break;
         }
         default:
@@ -681,13 +729,25 @@
 }
 
 - (IBAction)deleteButton:(id)sender {
+    // 入力エラーがない場合は保存確認のダイアログを表示
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction* action) {
+                                    [self deleteGameResult];
+                               }];
+    UIAlertController* alertController = [Utility makeConfirmAlert:@"試合結果の削除" message:@"削除してよろしいですか？" okAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    /*
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の削除"
                                                     message:@"削除してよろしいですか？" delegate:self
                                           cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
     alert.tag = ALERT_DELETE;
     [alert show];
+     */
 }
 
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // 削除ボタンでOKを押した場合
     if(alertView.tag == ALERT_DELETE && buttonIndex == 1){
@@ -705,6 +765,23 @@
         // 一覧画面に戻る
         [self backToResultList];
     }
+}
+*/
+
+- (void)deleteGameResult {
+    // AppDelegateからresultidを取得して削除
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    int resultid = appDelegate.targetGameResult.resultid;
+    
+    [GameResultManager removeGameResult:resultid];
+    
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        appDelegate.showInterstitialFlg = YES;
+    }
+    
+    // 一覧画面に戻る
+    [self backToResultList];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {

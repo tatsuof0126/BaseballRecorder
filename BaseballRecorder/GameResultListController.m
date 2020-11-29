@@ -247,6 +247,7 @@
     }
 }
 
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
         int resultid = [Utility convert2int:alertView.tag];
@@ -263,6 +264,7 @@
         }
     }
 }
+*/
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];

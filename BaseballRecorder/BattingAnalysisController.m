@@ -9,6 +9,7 @@
 #import "BattingAnalysisController.h"
 #import "AppDelegate.h"
 #import "ConfigManager.h"
+#import "Utility.h"
 
 @interface BattingAnalysisController ()
 
@@ -128,9 +129,14 @@
     if(error){
         message = @"保存に失敗しました";
     }
+    
+    [Utility showAlert:message];
+
+    /*
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message
         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+     */
 }
 
 - (IBAction)shareAnalysis:(id)sender {

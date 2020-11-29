@@ -14,10 +14,76 @@
     [self showAlert:@"" message:message];
 }
 
+/*
 + (void)showAlert:(NSString*)title message:(NSString*)message {
     UIAlertView *alert = [ [UIAlertView alloc] initWithTitle:title
         message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+}
+*/
+
++ (void)showAlert:(NSString*)title message:(NSString*)message {
+    [self showAlert:@"" message:message buttonText:@"OK"];
+}
+
++ (void)showAlert:(NSString*)title message:(NSString*)message buttonText:(NSString*)buttonText {
+    UIAlertController* alertController =
+        [UIAlertController alertControllerWithTitle:title
+                                            message:message
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction =
+        [UIAlertAction actionWithTitle:buttonText
+                                 style:UIAlertActionStyleDefault
+                               handler:nil];
+    [alertController addAction:okAction];
+    
+    [[Utility topViewController] presentViewController:alertController animated:YES completion:nil];
+}
+
+// https://qastack.jp/programming/26667009/get-top-most-uiviewcontroller
+// https://sites.google.com/site/kindaichiios9/home/uiapplication/uiapplicationkararootviewcontrollerwo-qu-desuru
++ (UIViewController*)topViewController {
+    UIViewController* rootVC = UIApplication.sharedApplication.keyWindow.rootViewController;
+    return [Utility topPresentedViewController:rootVC];
+}
+
++ (UIViewController*)topPresentedViewController:(UIViewController*)viewController {
+    NSLog(@"hoge2");
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        NSLog(@"hoge3");
+        UIViewController* targetViewController =  (UIViewController*)[((UINavigationController*)viewController).viewControllers objectAtIndex:0];
+        return [Utility topPresentedViewController:targetViewController];
+    }
+    
+    if ([viewController isKindOfClass:[UITabBarController class]]) {
+        NSLog(@"hoge4");
+        UIViewController* targetViewController = ((UITabBarController*)viewController).selectedViewController;
+        return [Utility topPresentedViewController:targetViewController];
+    }
+    
+    if(viewController.presentedViewController){
+        NSLog(@"hoge5");
+        return [Utility topPresentedViewController:viewController.presentedViewController];
+    }
+    
+    NSLog(@"hoge6");
+    
+    return viewController;
+}
+
++ (UIAlertController*)makeConfirmAlert:(NSString*)title message:(NSString*)message okAction:(UIAlertAction*)okAction {
+    UIAlertController* alertController =
+        [UIAlertController alertControllerWithTitle:title
+                                            message:message
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:okAction];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"キャンセル"
+                                 style:UIAlertActionStyleCancel
+                               handler:nil];
+    [alertController addAction:cancelAction];
+    
+    return alertController;
 }
 
 + (NSString*)getFloatStr:(float)floatvalue appendBlank:(BOOL)appendBlank {

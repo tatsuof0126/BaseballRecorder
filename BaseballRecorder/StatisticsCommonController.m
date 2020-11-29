@@ -521,6 +521,7 @@
 }
 
 - (void)shareStatistics:(int)shareType {
+    /*
     UIActionSheet* actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
     actionSheet.tag = shareType;
@@ -535,8 +536,47 @@
     }
     [actionSheet addButtonWithTitle:@"キャンセル"];
     [actionSheet showInView:self.view.window];
+    */
+    
+    // コントローラを生成
+    UIAlertController *alertController =
+        [UIAlertController alertControllerWithTitle:nil message:nil
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+    // キャンセル用のアクションを生成
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"キャンセル"
+                                 style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *actionTwitter = [UIAlertAction actionWithTitle:@"Twitterにつぶやく"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                [self postToTwitter:shareType];
+                               }];
+
+    UIAlertAction *actionLine = [UIAlertAction actionWithTitle:@"Lineに送る"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                    [self postToLine:shareType];
+                                   }];
+
+    UIAlertAction *actionInstagram = [UIAlertAction actionWithTitle:@"Instagramに投稿"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                    [self postToInstagram:shareType];
+                                   }];
+    
+    // コントローラにアクションを追加
+    [alertController addAction:cancelAction];
+    [alertController addAction:actionTwitter];
+    [alertController addAction:actionLine];
+    if(shareType == SHARE_TYPE_IMAGE){
+        [alertController addAction:actionInstagram];
+    }
+
+    // アクションシート表示処理
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
+/*
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
@@ -553,6 +593,7 @@
             break;
     }
 }
+*/
 
 - (void)postToTwitter:(int)shareType {
     posted = NO;
@@ -572,9 +613,13 @@
         }
         [self dismissViewControllerAnimated:YES completion:^{
             if(posted == YES){
+                [Utility showAlert:@"つぶやきました"];
+                
+                /*
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
                     message:@"つぶやきました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
+                 */
             }
         }];
     }];
@@ -631,11 +676,13 @@
         NSString* shareString = [self makeShareString:POST_LINE shareType:(int)shareType];
         NSString* shareURLString = [self getShareURLString:POST_LINE shareType:(int)shareType];
         
-        NSString* encodedString = [[NSString stringWithFormat:@"%@ %@",shareString, shareURLString]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        // NSString* encodedString = [[NSString stringWithFormat:@"%@ %@",shareString, shareURLString]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString* encodedString = [[NSString stringWithFormat:@"%@ %@",shareString, shareURLString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
         
         NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/text/%@", encodedString];
     
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString] options:@{} completionHandler:nil];
+        // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
     } else if(shareType == SHARE_TYPE_IMAGE){
         UIImage* shareImage = [self getShareImage:POST_LINE shareType:(int)shareType];
         
@@ -647,7 +694,9 @@
         [pasteboard setData:UIImagePNGRepresentation(shareImage) forPasteboardType:@"public.png"];
         NSString *LINEUrlString = [NSString stringWithFormat:@"line://msg/image/%@", pasteboard.name];
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString] options:@{} completionHandler:nil];
+
+        // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LINEUrlString]];
     }
 }
 

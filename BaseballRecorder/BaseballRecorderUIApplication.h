@@ -10,6 +10,6 @@
 
 @interface BaseballRecorderUIApplication : UIApplication
 
-@property (strong, nonatomic) NSURL* _url;
+@property (strong, nonatomic) NSURL* targetUrl;
 
 @end

@@ -828,10 +828,21 @@
         } else {
             messageStr = @"編集内容は保存されませんが、\nよろしいですか？";
         }
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction* action) {
+                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                   }];
+        UIAlertController* alertController = [Utility makeConfirmAlert:@"" message:messageStr okAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:messageStr delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
         [alert setTag:ALERT_BACK];
         [alert show];
+         */
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
 //        [self dismissModalViewControllerAnimated:YES];
@@ -914,9 +925,13 @@
             }
         }
         
+        [Utility showAlert:@"" message:errorStr buttonText:@"閉じる"];
+
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
         [alert show];
+         */
         
         return;
     }
@@ -943,21 +958,35 @@
             }
         }
         
+        [Utility showAlert:@"" message:errorStr buttonText:@"閉じる"];
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
         [alert show];
+         */
         
         return;
     }
     
     // 入力エラーがない場合は保存確認のダイアログを表示
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction* action) {
+                                    [self saveGameResult];
+                               }];
+    UIAlertController* alertController = [Utility makeConfirmAlert:@"試合結果の保存" message:@"保存してよろしいですか？" okAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    /*
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"試合結果の保存" message:@"保存してよろしいですか？"
                               delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
     [alert setTag:ALERT_SAVE];
     [alert show];
+     */
     
 }
 
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_BACK:
@@ -987,6 +1016,23 @@
         default:
             break;
     }
+}
+*/
+
+- (void)saveGameResult {
+    // 入力内容をオブジェクトに反映
+    [self updateGameResult];
+    
+    // ファイルに保存
+    [GameResultManager saveGameResult:gameResult];
+    
+    // インタースティシャル広告表示をセット
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        appDelegate.showInterstitialFlg = YES;
+    }
+    
+    [self moveNextView];
 }
 
 - (NSArray*)inputCheck {

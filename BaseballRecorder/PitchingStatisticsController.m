@@ -338,16 +338,22 @@
             break;
         // 送信成功
         case MFMailComposeResultSent: {
+            [Utility showAlert:@"送信しました"];
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                 message:@"送信しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+             */
             break;
         }
         // 送信失敗
         case MFMailComposeResultFailed: {
+            [Utility showAlert:@"送信に失敗しました"];
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                 message:@"送信に失敗しました" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+             */
             break;
         }
         default:

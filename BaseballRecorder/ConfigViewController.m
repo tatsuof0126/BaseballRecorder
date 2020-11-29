@@ -161,17 +161,42 @@
 }
 
 - (void)showMoveAddonView:(NSString*)message {
+    UIAlertController* alertController =
+        [UIAlertController alertControllerWithTitle:@""
+                                            message:message
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"アドオン入手"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction* action) {
+                                [self performSegueWithIdentifier:@"getaddon" sender:self];
+                                [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
+                               }];
+
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"キャンセル"
+                                 style:UIAlertActionStyleCancel
+                                handler:^(UIAlertAction* action) {
+                                    [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
+                                                         }];
+    [alertController addAction:okAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+    /*
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
         message:message delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"アドオン入手", nil];
     [alert show];
+     */
 }
 
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1){
         [self performSegueWithIdentifier:@"getaddon" sender:self];
     }
     [configTableView deselectRowAtIndexPath:[configTableView indexPathForSelectedRow] animated:NO];
 }
+*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -193,11 +218,13 @@
 //        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
         NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
 
-        [[UIApplication sharedApplication] openURL:url];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        // [[UIApplication sharedApplication] openURL:url];
     } else if(sender.view == otherappLabel){
         NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.com/apps/TatsuoFujiwara"];
         
-        [[UIApplication sharedApplication] openURL:url];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        // [[UIApplication sharedApplication] openURL:url];
     }
 }
 

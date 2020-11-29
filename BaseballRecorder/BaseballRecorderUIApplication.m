@@ -7,11 +7,41 @@
 //
 
 #import "BaseballRecorderUIApplication.h"
+#import "Utility.h"
 
 @implementation BaseballRecorderUIApplication
 
-@synthesize _url;
+@synthesize targetUrl;
 
+- (void)openURL:(NSURL*)url options:(NSDictionary<NSString *, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion {
+// - (BOOL)openURL:(NSURL*)url {
+    targetUrl = url;
+    
+    NSString* messageStr;
+    
+    if([[url absoluteString] hasPrefix:@"http://"] == YES ||
+       [[url absoluteString] hasPrefix:@"https://"] == YES ){
+        [super openURL:targetUrl options:options completionHandler:completion];
+        return;
+    }
+    
+    if([[url absoluteString] hasPrefix:@"itms-apps://"] == YES){
+        messageStr = @"AppStoreを起動します";
+    } else {
+        messageStr = @"アプリを起動します";
+    }
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction* action) {
+        [super openURL:self->targetUrl options:options completionHandler:completion];
+                               }];
+    UIAlertController* alertController = [Utility makeConfirmAlert:@"" message:messageStr okAction:okAction];
+    
+    [[Utility topViewController] presentViewController:alertController animated:YES completion:nil];
+}
+
+/*
 - (BOOL)openURL:(NSURL *)url
 {
     _url = url;
@@ -45,5 +75,6 @@
         [super openURL:_url];
     }
 }
+*/
 
 @end

@@ -66,7 +66,7 @@
                                     <navigationItem title="試合結果一覧" id="6Wt-uO-NRw">
                                         <barButtonItem key="rightBarButtonItem" tag="1" title="追加" style="done" id="znF-Vh-XId">
                                             <connections>
-                                                <segue destination="CYm-Gx-IRt" kind="modal" modalTransitionStyle="crossDissolve" id="beY-vE-fQn"/>
+                                                <segue destination="CYm-Gx-IRt" kind="modal" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="beY-vE-fQn"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -3254,9 +3254,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TXb-6e-0gl"/>
+        <segue reference="ixE-B1-hxx"/>
         <segue reference="bTa-kb-VlZ"/>
-        <segue reference="7pF-G3-Z3a"/>
+        <segue reference="beY-vE-fQn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow_left.png" width="44" height="44"/>

@@ -53,8 +53,6 @@
 		0B683706164279E00086E198 /* BattingStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B683705164279E00086E198 /* BattingStatistics.m */; };
 		0B6BB1B416AD9E1C00B66509 /* SelectInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BB1B316AD9E1C00B66509 /* SelectInputViewController.m */; };
 		0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6BB1D016AEC7A000B66509 /* MessageUI.framework */; };
-		0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6BB1D216AEE6E100B66509 /* AddressBookUI.framework */; };
-		0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6BB1D616AEF09200B66509 /* AddressBook.framework */; };
 		0B6E5C2E1E084E39006C91E0 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6E5C281E0847E0006C91E0 /* AWSCore.framework */; };
 		0B6E5C2F1E084E39006C91E0 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6E5C281E0847E0006C91E0 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0B6E5C311E084E4C006C91E0 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6E5C241E0845EE006C91E0 /* AWSCognito.framework */; };
@@ -310,9 +308,7 @@
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
-				0B6BB1D716AEF09200B66509 /* AddressBook.framework in Frameworks */,
 				0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */,
-				0B6BB1D316AEE6E100B66509 /* AddressBookUI.framework in Frameworks */,
 				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B6E5C311E084E4C006C91E0 /* AWSCognito.framework in Frameworks */,
@@ -373,8 +369,7 @@
 				0BB960FA1A5997530062EA3F /* icon-76.png */,
 				0BB960FB1A5997530062EA3F /* icon-76@2x.png */,
 			);
-			name = images;
-			path = image;
+			path = images;
 			sourceTree = "<group>";
 		};
 		0B94999E16325696007F574D = {
@@ -889,7 +884,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -924,7 +919,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -955,7 +950,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK/GoogleMobileAds/\"",
 				);
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1002,7 +997,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK/GoogleMobileAds/\"",
 				);
 				INFOPLIST_FILE = "BaseballRecorder/BaseballRecorder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

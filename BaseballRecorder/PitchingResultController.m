@@ -476,6 +476,7 @@
     gameResult.tamakazu   = TAMAKAZU_NONE;
 }
 
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (alertView.tag) {
         case ALERT_TO_BATTING:
@@ -525,6 +526,41 @@
         default:
             break;
     }
+}
+*/
+
+- (void)saveGameResult {
+    // 入力内容をGameResultオブジェクトに反映
+    [self updateGameResult];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    // ファイルに保存
+    [GameResultManager saveGameResult:appDelegate.targetGameResult];
+    
+    // インタースティシャル広告表示をセット
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        appDelegate.showInterstitialFlg = YES;
+    }
+    
+    // 試合結果参照画面へ
+    [self moveNextView];
+}
+
+- (void)saveGameResultOnlyBatting {
+    // 投手成績の入力内容をGameResultオブジェクトから削除
+    [self clearGameResult];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    // ファイルに保存
+    [GameResultManager saveGameResult:appDelegate.targetGameResult];
+    
+    // インタースティシャル広告表示をセット
+    if(AD_VIEW == 1 && [ConfigManager isRemoveAdsFlg] == NO){
+        appDelegate.showInterstitialFlg = YES;
+    }
+    
+    // 試合結果参照画面へ
+    [self moveNextView];
 }
 
 - (void)moveNextView {
@@ -620,9 +656,13 @@
             }
         }
         
+        [Utility showAlert:@"" message:errorStr buttonText:@"閉じる"];
+        
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
         [alert show];
+         */
         
         return;
     }
@@ -639,14 +679,26 @@
         [_tamakazu.text isEqualToString:@"---"] == NO ||
         _kanto.checkBoxSelected == YES ||
         _sekinin != 0)){
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction* action) {
+                                    // 投手成績を初期化して戻る（入力内容は無視）
+                                    [self clearGameResult];
+                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                   }];
+        UIAlertController* alertController = [Utility makeConfirmAlert:@"" message:@"投球回が空のため投手成績の入力内容はクリアされます。\nよろしいですか？" okAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+            /*
            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                 message:@"投球回が空のため投手成績の入力内容はクリアされます。\nよろしいですか？"
                 delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
            [alert setTag:ALERT_TO_BATTING];
            [alert show];
-       } else {
-           [self backToBattingView];
-       }
+             */
+    } else {
+        [self backToBattingView];
+    }
 }
 
 - (IBAction)saveButton:(id)sender {
@@ -662,15 +714,19 @@
             }
         }
         
+        [Utility showAlert:@"" message:errorStr buttonText:@"閉じる"];
+        
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
             message:errorStr delegate:self cancelButtonTitle:@"閉じる" otherButtonTitles:nil];
         [alert show];
+         */
         
         return;
     }
     
     // 入力エラーでない場合は保存確認のダイアログを表示
-    UIAlertView* alert = nil;
+    // UIAlertView* alert = nil;
     if(_inning == 0 && _inning2 == 0 &&
             ([_hianda.text isEqualToString:@"0"] == NO ||
              [_hihomerun.text isEqualToString:@"0"] == NO ||
@@ -682,17 +738,37 @@
              [_tamakazu.text isEqualToString:@"---"] == NO ||
              _kanto.checkBoxSelected == YES || _sekinin != 0)){
         // 投球回が０で何らかの入力がある場合は、投手成績の入力内容が消える旨のダイアログを表示
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction* action) {
+                                    [self saveGameResultOnlyBatting];
+                                   }];
+        UIAlertController* alertController = [Utility makeConfirmAlert:@"" message:@"投球回が空のため投手成績の入力内容はクリアされます。\n保存してよろしいですか？" okAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        /*
         alert = [[UIAlertView alloc] initWithTitle:@"試合結果の保存"
             message:@"投球回が空のため投手成績の入力内容はクリアされます。\n保存してよろしいですか？"
             delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
         [alert setTag:ALERT_SAVE_ONLY_BATTING];
+         */
     } else {
         // 通常の保存確認のダイアログを表示
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction* action) {
+                                    [self saveGameResult];
+                                   }];
+        UIAlertController* alertController = [Utility makeConfirmAlert:@"試合結果の保存" message:@"保存してよろしいですか？" okAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+
+        /*
         alert = [[UIAlertView alloc] initWithTitle:@"試合結果の保存" message:@"保存してよろしいですか？"
             delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
         [alert setTag:ALERT_SAVE];
+         */
     }
-    [alert show];
+    // [alert show];
 }
 
 - (void)dealloc {

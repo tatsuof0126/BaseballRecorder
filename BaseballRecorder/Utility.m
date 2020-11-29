@@ -48,25 +48,19 @@
 }
 
 + (UIViewController*)topPresentedViewController:(UIViewController*)viewController {
-    NSLog(@"hoge2");
     if ([viewController isKindOfClass:[UINavigationController class]]) {
-        NSLog(@"hoge3");
         UIViewController* targetViewController =  (UIViewController*)[((UINavigationController*)viewController).viewControllers objectAtIndex:0];
         return [Utility topPresentedViewController:targetViewController];
     }
     
     if ([viewController isKindOfClass:[UITabBarController class]]) {
-        NSLog(@"hoge4");
         UIViewController* targetViewController = ((UITabBarController*)viewController).selectedViewController;
         return [Utility topPresentedViewController:targetViewController];
     }
     
     if(viewController.presentedViewController){
-        NSLog(@"hoge5");
         return [Utility topPresentedViewController:viewController.presentedViewController];
     }
-    
-    NSLog(@"hoge6");
     
     return viewController;
 }

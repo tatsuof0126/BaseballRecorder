@@ -69,6 +69,7 @@
 		<string>fbapi20160328</string>
 		<string>fbauth</string>
 		<string>fb-messenger-api20140430</string>
+		<string>instagram</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -99,5 +100,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6719193336347757~8143135058</string>
 </dict>
 </plist>

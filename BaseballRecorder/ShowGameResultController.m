@@ -570,6 +570,7 @@
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
         [Utility showAlert:@"Lineがインストールされていません。"];
+        return;
     }
     
     NSString* shareString = [self makeShareString:POST_LINE];
@@ -673,6 +674,11 @@
 }
 
 - (IBAction)mailButton:(id)sender {
+    if([MFMailComposeViewController canSendMail] == NO) {
+        [Utility showAlert:@"メール送信ができません。メールアカウントの設定を確認してください"];
+        return;
+    }
+    
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     mailPicker.mailComposeDelegate = self;
     

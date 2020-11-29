@@ -8,7 +8,7 @@
 
 // #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
-#import "GADInterstitial.h"
+// #import "GADInterstitial.h"
 #import "ConfigManager.h"
 #import "GameResultManager.h"
 
@@ -45,6 +45,9 @@
     
     // 設定ファイルを初期化（必要な場合のみ）
     [ConfigManager initConfig];
+    
+    // Admobにテストデバイスをセット（シミュレータとiPhone8）
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ kGADSimulatorID, @"e6e2fabbcf39785caebdc06c14fce0bc" ];
     
     // インタースティシャル広告の初期化
     // [self prepareInterstitial];
@@ -245,7 +248,7 @@
     gadView.rootViewController = controller;
     GADRequest* request = [GADRequest request];
     //request.testDevices = @[kGADSimulatorID, @"2dc8fc8942df647fb90b48c2272a59e6", @"b6474e40085305a78a0e53bb0956b6a0", @"1084e3d70a3d8780d5da956bb04a44b4", @"1637233b45ab1f6b3ca62e7003528879"];
-    request.testDevices = @[kGADSimulatorID];
+    // request.testDevices = @[kGADSimulatorID];
     [gadView loadRequest:request];
     return gadView;
 }

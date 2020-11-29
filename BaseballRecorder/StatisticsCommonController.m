@@ -558,20 +558,23 @@
                                     [self postToLine:shareType];
                                    }];
 
+    /*
+     // Instagramへの投稿はうまくできない
     UIAlertAction *actionInstagram = [UIAlertAction actionWithTitle:@"Instagramに投稿"
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action) {
                                     [self postToInstagram:shareType];
                                    }];
+    */
     
     // コントローラにアクションを追加
     [alertController addAction:cancelAction];
     [alertController addAction:actionTwitter];
     [alertController addAction:actionLine];
     if(shareType == SHARE_TYPE_IMAGE){
-        [alertController addAction:actionInstagram];
+        // [alertController addAction:actionInstagram];
     }
-
+    
     // アクションシート表示処理
     [self presentViewController:alertController animated:YES completion:nil];
 }
@@ -668,6 +671,7 @@
 - (void)postToLine:(int)shareType {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"line://msg/text/test"]] == NO) {
         [Utility showAlert:@"Lineがインストールされていません。"];
+        return;
     }
     
     posted = NO;
@@ -700,6 +704,7 @@
     }
 }
 
+/*
 - (void)postToInstagram:(int)shareType {
     if(shareType != SHARE_TYPE_IMAGE){
         return;
@@ -724,6 +729,7 @@
         [Utility showAlert:@"投稿に失敗しました。Instagramがインストールされているか確認してください。"];
     }
 }
+*/
 
 - (void)documentInteractionController:(UIDocumentInteractionController*)controller willBeginSendingToApplication:(NSString*)application {
     // NSLog(@"willBeginSendingToApplication - %@", application);

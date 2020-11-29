@@ -284,8 +284,8 @@
 		0BF3AB6A1B525DE10029DC13 /* Help2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Help2ViewController.m; sourceTree = "<group>"; };
 		0BF3AB6C1B525E020029DC13 /* Help2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Help2ViewController.h; sourceTree = "<group>"; };
 		1587FC2CA3BEF6A0D0AF606C /* Pods-BaseballRecorder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseballRecorder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder.debug.xcconfig"; sourceTree = "<group>"; };
+		355742ACA87B651363D4DD13 /* Pods-BaseballRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseballRecorder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder.release.xcconfig"; sourceTree = "<group>"; };
 		5DA80F88DA27E003A25503D7 /* libPods-BaseballRecorder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseballRecorder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseballRecorder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,7 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				1587FC2CA3BEF6A0D0AF606C /* Pods-BaseballRecorder.debug.xcconfig */,
-				69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */,
+				355742ACA87B651363D4DD13 /* Pods-BaseballRecorder.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -556,13 +556,13 @@
 			buildConfigurationList = 0B9499ED16325697007F574D /* Build configuration list for PBXNativeTarget "BaseballRecorder" */;
 			buildPhases = (
 				2FD68FDE71B6F0F4EEFE8BF5 /* [CP] Check Pods Manifest.lock */,
+				30283918BFD794FBF6B9C171 /* [CP] Prepare Artifacts */,
 				0B9499A516325697007F574D /* Sources */,
 				0B9499A616325697007F574D /* Frameworks */,
 				0B9499A716325697007F574D /* Resources */,
-				0AC1CEC96F51034D042B6BE4 /* [CP] Embed Pods Frameworks */,
-				C9C4DB0A6C0073B1E85E4F5E /* [CP] Copy Pods Resources */,
 				0B6E5C301E084E3A006C91E0 /* Embed Frameworks */,
 				0B6E5C3E1E0ACD56006C91E0 /* ShellScript */,
+				9AACD0B4910EF540D96CDDA1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -683,21 +683,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0AC1CEC96F51034D042B6BE4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0B6E5C3E1E0ACD56006C91E0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -730,28 +715,52 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BaseballRecorder-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9C4DB0A6C0073B1E85E4F5E /* [CP] Copy Pods Resources */ = {
+		30283918BFD794FBF6B9C171 /* [CP] Prepare Artifacts */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-artifacts.sh",
+				"${PODS_ROOT}/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework",
+				"${PODS_ROOT}/GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Prepare Artifacts";
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AACD0B4910EF540D96CDDA1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BaseballRecorder/Pods-BaseballRecorder-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -849,7 +858,6 @@
 /* Begin XCBuildConfiguration section */
 		0B9499EB16325697007F574D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -892,7 +900,6 @@
 		};
 		0B9499EC16325697007F574D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -976,7 +983,7 @@
 		};
 		0B9499EF16325697007F574D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */;
+			baseConfigurationReference = 355742ACA87B651363D4DD13 /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1020,7 +1027,6 @@
 		};
 		0B9499F116325697007F574D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BaseballRecorder.app/BaseballRecorder";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1039,7 +1045,6 @@
 		};
 		0B9499F216325697007F574D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69622BF9BECC71DDE112ED23 /* Pods-BaseballRecorder.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BaseballRecorder.app/BaseballRecorder";
 				FRAMEWORK_SEARCH_PATHS = (

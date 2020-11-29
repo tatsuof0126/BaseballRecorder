@@ -216,12 +216,16 @@
 - (void)tapAction:(UITapGestureRecognizer*)sender{
     if(sender.view == appstoreLabel){
 //        NSURL* url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/jp/app/cao-ye-qiu-ri-ji-beboreko/id578136103?mt=8&uo=4"];
-        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
+        // NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=578136103&mt=8&type=Purple+Software"];
+
+        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/578136103?action=write-review"];
 
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         // [[UIApplication sharedApplication] openURL:url];
     } else if(sender.view == otherappLabel){
-        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.com/apps/TatsuoFujiwara"];
+        NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/developer/tatsuo-fujiwara/id578136106"];
+
+        // NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.com/apps/TatsuoFujiwara"];
         
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         // [[UIApplication sharedApplication] openURL:url];

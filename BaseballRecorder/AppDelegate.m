@@ -47,7 +47,9 @@
     [ConfigManager initConfig];
     
     // Admobにテストデバイスをセット（シミュレータとiPhone8）
-    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ kGADSimulatorID, @"e6e2fabbcf39785caebdc06c14fce0bc" ];
+    // GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ kGADSimulatorID, @"e6e2fabbcf39785caebdc06c14fce0bc" ];
+    // Admobにテストデバイスをセット（シミュレータ）
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ kGADSimulatorID ];
     
     // インタースティシャル広告の初期化
     // [self prepareInterstitial];

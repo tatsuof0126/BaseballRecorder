@@ -103,7 +103,6 @@
 		0BC5F7F817C26D4D00C755A7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F717C26D4D00C755A7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0BC5F7FA17C26D5400C755A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC5F7F917C26D5400C755A7 /* Security.framework */; };
 		0BDB052E1D2AADB800AD92E9 /* FiveAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052D1D2AADB800AD92E9 /* FiveAd.framework */; };
-		0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDB052F1D2AB4F000AD92E9 /* AppVadorSDK.framework */; };
 		0BE4C49C16FB646100DAD11F /* PurchaseAddonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C49B16FB646100DAD11F /* PurchaseAddonController.m */; };
 		0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE4C49D16FF0C9200DAD11F /* StoreKit.framework */; };
 		0BE4C4A216FF0D2E00DAD11F /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4C4A116FF0D2E00DAD11F /* InAppPurchaseManager.m */; };
@@ -308,7 +307,6 @@
 				0B9AA57318C35E53001F42F4 /* Social.framework in Frameworks */,
 				0BC4265517C663A500AB95D0 /* Twitter.framework in Frameworks */,
 				0BE4C49E16FF0C9200DAD11F /* StoreKit.framework in Frameworks */,
-				0BDB05301D2AB4F000AD92E9 /* AppVadorSDK.framework in Frameworks */,
 				0B6BB1D116AEC7A100B66509 /* MessageUI.framework in Frameworks */,
 				0B9499AE16325697007F574D /* UIKit.framework in Frameworks */,
 				0B6E5C311E084E4C006C91E0 /* AWSCognito.framework in Frameworks */,

@@ -106,9 +106,14 @@
 }
 
 - (IBAction)saveAnalysis:(id)sender {
+    [self saveCapturedImage:_indView];
+        
+    /*
+     // バックグラウンドで保存するのはやめた
     [_indView startAnimating];
     
     [NSThread detachNewThreadSelector:@selector(saveCapturedImage:) toTarget:self withObject:_indView];
+     */
 }
 
 - (void)saveCapturedImage:(id)obj {
